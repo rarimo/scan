@@ -1,0 +1,51 @@
+{
+  "name": "scan",
+  "version": "0.1.0",
+  "private": true,
+  "gitHooks": {
+    "pre-commit": "yarn tsc --noEmit && yarn eslint .",
+    "pre-push": "yarn rsc"
+  },
+  "scripts": {
+    "dev": "next dev --port 8095",
+    "build": "next build",
+    "start": "next start",
+    "lint": "yarn lint:scripts && yarn lint:styles",
+    "lint:scripts": "next lint",
+    "lint:styles": "stylelint \"src/**/*.{css,sass,scss}\" --max-warnings=0",
+    "rsc": "node scripts/release-sanity-check.mjs"
+  },
+  "dependencies": {
+    "@formatjs/intl-localematcher": "^0.4.0",
+    "negotiator": "^0.6.3",
+    "next": "13.4.12",
+    "next-international": "^0.8.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@comparaonline/stylelint-config-scss-modules": "^1.1.0",
+    "@types/negotiator": "^0",
+    "@types/node": "20.4.5",
+    "@types/prettier": "^3",
+    "@types/react": "18.2.18",
+    "@types/react-dom": "18.2.7",
+    "eslint": "8.46.0",
+    "eslint-config-next": "13.4.12",
+    "eslint-config-prettier": "^8.9.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "prettier": "^3.0.0",
+    "sass": "^1.64.2",
+    "stylelint": "^15.10.2",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-standard-scss": "^10.0.0",
+    "stylelint-declaration-strict-value": "^1.9.2",
+    "stylelint-prettier": "^4.0.2",
+    "stylelint-scss": "^5.0.1",
+    "yorkie": "^2.0.0"
+  },
+  "packageManager": "yarn@3.6.1"
+}
