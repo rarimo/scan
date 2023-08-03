@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "gitHooks": {
-    "pre-commit": "yarn tsc --noEmit && yarn eslint .",
+    "pre-commit": "yarn tsc --noEmit && yarn lint",
     "pre-push": "yarn rsc"
   },
   "scripts": {
