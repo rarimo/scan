@@ -4,7 +4,15 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { ReactNode } from 'react'
 
+import { MainLayout } from '@/components'
 import { craftPageTitle, METADATA } from '@/config'
+import {
+  ApolloProvider,
+  AppStateProvider,
+  I18nProvider,
+  ThemeProvider,
+  ViewportProvider,
+} from '@/providers'
 
 const font = localFont({
   display: 'swap',
@@ -52,11 +60,23 @@ export default function RootLayout({
   params,
 }: {
   children: ReactNode
-  params: { lang: string }
+  params: { locale: string }
 }) {
   return (
-    <html lang={params.lang} className={font.className}>
-      <body>{children}</body>
+    <html lang={params.locale} className={font.className}>
+      <body>
+        <AppStateProvider>
+          <ViewportProvider>
+            <ApolloProvider>
+              <ThemeProvider>
+                <I18nProvider locale={params.locale}>
+                  <MainLayout>{children}</MainLayout>
+                </I18nProvider>
+              </ThemeProvider>
+            </ApolloProvider>
+          </ViewportProvider>
+        </AppStateProvider>
+      </body>
     </html>
   )
 }

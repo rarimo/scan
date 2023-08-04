@@ -121,6 +121,7 @@ module.exports = {
       {
         severity: 'warning',
         ignore: ['after-comment', 'first-nested'],
+        ignoreAtRules: ['import'],
       },
     ],
     'comment-whitespace-inside': ['always', { severity: 'warning' }],
@@ -146,7 +147,7 @@ module.exports = {
     ],
     'no-duplicate-selectors': [true, { severity: 'warning' }],
     'no-descending-specificity': [true, { severity: 'warning' }],
-    'color-function-notation': 'legacy',
+    'color-function-notation': 'modern',
     'scss/at-mixin-parentheses-space-before': 'always',
     'alpha-value-notation': 'number',
     'selector-not-notation': 'simple',
