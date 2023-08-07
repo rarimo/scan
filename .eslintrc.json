@@ -1,6 +1,6 @@
 {
   "extends": ["next/core-web-vitals", "prettier"],
-  "plugins": ["unused-imports","simple-import-sort", "prettier"],
+  "plugins": ["simple-import-sort", "prettier"],
   "rules": {
     "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
     "arrow-parens": 0,
