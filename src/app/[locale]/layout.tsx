@@ -66,15 +66,15 @@ export default function RootLayout({
     <html lang={params.locale} className={font.className}>
       <body>
         <AppStateProvider>
-          <ViewportProvider>
-            <ApolloProvider>
-              <ThemeProvider>
-                <I18nProvider locale={params.locale}>
+          <ThemeProvider options={{ key: 'mui' }}>
+            <ViewportProvider>
+              <I18nProvider locale={params.locale}>
+                <ApolloProvider>
                   <MainLayout>{children}</MainLayout>
-                </I18nProvider>
-              </ThemeProvider>
-            </ApolloProvider>
-          </ViewportProvider>
+                </ApolloProvider>
+              </I18nProvider>
+            </ViewportProvider>
+          </ThemeProvider>
         </AppStateProvider>
       </body>
     </html>

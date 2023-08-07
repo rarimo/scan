@@ -13,7 +13,7 @@ const THEME_CLASSES = {
 }
 
 export const useThemeMode = () => {
-  const { themeMode, setThemeMode } = useAppState()
+  const { themeMode, setThemeMode, isInitialised } = useAppState()
   const isPrefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
   const mode = useMemo(() => {
@@ -53,6 +53,7 @@ export const useThemeMode = () => {
   )
 
   useEffect(() => {
+    if (!isInitialised) return
     document.body.classList.add(
       THEME_CLASSES[themeMode as ThemeMode] ||
         THEME_CLASSES[isPrefersDarkMode ? ThemeMode.Dark : ThemeMode.Light],
@@ -60,7 +61,7 @@ export const useThemeMode = () => {
     if (themeMode) return
     setThemeMode(mode)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [isInitialised])
 
   return { colorMode, theme, isDarkThemeMode }
 }

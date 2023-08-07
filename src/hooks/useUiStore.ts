@@ -10,6 +10,7 @@ export const useUiStore = () => {
   const [storage, setStorage] = useState<UiStorage | null>(null)
   const [viewportWidth, setViewportWidth] = useState(0)
   const [themeMode, setThemeMode] = useState<ThemeMode>('' as ThemeMode)
+  const [isInitialised, setIsInitialised] = useState(false)
 
   useEffect(() => {
     if (!isWindow()) return
@@ -24,8 +25,9 @@ export const useUiStore = () => {
 
     setThemeMode(restored.themeMode ?? ('' as ThemeMode))
     setViewportWidth(restored.viewportWidth)
+    setIsInitialised(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [isWindow()])
 
   useEffect(() => {
     if (!storage) return
@@ -36,6 +38,7 @@ export const useUiStore = () => {
   return {
     viewportWidth,
     themeMode,
+    isInitialised,
     setViewportWidth,
     setThemeMode,
   }

@@ -10,6 +10,7 @@ export const useWeb3Store = () => {
   const [isConnected, setIsConnected] = useState(false)
   const [isValidator, setIsValidator] = useState(false)
   const [address, setAddress] = useState('')
+  const [isInitialised, setIsInitialised] = useState(false)
 
   useEffect(() => {
     if (!isWindow()) return
@@ -22,8 +23,9 @@ export const useWeb3Store = () => {
     setIsConnected(restored.isConnected)
     setIsValidator(restored.isValidator)
     setAddress(restored.address)
+    setIsInitialised(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [isWindow()])
 
   useEffect(() => {
     if (!storage) return
@@ -34,6 +36,7 @@ export const useWeb3Store = () => {
   return {
     isConnected,
     isValidator,
+    isInitialised,
     address,
     setIsConnected,
     setIsValidator,

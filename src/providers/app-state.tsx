@@ -6,11 +6,29 @@ import { AppStateContext } from '@/contexts'
 import { useUiStore, useWeb3Store } from '@/hooks'
 
 export const AppStateProvider = ({ children }: { children: ReactNode }) => {
-  const { viewportWidth, themeMode, setViewportWidth, setThemeMode } = useUiStore()
-  const { isConnected, isValidator, address, setIsConnected, setValidator, setAddress } =
-    useWeb3Store()
+  const {
+    isInitialised: isUiInitialised,
+    viewportWidth,
+    themeMode,
+    setViewportWidth,
+    setThemeMode,
+  } = useUiStore()
+  const {
+    isInitialised: isWeb3Initialised,
+    isConnected,
+    isValidator,
+    address,
+    setIsConnected,
+    setIsValidator,
+    setAddress,
+  } = useWeb3Store()
 
   const [isMobileNavbarOpened, setIsMobileNavbarOpened] = useState(false)
+
+  const isInitialised = useMemo(
+    () => isUiInitialised && isWeb3Initialised,
+    [isUiInitialised, isWeb3Initialised],
+  )
 
   const toggleMobileNavbar = useMemo(
     () => () => {
@@ -27,8 +45,9 @@ export const AppStateProvider = ({ children }: { children: ReactNode }) => {
       isValidator,
       address,
       isMobileNavbarOpened,
+      isInitialised,
       setIsConnected,
-      setValidator,
+      setIsValidator,
       setAddress,
       setViewportWidth,
       setThemeMode,
@@ -42,8 +61,9 @@ export const AppStateProvider = ({ children }: { children: ReactNode }) => {
       isValidator,
       address,
       isMobileNavbarOpened,
+      isInitialised,
       setIsConnected,
-      setValidator,
+      setIsValidator,
       setAddress,
       setViewportWidth,
       setThemeMode,
