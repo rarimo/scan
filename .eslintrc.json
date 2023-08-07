@@ -1,6 +1,6 @@
 {
   "extends": ["next/core-web-vitals", "prettier"],
-  "plugins": ["simple-import-sort", "prettier"],
+  "plugins": ["unused-imports","simple-import-sort", "prettier"],
   "rules": {
     "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
     "arrow-parens": 0,
@@ -26,7 +26,6 @@
     "comma-dangle": [1, "always-multiline"],
     "linebreak-style": ["error", "unix"],
     "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/no-unused-vars": "off",
     "no-non-null-assertion": "off"
   }
 }
