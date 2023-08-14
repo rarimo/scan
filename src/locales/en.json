@@ -22,5 +22,75 @@
     "connect-wallet-btn": "Connect Wallet",
     "disconnect-wallet-btn": "Disconnect Wallet",
     "loading-error-msg": "There was an error while loading, please try again later."
+  },
+  "header-network-switcher": {
+    "testnet-lbl": "Testnet",
+    "devnet-lbl": "Devnet",
+    "mainnet-lbl": "Mainnet"
+  },
+  "header-blockchain-menu": {
+    "menu-lbl": "Blockchain:",
+    "blocks-lbl": "Blocks",
+    "transactions-lbl": "Transactions",
+    "validators-lbl": "Validators",
+    "proposals-lbl": "Proposals"
+  },
+  "footer": {
+    "promo-lbl": "An interoperability protocol for the next generation of multi-chain assets & identities",
+    "navigation-links-lbl": "Blockchain",
+    "blocks-lbl": "Blocks",
+    "transactions-lbl": "Transactions",
+    "validators-lbl": "Validators",
+    "proposals-lbl": "Proposals",
+    "follow-us-links-lbl": "Follow us",
+    "discord-lbl": "Discord",
+    "twitter-lbl": "Twitter",
+    "telegram-lbl": "Telegram"
+  },
+  "home": {
+    "title-part-1": "THE RARIMO ",
+    "title-part-2": "BLOCKCHAIN ",
+    "title-part-3": "EXPLORER"
+  },
+  "home-statistics": {
+    "height-lbl": "Height",
+    "transaction-lbl": "Transactions",
+    "supply-lbl": "Supply",
+    "average-block-time-lbl": "Average block time"
+  },
+  "snackbar-info": {
+    "title-warning": "Warning",
+    "title-success": "Success",
+    "title-error": "Error",
+    "title-info": "Info"
+  },
+  "transactions-list": {
+    "title": "Latest transactions",
+    "operation-col-lbl": "Operation",
+    "from": "Sender",
+    "view-all": "View all",
+    "no-data-msg": "There are no last transactions, it will appear for a while",
+    "hash-col-lbl": "Hash",
+    "block-col-lbl": "Block",
+    "status-col-lbl": "Status",
+    "date-col-lbl": "Age",
+    "sender-col-lbl": "Sender",
+    "fee-col-lbl": "Fee",
+    "table-lbl": "Transactions",
+    "successful": "Successful",
+    "unsuccessful": "Failed",
+    "validator-col-lbl": "Validator"
+  },
+  "block-list": {
+    "title": "Latest blocks",
+    "validator": "Validator",
+    "view-all": "View all",
+    "no-data-msg": "There are no last blocks, it will appear for a while",
+    "block-col-lbl": "Block",
+    "tnx-col-lbl": "Transactions",
+    "validator-col-lbl": "Validator",
+    "date-col-lbl": "Age",
+    "gas-col-lbl": "Total gas",
+    "table-lbl": "Blocks"
   }
 }

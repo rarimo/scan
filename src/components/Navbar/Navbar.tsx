@@ -1,7 +1,7 @@
 'use client'
 
+import Cancel from '@mui/icons-material/Cancel'
 import { Box, Divider, Drawer, IconButton, Stack, Toolbar, useTheme } from '@mui/material'
-import { Cancel } from 'iconoir-react'
 import { ReactNode } from 'react'
 
 import { isWindow } from '@/helpers'

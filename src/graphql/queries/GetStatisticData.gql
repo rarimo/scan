@@ -1,0 +1,17 @@
+query GetStatistic {
+  block(order_by: {height: desc}, limit: 1) {
+    timestamp
+    height
+  }
+  transaction_aggregate {
+    aggregate {
+      count(columns: height)
+    }
+  }
+  supply {
+    coins
+  }
+  averageBlockTime: average_block_time_per_minute(limit: 1, order_by: {height: desc}) {
+    averageTime: average_time
+  }
+}

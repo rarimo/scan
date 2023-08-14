@@ -18485,6 +18485,12 @@ export type Vote_Variance_Fields = {
   vote?: Maybe<Scalars['Float']['output']>;
 };
 
+export type BlockBaseFragment = { __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null };
+
+export type TransactionBaseFragment = { __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any } };
+
+export type TransactionListFragment = { __typename?: 'transaction', messages: any, hash: string, success: boolean, fee: any, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null } };
+
 export type GetAccountValidatorInfosQueryVariables = Exact<{
   address: Scalars['String']['input'];
 }>;
@@ -18492,7 +18498,78 @@ export type GetAccountValidatorInfosQueryVariables = Exact<{
 
 export type GetAccountValidatorInfosQuery = { __typename?: 'query_root', account: Array<{ __typename?: 'account', validator_infos: Array<{ __typename?: 'validator_info', consensus_address: string }> }> };
 
+export type GetLatestTxAndBlocksQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
 
+
+export type GetLatestTxAndBlocksQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any } }>, block: Array<{ __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null }> };
+
+export type GetStatisticQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetStatisticQuery = { __typename?: 'query_root', block: Array<{ __typename?: 'block', timestamp: any, height: any }>, transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, supply: Array<{ __typename?: 'supply', coins: any }>, averageBlockTime: Array<{ __typename?: 'average_block_time_per_minute', averageTime: any }> };
+
+export type GetTransactionListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<Transaction_Bool_Exp>;
+}>;
+
+
+export type GetTransactionListQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', messages: any, hash: string, success: boolean, fee: any, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null } }> };
+
+export const BlockBase = gql`
+    fragment BlockBase on block {
+  height
+  timestamp
+  validator {
+    validator_info {
+      operator_address
+    }
+    validator_descriptions {
+      avatar_url
+      moniker
+    }
+  }
+}
+    `;
+export const TransactionBase = gql`
+    fragment TransactionBase on transaction {
+  height
+  hash
+  success
+  signer_infos
+  raw_log
+  block {
+    timestamp
+  }
+}
+    `;
+export const TransactionList = gql`
+    fragment TransactionList on transaction {
+  messages
+  hash
+  success
+  fee
+  signer_infos
+  raw_log
+  block {
+    timestamp
+    height
+    validator {
+      validator_info {
+        operator_address
+      }
+      validator_descriptions {
+        moniker
+        avatar_url
+      }
+    }
+  }
+}
+    `;
 export const GetAccountValidatorInfos = gql`
     query GetAccountValidatorInfos($address: String!) {
   account(where: {address: {_eq: $address}}) {
@@ -18502,3 +18579,52 @@ export const GetAccountValidatorInfos = gql`
   }
 }
     `;
+export const GetLatestTxAndBlocks = gql`
+    query GetLatestTxAndBlocks($limit: Int, $offset: Int) {
+  transaction(
+    order_by: {block: {timestamp: desc}}
+    limit: $limit
+    offset: $offset
+  ) {
+    ...TransactionBase
+  }
+  block(order_by: {timestamp: desc}, limit: $limit, offset: $offset) {
+    ...BlockBase
+  }
+}
+    ${TransactionBase}
+${BlockBase}`;
+export const GetStatistic = gql`
+    query GetStatistic {
+  block(order_by: {height: desc}, limit: 1) {
+    timestamp
+    height
+  }
+  transaction_aggregate {
+    aggregate {
+      count(columns: height)
+    }
+  }
+  supply {
+    coins
+  }
+  averageBlockTime: average_block_time_per_minute(
+    limit: 1
+    order_by: {height: desc}
+  ) {
+    averageTime: average_time
+  }
+}
+    `;
+export const GetTransactionList = gql`
+    query GetTransactionList($limit: Int, $offset: Int, $where: transaction_bool_exp) {
+  transaction(
+    order_by: {block: {timestamp: desc}}
+    limit: $limit
+    offset: $offset
+    where: $where
+  ) {
+    ...TransactionList
+  }
+}
+    ${TransactionList}`;

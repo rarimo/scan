@@ -1,22 +1,59 @@
 'use client'
 
-import { AppBar, Box, Button, IconButton, Stack, useTheme } from '@mui/material'
-import { Brightness, LogOut, Menu } from 'iconoir-react'
-import { useContext } from 'react'
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
+import Menu from '@mui/icons-material/Menu'
+import { AppBar, Box, Button, IconButton, Stack, useMediaQuery, useTheme } from '@mui/material'
+import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { ColorModeContext } from '@/contexts'
+import { ThemeMode } from '@/enums'
+import { abbr } from '@/helpers'
 import { useAppState, useWeb3 } from '@/hooks'
 import { useI18n } from '@/locales/client'
 
 import { Logo } from '../Logo'
-import { HeaderMenuList } from './HeaderMenuList'
+import { HeaderBlockchainMenu } from './HeaderBlockchainMenu'
+import { HeaderNetworkSwitcher } from './HeaderNetworkSwitcher'
+
+const iconProps = {
+  width: 24,
+  height: 24,
+  'aria-hidden': true,
+}
+
+const HEADER_CONTENT_HEIGHT = 40
 
 export const Header = () => {
-  const { connect, disconnect, isConnected, isConnecting } = useWeb3()
   const t = useI18n()
-  const { isMobileNavbarOpened, toggleMobileNavbar } = useAppState()
   const theme = useTheme()
   const colorMode = useContext(ColorModeContext)
+  const [isOnTopPositioned, setIsOnTopPositioned] = useState(true)
+  const isPrefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+  const { themeMode } = useAppState()
+
+  const { connect, disconnect, isConnected, isConnecting, address } = useWeb3()
+  const { isMobileNavbarOpened, toggleMobileNavbar } = useAppState()
+
+  const mode = useMemo(() => {
+    if (themeMode) return themeMode
+    if (isPrefersDarkMode) return ThemeMode.Dark
+    return ThemeMode.Light
+  }, [themeMode, isPrefersDarkMode])
+
+  const isDarkMode = useMemo(() => mode === ThemeMode.Dark, [mode])
+  const setTopPositioned = () => {
+    setIsOnTopPositioned(window.scrollY === 0)
+  }
+
+  useEffect(() => {
+    window.addEventListener('wheel', setTopPositioned)
+
+    return () => {
+      window.removeEventListener('wheel', setTopPositioned)
+    }
+  }, [])
 
   return (
     <AppBar
@@ -25,11 +62,23 @@ export const Header = () => {
         display: 'flex',
         flexDirection: 'row',
         boxShadow: 'none',
-        borderBottom: '1px solid var(--col-border-light)',
-        height: 'var(--ui-appbar-height)',
-        bgcolor: 'var(--col-bg-primary)',
+        bgcolor: isOnTopPositioned ? 'transparent' : 'var(--col-bg-primary)',
+        backgroundImage: 'none',
         color: theme.palette.secondary.main,
-        p: theme.spacing(1.75, 2.5, 1.75, 4.5),
+        transitionProperty: 'background-color,padding',
+        transitionDuration: '0.3s',
+        transitionTimingFunction: isOnTopPositioned ? 'ease-out' : 'ease-in',
+        p: {
+          xs: isOnTopPositioned
+            ? 'var(--ui-header-padding-xs)'
+            : 'var(--ui-header-padding-overlay-xs)',
+          sm: isOnTopPositioned
+            ? 'var(--ui-header-padding-sm)'
+            : 'var(--ui-header-padding-overlay-sm)',
+          lg: isOnTopPositioned
+            ? 'var(--ui-header-padding-lg)'
+            : 'var(--ui-header-padding-overlay-lg)',
+        },
       }}
     >
       <IconButton
@@ -41,20 +90,22 @@ export const Header = () => {
         sx={{
           color: theme.palette.text.primary,
           display: { md: 'none' },
+          width: HEADER_CONTENT_HEIGHT,
+          height: HEADER_CONTENT_HEIGHT,
         }}
       >
-        <Menu aria-hidden='true' />
+        <Menu {...iconProps} />
       </IconButton>
 
       <Stack
         flexDirection='row'
-        justifyContent='center'
         alignItems='center'
         sx={{
           maxWidth: 'var(--ui-max-width)',
           m: '0 auto',
           width: '100%',
           flex: '1',
+          maxHeight: HEADER_CONTENT_HEIGHT,
         }}
       >
         <Box
@@ -66,56 +117,58 @@ export const Header = () => {
           }}
         />
 
-        <Logo />
+        <Logo sx={{ width: { xs: '100%', md: 'auto' } }} />
 
-        <HeaderMenuList />
+        <Stack
+          direction={'row'}
+          justifyContent={'space-between'}
+          flex={1}
+          sx={{ ml: { xs: 0, md: 6 } }}
+        >
+          <HeaderBlockchainMenu />
 
-        {isConnected ? (
-          <Button
-            size='small'
-            variant='outlined'
-            aria-label={t('common.disconnect-wallet-btn')}
-            sx={{
-              p: theme.spacing(1, 1.5),
-              height: theme.spacing(5.5),
-              minWidth: theme.spacing(6),
-              display: { xs: 'none', md: 'block' },
-            }}
-            onClick={disconnect}
-          >
-            <LogOut aria-hidden='true' style={{ marginLeft: '-1px', marginTop: '1px' }} />
-          </Button>
-        ) : (
-          <Button
-            size='small'
-            sx={{
-              minWidth: '170px',
-              display: { xs: 'none', md: 'block' },
-            }}
-            onClick={connect}
-            disabled={isConnecting}
-          >
-            {t('common.connect-wallet-btn')}
-          </Button>
-        )}
-        <Box sx={{ display: { xs: 'none', md: 'block' } }}>{/*<HeaderSwitcherNetwork />*/}</Box>
+          <Stack spacing={{ xs: 0, md: 2 }} direction={'row'} sx={{ ml: { xs: 'auto', md: 0 } }}>
+            <Button
+              sx={{
+                minWidth: 170,
+                display: { xs: 'none', md: 'flex' },
+                flexDirection: 'row',
+              }}
+              onClick={isConnected ? disconnect : connect}
+              disabled={isConnecting}
+            >
+              {isConnected ? abbr(address, 7, 6) : t('common.connect-wallet-btn')}
+              {isConnected && (
+                <LogoutOutlinedIcon
+                  aria-hidden='true'
+                  style={{ marginLeft: 8, marginTop: '1px', width: 20, height: 20 }}
+                />
+              )}
+            </Button>
+
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              <HeaderNetworkSwitcher />
+            </Box>
+
+            <IconButton
+              size='small'
+              color='inherit'
+              onClick={colorMode.toggleColorMode}
+              sx={{
+                color: theme.palette.action.active,
+                width: HEADER_CONTENT_HEIGHT,
+                height: HEADER_CONTENT_HEIGHT,
+              }}
+            >
+              {isDarkMode ? (
+                <LightModeOutlinedIcon {...iconProps} />
+              ) : (
+                <DarkModeOutlinedIcon {...iconProps} />
+              )}
+            </IconButton>
+          </Stack>
+        </Stack>
       </Stack>
-      <IconButton
-        size='small'
-        color='inherit'
-        onClick={colorMode.toggleColorMode}
-        sx={{
-          pl: { xs: theme.spacing(2.5), lg: 0 },
-          margin: 'auto 0',
-          color: theme.palette.text.primary,
-          '&:hover': {
-            backgroundColor: theme.palette.text.primary,
-            color: theme.palette.getContrastText(theme.palette.text.primary),
-          },
-        }}
-      >
-        <Brightness width={36} height={36} aria-hidden='true' />
-      </IconButton>
     </AppBar>
   )
 }

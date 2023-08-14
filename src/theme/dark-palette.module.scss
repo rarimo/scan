@@ -6,47 +6,46 @@
 /* stylelint-disable selector-pseudo-class-no-unknown */
 /* stylelint-disable declaration-empty-line-before */
 :export {
-  colLight: $col-light;
-  colDark: $col-dark;
-
-  colPrimaryLight: $col-primary-light;
+  colBgDivider: $col-bg-divider;
+  colTxtPrimary: $col-txt-primary;
+  colTxtSecondary: $col-txt-secondary;
+  colTxtDisabled: $col-txt-disabled;
+  colTxtHover: $col-txt-hover;
+  colTxtSelected: $col-txt-selected;
+  colTxtFocus: $col-txt-focus;
+  colTxtFocusVisible: $col-txt-focus-visible;
   colPrimaryMain: $col-primary-main;
   colPrimaryDark: $col-primary-dark;
-
-  colSecondaryLight: $col-secondary-light;
+  colPrimaryLight: $col-primary-light;
+  colPrimaryContrast: $col-primary-contrast;
   colSecondaryMain: $col-secondary-main;
   colSecondaryDark: $col-secondary-dark;
-
-  colErrorLight: $col-error-light;
+  colSecondaryLight: $col-secondary-light;
+  colSecondaryContrast: $col-secondary-contrast;
   colErrorMain: $col-error-main;
   colErrorDark: $col-error-dark;
-
-  colWarningLight: $col-warning-light;
+  colErrorLight: $col-error-light;
+  colErrorContrast: $col-error-contrast;
   colWarningMain: $col-warning-main;
   colWarningDark: $col-warning-dark;
-
-  colSuccessLight: $col-success-light;
-  colSuccessMain: $col-success-main;
-  colSuccessDark: $col-success-dark;
-
-  colInfoLight: $col-info-light;
+  colWarningLight: $col-warning-light;
+  colWarningContrast: $col-warning-contrast;
   colInfoMain: $col-info-main;
   colInfoDark: $col-info-dark;
-
+  colInfoLight: $col-info-light;
+  colInfoContrast: $col-info-contrast;
+  colSuccessMain: $col-success-main;
+  colSuccessDark: $col-success-dark;
+  colSuccessLight: $col-success-light;
+  colSuccessContrast: $col-success-contrast;
+  colActionActive: $col-action-active;
+  colActionHover: $col-action-hover;
+  colActionSelected: $col-action-selected;
+  colActionFocus: $col-action-focus;
+  colActionDisabled: $col-action-disabled;
+  colActionDisabledBg: $col-action-disabled-bg;
   colBgPrimary: $col-bg-primary;
-  colBgSecondary: $col-bg-secondary;
-  colBgTertiary: $col-bg-tertiary;
-  colBgDivider: $col-bg-divider;
   colBgPaper: $col-bg-paper;
-
-  colTxtPrimaryLight: $col-txt-primary-light;
-  colTxtPrimaryDark: $col-txt-primary-dark;
-  colTxtSecondaryLight: $col-txt-secondary-light;
-  colTxtSecondaryDark: $col-txt-secondary-dark;
-  colTxtDisabledLight: $col-txt-disabled-light;
-  colTxtDisabledDark: $col-txt-disabled-dark;
-
-  colBorderLight: $col-border-light;
 }
 /* stylelint-enable property-case */
 /* stylelint-enable property-no-unknown */

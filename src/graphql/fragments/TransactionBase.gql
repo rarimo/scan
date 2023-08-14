@@ -1,0 +1,10 @@
+fragment TransactionBase on transaction {
+  height
+  hash
+  success
+  signer_infos
+  raw_log
+  block {
+    timestamp
+  }
+}
