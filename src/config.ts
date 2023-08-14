@@ -14,6 +14,9 @@ export const CONFIG = {
   GAS_PRICE_STEP_LOW: String(process.env.GAS_PRICE_STEP_LOW),
   GAS_PRICE_STEP_AVG: String(process.env.GAS_PRICE_STEP_AVG),
   GAS_PRICE_STEP_HIGH: String(process.env.GAS_PRICE_STEP_HIGH),
+  DEVNET_URL: String(process.env.DEVNET_URL),
+  TESTNET_URL: String(process.env.TESTNET_URL),
+  MAINNET_URL: String(process.env.MAINNET_URL),
   // Internal
   DECIMALS: 6,
   PERCENT_DECIMALS: 2,
@@ -22,6 +25,9 @@ export const CONFIG = {
   UPDATE_INTERVAL: 5000,
   FEE_AMOUNT: 100000000,
   GAS_AMOUNT: 10000000,
+  DISCORD_URL: 'https://discord.gg/Bzjm5MDXrU',
+  TELEGRAM_URL: 'https://t.me/+m_vvj8nFk5g4NTgy',
+  TWITTER_URL: 'https://twitter.com/Rarimo_protocol',
 } as const
 
 export const METADATA: Metadata = {

@@ -1,22 +1,22 @@
 @import 'light-theme-colors';
+@import 'functions';
 
 .App__light {
   &, *:before, *:after {
     /* Color variables */
-    --col-primary-main: #{$col-primary-main};
     --col-bg-primary: #{$col-bg-primary};
-    --col-bg-secondary: #{$col-bg-secondary};
-    --col-border-light: #{$col-border-light};
-    --col-txt-primary-light: #{$col-txt-primary-light};
-    --col-bg-tertiary: #{$col-bg-tertiary};
-    --col-btn-txt: #{$col-txt-primary-dark};
+    --col-divider: #{$col-bg-divider};
+    --col-txt-primary: #{$col-txt-primary};
+    --col-primary-outlined-border: #{$col-primary-outlined-border};
+    --col-primary-hover: #{$col-primary-hover};
+    --col-primary-main: #{$col-primary-main};
 
     /* UI variables */
-    --ui-app-background: #{$col-bg-secondary};
-    --ui-box-shadow: #{to-rem(2)}
-    #{to-rem(4)}
-    #{to-rem(24)}
-    0
-    #{rgba($col-dark, 0.08)};
+    --ui-border: #{to-rem(1)} solid #{$col-bg-divider};
+    --ui-app-background: #{$col-bg-primary};
+    --ui-app-home-gradient-2: linear-gradient(0deg, #fbfbfb 0%, rgba(255 255 255 / 0) 94.59%);
+    --ui-app-home-gradient:
+      radial-gradient(84.49% 84.49% at 50% -29.58%, rgba(138 181 164 / 0.3) 0%, rgba(138 181 164 / 0) 100%),
+      linear-gradient(0deg, rgba(255 255 255 / 0.01), rgba(255 255 255 / 0.01));
   }
 }

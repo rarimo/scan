@@ -26,6 +26,7 @@
     "comma-dangle": [1, "always-multiline"],
     "linebreak-style": ["error", "unix"],
     "@typescript-eslint/no-non-null-assertion": "off",
-    "no-non-null-assertion": "off"
+    "no-non-null-assertion": "off",
+    "@next/next/no-img-element": "off"
   }
 }

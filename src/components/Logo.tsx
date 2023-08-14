@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, useTheme } from '@mui/material'
+import { Box, SxProps, useTheme } from '@mui/material'
 import Link from 'next/link'
 
 import { RoutePaths } from '@/enums'
@@ -8,12 +8,16 @@ import { useAppState } from '@/hooks'
 
 export const Logo = ({
   isInsideNavbar = false,
-  width = 140,
-  height = 42,
+  withoutMarginTop = false,
+  width = 102,
+  height = 56,
+  sx = {},
 }: {
+  withoutMarginTop?: boolean
   isInsideNavbar?: boolean
   width?: number
   height?: number
+  sx?: SxProps
 }) => {
   const theme = useTheme()
   const { toggleMobileNavbar } = useAppState()
@@ -23,14 +27,16 @@ export const Logo = ({
       component={Link}
       href={RoutePaths.Main}
       sx={{
+        ...sx,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        mt: theme.spacing(-1),
+        mt: withoutMarginTop ? 0 : theme.spacing(-1),
       }}
       onClick={isInsideNavbar ? toggleMobileNavbar : () => {}}
     >
       <svg
+        style={{ marginLeft: width > 100 ? '-7px' : '-12px' }}
         width={width}
         height={height}
         viewBox='0 0 1024.000000 307.000000'

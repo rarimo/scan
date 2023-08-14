@@ -1,16 +1,23 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { client, initClient } from '@/client'
 import { apolloClient } from '@/graphql'
-import { ErrorHandler } from '@/helpers'
+import { ErrorHandler, isWindow } from '@/helpers'
 import { useAppState } from '@/hooks/useAppState'
 import { GetAccountValidatorInfos, GetAccountValidatorInfosQuery } from '@/types'
 
 export const useWeb3 = () => {
-  const { isConnected, isValidator, address, setIsConnected, setAddress, setIsValidator } =
-    useAppState()
+  const {
+    isConnected,
+    isValidator,
+    address,
+    setIsConnected,
+    setAddress,
+    setIsValidator,
+    isInitialised,
+  } = useAppState()
   const [isConnecting, setIsConnecting] = useState(false)
 
   const state = {
@@ -61,6 +68,17 @@ export const useWeb3 = () => {
     if (state.isConnected) return
     await connect()
   }
+
+  useEffect(() => {
+    if (!isWindow()) return
+    async function init() {
+      await initClient()
+      if (isInitialised && isConnected) await connect()
+    }
+
+    init()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isWindow(), isInitialised, isConnected])
 
   return { connect, disconnect, handleWalletConnection, ...state, isConnecting }
 }

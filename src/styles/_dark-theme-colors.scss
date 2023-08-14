@@ -1,43 +1,57 @@
 /* stylelint-disable scss/dollar-variable-empty-line-before */
-$col-dark: #0e1117;
-$col-light: #f0f6fb;
+@import './base-colors';
 
-$col-primary-light: #6487ff;
-$col-primary-main: #145bd7;
-$col-primary-dark: #0033a5;
+$col-dark: rgba($col-black, 0.87);
 
-$col-secondary-light: #62666d;
-$col-secondary-main: #383c42;
-$col-secondary-dark: #12161b;
+$col-bg-divider: rgba($col-white, 0.05);
 
-$col-error-light: #ff573f;
-$col-error-main: #d71414;
-$col-error-dark: #9d0000;
+$col-txt-primary: $col-white;
+$col-txt-secondary: rgba($col-white, 0.7);
+$col-txt-disabled: rgba($col-white, 0.38);
+$col-txt-hover: rgba($col-white, 0.04);
+$col-txt-selected: rgba($col-white, 0.08);
+$col-txt-focus: rgba($col-white, 0.12);
+$col-txt-focus-visible: rgba($col-white, 0.30);
 
-$col-warning-light: #ffe34e;
-$col-warning-main: #d7d014;
-$col-warning-dark: #ac8200;
+$col-primary-main: #8AB5A4;
+$col-primary-dark: #6E9183;
+$col-primary-light: #A1C4B6;
+$col-primary-contrast: $col-dark;
+$col-primary-outlined-border: rgba($col-primary-main, 0.5);
+$col-primary-hover: rgba($col-primary-main, 0.08);
 
-$col-success-light: #66ffc0;
-$col-success-main: #14d78f;
-$col-success-dark: #00a461;
+$col-secondary-main: #FBD196;
+$col-secondary-dark: #C9A778;
+$col-secondary-light: #FCDAAB;
+$col-secondary-contrast: rgba($col-secondary-main, 0.87);
 
-$col-info-light: $col-dark;
-$col-info-main: #edeff2;
-$col-info-dark: #d2d4dc;
+$col-error-main: #F44336;
+$col-error-dark: #D32F2F;
+$col-error-light: #E57373;
+$col-error-contrast: $col-white;
 
-$col-bg-primary: $col-dark;
-$col-bg-secondary: #161b22;
-$col-bg-paper: $col-bg-secondary;
-$col-bg-tertiary: rgba(255 255 255 / 0.12);
-$col-bg-divider: rgba(255 255 255 / 0.12);
+$col-warning-main: #FFA726;
+$col-warning-dark: #F57C00;
+$col-warning-light: #FFB74D;
+$col-warning-contrast: $col-dark;
 
-$col-txt-primary-light: $col-light;
-$col-txt-primary-dark: $col-dark;
-$col-txt-secondary-light: rgba(255 255 255 / 0.7);
-$col-txt-secondary-dark: rgba(0 0 0 / 0.6);
-$col-txt-disabled-light: rgba(255 255 255 / 0.38);
-$col-txt-disabled-dark: rgba(0 0 0 / 0.38);
+$col-info-main: #29B6F6;
+$col-info-dark: #0288D1;
+$col-info-light: #4FC3F7;
+$col-info-contrast: $col-dark;
 
-$col-border-light: #30363d;
+$col-success-main: #60A88C;
+$col-success-dark: #3E7E66;
+$col-success-light: #71B199;
+$col-success-contrast: $col-dark;
+
+$col-action-active: rgba($col-white, 0.56);
+$col-action-hover: rgba($col-white, 0.04);
+$col-action-selected: rgba($col-white, 0.08);
+$col-action-focus: rgba($col-white, 0.12);
+$col-action-disabled: rgba($col-white, 0.38);
+$col-action-disabled-bg: rgba($col-white, 0.12);
+
+$col-bg-primary: #0D0D0D;
+$col-bg-paper: #171717;
 /* stylelint-enable scss/dollar-variable-empty-line-before */

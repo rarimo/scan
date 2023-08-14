@@ -5,7 +5,7 @@ import { useEffect, useMemo } from 'react'
 
 import { ThemeMode } from '@/enums'
 import { useAppState } from '@/hooks'
-import { componentsTheme, darkPalette, lightPalette, typographyTheme } from '@/theme'
+import { COMPONENTS, PALETTE, typographyTheme } from '@/theme'
 
 const THEME_CLASSES = {
   [ThemeMode.Light]: 'App__light',
@@ -41,12 +41,12 @@ export const useThemeMode = () => {
       createTheme({
         palette: {
           mode,
-          ...(themeMode === ThemeMode.Dark ? darkPalette : lightPalette),
+          ...PALETTE[themeMode],
         },
         typography: typographyTheme,
-        components: componentsTheme,
+        components: COMPONENTS,
         shape: {
-          borderRadius: 8,
+          borderRadius: 0,
         },
       }),
     [mode, themeMode],

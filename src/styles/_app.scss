@@ -1,5 +1,6 @@
 /* stylelint-disable declaration-no-important */
 /* stylelint-disable unit-disallowed-list */
+/* stylelint-disable no-duplicate-selectors */
 @import 'functions';
 
 html {
@@ -18,7 +19,7 @@ ul,
 li,
 body,
 p {
-  color: var(--col-txt-primary-light);
+  color: var(--col-txt-primary);
 }
 
 body {
@@ -26,6 +27,10 @@ body {
   li {
     list-style-type: none;
   }
+}
+
+body {
+  overflow-x: hidden;
 }
 
 body,
@@ -41,7 +46,7 @@ input,
 select,
 textarea {
   background-color: var(--col-bg-primary);
-  color: var(--col-txt-primary-light);
+  color: var(--col-txt-primary);
   font-family: var(--txt-font-family);
   font-size: to-rem(16);
   font-weight: 400;
@@ -51,13 +56,11 @@ body,
 p {
   font-size: var(--txt-font-size-body1);
   font-weight: var(--txt-font-weight-body1);
-  letter-spacing: var(--txt-font-letter-spacing-body1);
   line-height: var(--txt-font-line-height-body1);
 }
 
 button {
   -webkit-appearance: none;
-  background-color: var(--col-primary-main);
   border: none;
   border-radius: to-rem(52);
   cursor: pointer;
@@ -86,7 +89,7 @@ h2,
 h3,
 h4,
 h5 {
-  color: var(--col-txt-primary-light);
+  color: var(--col-txt-primary);
   font-family: var(--txt-font-family);
   font-weight: 700;
   line-height: 1.2;
@@ -118,6 +121,27 @@ h4 {
   font-weight: var(--txt-font-weight-h4);
   letter-spacing: var(--txt-font-letter-spacing-h4);
   line-height: var(--txt-font-line-height-h4);
+}
+
+h4 {
+  font-size: var(--txt-font-size-h4);
+  font-weight: var(--txt-font-weight-h4);
+  letter-spacing: var(--txt-font-letter-spacing-h4);
+  line-height: var(--txt-font-line-height-h4);
+}
+
+h5 {
+  font-size: var(--txt-font-size-h5);
+  font-weight: var(--txt-font-weight-h5);
+  letter-spacing: var(--txt-font-letter-spacing-h5);
+  line-height: var(--txt-font-line-height-h5);
+}
+
+h6 {
+  font-size: var(--txt-font-size-h6);
+  font-weight: var(--txt-font-weight-h6);
+  letter-spacing: var(--txt-font-letter-spacing-h6);
+  line-height: var(--txt-font-line-height-h6);
 }
 
 a {

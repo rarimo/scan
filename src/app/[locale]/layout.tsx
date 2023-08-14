@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { ReactNode } from 'react'
 
-import { MainLayout } from '@/components'
+import { MainLayout, StatusMessage } from '@/components'
 import { craftPageTitle, METADATA } from '@/config'
 import {
   ApolloProvider,
@@ -14,7 +14,7 @@ import {
   ViewportProvider,
 } from '@/providers'
 
-const font = localFont({
+const inter = localFont({
   display: 'swap',
   src: [
     {
@@ -63,7 +63,7 @@ export default function RootLayout({
   params: { locale: string }
 }) {
   return (
-    <html lang={params.locale} className={font.className}>
+    <html lang={params.locale} className={inter.className}>
       <body>
         <AppStateProvider>
           <ThemeProvider options={{ key: 'mui' }}>
@@ -71,6 +71,7 @@ export default function RootLayout({
               <I18nProvider locale={params.locale}>
                 <ApolloProvider>
                   <MainLayout>{children}</MainLayout>
+                  <StatusMessage />
                 </ApolloProvider>
               </I18nProvider>
             </ViewportProvider>
