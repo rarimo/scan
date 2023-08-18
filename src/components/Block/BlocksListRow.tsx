@@ -28,8 +28,8 @@ export const BlocksListRow = ({
     textOverflow: 'ellipsis',
   }
 
-  const withSkeleton = (children: ReactNode, height?: number) =>
-    isLoading ? <Skeleton width={'100%'} {...(height && { height })} /> : children
+  const withSkeleton = (children: ReactNode, height?: number, width = '100%') =>
+    isLoading ? <Skeleton width={width} {...(height && { height })} /> : children
 
   return (
     <TableRow hover role='checkbox' tabIndex={-1}>
@@ -46,6 +46,8 @@ export const BlocksListRow = ({
           >
             {block?.height}
           </MuiLink>,
+          0,
+          '228',
         )}
       </TableCell>
 
@@ -66,6 +68,7 @@ export const BlocksListRow = ({
             abbrAddress={false}
           />,
           22,
+          '439',
         )}
       </TableCell>
       <TableCell sx={columnMap[ColumnIds.GAS]?.sx} align={columnMap[ColumnIds.GAS]?.align}>

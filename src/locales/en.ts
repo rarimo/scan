@@ -251,4 +251,17 @@ export default {
     "show-lbl": "Show",
     "hide-lbl": "Hide",
   },
+  "block-details": {
+    "title": "Block details",
+    "hash-lbl": "Hash:",
+    "height-lbl": "Height:",
+    "age-lbl": "Age:",
+    "validator-lbl": "Validator:",
+    "gas-total-lbl": "Total gas:",
+    "tnx-lbl": "Transactions:",
+    "no-data-message": "There is no block with such height.",
+  },
+  "block-transactions": {
+    "title-lbl": "Transactions",
+  },
 } as const

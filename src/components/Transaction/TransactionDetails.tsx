@@ -7,6 +7,13 @@ import { ReactNode } from 'react'
 
 import { getTransactionByHash } from '@/callers'
 import { CONFIG } from '@/config'
+import {
+  TABLE_ADDRESS_SKELETON_SX,
+  TABLE_HASH_SKELETON_SX,
+  TABLE_MEDIUM_TEXT_SKELETON_SX,
+  TABLE_SMALL_TEXT_SKELETON_SX,
+  TABLE_TYPE_BOX_SKELETON_SX,
+} from '@/const'
 import { RoutePaths } from '@/enums'
 import { formatCurrencyWithDenom, generatePath, parseAddress } from '@/helpers'
 import { useLoading, useLocalize } from '@/hooks'
@@ -19,11 +26,6 @@ import { CopyToClipboardWrapper } from '../CopyToClipboardWrapper'
 import { OverviewTable } from '../OverviewTable'
 import { TransactionDetailsContentRow } from './TransactionDetailsContentRow'
 import { TransactionStatus } from './TransactionStatus'
-
-const SKELETON_TEXT_SX = {
-  height: 22,
-  padding: '1.6, 0',
-}
 
 export const TransactionDetailsSection = ({ hash }: { hash: string }) => {
   const t = useI18n()
@@ -48,15 +50,15 @@ export const TransactionDetailsSection = ({ hash }: { hash: string }) => {
         <CopyToClipboardWrapper value={transaction?.hash}>
           {transaction?.hash}
         </CopyToClipboardWrapper>,
-        { width: '75%' },
+        TABLE_HASH_SKELETON_SX,
       ),
     },
     {
       head: t('transaction-details.status-lbl'),
-      body: withSkeleton(<TransactionStatus status={transaction?.success} />, {
-        height: 32,
-        width: 120,
-      }),
+      body: withSkeleton(
+        <TransactionStatus status={transaction?.success} />,
+        TABLE_TYPE_BOX_SKELETON_SX,
+      ),
     },
     {
       head: t('transaction-details.block-lbl'),
@@ -69,25 +71,22 @@ export const TransactionDetailsSection = ({ hash }: { hash: string }) => {
         >
           {transaction?.height}
         </MuiLink>,
-        {
-          ...SKELETON_TEXT_SX,
-          width: 150,
-        },
+        TABLE_MEDIUM_TEXT_SKELETON_SX,
       ),
     },
     {
       head: t('transaction-details.age-lbl'),
-      body: withSkeleton(time(transaction?.block?.timestamp, { utc: true }).fromNow, {
-        ...SKELETON_TEXT_SX,
-        width: 175,
-      }),
+      body: withSkeleton(
+        time(transaction?.block?.timestamp, { utc: true }).fromNow,
+        TABLE_MEDIUM_TEXT_SKELETON_SX,
+      ),
     },
     {
       head: t('transaction-details.sender-lbl'),
-      body: withSkeleton(<AvatarName abbrAddress={false} address={parseAddress(transaction)} />, {
-        ...SKELETON_TEXT_SX,
-        width: '60%',
-      }),
+      body: withSkeleton(
+        <AvatarName abbrAddress={false} address={parseAddress(transaction)} />,
+        TABLE_ADDRESS_SKELETON_SX,
+      ),
     },
     {
       head: t('transaction-details.validator-lbl'),
@@ -98,27 +97,18 @@ export const TransactionDetailsSection = ({ hash }: { hash: string }) => {
           name={transaction?.block?.validator?.validator_descriptions?.[0]?.moniker ?? ''}
           imageUrl={transaction?.block?.validator?.validator_descriptions?.[0]?.avatar_url ?? ''}
         />,
-        {
-          ...SKELETON_TEXT_SX,
-          width: '60%',
-        },
+        TABLE_ADDRESS_SKELETON_SX,
       ),
     },
     {
       head: t('transaction-details.gas-used-lbl'),
-      body: withSkeleton(transaction?.gas_used, {
-        ...SKELETON_TEXT_SX,
-        width: 120,
-      }),
+      body: withSkeleton(transaction?.gas_used, TABLE_SMALL_TEXT_SKELETON_SX),
     },
     {
       head: t('transaction-details.fee-lbl'),
       body: withSkeleton(
         formatCurrencyWithDenom(transaction?.fee?.amount[0]?.amount, CONFIG.DECIMALS),
-        {
-          ...SKELETON_TEXT_SX,
-          width: 120,
-        },
+        TABLE_SMALL_TEXT_SKELETON_SX,
       ),
     },
     {
@@ -129,10 +119,7 @@ export const TransactionDetailsSection = ({ hash }: { hash: string }) => {
             localizeMsgType(transaction?.messages?.[0]?.['@type']) ?? t('message-types.unknown-lbl')
           }
         />,
-        {
-          height: 32,
-          width: 120,
-        },
+        TABLE_TYPE_BOX_SKELETON_SX,
       ),
     },
   ]
