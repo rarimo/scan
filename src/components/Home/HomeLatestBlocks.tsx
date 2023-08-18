@@ -4,14 +4,15 @@ import { time } from '@distributedlab/tools'
 import { Link as MuiLink } from '@mui/material'
 import Link from 'next/link'
 
-import { AvatarName } from '@/components/Avatar/AvatarName'
-import { HomeLatestDataRow } from '@/components/Home/HomeLatestDataRow'
+import { AvatarName } from '@/components/Avatar'
 import { NoDataRow } from '@/components/NoDataRow'
 import { PreviewList } from '@/components/PreviewList'
 import { RoutePaths } from '@/enums'
 import { generatePath } from '@/helpers'
 import { useI18n } from '@/locales/client'
 import { Block, BlockBaseFragment } from '@/types'
+
+import { HomeLatestDataRow } from './HomeLatestDataRow'
 
 export const HomeLatestBlocks = ({
   isLoading,
@@ -59,8 +60,6 @@ export const HomeLatestBlocks = ({
                   address={el?.validator?.validator_info?.operator_address ?? ''}
                   name={el?.validator?.validator_descriptions?.[0]?.moniker ?? ''}
                   imageUrl={el?.validator?.validator_descriptions?.[0]?.avatar_url ?? ''}
-                  imageSize={20}
-                  fontSize={'14px'}
                 />
               }
             />

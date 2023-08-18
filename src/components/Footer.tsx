@@ -1,3 +1,5 @@
+'use client'
+
 import { ArrowUpward } from '@mui/icons-material'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward'
 import { Divider, IconButton, Link, Stack, Typography, useTheme } from '@mui/material'
@@ -54,8 +56,20 @@ export const Footer = () => {
     { label: t('footer.blocks-lbl'), href: RoutePaths.Blocks },
   ]
 
+  let interval: NodeJS.Timer | undefined
+
   const scrollToTop = () => {
+    if (interval) return
+
     window.scrollTo({ top: 0, behavior: 'smooth' })
+
+    interval = setInterval(() => {
+      if (window.scrollY !== 0) return
+      // dispatch event to trigger header animation
+      window.dispatchEvent(new Event('wheel'))
+      clearInterval(interval)
+      interval = undefined
+    }, 100)
   }
 
   const linkProps = {

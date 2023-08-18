@@ -8,6 +8,7 @@ export const BUS_EVENT_TYPES = {
   success: 'success',
   error: 'error',
   info: 'info',
+  redirectToHome: 'redirectToHome',
   reloadVotes: 'reloadVotes',
 }
 

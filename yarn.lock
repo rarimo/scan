@@ -2449,27 +2449,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rarimo/client@npm:^2.0.0-rc.12":
-  version: 2.0.0-rc.12
-  resolution: "@rarimo/client@npm:2.0.0-rc.12"
+"@rarimo/client@npm:^2.0.0-rc.17":
+  version: 2.0.0-rc.17
+  resolution: "@rarimo/client@npm:2.0.0-rc.17"
   dependencies:
     "@cosmjs/launchpad": ^0.27.1
     "@cosmjs/proto-signing": ^0.31.0
     "@cosmjs/stargate": ^0.31.0
     "@distributedlab/fetcher": ^1.0.0-rc.6
     "@distributedlab/reactivity": ^1.0.0-rc.6
-    "@rarimo/shared": ^2.0.0-rc.12
-  checksum: e7308920190db820d57e37bc624d61a2314aafc8970d024a3f2411c8f58c81eca16a445d00047e978a00e89328c7a0d3531bb9df8104ec9578ef5f73ed462962
+    "@rarimo/shared": ^2.0.0-rc.17
+  checksum: 60820ecbafcb2e41b942aa539cb97dd88f8c4f2a317b8b8b41db8cdd3546dac93319005d12e32b74c9497dae375d9bd57b8f161ef51140b9348f334bcc395f15
   languageName: node
   linkType: hard
 
-"@rarimo/shared@npm:^2.0.0-rc.12":
-  version: 2.0.0-rc.12
-  resolution: "@rarimo/shared@npm:2.0.0-rc.12"
+"@rarimo/shared@npm:^2.0.0-rc.17":
+  version: 2.0.0-rc.17
+  resolution: "@rarimo/shared@npm:2.0.0-rc.17"
   dependencies:
     "@distributedlab/jac": ^1.0.0-rc.6
     "@distributedlab/tools": ^1.0.0-rc.6
-  checksum: cde3a266a439397c0e3368c7297d2389b792eaa990a661dedd6f5e7cf498861944ea5f9d9b86c35a750a81795f027112f7d162ede274e188df015a0b65516350
+  checksum: 3a480133b4618d31fcd1e6579709ea63d115c9d56b7b73ed1ea8580a68047a3d2472391adaec9e4268b4352503e660a47fb387462d8ed7d53f58696b23084fda
   languageName: node
   linkType: hard
 
@@ -8713,6 +8713,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"property-expr@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "property-expr@npm:2.0.5"
+  checksum: 4ebe82ce45aaf1527e96e2ab84d75d25217167ec3ff6378cf83a84fb4abc746e7c65768a79d275881602ae82f168f9a6dfaa7f5e331d0fcc83d692770bcce5f1
+  languageName: node
+  linkType: hard
+
 "protobufjs@npm:^6.8.8, protobufjs@npm:~6.11.2, protobufjs@npm:~6.11.3":
   version: 6.11.3
   resolution: "protobufjs@npm:6.11.3"
@@ -9361,7 +9368,7 @@ __metadata:
     "@graphql-codegen/typescript-react-apollo": ^3.3.7
     "@mui/icons-material": ^5.14.3
     "@mui/material": ^5.14.3
-    "@rarimo/client": ^2.0.0-rc.12
+    "@rarimo/client": ^2.0.0-rc.17
     "@types/lodash-es": ^4
     "@types/negotiator": ^0
     "@types/node": 20.4.5
@@ -9394,6 +9401,7 @@ __metadata:
     stylelint-scss: ^5.0.1
     typescript: 5.1.6
     yorkie: ^2.0.0
+    yup: ^1.2.0
   languageName: unknown
   linkType: soft
 
@@ -10456,6 +10464,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tiny-case@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "tiny-case@npm:1.0.3"
+  checksum: 3f7a30c39d5b0e1bc097b0b271bec14eb5b836093db034f35a0de26c14422380b50dc12bfd37498cf35b192f5df06f28a710712c87ead68872a9e37ad6f6049d
+  languageName: node
+  linkType: hard
+
 "title-case@npm:^3.0.3":
   version: 3.0.3
   resolution: "title-case@npm:3.0.3"
@@ -10494,6 +10509,13 @@ __metadata:
   dependencies:
     is-number: ^7.0.0
   checksum: f76fa01b3d5be85db6a2a143e24df9f60dd047d151062d0ba3df62953f2f697b16fe5dad9b0ac6191c7efc7b1d9dcaa4b768174b7b29da89d4428e64bc0a20ed
+  languageName: node
+  linkType: hard
+
+"toposort@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "toposort@npm:2.0.2"
+  checksum: d64c74b570391c9432873f48e231b439ee56bc49f7cb9780b505cfdf5cb832f808d0bae072515d93834dd6bceca5bb34448b5b4b408335e4d4716eaf68195dcb
   languageName: node
   linkType: hard
 
@@ -10612,6 +10634,13 @@ __metadata:
   version: 1.4.0
   resolution: "type-fest@npm:1.4.0"
   checksum: b011c3388665b097ae6a109a437a04d6f61d81b7357f74cbcb02246f2f5bd72b888ae33631b99871388122ba0a87f4ff1c94078e7119ff22c70e52c0ff828201
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^2.19.0":
+  version: 2.19.0
+  resolution: "type-fest@npm:2.19.0"
+  checksum: a4ef07ece297c9fba78fc1bd6d85dff4472fe043ede98bd4710d2615d15776902b595abf62bd78339ed6278f021235fb28a96361f8be86ed754f778973a0d278
   languageName: node
   linkType: hard
 
@@ -11248,6 +11277,18 @@ __metadata:
     normalize-path: ^1.0.0
     strip-indent: ^2.0.0
   checksum: 6810adaf6be7b6cc115ed9454e5a4e8e0949deecb107d65dc0c196051e862f04d6394ad12fbef0d51e6c730329992ae98625ba82cba5e34775023ddb6dc921b8
+  languageName: node
+  linkType: hard
+
+"yup@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "yup@npm:1.2.0"
+  dependencies:
+    property-expr: ^2.0.5
+    tiny-case: ^1.0.3
+    toposort: ^2.0.2
+    type-fest: ^2.19.0
+  checksum: f0cdceb144e358c6155670f3e27404b65b090cc12594fde6db2699523661e13542aaf87ebe8e542b67f29a5f3f9bc5f23a3a3bb09e17f10d125353d35b841fac
   languageName: node
   linkType: hard
 

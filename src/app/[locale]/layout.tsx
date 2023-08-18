@@ -12,6 +12,7 @@ import {
   I18nProvider,
   ThemeProvider,
   ViewportProvider,
+  YupProvider,
 } from '@/providers'
 
 const inter = localFont({
@@ -69,10 +70,12 @@ export default function RootLayout({
           <ThemeProvider options={{ key: 'mui' }}>
             <ViewportProvider>
               <I18nProvider locale={params.locale}>
-                <ApolloProvider>
-                  <MainLayout>{children}</MainLayout>
-                  <StatusMessage />
-                </ApolloProvider>
+                <YupProvider>
+                  <ApolloProvider>
+                    <MainLayout>{children}</MainLayout>
+                    <StatusMessage />
+                  </ApolloProvider>
+                </YupProvider>
               </I18nProvider>
             </ViewportProvider>
           </ThemeProvider>

@@ -6,5 +6,6 @@ fragment TransactionBase on transaction {
   raw_log
   block {
     timestamp
+    height
   }
 }

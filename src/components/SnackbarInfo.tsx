@@ -13,7 +13,7 @@ const getIconBySeverity = (theme: Theme, severity: AlertColor) => {
   const color = theme.palette[severity].dark as OverridableStringUnion<AlertColor>
 
   const iconProps = {
-    ariaHidden: true,
+    'aria-hidden': true,
     color,
   }
 

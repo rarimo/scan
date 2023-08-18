@@ -4,13 +4,15 @@ import { CONFIG } from '@/config'
 
 export let client: RarimoClient
 
-export const initClient = async () => {
-  if (client) return
+export const getClient = async () => {
+  if (client) return client
 
   client = await makeRarimoClient({
     rpcUrl: CONFIG.CHAIN_RPC_URL,
     apiUrl: CONFIG.CHAIN_API_URL,
     prefix: CONFIG.CHAIN_ADDR_PREFIX,
+    chainName: CONFIG.CHAIN_NAME,
+    chainIconUrl: CONFIG.CHAIN_ICON_URL,
     currency: {
       denom: CONFIG.DENOM,
       minDenom: CONFIG.MINIMAL_DENOM,
@@ -26,4 +28,6 @@ export const initClient = async () => {
       gas: String(CONFIG.GAS_AMOUNT),
     },
   })
+
+  return client
 }

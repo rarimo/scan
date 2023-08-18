@@ -75,7 +75,7 @@ export const HomeLatestTransactions = ({
               }
               subhead={time(el.block?.timestamp, { utc: true })?.fromNow}
               footer={t('transactions-list.from') + ':'}
-              subfooter={<AvatarName address={el?.sender ?? ''} imageSize={20} fontSize={14} />}
+              subfooter={<AvatarName address={el?.sender ?? ''} />}
             />
           ),
         )}

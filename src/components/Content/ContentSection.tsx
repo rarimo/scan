@@ -30,9 +30,9 @@ export const ContentSection = ({
             <IconButton
               onClick={router.back}
               sx={{
-                width: theme.spacing(3.5),
-                height: theme.spacing(3.5),
-                mr: theme.spacing(2),
+                width: theme.spacing(5),
+                height: theme.spacing(5),
+                mr: theme.spacing(6),
               }}
               aria-label={t('common.back-btn')}
             >
@@ -48,7 +48,11 @@ export const ContentSection = ({
             justifyContent='space-between'
             height='56px'
           >
-            {title && <Typography variant='h4'>{title}</Typography>}
+            {title && (
+              <Typography variant='h4' sx={{ fontSize: 30 }}>
+                {title}
+              </Typography>
+            )}
             {action}
           </Stack>
         </Stack>

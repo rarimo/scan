@@ -9,7 +9,6 @@ const sx = {
     display: 'inline',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    // whiteSpace: 'nowrap',
   },
   item: {
     item: true,
@@ -67,6 +66,7 @@ export const HomeLatestDataRow = ({
         <Grid {...sx.item} sm={5} xs={7}>
           {withSkeleton(head)}
           <Typography
+            component={'p'}
             variant={'caption'}
             {...sx.textBlock}
             sx={{
@@ -91,6 +91,7 @@ export const HomeLatestDataRow = ({
           <Typography
             {...sx.textBlock}
             variant={'overline'}
+            component={'p'}
             sx={{
               mb: 1,
               fontSize: 10,

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { MouseOverDropdown } from '@/components/MouseOverDropdown'
 import { RoutePaths } from '@/enums'
+import { Bus } from '@/helpers'
 import { useI18n } from '@/locales/client'
 
 type AvailableRoutes =
@@ -24,7 +25,7 @@ export const HeaderBlockchainMenu = () => {
   const pathname = usePathname()
   const theme = useTheme()
   const t = useI18n()
-  const [route, setRoute] = useState<AvailableRoutes>()
+  const [route, setRoute] = useState<AvailableRoutes>('' as AvailableRoutes)
 
   const handleChange = (event: SelectChangeEvent) => {
     if (!event.target.value) return
@@ -33,18 +34,22 @@ export const HeaderBlockchainMenu = () => {
   }
 
   const itemList = [
-    { label: 'SELECT' },
+    { label: 'SELECT', href: '' },
     { label: t('header-blockchain-menu.validators-lbl'), href: RoutePaths.Validators },
     { label: t('header-blockchain-menu.proposals-lbl'), href: RoutePaths.Proposals },
     { label: t('header-blockchain-menu.transactions-lbl'), href: RoutePaths.Transactions },
     { label: t('header-blockchain-menu.blocks-lbl'), href: RoutePaths.Blocks },
   ]
 
+  Bus.on(Bus.eventList.redirectToHome, () => {
+    if (String(route) === '') return
+    setRoute('' as AvailableRoutes)
+  })
+
   useEffect(() => {
-    if (!pathname || !AVAILABLE_ROUTES.includes(pathname as AvailableRoutes)) return
-    setRoute(pathname as AvailableRoutes)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    if (![...AVAILABLE_ROUTES, ''].includes(pathname as AvailableRoutes)) return
+    setRoute((pathname ?? '') as AvailableRoutes)
+  }, [pathname])
 
   return (
     <Stack

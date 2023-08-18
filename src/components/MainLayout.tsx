@@ -1,7 +1,12 @@
 'use client'
 
-import { Box, Stack, useTheme } from '@mui/material'
-import { ReactNode, useMemo } from 'react'
+import CloseIcon from '@mui/icons-material/Close'
+import { Backdrop, Box, IconButton, Stack, useTheme } from '@mui/material'
+import React, { ReactNode, useMemo } from 'react'
+
+import { Search } from '@/components/Search'
+import { ThemeMode } from '@/enums'
+import { useAppState } from '@/hooks'
 
 import { Footer } from './Footer'
 import { Header } from './Header/Header'
@@ -10,7 +15,7 @@ import { Navbar } from './Navbar/Navbar'
 export const MainLayout = ({ children }: { children: ReactNode }) => {
   const theme = useTheme()
   const isDarkMode = useMemo(() => theme.palette.mode === 'dark', [theme.palette.mode])
-
+  const { isSearchOpened, setIsSearchOpened, themeMode } = useAppState()
   const layoutMixin = {
     spacing: {
       xs: theme.spacing(4.5),
@@ -33,56 +38,80 @@ export const MainLayout = ({ children }: { children: ReactNode }) => {
     },
   }
 
+  const isLightTheme = themeMode === ThemeMode.Light
+
   return (
-    <Box
-      component='div'
-      className='App'
-      sx={{
-        display: 'flex',
-        flex: 1,
-        bgcolor: 'var(--ui-app-background)',
-        zIndex: 2,
-      }}
-    >
+    <>
       <Box
+        component='div'
+        className='App'
         sx={{
-          position: 'absolute',
-          minHeight: 661,
-          height: 661,
-          width: '100%',
-          background: 'var(--ui-app-home-gradient-2)',
+          display: 'flex',
+          flex: 1,
+          bgcolor: 'var(--ui-app-background)',
+          zIndex: 2,
         }}
       >
         <Box
           sx={{
+            position: 'absolute',
+            minHeight: 661,
+            height: 661,
             width: '100%',
-            height: '100%',
-            background: 'var(--ui-app-home-gradient)',
-          }}
-        />
-      </Box>
-      <img
-        src={isDarkMode ? '/squares.png' : '/squares-2.png'}
-        alt=''
-        width={'100%'}
-        height={650}
-        style={{ position: 'absolute', objectFit: 'cover', pointerEvents: 'none', zIndex: '-1' }}
-      />
-      <Navbar>
-        <Header />
-      </Navbar>
-      <Stack {...layoutMixin}>
-        <Stack
-          sx={{
-            width: '100%',
-            maxWidth: 'var(--ui-max-width)',
-            zIndex: 2,
+            background: 'var(--ui-app-home-gradient-2)',
           }}
         >
-          {children}
+          <Box
+            sx={{
+              width: '100%',
+              height: '100%',
+              background: 'var(--ui-app-home-gradient)',
+            }}
+          />
+        </Box>
+        <img
+          src={isDarkMode ? '/squares.png' : '/squares-2.png'}
+          alt=''
+          width={'100%'}
+          height={650}
+          style={{ position: 'absolute', objectFit: 'cover', pointerEvents: 'none', zIndex: '-1' }}
+        />
+        <Navbar>
+          <Header />
+        </Navbar>
+        <Stack {...layoutMixin}>
+          <Stack
+            sx={{
+              width: '100%',
+              maxWidth: 'var(--ui-max-width)',
+              zIndex: 2,
+            }}
+          >
+            {children}
+          </Stack>
         </Stack>
-      </Stack>
-      <Footer />
-    </Box>
+        <Footer />
+      </Box>
+      <Backdrop
+        sx={{ bgcolor: 'rgba(0, 0, 0, 0.8)', zIndex: theme => theme.zIndex.drawer + 1, p: 3 }}
+        open={isSearchOpened}
+      >
+        <IconButton
+          sx={{
+            zIndex: -1,
+            position: 'absolute',
+            top: 40,
+            right: 40,
+            ...(isLightTheme && { color: theme.palette.primary.contrastText }),
+          }}
+          onClick={() => setIsSearchOpened(false)}
+        >
+          <CloseIcon />
+        </IconButton>
+        <Box sx={{ maxWidth: 700, width: '100%' }}>
+          <Search size={'big'} />
+        </Box>
+      </Backdrop>
+    </>
   )
 }

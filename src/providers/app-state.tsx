@@ -24,6 +24,7 @@ export const AppStateProvider = ({ children }: { children: ReactNode }) => {
   } = useWeb3Store()
 
   const [isMobileNavbarOpened, setIsMobileNavbarOpened] = useState(false)
+  const [isSearchOpened, setIsSearchOpened] = useState(false)
 
   const isInitialised = useMemo(
     () => isUiInitialised && isWeb3Initialised,
@@ -46,6 +47,7 @@ export const AppStateProvider = ({ children }: { children: ReactNode }) => {
       address,
       isMobileNavbarOpened,
       isInitialised,
+      isSearchOpened,
       setIsConnected,
       setIsValidator,
       setAddress,
@@ -53,6 +55,7 @@ export const AppStateProvider = ({ children }: { children: ReactNode }) => {
       setThemeMode,
       setIsMobileNavbarOpened,
       toggleMobileNavbar,
+      setIsSearchOpened,
     }),
     [
       viewportWidth,
@@ -62,12 +65,14 @@ export const AppStateProvider = ({ children }: { children: ReactNode }) => {
       address,
       isMobileNavbarOpened,
       isInitialised,
+      isSearchOpened,
       setIsConnected,
       setIsValidator,
       setAddress,
       setViewportWidth,
       setThemeMode,
       setIsMobileNavbarOpened,
+      setIsSearchOpened,
       toggleMobileNavbar,
     ],
   )

@@ -8,6 +8,7 @@ export const COMPONENTS: Components<BaseTheme> = {
     styleOverrides: {
       root: ({ theme }) => ({
         fontSize: 14,
+        fontWeight: 500,
         lineHeight: 1.57,
         color: theme.palette.text.primary,
         textDecorationStyle: 'dotted',
@@ -32,6 +33,7 @@ export const COMPONENTS: Components<BaseTheme> = {
       root: {
         textTransform: 'uppercase',
         whiteSpace: 'nowrap',
+        boxShadow: 'unset',
       },
       outlinedSizeMedium: {
         height: 40,
@@ -40,6 +42,13 @@ export const COMPONENTS: Components<BaseTheme> = {
       containedSizeMedium: {
         height: 40,
         padding: '8px 16px',
+      },
+      containedSizeSmall: {
+        height: 32,
+        minWidth: 'auto',
+        padding: '10px 7px',
+        fontSize: 13,
+        lineHeight: 1.7,
       },
     },
   },
@@ -58,8 +67,8 @@ export const COMPONENTS: Components<BaseTheme> = {
     styleOverrides: {
       root: ({ theme }) => ({
         transform: 'none',
-        borderRadius: theme.spacing(0.5),
-        backgroundColor: 'var(--col-bg-tertiary)',
+        borderRadius: 0,
+        backgroundColor: theme.palette.action.hover,
       }),
     },
   },
@@ -79,6 +88,53 @@ export const COMPONENTS: Components<BaseTheme> = {
     },
     defaultProps: {
       IconComponent: KeyboardArrowDownOutlinedIcon,
+    },
+  },
+  MuiInputBase: {
+    styleOverrides: {
+      root: {
+        caretColor: 'var(--col-primary-main)',
+      },
+    },
+  },
+  MuiTooltip: {
+    styleOverrides: {
+      tooltip: {
+        maxWidth: 300,
+        borderRadius: 0,
+      },
+      popper: {
+        '&[data-popper-placement*="bottom"]': {
+          '& > .MuiTooltip-tooltip': {
+            marginTop: 4,
+          },
+        },
+      },
+    },
+  },
+  MuiTableCell: {
+    styleOverrides: {
+      root: {
+        borderColor: 'var(--col-divider)',
+      },
+      head: {
+        background: 'var(--col-bg-secondary)',
+        textTransform: 'uppercase',
+        fontSize: 12,
+        lineHeight: 2,
+        fontWeight: 700,
+        color: 'var(--col-txt-secondary)',
+      },
+    },
+  },
+  MuiChip: {
+    styleOverrides: {
+      root: {
+        borderRadius: 0,
+        fontWeight: 400,
+        fontSize: 13,
+        lineHeight: 1.38,
+      },
     },
   },
 }

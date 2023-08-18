@@ -3,8 +3,7 @@
 import { Stack, useTheme } from '@mui/material'
 
 import { getLatestTxAndBlocks } from '@/callers'
-import { ContentBox } from '@/components/Content/ContentBox'
-import { ContentSection } from '@/components/Content/ContentSection'
+import { ContentBox, ContentSection } from '@/components/Content'
 import { CONFIG } from '@/config'
 import { useInterval, useLoading } from '@/hooks'
 import { GetLatestTxAndBlocksQuery } from '@/types'

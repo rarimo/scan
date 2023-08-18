@@ -6979,20 +6979,18 @@ export type Proposal = {
   __typename?: 'proposal';
   content: Scalars['jsonb']['output'];
   deposit_end_block?: Maybe<Scalars['bigint']['output']>;
-  description: Scalars['String']['output'];
   id: Scalars['Int']['output'];
+  metadata: Scalars['String']['output'];
   /** An array relationship */
   proposal_deposits: Array<Proposal_Deposit>;
   /** An aggregate relationship */
   proposal_deposits_aggregate: Proposal_Deposit_Aggregate;
-  proposal_route: Scalars['String']['output'];
   /** An object relationship */
   proposal_tally_result?: Maybe<Proposal_Tally_Result>;
   /** An array relationship */
   proposal_tally_results: Array<Proposal_Tally_Result>;
   /** An aggregate relationship */
   proposal_tally_results_aggregate: Proposal_Tally_Result_Aggregate;
-  proposal_type: Scalars['String']['output'];
   /** An array relationship */
   proposal_votes: Array<Proposal_Vote>;
   /** An aggregate relationship */
@@ -7004,7 +7002,6 @@ export type Proposal = {
   staking_pool_snapshot?: Maybe<Proposal_Staking_Pool_Snapshot>;
   status?: Maybe<Scalars['String']['output']>;
   submit_block: Scalars['bigint']['output'];
-  title: Scalars['String']['output'];
   /** An array relationship */
   validator_status_snapshots: Array<Proposal_Validator_Status_Snapshot>;
   /** An aggregate relationship */
@@ -7181,15 +7178,13 @@ export type Proposal_Bool_Exp = {
   _or?: InputMaybe<Array<Proposal_Bool_Exp>>;
   content?: InputMaybe<Jsonb_Comparison_Exp>;
   deposit_end_block?: InputMaybe<Bigint_Comparison_Exp>;
-  description?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
+  metadata?: InputMaybe<String_Comparison_Exp>;
   proposal_deposits?: InputMaybe<Proposal_Deposit_Bool_Exp>;
   proposal_deposits_aggregate?: InputMaybe<Proposal_Deposit_Aggregate_Bool_Exp>;
-  proposal_route?: InputMaybe<String_Comparison_Exp>;
   proposal_tally_result?: InputMaybe<Proposal_Tally_Result_Bool_Exp>;
   proposal_tally_results?: InputMaybe<Proposal_Tally_Result_Bool_Exp>;
   proposal_tally_results_aggregate?: InputMaybe<Proposal_Tally_Result_Aggregate_Bool_Exp>;
-  proposal_type?: InputMaybe<String_Comparison_Exp>;
   proposal_votes?: InputMaybe<Proposal_Vote_Bool_Exp>;
   proposal_votes_aggregate?: InputMaybe<Proposal_Vote_Aggregate_Bool_Exp>;
   proposer?: InputMaybe<Account_Bool_Exp>;
@@ -7197,7 +7192,6 @@ export type Proposal_Bool_Exp = {
   staking_pool_snapshot?: InputMaybe<Proposal_Staking_Pool_Snapshot_Bool_Exp>;
   status?: InputMaybe<String_Comparison_Exp>;
   submit_block?: InputMaybe<Bigint_Comparison_Exp>;
-  title?: InputMaybe<String_Comparison_Exp>;
   validator_status_snapshots?: InputMaybe<Proposal_Validator_Status_Snapshot_Bool_Exp>;
   validator_status_snapshots_aggregate?: InputMaybe<Proposal_Validator_Status_Snapshot_Aggregate_Bool_Exp>;
   voting_end_block?: InputMaybe<Bigint_Comparison_Exp>;
@@ -7466,14 +7460,11 @@ export type Proposal_Deposit_Variance_Order_By = {
 export type Proposal_Max_Fields = {
   __typename?: 'proposal_max_fields';
   deposit_end_block?: Maybe<Scalars['bigint']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  proposal_route?: Maybe<Scalars['String']['output']>;
-  proposal_type?: Maybe<Scalars['String']['output']>;
+  metadata?: Maybe<Scalars['String']['output']>;
   proposer_address?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Scalars['String']['output']>;
   submit_block?: Maybe<Scalars['bigint']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
   voting_end_block?: Maybe<Scalars['bigint']['output']>;
   voting_start_block?: Maybe<Scalars['bigint']['output']>;
 };
@@ -7481,14 +7472,11 @@ export type Proposal_Max_Fields = {
 /** order by max() on columns of table "proposal" */
 export type Proposal_Max_Order_By = {
   deposit_end_block?: InputMaybe<Order_By>;
-  description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  proposal_route?: InputMaybe<Order_By>;
-  proposal_type?: InputMaybe<Order_By>;
+  metadata?: InputMaybe<Order_By>;
   proposer_address?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
   submit_block?: InputMaybe<Order_By>;
-  title?: InputMaybe<Order_By>;
   voting_end_block?: InputMaybe<Order_By>;
   voting_start_block?: InputMaybe<Order_By>;
 };
@@ -7497,14 +7485,11 @@ export type Proposal_Max_Order_By = {
 export type Proposal_Min_Fields = {
   __typename?: 'proposal_min_fields';
   deposit_end_block?: Maybe<Scalars['bigint']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  proposal_route?: Maybe<Scalars['String']['output']>;
-  proposal_type?: Maybe<Scalars['String']['output']>;
+  metadata?: Maybe<Scalars['String']['output']>;
   proposer_address?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Scalars['String']['output']>;
   submit_block?: Maybe<Scalars['bigint']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
   voting_end_block?: Maybe<Scalars['bigint']['output']>;
   voting_start_block?: Maybe<Scalars['bigint']['output']>;
 };
@@ -7512,14 +7497,11 @@ export type Proposal_Min_Fields = {
 /** order by min() on columns of table "proposal" */
 export type Proposal_Min_Order_By = {
   deposit_end_block?: InputMaybe<Order_By>;
-  description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  proposal_route?: InputMaybe<Order_By>;
-  proposal_type?: InputMaybe<Order_By>;
+  metadata?: InputMaybe<Order_By>;
   proposer_address?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
   submit_block?: InputMaybe<Order_By>;
-  title?: InputMaybe<Order_By>;
   voting_end_block?: InputMaybe<Order_By>;
   voting_start_block?: InputMaybe<Order_By>;
 };
@@ -7528,20 +7510,17 @@ export type Proposal_Min_Order_By = {
 export type Proposal_Order_By = {
   content?: InputMaybe<Order_By>;
   deposit_end_block?: InputMaybe<Order_By>;
-  description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  metadata?: InputMaybe<Order_By>;
   proposal_deposits_aggregate?: InputMaybe<Proposal_Deposit_Aggregate_Order_By>;
-  proposal_route?: InputMaybe<Order_By>;
   proposal_tally_result?: InputMaybe<Proposal_Tally_Result_Order_By>;
   proposal_tally_results_aggregate?: InputMaybe<Proposal_Tally_Result_Aggregate_Order_By>;
-  proposal_type?: InputMaybe<Order_By>;
   proposal_votes_aggregate?: InputMaybe<Proposal_Vote_Aggregate_Order_By>;
   proposer?: InputMaybe<Account_Order_By>;
   proposer_address?: InputMaybe<Order_By>;
   staking_pool_snapshot?: InputMaybe<Proposal_Staking_Pool_Snapshot_Order_By>;
   status?: InputMaybe<Order_By>;
   submit_block?: InputMaybe<Order_By>;
-  title?: InputMaybe<Order_By>;
   validator_status_snapshots_aggregate?: InputMaybe<Proposal_Validator_Status_Snapshot_Aggregate_Order_By>;
   voting_end_block?: InputMaybe<Order_By>;
   voting_start_block?: InputMaybe<Order_By>;
@@ -7554,21 +7533,15 @@ export enum Proposal_Select_Column {
   /** column name */
   DepositEndBlock = 'deposit_end_block',
   /** column name */
-  Description = 'description',
-  /** column name */
   Id = 'id',
   /** column name */
-  ProposalRoute = 'proposal_route',
-  /** column name */
-  ProposalType = 'proposal_type',
+  Metadata = 'metadata',
   /** column name */
   ProposerAddress = 'proposer_address',
   /** column name */
   Status = 'status',
   /** column name */
   SubmitBlock = 'submit_block',
-  /** column name */
-  Title = 'title',
   /** column name */
   VotingEndBlock = 'voting_end_block',
   /** column name */
@@ -7808,14 +7781,11 @@ export type Proposal_Stream_Cursor_Input = {
 export type Proposal_Stream_Cursor_Value_Input = {
   content?: InputMaybe<Scalars['jsonb']['input']>;
   deposit_end_block?: InputMaybe<Scalars['bigint']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
-  proposal_route?: InputMaybe<Scalars['String']['input']>;
-  proposal_type?: InputMaybe<Scalars['String']['input']>;
+  metadata?: InputMaybe<Scalars['String']['input']>;
   proposer_address?: InputMaybe<Scalars['String']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
   submit_block?: InputMaybe<Scalars['bigint']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
   voting_end_block?: InputMaybe<Scalars['bigint']['input']>;
   voting_start_block?: InputMaybe<Scalars['bigint']['input']>;
 };
@@ -18485,11 +18455,17 @@ export type Vote_Variance_Fields = {
   vote?: Maybe<Scalars['Float']['output']>;
 };
 
+export type BlockFragment = { __typename?: 'block', height: any, timestamp: any, total_gas?: any | null, hash: string, num_txs?: number | null, validator?: { __typename?: 'validator', validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }>, validator_info?: { __typename?: 'validator_info', operator_address: string } | null } | null };
+
 export type BlockBaseFragment = { __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null };
 
-export type TransactionBaseFragment = { __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any } };
+export type BlockListFragment = { __typename?: 'block', height: any, timestamp: any, total_gas?: any | null, transactions_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null };
 
-export type TransactionListFragment = { __typename?: 'transaction', messages: any, hash: string, success: boolean, fee: any, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null } };
+export type TransactionFragment = { __typename?: 'transaction', hash: string, success: boolean, fee: any, signer_infos: any, height: any, messages: any, gas_used?: any | null, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, validator?: { __typename?: 'validator', validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }>, validator_info?: { __typename?: 'validator_info', operator_address: string } | null } | null } };
+
+export type TransactionBaseFragment = { __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } };
+
+export type TransactionListFragment = { __typename?: 'transaction', messages: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } };
 
 export type GetAccountValidatorInfosQueryVariables = Exact<{
   address: Scalars['String']['input'];
@@ -18498,18 +18474,63 @@ export type GetAccountValidatorInfosQueryVariables = Exact<{
 
 export type GetAccountValidatorInfosQuery = { __typename?: 'query_root', account: Array<{ __typename?: 'account', validator_infos: Array<{ __typename?: 'validator_info', consensus_address: string }> }> };
 
+export type GetBlockByHeightQueryVariables = Exact<{
+  height: Scalars['bigint']['input'];
+}>;
+
+
+export type GetBlockByHeightQuery = { __typename?: 'query_root', block: Array<{ __typename?: 'block', height: any, timestamp: any, total_gas?: any | null, hash: string, num_txs?: number | null, validator?: { __typename?: 'validator', validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }>, validator_info?: { __typename?: 'validator_info', operator_address: string } | null } | null }> };
+
+export type GetBlockCountQueryVariables = Exact<{
+  where?: InputMaybe<Block_Bool_Exp>;
+}>;
+
+
+export type GetBlockCountQuery = { __typename?: 'query_root', block_aggregate: { __typename?: 'block_aggregate', aggregate?: { __typename?: 'block_aggregate_fields', count: number } | null } };
+
+export type GetBlockListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<Block_Bool_Exp>;
+}>;
+
+
+export type GetBlockListQuery = { __typename?: 'query_root', block: Array<{ __typename?: 'block', height: any, timestamp: any, total_gas?: any | null, transactions_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null }> };
+
 export type GetLatestTxAndBlocksQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetLatestTxAndBlocksQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any } }>, block: Array<{ __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null }> };
+export type GetLatestTxAndBlocksQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } }>, block: Array<{ __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null }> };
 
 export type GetStatisticQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetStatisticQuery = { __typename?: 'query_root', block: Array<{ __typename?: 'block', timestamp: any, height: any }>, transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, supply: Array<{ __typename?: 'supply', coins: any }>, averageBlockTime: Array<{ __typename?: 'average_block_time_per_minute', averageTime: any }> };
+
+export type GetTransactionBaseQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetTransactionBaseQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } }>, block: Array<{ __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null }> };
+
+export type GetTransactionByHashQueryVariables = Exact<{
+  hash: Scalars['String']['input'];
+}>;
+
+
+export type GetTransactionByHashQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', hash: string, success: boolean, fee: any, signer_infos: any, height: any, messages: any, gas_used?: any | null, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, validator?: { __typename?: 'validator', validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }>, validator_info?: { __typename?: 'validator_info', operator_address: string } | null } | null } }> };
+
+export type GetTransactionCountQueryVariables = Exact<{
+  where?: InputMaybe<Transaction_Bool_Exp>;
+}>;
+
+
+export type GetTransactionCountQuery = { __typename?: 'query_root', transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null } };
 
 export type GetTransactionListQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -18518,8 +18539,43 @@ export type GetTransactionListQueryVariables = Exact<{
 }>;
 
 
-export type GetTransactionListQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', messages: any, hash: string, success: boolean, fee: any, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null } }> };
+export type GetTransactionListQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', messages: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } }> };
 
+export type GetTransactionListByBlockQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  blockHeight?: InputMaybe<Scalars['bigint']['input']>;
+}>;
+
+
+export type GetTransactionListByBlockQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', messages: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } }> };
+
+export type SearchQueryVariables = Exact<{
+  valueStr?: InputMaybe<Scalars['String']['input']>;
+  valueInt?: InputMaybe<Scalars['bigint']['input']>;
+}>;
+
+
+export type SearchQuery = { __typename?: 'query_root', account: Array<{ __typename?: 'account', address: string }>, block: Array<{ __typename?: 'block', height: any }>, transaction: Array<{ __typename?: 'transaction', hash: string }> };
+
+export const Block = gql`
+    fragment Block on block {
+  height
+  timestamp
+  total_gas
+  validator {
+    validator_descriptions {
+      avatar_url
+      moniker
+    }
+    validator_info {
+      operator_address
+    }
+  }
+  hash
+  num_txs
+}
+    `;
 export const BlockBase = gql`
     fragment BlockBase on block {
   height
@@ -18535,6 +18591,51 @@ export const BlockBase = gql`
   }
 }
     `;
+export const BlockList = gql`
+    fragment BlockList on block {
+  height
+  timestamp
+  total_gas
+  transactions_aggregate {
+    aggregate {
+      count(columns: hash)
+    }
+  }
+  validator {
+    validator_info {
+      operator_address
+    }
+    validator_descriptions {
+      moniker
+      avatar_url
+    }
+  }
+}
+    `;
+export const Transaction = gql`
+    fragment Transaction on transaction {
+  hash
+  success
+  fee
+  signer_infos
+  height
+  block {
+    timestamp
+    validator {
+      validator_descriptions {
+        avatar_url
+        moniker
+      }
+      validator_info {
+        operator_address
+      }
+    }
+  }
+  messages
+  gas_used
+  raw_log
+}
+    `;
 export const TransactionBase = gql`
     fragment TransactionBase on transaction {
   height
@@ -18544,6 +18645,7 @@ export const TransactionBase = gql`
   raw_log
   block {
     timestamp
+    height
   }
 }
     `;
@@ -18552,21 +18654,11 @@ export const TransactionList = gql`
   messages
   hash
   success
-  fee
   signer_infos
   raw_log
   block {
     timestamp
     height
-    validator {
-      validator_info {
-        operator_address
-      }
-      validator_descriptions {
-        moniker
-        avatar_url
-      }
-    }
   }
 }
     `;
@@ -18579,6 +18671,34 @@ export const GetAccountValidatorInfos = gql`
   }
 }
     `;
+export const GetBlockByHeight = gql`
+    query GetBlockByHeight($height: bigint!) {
+  block(where: {height: {_eq: $height}}) {
+    ...Block
+  }
+}
+    ${Block}`;
+export const GetBlockCount = gql`
+    query GetBlockCount($where: block_bool_exp) {
+  block_aggregate(where: $where) {
+    aggregate {
+      count(columns: height)
+    }
+  }
+}
+    `;
+export const GetBlockList = gql`
+    query GetBlockList($limit: Int, $offset: Int, $where: block_bool_exp) {
+  block(
+    order_by: {timestamp: desc}
+    limit: $limit
+    offset: $offset
+    where: $where
+  ) {
+    ...BlockList
+  }
+}
+    ${BlockList}`;
 export const GetLatestTxAndBlocks = gql`
     query GetLatestTxAndBlocks($limit: Int, $offset: Int) {
   transaction(
@@ -18616,6 +18736,37 @@ export const GetStatistic = gql`
   }
 }
     `;
+export const GetTransactionBase = gql`
+    query GetTransactionBase($limit: Int, $offset: Int) {
+  transaction(
+    order_by: {block: {timestamp: desc}}
+    limit: $limit
+    offset: $offset
+  ) {
+    ...TransactionBase
+  }
+  block(order_by: {timestamp: desc}, limit: $limit, offset: $offset) {
+    ...BlockBase
+  }
+}
+    ${TransactionBase}
+${BlockBase}`;
+export const GetTransactionByHash = gql`
+    query GetTransactionByHash($hash: String!) {
+  transaction(where: {hash: {_eq: $hash}}) {
+    ...Transaction
+  }
+}
+    ${Transaction}`;
+export const GetTransactionCount = gql`
+    query GetTransactionCount($where: transaction_bool_exp) {
+  transaction_aggregate(where: $where) {
+    aggregate {
+      count(columns: hash)
+    }
+  }
+}
+    `;
 export const GetTransactionList = gql`
     query GetTransactionList($limit: Int, $offset: Int, $where: transaction_bool_exp) {
   transaction(
@@ -18628,3 +18779,28 @@ export const GetTransactionList = gql`
   }
 }
     ${TransactionList}`;
+export const GetTransactionListByBlock = gql`
+    query GetTransactionListByBlock($limit: Int, $offset: Int, $blockHeight: bigint) {
+  transaction(
+    order_by: {block: {timestamp: desc}}
+    limit: $limit
+    offset: $offset
+    where: {block: {height: {_eq: $blockHeight}}}
+  ) {
+    ...TransactionList
+  }
+}
+    ${TransactionList}`;
+export const Search = gql`
+    query Search($valueStr: String, $valueInt: bigint) {
+  account(where: {address: {_eq: $valueStr}}, limit: 1) {
+    address
+  }
+  block(where: {height: {_eq: $valueInt}}, limit: 1) {
+    height
+  }
+  transaction(where: {hash: {_eq: $valueStr}}, limit: 1) {
+    hash
+  }
+}
+    `;

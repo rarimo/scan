@@ -13,6 +13,8 @@ module.exports = {
     DESCRIPTION: process.env.DESCRIPTION,
     CHAIN_ID: process.env.CHAIN_ID,
     CHAIN_ADDR_PREFIX: process.env.CHAIN_ADDR_PREFIX,
+    CHAIN_NAME: process.env.CHAIN_NAME,
+    CHAIN_ICON_URL: process.env.CHAIN_ICON_URL,
     DENOM: process.env.DENOM,
     MINIMAL_DENOM: process.env.MINIMAL_DENOM,
     GAS_PRICE_STEP_LOW: process.env.GAS_PRICE_STEP_LOW,

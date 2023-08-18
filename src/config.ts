@@ -8,6 +8,8 @@ export const CONFIG = {
   CHAIN_RPC_URL: String(process.env.CHAIN_RPC_URL),
   CHAIN_ID: String(process.env.CHAIN_ID),
   CHAIN_ADDR_PREFIX: String(process.env.CHAIN_ADDR_PREFIX),
+  CHAIN_NAME: String(process.env.CHAIN_NAME),
+  CHAIN_ICON_URL: String(process.env.CHAIN_ICON_URL),
   DENOM: String(process.env.DENOM),
   MINIMAL_DENOM: String(process.env.MINIMAL_DENOM),
   GRAPHQL_URL: String(process.env.GRAPHQL_URL),
