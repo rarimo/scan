@@ -28,8 +28,12 @@ export const BlocksListRow = ({
     textOverflow: 'ellipsis',
   }
 
-  const withSkeleton = (children: ReactNode, height?: number, width = '100%') =>
-    isLoading ? <Skeleton width={width} {...(height && { height })} /> : children
+  const withSkeleton = (children: ReactNode, height?: number, width = '100%', ml?: string) =>
+    isLoading ? (
+      <Skeleton width={width} {...(height && { height })} sx={{ ...(ml && { ml }) }} />
+    ) : (
+      children
+    )
 
   return (
     <TableRow hover role='checkbox' tabIndex={-1}>
@@ -47,12 +51,12 @@ export const BlocksListRow = ({
             {block?.height}
           </MuiLink>,
           0,
-          '228',
+          '100px',
         )}
       </TableCell>
 
       <TableCell sx={{ ...columnMap[ColumnIds.DATE]?.sx }}>
-        {withSkeleton(time(block?.timestamp, { utc: true }).fromNow)}
+        {withSkeleton(time(block?.timestamp, { utc: true }).fromNow, 0, '140px')}
       </TableCell>
       <TableCell
         sx={{
@@ -68,15 +72,15 @@ export const BlocksListRow = ({
             abbrAddress={false}
           />,
           22,
-          '439',
+          '439px',
         )}
       </TableCell>
       <TableCell sx={columnMap[ColumnIds.GAS]?.sx} align={columnMap[ColumnIds.GAS]?.align}>
-        {withSkeleton(block?.total_gas)}
+        {withSkeleton(block?.total_gas, undefined, '90px', 'auto')}
       </TableCell>
 
       <TableCell sx={columnMap[ColumnIds.TXN]?.sx} align={columnMap[ColumnIds.TXN]?.align}>
-        {withSkeleton(block?.transactions_aggregate?.aggregate?.count)}
+        {withSkeleton(block?.transactions_aggregate?.aggregate?.count, undefined, '60px', 'auto')}
       </TableCell>
     </TableRow>
   )
