@@ -3,9 +3,16 @@ import { fromHex, toBech32 } from '@cosmjs/encoding'
 import { isHex } from '@distributedlab/tools'
 
 import { CONFIG } from '@/config'
-import { TransactionBaseFragment, TransactionEVMLog, TransactionListFragment } from '@/types'
+import {
+  TransactionBaseFragment,
+  TransactionEVMLog,
+  TransactionFragment,
+  TransactionListFragment,
+} from '@/types'
 
-export const parseAddress = (tx?: TransactionBaseFragment | TransactionListFragment) => {
+export const parseAddress = (
+  tx?: TransactionBaseFragment | TransactionListFragment | TransactionFragment,
+) => {
   const sender = tx?.signer_infos?.[0]?.public_key
   if (sender) {
     return pubkeyToAddress(

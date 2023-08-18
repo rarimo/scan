@@ -1,6 +1,8 @@
 import { SxProps, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material'
 import { ReactNode } from 'react'
 
+import { TABLE_OVERVIEW_CELL_HEIGHT } from '@/const'
+
 import { NoDataTableRow } from './NoDataTableRow'
 
 export const OverviewTable = ({
@@ -31,8 +33,13 @@ export const OverviewTable = ({
             <TableCell
               sx={{
                 width: { xs: 300, sm: 300 },
+                height: TABLE_OVERVIEW_CELL_HEIGHT,
                 minWidth: { xs: 300, sm: 'auto' },
                 color: theme => theme.palette.text.secondary,
+                textTransform: 'unset',
+                fontSize: 14,
+                fontWeight: 400,
+                lineHeight: 1.42,
               }}
               component='th'
               scope='row'
@@ -40,7 +47,7 @@ export const OverviewTable = ({
             >
               {head}
             </TableCell>
-            <TableCell>{body}</TableCell>
+            <TableCell sx={{ height: TABLE_OVERVIEW_CELL_HEIGHT }}>{body}</TableCell>
           </TableRow>
         ))}
       </>

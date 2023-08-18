@@ -37,6 +37,7 @@
     "next-international": "^0.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-json-view": "^1.21.3",
     "typescript": "5.1.6",
     "yup": "^1.2.0"
   },

@@ -18,7 +18,11 @@ export function generateMetadata({ params }: { params: { address: string } }): M
   }
 }
 
-export default async function Account({ params: { address } }: { params: { address: string } }) {
+export default async function AccountPage({
+  params: { address },
+}: {
+  params: { address: string }
+}) {
   const account = await getAccount(address)
 
   return (

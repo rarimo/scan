@@ -8,7 +8,7 @@ import { BlockListFragment } from '@/types'
 import { ContentBox, ContentSection } from '../Content'
 import { BlocksList } from './BlocksList'
 
-export const BlocksSection = () => {
+export const Blocks = () => {
   const t = useI18n()
 
   const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination()
@@ -26,8 +26,6 @@ export const BlocksSection = () => {
       loadArgs: [limit, offset],
     },
   )
-
-  // const isLoading = true
 
   return (
     <ContentSection withBackButton title={t('block-list.table-lbl')}>

@@ -8,7 +8,7 @@ import { TransactionListFragment } from '@/types'
 
 import { TransactionList } from './TransactionList'
 
-export const TransactionsSection = () => {
+export const Transactions = () => {
   const t = useI18n()
 
   const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination()

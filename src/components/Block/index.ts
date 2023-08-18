@@ -1,1 +1,1 @@
-export * from './BlocksSection'
+export * from './Blocks'

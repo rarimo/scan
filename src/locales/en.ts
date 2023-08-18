@@ -230,4 +230,25 @@ export default {
     "jailed-lbl": "Jailed",
     "tombstoned-lbl": "Tombstoned",
   },
+  "transaction-details": {
+    "title": "Transaction details",
+    "hash-lbl": "Hash:",
+    "status-lbl": "Status:",
+    "block-lbl": "Block:",
+    "age-lbl": "Age:",
+    "sender-lbl": "Sender:",
+    "validator-lbl": "Validator:",
+    "fee-lbl": "Fee:",
+    "operation-lbl": "Operation:",
+    "gas-used-lbl": "Gas used:",
+    "no-data-message": "There is no transaction with such hash.",
+  },
+  "transaction-details-content-row": {
+    "heading-messages-lbl": "Messages",
+    "heading-raw-log-lbl": "Logs",
+  },
+  "table-collapse-row": {
+    "show-lbl": "Show",
+    "hide-lbl": "Hide",
+  },
 } as const

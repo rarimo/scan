@@ -1,0 +1,1 @@
+export const TABLE_OVERVIEW_CELL_HEIGHT = 64

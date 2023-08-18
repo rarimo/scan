@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { BlocksSection, PageContainer } from '@/components'
+import { Blocks, PageContainer } from '@/components'
 import { craftPageTitle, METADATA } from '@/config'
 
 export const metadata: Metadata = {
@@ -8,10 +8,10 @@ export const metadata: Metadata = {
   title: craftPageTitle('Blocks'),
 }
 
-export default function Blocks() {
+export default function BlocksPage() {
   return (
     <PageContainer>
-      <BlocksSection />
+      <Blocks />
     </PageContainer>
   )
 }

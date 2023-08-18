@@ -24,7 +24,7 @@ const TITLE_PARTS_PROPS = {
   lineHeight: 1.25,
 }
 
-export default async function Home() {
+export default async function HomePage() {
   const t = await getI18n()
 
   return (

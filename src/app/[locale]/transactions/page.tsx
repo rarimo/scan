@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { PageContainer, TransactionsSection } from '@/components'
+import { PageContainer, Transactions } from '@/components'
 import { craftPageTitle, METADATA } from '@/config'
 
 export const metadata: Metadata = {
@@ -8,10 +8,10 @@ export const metadata: Metadata = {
   title: craftPageTitle('Transactions'),
 }
 
-export default function Transactions() {
+export default function TransactionsPage() {
   return (
     <PageContainer>
-      <TransactionsSection />
+      <Transactions />
     </PageContainer>
   )
 }
