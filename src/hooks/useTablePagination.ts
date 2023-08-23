@@ -13,16 +13,13 @@ const QUERY_KEYS = {
   ORDER_BY: 'orderBy',
 }
 
-export const useTablePagination = <T = unknown>(
-  initialLimit: number = CONFIG.PAGE_LIMIT,
-  initialOffset = 0,
-) => {
+export const useTablePagination = <T = unknown>() => {
   const router = useRouter()
   const query = useSearchParams()!
   const pathname = usePathname()
 
-  const [limit, setLimit] = useState<number>(initialLimit)
-  const [offset, setOffset] = useState<number>(initialOffset)
+  const [limit, setLimit] = useState<number>(CONFIG.PAGE_LIMIT)
+  const [offset, setOffset] = useState<number>(0)
   const [order, setOrder] = useState<SortOrder>('' as SortOrder)
   const [orderBy, setOrderBy] = useState<T>('' as T)
 
@@ -69,14 +66,14 @@ export const useTablePagination = <T = unknown>(
   }, [handlers, query])
 
   const getQueryString = useCallback(() => {
-    const _query = new URLSearchParams()
+    const _query = new URLSearchParams(query.toString())
 
     for (const [key, value] of Object.entries(values)) {
       if (value || value === 0) _query.set(key, String(value))
     }
 
     return _query.toString()
-  }, [values])
+  }, [query, values])
 
   const replaceUrl = useCallback(() => {
     router.push(`${pathname}?${getQueryString()}`, { scroll: false })

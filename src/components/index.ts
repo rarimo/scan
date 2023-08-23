@@ -4,6 +4,7 @@ export * from './Home'
 export * from './Transaction'
 export * from './Block'
 export * from './Proposal'
+export * from './Validator'
 
 export { default as Avatar } from './Avatar/Avatar'
 export { default as AvatarName } from './Avatar/AvatarName'

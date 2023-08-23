@@ -18469,6 +18469,10 @@ export type ProposalDepositFragment = { __typename?: 'proposal_deposit', amount?
 
 export type ProposalVoteFragment = { __typename?: 'proposal_vote', voter_address: string, option: string, height: any, block: { __typename?: 'block', timestamp: any, transactions: Array<{ __typename?: 'transaction', hash: string }> } };
 
+export type SlashingParamsFragment = { __typename?: 'slashing_params', params: any };
+
+export type StakingPoolFragment = { __typename?: 'staking_pool', bonded_tokens: string };
+
 export type TallyResultFragment = { __typename?: 'proposal_tally_result', abstain: string, no: string, no_with_veto: string, yes: string };
 
 export type TransactionFragment = { __typename?: 'transaction', hash: string, success: boolean, fee: any, signer_infos: any, height: any, messages: any, gas_used?: any | null, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, validator?: { __typename?: 'validator', validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }>, validator_info?: { __typename?: 'validator_info', operator_address: string } | null } | null } };
@@ -18476,6 +18480,10 @@ export type TransactionFragment = { __typename?: 'transaction', hash: string, su
 export type TransactionBaseFragment = { __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } };
 
 export type TransactionListFragment = { __typename?: 'transaction', messages: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } };
+
+export type ValidatorFragment = { __typename?: 'validator', consensus_address: string, consensus_pubkey: string, validator_commissions: Array<{ __typename?: 'validator_commission', commission: any, min_self_delegation: any }>, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null, website?: string | null }>, validator_info?: { __typename?: 'validator_info', operator_address: string, account?: { __typename?: 'account', address: string } | null } | null, validator_signing_infos: Array<{ __typename?: 'validator_signing_info', missed_blocks_counter: any }>, validator_statuses: Array<{ __typename?: 'validator_status', jailed: boolean, status: number }>, validator_voting_powers: Array<{ __typename?: 'validator_voting_power', voting_power: any }> };
+
+export type ValidatorBaseFragment = { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_commissions: Array<{ __typename?: 'validator_commission', commission: any }>, validator_signing_infos: Array<{ __typename?: 'validator_signing_info', missed_blocks_counter: any }>, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }>, validator_statuses: Array<{ __typename?: 'validator_status', status: number, jailed: boolean }>, validator_voting_powers: Array<{ __typename?: 'validator_voting_power', voting_power: any }> };
 
 export type GetAccountValidatorInfosQueryVariables = Exact<{
   address: Scalars['String']['input'];
@@ -18612,6 +18620,71 @@ export type GetTransactionListByBlockQueryVariables = Exact<{
 
 export type GetTransactionListByBlockQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', messages: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } }> };
 
+export type GetValidatorBaseQueryVariables = Exact<{
+  where?: InputMaybe<Validator_Bool_Exp>;
+  order_by?: InputMaybe<Array<Validator_Order_By> | Validator_Order_By>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetValidatorBaseQuery = { __typename?: 'query_root', validator: Array<{ __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_commissions: Array<{ __typename?: 'validator_commission', commission: any }>, validator_signing_infos: Array<{ __typename?: 'validator_signing_info', missed_blocks_counter: any }>, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }>, validator_statuses: Array<{ __typename?: 'validator_status', status: number, jailed: boolean }>, validator_voting_powers: Array<{ __typename?: 'validator_voting_power', voting_power: any }> }>, slashing_params: Array<{ __typename?: 'slashing_params', params: any }>, staking_pool: Array<{ __typename?: 'staking_pool', bonded_tokens: string }> };
+
+export type GetValidatorByAddressQueryVariables = Exact<{
+  address: Scalars['String']['input'];
+}>;
+
+
+export type GetValidatorByAddressQuery = { __typename?: 'query_root', validator: Array<{ __typename?: 'validator', consensus_address: string, consensus_pubkey: string, validator_commissions: Array<{ __typename?: 'validator_commission', commission: any, min_self_delegation: any }>, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null, website?: string | null }>, validator_info?: { __typename?: 'validator_info', operator_address: string, account?: { __typename?: 'account', address: string } | null } | null, validator_signing_infos: Array<{ __typename?: 'validator_signing_info', missed_blocks_counter: any }>, validator_statuses: Array<{ __typename?: 'validator_status', jailed: boolean, status: number }>, validator_voting_powers: Array<{ __typename?: 'validator_voting_power', voting_power: any }> }>, slashing_params: Array<{ __typename?: 'slashing_params', params: any }>, staking_pool: Array<{ __typename?: 'staking_pool', bonded_tokens: string }> };
+
+export type GetValidatorByConsensusAddressQueryVariables = Exact<{
+  address: Scalars['String']['input'];
+}>;
+
+
+export type GetValidatorByConsensusAddressQuery = { __typename?: 'query_root', validator: Array<{ __typename?: 'validator', validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }>, validator_info?: { __typename?: 'validator_info', account?: { __typename?: 'account', address: string } | null } | null }> };
+
+export type GetValidatorCommissionAmountQueryVariables = Exact<{
+  address: Scalars['String']['input'];
+}>;
+
+
+export type GetValidatorCommissionAmountQuery = { __typename?: 'query_root', action_validator_commission_amount?: { __typename?: 'ActionValidatorCommissionAmount', coins?: Array<any | null> | null } | null };
+
+export type GetValidatorCountQueryVariables = Exact<{
+  where?: InputMaybe<Validator_Bool_Exp>;
+}>;
+
+
+export type GetValidatorCountQuery = { __typename?: 'query_root', validator_aggregate: { __typename?: 'validator_aggregate', aggregate?: { __typename?: 'validator_aggregate_fields', count: number } | null } };
+
+export type GetValidatorDelegationListQueryVariables = Exact<{
+  operator: Scalars['String']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetValidatorDelegationListQuery = { __typename?: 'query_root', action_validator_delegations?: { __typename?: 'ActionDelegationResponse', delegations?: Array<any | null> | null, pagination?: any | null } | null };
+
+export type GetValidatorRedelegationListQueryVariables = Exact<{
+  operator: Scalars['String']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetValidatorRedelegationListQuery = { __typename?: 'query_root', action_validator_redelegations_from?: { __typename?: 'ActionRedelegationResponse', redelegations?: Array<any | null> | null, pagination?: any | null } | null };
+
+export type GetValidatorUnbondingDelegationListQueryVariables = Exact<{
+  operator: Scalars['String']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetValidatorUnbondingDelegationListQuery = { __typename?: 'query_root', action_validator_unbonding_delegations?: { __typename?: 'ActionUnbondingDelegationResponse', unbonding_delegations?: Array<any | null> | null, pagination?: any | null } | null };
+
 export type SearchQueryVariables = Exact<{
   valueStr?: InputMaybe<Scalars['String']['input']>;
   valueInt?: InputMaybe<Scalars['bigint']['input']>;
@@ -18734,6 +18807,16 @@ export const ProposalVote = gql`
   }
 }
     `;
+export const SlashingParams = gql`
+    fragment SlashingParams on slashing_params {
+  params
+}
+    `;
+export const StakingPool = gql`
+    fragment StakingPool on staking_pool {
+  bonded_tokens
+}
+    `;
 export const Transaction = gql`
     fragment Transaction on transaction {
   hash
@@ -18781,6 +18864,61 @@ export const TransactionList = gql`
   block {
     timestamp
     height
+  }
+}
+    `;
+export const Validator = gql`
+    fragment Validator on validator {
+  consensus_address
+  consensus_pubkey
+  validator_commissions {
+    commission
+    min_self_delegation
+  }
+  validator_descriptions {
+    avatar_url
+    moniker
+    website
+  }
+  validator_info {
+    operator_address
+    account {
+      address
+    }
+  }
+  validator_signing_infos {
+    missed_blocks_counter
+  }
+  validator_statuses {
+    jailed
+    status
+  }
+  validator_voting_powers {
+    voting_power
+  }
+}
+    `;
+export const ValidatorBase = gql`
+    fragment ValidatorBase on validator {
+  validator_info {
+    operator_address
+  }
+  validator_commissions {
+    commission
+  }
+  validator_signing_infos {
+    missed_blocks_counter
+  }
+  validator_descriptions {
+    moniker
+    avatar_url
+  }
+  validator_statuses {
+    status
+    jailed
+  }
+  validator_voting_powers {
+    voting_power
   }
 }
     `;
@@ -18976,6 +19114,104 @@ export const GetTransactionListByBlock = gql`
   }
 }
     ${TransactionList}`;
+export const GetValidatorBase = gql`
+    query GetValidatorBase($where: validator_bool_exp, $order_by: [validator_order_by!], $limit: Int, $offset: Int) {
+  validator(limit: $limit, offset: $offset, where: $where, order_by: $order_by) {
+    ...ValidatorBase
+  }
+  slashing_params {
+    ...SlashingParams
+  }
+  staking_pool(limit: 1, order_by: {height: desc}) {
+    ...StakingPool
+  }
+}
+    ${ValidatorBase}
+${SlashingParams}
+${StakingPool}`;
+export const GetValidatorByAddress = gql`
+    query GetValidatorByAddress($address: String!) {
+  validator(where: {validator_info: {operator_address: {_eq: $address}}}) {
+    ...Validator
+  }
+  slashing_params {
+    params
+  }
+  staking_pool {
+    bonded_tokens
+  }
+}
+    ${Validator}`;
+export const GetValidatorByConsensusAddress = gql`
+    query GetValidatorByConsensusAddress($address: String!) {
+  validator(where: {validator_info: {consensus_address: {_eq: $address}}}) {
+    validator_descriptions {
+      moniker
+      avatar_url
+    }
+    validator_info {
+      account {
+        address
+      }
+    }
+  }
+}
+    `;
+export const GetValidatorCommissionAmount = gql`
+    query GetValidatorCommissionAmount($address: String!) {
+  action_validator_commission_amount(address: $address) {
+    coins
+  }
+}
+    `;
+export const GetValidatorCount = gql`
+    query GetValidatorCount($where: validator_bool_exp) {
+  validator_aggregate(where: $where) {
+    aggregate {
+      count(columns: consensus_address)
+    }
+  }
+}
+    `;
+export const GetValidatorDelegationList = gql`
+    query GetValidatorDelegationList($operator: String!, $limit: Int, $offset: Int) {
+  action_validator_delegations(
+    address: $operator
+    count_total: true
+    limit: $limit
+    offset: $offset
+  ) {
+    delegations
+    pagination
+  }
+}
+    `;
+export const GetValidatorRedelegationList = gql`
+    query GetValidatorRedelegationList($operator: String!, $limit: Int, $offset: Int) {
+  action_validator_redelegations_from(
+    address: $operator
+    count_total: true
+    limit: $limit
+    offset: $offset
+  ) {
+    redelegations
+    pagination
+  }
+}
+    `;
+export const GetValidatorUnbondingDelegationList = gql`
+    query GetValidatorUnbondingDelegationList($operator: String!, $limit: Int, $offset: Int) {
+  action_validator_unbonding_delegations(
+    address: $operator
+    count_total: true
+    limit: $limit
+    offset: $offset
+  ) {
+    unbonding_delegations
+    pagination
+  }
+}
+    `;
 export const Search = gql`
     query Search($valueStr: String, $valueInt: bigint) {
   account(where: {address: {_eq: $valueStr}}, limit: 1) {

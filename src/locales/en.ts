@@ -325,4 +325,26 @@ export default {
   "proposal-details-content-row": {
     "heading-lbl": "Content",
   },
+  "validators": {
+    "title": "Validators",
+    "all-filter-lbl": "All",
+    "active-filter-lbl": "Active",
+    "inactive-filter-lbl": "Inactive",
+    "tabs-lbl": "Validator statuses",
+  },
+  "validator-list": {
+    "validator-col-lbl": "Validator",
+    "voting-power-col-lbl": "Voting Power",
+    "voting-power-col-tip-lbl": "As the top 34% voting power can easily decrease network security and halt the network they will be highlighted differently in order to educate and encourage decentralization.",
+    "commission-col-lbl": "Commission",
+    "condition-col-lbl": "Condition",
+    "status-col-lbl": "Status",
+    "table-lbl": "Validators",
+    "no-data-msg": "There is no existing validators, it will appear for a while",
+    "condition-col-tooltip": "The overall health condition of validator within the current signed block window",
+    "condition-col-tooltip-0-percent": "0%",
+    "condition-col-tooltip-1-percent": "1% – 70%",
+    "condition-col-tooltip-70-percent": "70% – 90%",
+    "condition-col-tooltip-90-percent": "90% – 100%",
+  },
 } as const

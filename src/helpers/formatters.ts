@@ -2,7 +2,7 @@ import { BN, BnFormatConfig, BnLike } from '@distributedlab/tools'
 
 import { CONFIG } from '@/config'
 
-const AMOUNT_CFG: BnFormatConfig = {
+export const AMOUNT_CFG: BnFormatConfig = {
   decimals: CONFIG.AMOUNT_DECIMALS,
   decimalSeparator: '.',
   groupSeparator: ',',

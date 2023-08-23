@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
 
-import { PageContainer } from '@/components'
-// import { PageContainer, Validators } from '@/components'
+import { PageContainer, Validators } from '@/components'
 import { craftPageTitle, METADATA } from '@/config'
 
 export const metadata: Metadata = {
@@ -10,5 +9,9 @@ export const metadata: Metadata = {
 }
 
 export default function ValidatorsPage() {
-  return <PageContainer>{/*<Validators />*/}</PageContainer>
+  return (
+    <PageContainer>
+      <Validators />
+    </PageContainer>
+  )
 }
