@@ -3,11 +3,11 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { IconButton, Stack, Typography, useTheme } from '@mui/material'
 import { useRouter } from 'next/navigation'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 import { useI18n } from '@/locales/client'
 
-export const ContentSection = ({
+export default function ContentSection({
   title,
   action,
   children,
@@ -17,7 +17,7 @@ export const ContentSection = ({
   action?: ReactNode
   children: ReactNode
   withBackButton?: boolean
-}) => {
+}) {
   const t = useI18n()
   const theme = useTheme()
   const router = useRouter()

@@ -6,11 +6,15 @@ import { useRouter } from 'next/navigation'
 import { KeyboardEvent, useState } from 'react'
 
 import { RoutePaths } from '@/enums'
-import { apolloClient } from '@/graphql'
+import {
+  apolloClient,
+  Search as SearchQuery,
+  SearchQuery as TSearchQuery,
+  SearchQueryVariables,
+} from '@/graphql'
 import { Bus, generatePath } from '@/helpers'
 import { useLoading } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { Search as SearchQuery, SearchQuery as TSearchQuery, SearchQueryVariables } from '@/types'
 
 const getSearchResults = async (value: string) => {
   const valueInt = Number(value)
@@ -27,7 +31,7 @@ const getSearchResults = async (value: string) => {
   return data
 }
 
-export const Search = ({ size = 'default' }: { size?: 'default' | 'big' }) => {
+export default function Search({ size = 'default' }: { size?: 'default' | 'big' }) {
   const t = useI18n()
   const router = useRouter()
   const theme = useTheme()

@@ -8,20 +8,22 @@ import {
   TableRow,
   useTheme,
 } from '@mui/material'
-import { ChangeEvent } from 'react'
+import { ChangeEvent, ReactNode } from 'react'
 
-import { NoDataTableRow } from './NoDataTableRow'
+import NoDataTableRow from '@/components/NoDataTableRow'
+import { TABLE_LIST_BODY_ROW_HEIGHT, TABLE_LIST_HEAD_ROW_HEIGHT } from '@/const'
 
 const footerFont = {
   fontSize: 12,
   lineHeight: 1.66,
 }
 
-export const TableWithPagination = ({
+export default function TableWithPagination({
   label,
   headCells,
   rows,
   noDataMessage,
+  isMinHeighted = true,
   isLoadingError,
   isLoading,
   limit,
@@ -31,9 +33,10 @@ export const TableWithPagination = ({
   handleChangeRowsPerPage,
 }: {
   label: string
-  rows: JSX.Element[]
-  headCells: JSX.Element[]
+  rows: ReactNode[]
+  headCells: ReactNode[]
   noDataMessage?: string
+  isMinHeighted?: boolean
   isLoadingError: boolean
   isLoading: boolean
   limit: number
@@ -41,16 +44,38 @@ export const TableWithPagination = ({
   count: number
   handleChangePage: (event: unknown, newPage: number) => void
   handleChangeRowsPerPage: (event: ChangeEvent<HTMLInputElement>) => void
-}) => {
+}) {
   const theme = useTheme()
   return (
     <>
-      <TableContainer>
+      <TableContainer
+        sx={{
+          ...(isMinHeighted && {
+            minHeight: `calc(${TABLE_LIST_HEAD_ROW_HEIGHT}px + ${
+              TABLE_LIST_BODY_ROW_HEIGHT * limit
+            }px)`,
+          }),
+        }}
+      >
         <Table stickyHeader aria-label={label}>
           <TableHead>
-            <TableRow>{headCells}</TableRow>
+            <TableRow
+              sx={{
+                '& > .MuiTableCell-root': {
+                  height: TABLE_LIST_HEAD_ROW_HEIGHT,
+                },
+              }}
+            >
+              {headCells}
+            </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody
+            sx={{
+              '& > .MuiTableRow-root > .MuiTableCell-root': {
+                height: TABLE_LIST_BODY_ROW_HEIGHT,
+              },
+            }}
+          >
             {rows}
             {!isLoading && (!rows?.length || isLoadingError) && (
               <NoDataTableRow
@@ -69,6 +94,7 @@ export const TableWithPagination = ({
         }}
         sx={{
           '& > .MuiToolbar-root': {
+            ...(limit !== rows.length && { borderTop: 'var(--ui-border)' }),
             minHeight: 44,
             height: 44,
             '& > .MuiTablePagination-selectLabel': {

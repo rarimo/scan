@@ -5,22 +5,21 @@ import { Skeleton, SxProps } from '@mui/material'
 import { ReactNode } from 'react'
 
 import { getBlockByHeight } from '@/callers'
+import { AvatarName } from '@/components/Avatar'
+import BlockTransactions from '@/components/Block/BlockTransactions'
+import { ContentBox, ContentSection, ContentWrapper } from '@/components/Content'
+import CopyToClipboardWrapper from '@/components/CopyToClipboardWrapper'
+import OverviewTable from '@/components/OverviewTable'
 import {
-  TABLE_ADDRESS_SKELETON_SX,
-  TABLE_HASH_SKELETON_SX,
+  TABLE_BIG_SKELETON_SX,
+  TABLE_LARGE_SKELETON_SX,
   TABLE_SMALL_TEXT_SKELETON_SX,
 } from '@/const'
+import { BlockFragment } from '@/graphql'
 import { useLoading } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { BlockFragment } from '@/types'
 
-import { AvatarName } from '../Avatar'
-import { ContentBox, ContentSection, ContentWrapper } from '../Content'
-import { CopyToClipboardWrapper } from '../CopyToClipboardWrapper'
-import { OverviewTable } from '../OverviewTable'
-import { BlockTransactions } from './BlockTransactions'
-
-export const BlockDetails = ({ height }: { height: string }) => {
+export default function BlockDetails({ height }: { height: string }) {
   const t = useI18n()
 
   const {
@@ -50,7 +49,7 @@ export const BlockDetails = ({ height }: { height: string }) => {
     },
     {
       head: t('block-details.hash-lbl'),
-      body: withSkeleton(block?.hash, TABLE_HASH_SKELETON_SX),
+      body: withSkeleton(block?.hash, TABLE_BIG_SKELETON_SX),
     },
     {
       head: t('block-details.validator-lbl'),
@@ -61,7 +60,7 @@ export const BlockDetails = ({ height }: { height: string }) => {
           name={block.validator?.validator_descriptions?.[0]?.moniker ?? ''}
           imageUrl={block.validator?.validator_descriptions?.[0]?.avatar_url ?? ''}
         />,
-        TABLE_ADDRESS_SKELETON_SX,
+        TABLE_LARGE_SKELETON_SX,
       ),
     },
     {

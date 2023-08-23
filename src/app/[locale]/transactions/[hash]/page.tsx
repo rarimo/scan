@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { PageContainer, TransactionDetailsSection } from '@/components'
+import { PageContainer, Transaction } from '@/components'
 import { craftPageTitle, METADATA } from '@/config'
 
 export function generateMetadata({ params }: { params: { hash: string } }): Metadata {
@@ -13,7 +13,7 @@ export function generateMetadata({ params }: { params: { hash: string } }): Meta
 export default function TransactionPage({ params: { hash } }: { params: { hash: string } }) {
   return (
     <PageContainer>
-      <TransactionDetailsSection hash={hash} />
+      <Transaction hash={hash} />
     </PageContainer>
   )
 }

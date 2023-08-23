@@ -5,7 +5,7 @@ import { ReactNode } from 'react'
 
 import { RoutePaths } from '@/enums'
 
-export const PreviewList = ({
+export default function PreviewList({
   title,
   children,
   actions,
@@ -15,7 +15,7 @@ export const PreviewList = ({
   actions: { label: string; link: RoutePaths }
   isLoading: boolean
   children: ReactNode
-}) => {
+}) {
   const theme = useTheme()
 
   return (

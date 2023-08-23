@@ -1,4 +1,3 @@
-export { HomeLatestData } from './HomeLatestData'
-export { HomeLatestDataRow } from './HomeLatestDataRow'
-export { HomeRedirectEmitter } from './HomeRedirectEmitter'
-export { HomeStatistics } from './HomeStatistics'
+export { default as HomeLatestData } from './HomeLatestData'
+export { default as HomeRedirectEmitter } from './HomeRedirectEmitter'
+export { default as HomeStatistics } from './HomeStatistics'

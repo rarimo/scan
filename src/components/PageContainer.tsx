@@ -1,7 +1,7 @@
 import { Stack } from '@mui/material'
 import { ReactNode } from 'react'
 
-export const PageContainer = ({ children }: { children: ReactNode }) => {
+export default function PageContainer({ children }: { children: ReactNode }) {
   return (
     <Stack
       className='App__page'

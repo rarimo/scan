@@ -15,13 +15,13 @@ const arrowIconStyleProps = {
   },
 }
 
-export const TableCollapseRow = ({
+export default function TableCollapseRow({
   heading,
   children,
 }: {
   heading: string
   children: ReactNode
-}) => {
+}) {
   const [isOpened, setIsOpened] = useState(false)
 
   const t = useI18n()

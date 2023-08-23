@@ -1,2 +1,2 @@
-export * from './AccountDetails'
-export * from './AccountTransactions'
+export { default as AccountDetails } from './AccountDetails'
+export { default as AccountTransactions } from './AccountTransactions'

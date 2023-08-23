@@ -4,7 +4,7 @@ import { Chip } from '@mui/material'
 
 import { useI18n } from '@/locales/client'
 
-export const TransactionStatus = ({ status }: { status?: boolean }) => {
+export default function TransactionStatus({ status }: { status?: boolean }) {
   const t = useI18n()
 
   return (

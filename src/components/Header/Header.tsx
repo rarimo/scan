@@ -9,15 +9,14 @@ import { AppBar, Box, Button, IconButton, Stack, useMediaQuery, useTheme } from 
 import { usePathname } from 'next/navigation'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 
+import HeaderBlockchainMenu from '@/components/Header/HeaderBlockchainMenu'
+import HeaderNetworkSwitcher from '@/components/Header/HeaderNetworkSwitcher'
+import Logo from '@/components/Logo'
 import { ColorModeContext } from '@/contexts'
 import { RoutePaths, ThemeMode } from '@/enums'
 import { abbr } from '@/helpers'
 import { useAppState, useWeb3 } from '@/hooks'
 import { useI18n } from '@/locales/client'
-
-import { Logo } from '../Logo'
-import { HeaderBlockchainMenu } from './HeaderBlockchainMenu'
-import { HeaderNetworkSwitcher } from './HeaderNetworkSwitcher'
 
 const iconProps = {
   width: 24,
@@ -27,7 +26,7 @@ const iconProps = {
 
 const HEADER_CONTENT_HEIGHT = 40
 
-export const Header = () => {
+export default function Header() {
   const t = useI18n()
   const theme = useTheme()
   const pathname = usePathname()

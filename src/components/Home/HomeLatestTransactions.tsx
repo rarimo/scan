@@ -5,14 +5,14 @@ import { Link as MuiLink } from '@mui/material'
 import Link from 'next/link'
 import { useMemo } from 'react'
 
-import { AvatarName } from '@/components/Avatar/AvatarName'
-import { HomeLatestDataRow } from '@/components/Home/HomeLatestDataRow'
-import { NoDataRow } from '@/components/NoDataRow'
-import { PreviewList } from '@/components/PreviewList'
+import AvatarName from '@/components/Avatar/AvatarName'
+import HomeLatestDataRow from '@/components/Home/HomeLatestDataRow'
+import NoDataRow from '@/components/NoDataRow'
+import PreviewList from '@/components/PreviewList'
 import { RoutePaths } from '@/enums'
+import { TransactionBaseFragment } from '@/graphql'
 import { abbr, generatePath, parseAddress } from '@/helpers'
 import { useI18n } from '@/locales/client'
-import { TransactionBaseFragment } from '@/types'
 
 const LINK_PROPS = {
   display: 'inline',
@@ -21,7 +21,7 @@ const LINK_PROPS = {
   whiteSpace: 'nowrap',
 }
 
-export const HomeLatestTransactions = ({
+export default function HomeLatestTransactions({
   isLoading,
   isLoadingError,
   transactionList,
@@ -31,7 +31,7 @@ export const HomeLatestTransactions = ({
   isLoading: boolean
   transactionList: TransactionBaseFragment[]
   limitRow: number
-}) => {
+}) {
   const t = useI18n()
 
   const list = useMemo(() => {

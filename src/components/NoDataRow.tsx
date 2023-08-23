@@ -12,7 +12,7 @@ interface INoDataTableRowProps {
   error?: boolean
 }
 
-export const NoDataRow = ({ message, error }: INoDataTableRowProps) => {
+export default function NoDataRow({ message, error }: INoDataTableRowProps) {
   const t = useI18n()
   const theme = useTheme()
 

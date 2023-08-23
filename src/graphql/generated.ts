@@ -18461,6 +18461,16 @@ export type BlockBaseFragment = { __typename?: 'block', height: any, timestamp: 
 
 export type BlockListFragment = { __typename?: 'block', height: any, timestamp: any, total_gas?: any | null, transactions_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null };
 
+export type ProposalFragment = { __typename?: 'proposal', content: any, deposit_end_block?: any | null, id: number, proposer_address: string, status?: string | null, submit_block: any, metadata: string, voting_end_block?: any | null, voting_start_block?: any | null, proposal_tally_result?: { __typename?: 'proposal_tally_result', abstain: string, no: string, no_with_veto: string, yes: string } | null };
+
+export type ProposalBaseFragment = { __typename?: 'proposal', id: number, proposer_address: string, content: any, metadata: string, status?: string | null };
+
+export type ProposalDepositFragment = { __typename?: 'proposal_deposit', amount?: any | null, depositor_address?: string | null, height: any, block?: { __typename?: 'block', height: any, timestamp: any, transactions: Array<{ __typename?: 'transaction', hash: string }> } | null };
+
+export type ProposalVoteFragment = { __typename?: 'proposal_vote', voter_address: string, option: string, height: any, block: { __typename?: 'block', timestamp: any, transactions: Array<{ __typename?: 'transaction', hash: string }> } };
+
+export type TallyResultFragment = { __typename?: 'proposal_tally_result', abstain: string, no: string, no_with_veto: string, yes: string };
+
 export type TransactionFragment = { __typename?: 'transaction', hash: string, success: boolean, fee: any, signer_infos: any, height: any, messages: any, gas_used?: any | null, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, validator?: { __typename?: 'validator', validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }>, validator_info?: { __typename?: 'validator_info', operator_address: string } | null } | null } };
 
 export type TransactionBaseFragment = { __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } };
@@ -18504,6 +18514,58 @@ export type GetLatestTxAndBlocksQueryVariables = Exact<{
 
 
 export type GetLatestTxAndBlocksQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } }>, block: Array<{ __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null }> };
+
+export type GetProposalBaseQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetProposalBaseQuery = { __typename?: 'query_root', proposal: Array<{ __typename?: 'proposal', id: number, proposer_address: string, content: any, metadata: string, status?: string | null }> };
+
+export type GetProposalByIdQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type GetProposalByIdQuery = { __typename?: 'query_root', proposal: Array<{ __typename?: 'proposal', content: any, deposit_end_block?: any | null, id: number, proposer_address: string, status?: string | null, submit_block: any, metadata: string, voting_end_block?: any | null, voting_start_block?: any | null, proposal_tally_result?: { __typename?: 'proposal_tally_result', abstain: string, no: string, no_with_veto: string, yes: string } | null }> };
+
+export type GetProposalCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetProposalCountQuery = { __typename?: 'query_root', proposal_aggregate: { __typename?: 'proposal_aggregate', aggregate?: { __typename?: 'proposal_aggregate_fields', count: number } | null } };
+
+export type GetProposalDepositsByIdQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetProposalDepositsByIdQuery = { __typename?: 'query_root', proposal: Array<{ __typename?: 'proposal', proposal_deposits: Array<{ __typename?: 'proposal_deposit', amount?: any | null, depositor_address?: string | null, height: any, block?: { __typename?: 'block', height: any, timestamp: any, transactions: Array<{ __typename?: 'transaction', hash: string }> } | null }> }> };
+
+export type GetProposalDepositsCountByIdQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type GetProposalDepositsCountByIdQuery = { __typename?: 'query_root', proposal: Array<{ __typename?: 'proposal', proposal_deposits_aggregate: { __typename?: 'proposal_deposit_aggregate', aggregate?: { __typename?: 'proposal_deposit_aggregate_fields', count: number } | null } }> };
+
+export type GetProposalVotesByIdQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetProposalVotesByIdQuery = { __typename?: 'query_root', proposal: Array<{ __typename?: 'proposal', proposal_votes: Array<{ __typename?: 'proposal_vote', voter_address: string, option: string, height: any, block: { __typename?: 'block', timestamp: any, transactions: Array<{ __typename?: 'transaction', hash: string }> } }> }> };
+
+export type GetProposalVotesCountByIdQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type GetProposalVotesCountByIdQuery = { __typename?: 'query_root', proposal: Array<{ __typename?: 'proposal', proposal_votes_aggregate: { __typename?: 'proposal_vote_aggregate', aggregate?: { __typename?: 'proposal_vote_aggregate_fields', count: number } | null } }> };
 
 export type GetStatisticQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -18612,6 +18674,66 @@ export const BlockList = gql`
   }
 }
     `;
+export const TallyResult = gql`
+    fragment TallyResult on proposal_tally_result {
+  abstain
+  no
+  no_with_veto
+  yes
+}
+    `;
+export const Proposal = gql`
+    fragment Proposal on proposal {
+  content
+  deposit_end_block
+  id
+  proposer_address
+  status
+  submit_block
+  metadata
+  voting_end_block
+  voting_start_block
+  proposal_tally_result {
+    ...TallyResult
+  }
+}
+    ${TallyResult}`;
+export const ProposalBase = gql`
+    fragment ProposalBase on proposal {
+  id
+  proposer_address
+  content
+  metadata
+  status
+}
+    `;
+export const ProposalDeposit = gql`
+    fragment ProposalDeposit on proposal_deposit {
+  amount
+  depositor_address
+  height
+  block {
+    height
+    timestamp
+    transactions {
+      hash
+    }
+  }
+}
+    `;
+export const ProposalVote = gql`
+    fragment ProposalVote on proposal_vote {
+  voter_address
+  option
+  height
+  block {
+    timestamp
+    transactions {
+      hash
+    }
+  }
+}
+    `;
 export const Transaction = gql`
     fragment Transaction on transaction {
   hash
@@ -18714,6 +18836,69 @@ export const GetLatestTxAndBlocks = gql`
 }
     ${TransactionBase}
 ${BlockBase}`;
+export const GetProposalBase = gql`
+    query GetProposalBase($limit: Int, $offset: Int) {
+  proposal(limit: $limit, offset: $offset, order_by: {id: desc}) {
+    ...ProposalBase
+  }
+}
+    ${ProposalBase}`;
+export const GetProposalById = gql`
+    query GetProposalByID($id: Int!) {
+  proposal(where: {id: {_eq: $id}}) {
+    ...Proposal
+  }
+}
+    ${Proposal}`;
+export const GetProposalCount = gql`
+    query GetProposalCount {
+  proposal_aggregate {
+    aggregate {
+      count(columns: id)
+    }
+  }
+}
+    `;
+export const GetProposalDepositsById = gql`
+    query GetProposalDepositsByID($id: Int!, $limit: Int, $offset: Int) {
+  proposal(where: {id: {_eq: $id}}) {
+    proposal_deposits(limit: $limit, offset: $offset) {
+      ...ProposalDeposit
+    }
+  }
+}
+    ${ProposalDeposit}`;
+export const GetProposalDepositsCountById = gql`
+    query GetProposalDepositsCountByID($id: Int!) {
+  proposal(where: {id: {_eq: $id}}) {
+    proposal_deposits_aggregate {
+      aggregate {
+        count(columns: depositor_address)
+      }
+    }
+  }
+}
+    `;
+export const GetProposalVotesById = gql`
+    query GetProposalVotesByID($id: Int!, $limit: Int, $offset: Int) {
+  proposal(where: {id: {_eq: $id}}) {
+    proposal_votes(limit: $limit, offset: $offset) {
+      ...ProposalVote
+    }
+  }
+}
+    ${ProposalVote}`;
+export const GetProposalVotesCountById = gql`
+    query GetProposalVotesCountByID($id: Int!) {
+  proposal(where: {id: {_eq: $id}}) {
+    proposal_votes_aggregate {
+      aggregate {
+        count(columns: voter_address)
+      }
+    }
+  }
+}
+    `;
 export const GetStatistic = gql`
     query GetStatistic {
   block(order_by: {height: desc}, limit: 1) {

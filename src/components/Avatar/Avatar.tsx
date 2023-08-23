@@ -3,13 +3,7 @@
 import { Avatar as MuiAvatar, Box, useTheme } from '@mui/material'
 import { useEffect, useState } from 'react'
 
-import { LogoSmall } from '@/components/LogoSmall'
-
-type AvatarProps = {
-  name?: string
-  imageUrl?: string
-  imageSize?: number
-}
+import LogoSmall from '@/components/LogoSmall'
 
 const getSx = (imageSize?: number | string) => ({
   width: imageSize,
@@ -29,7 +23,15 @@ const getSx = (imageSize?: number | string) => ({
   },
 })
 
-export const Avatar = ({ imageUrl, name, imageSize = 28 }: AvatarProps) => {
+export default function Avatar({
+  imageUrl,
+  name,
+  imageSize = 28,
+}: {
+  name?: string
+  imageUrl?: string
+  imageSize?: number
+}) {
   const theme = useTheme()
   const [error, setError] = useState<boolean>(false)
 

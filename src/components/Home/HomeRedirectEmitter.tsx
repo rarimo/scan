@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 
 import { Bus } from '@/helpers'
 
-export const HomeRedirectEmitter = () => {
+export default function HomeRedirectEmitter() {
   useEffect(() => {
     Bus.emit(Bus.eventList.redirectToHome)
   }, [])

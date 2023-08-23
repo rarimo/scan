@@ -4,16 +4,15 @@ import Cancel from '@mui/icons-material/Cancel'
 import { Box, Divider, Drawer, IconButton, Stack, Toolbar, useTheme } from '@mui/material'
 import { ReactNode } from 'react'
 
+import Logo from '@/components/Logo'
+import NavbarMenuList from '@/components/Navbar/NavbarMenuList'
 import { isWindow } from '@/helpers'
 import { useAppState } from '@/hooks'
 import { useI18n } from '@/locales/client'
 
-import { Logo } from '../Logo'
-import { NavbarMenuList } from './NavbarMenuList'
-
 const container = isWindow() ? () => window.document.body : undefined
 
-export const Navbar = ({ children }: { children: ReactNode }) => {
+export default function Navbar({ children }: { children: ReactNode }) {
   const t = useI18n()
   const { toggleMobileNavbar, isMobileNavbarOpened } = useAppState()
   const theme = useTheme()

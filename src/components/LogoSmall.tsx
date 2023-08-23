@@ -1,4 +1,10 @@
-export const LogoSmall = ({ width = 24, height = 24 }: { width?: number; height?: number }) => {
+export default function LogoSmall({
+  width = 24,
+  height = 24,
+}: {
+  width?: number
+  height?: number
+}) {
   return (
     <svg width={width} height={height} viewBox='0 0 512 512'>
       <path

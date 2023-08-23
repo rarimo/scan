@@ -6,9 +6,9 @@ import { CONFIG } from '@/config'
 import { RoutePaths } from '@/enums'
 import { abbr, generatePath } from '@/helpers'
 
-import { Avatar } from './Avatar'
+import Avatar from './Avatar'
 
-export const AvatarName = ({
+export default function AvatarName({
   imageUrl,
   name,
   address,
@@ -24,7 +24,7 @@ export const AvatarName = ({
   fontSize?: number | string
   padding?: number | string
   abbrAddress?: boolean
-}) => {
+}) {
   const route = useMemo(
     () =>
       address.startsWith(CONFIG.CHAIN_ID + 'valoper')

@@ -3,7 +3,7 @@ import ReactJson from 'react-json-view'
 
 import { useThemeMode } from '@/hooks'
 
-export const JsonViewer = ({ value }: { value: object }) => {
+export default function JsonViewer({ value }: { value: object }) {
   const { isDarkThemeMode } = useThemeMode()
   const theme = useTheme()
 

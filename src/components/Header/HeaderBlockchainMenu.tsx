@@ -2,7 +2,7 @@ import { MenuItem, SelectChangeEvent, Stack, Typography, useTheme } from '@mui/m
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-import { MouseOverDropdown } from '@/components/MouseOverDropdown'
+import MouseOverDropdown from '@/components/MouseOverDropdown'
 import { RoutePaths } from '@/enums'
 import { Bus } from '@/helpers'
 import { useI18n } from '@/locales/client'
@@ -20,7 +20,7 @@ const AVAILABLE_ROUTES: AvailableRoutes[] = [
   RoutePaths.Blocks,
 ]
 
-export const HeaderBlockchainMenu = () => {
+export default function HeaderBlockchainMenu() {
   const router = useRouter()
   const pathname = usePathname()
   const theme = useTheme()

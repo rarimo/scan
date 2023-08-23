@@ -25,7 +25,7 @@ const getIconBySeverity = (theme: Theme, severity: AlertColor) => {
   }[severity]
 }
 
-const SnackbarInfo = ({
+export default function SnackbarInfo({
   anchorOrigin = { vertical: 'top', horizontal: 'right' },
   autoHideDuration = 5000,
   isOpened,
@@ -39,7 +39,7 @@ const SnackbarInfo = ({
   message: string
   close?: () => void
   severity: AlertColor
-}) => {
+}) {
   const t = useI18n()
   const theme = useTheme()
 
@@ -93,5 +93,3 @@ const SnackbarInfo = ({
     </Snackbar>
   )
 }
-
-export default SnackbarInfo

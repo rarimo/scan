@@ -5,11 +5,10 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward'
 import { Divider, IconButton, Link, Stack, Typography, useTheme } from '@mui/material'
 import { Variant } from '@mui/material/styles/createTypography'
 
+import Logo from '@/components/Logo'
 import { CONFIG } from '@/config'
 import { RoutePaths } from '@/enums'
 import { useI18n } from '@/locales/client'
-
-import { Logo } from './Logo'
 
 const SCROLL_ICON_SIZE = 36
 const LINKS_SPACING = 2.7
@@ -21,7 +20,7 @@ const HIDE_ON_MOBILE_SX = {
   },
 }
 
-export const Footer = () => {
+export default function Footer() {
   const theme = useTheme()
   const t = useI18n()
 

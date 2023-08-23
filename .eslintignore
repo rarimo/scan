@@ -1,4 +1,4 @@
 .next
 *.md
 .eslintcache
-src/types/graphql.ts
+src/graphql/generated.ts

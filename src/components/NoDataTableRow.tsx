@@ -6,7 +6,7 @@ import { AlertColor, Stack, TableCell, TableRow, Typography, useTheme } from '@m
 
 import { useI18n } from '@/locales/client'
 
-export const NoDataTableRow = ({
+export default function NoDataTableRow({
   colSpan,
   message,
   error,
@@ -14,7 +14,7 @@ export const NoDataTableRow = ({
   colSpan: number
   message?: string
   error?: boolean
-}) => {
+}) {
   const t = useI18n()
   const theme = useTheme()
 

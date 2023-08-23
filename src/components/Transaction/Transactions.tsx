@@ -2,13 +2,12 @@
 
 import { getTransactionCount, getTransactionsList } from '@/callers'
 import { ContentBox, ContentSection } from '@/components/Content'
+import TransactionList from '@/components/Transaction/TransactionList'
+import { TransactionListFragment } from '@/graphql'
 import { useLoading, useTablePagination } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { TransactionListFragment } from '@/types'
 
-import { TransactionList } from './TransactionList'
-
-export const Transactions = () => {
+export default function Transactions() {
   const t = useI18n()
 
   const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination()

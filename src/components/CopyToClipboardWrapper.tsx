@@ -7,7 +7,7 @@ import { ReactNode, useState } from 'react'
 import { Bus } from '@/helpers'
 import { useI18n } from '@/locales/client'
 
-export const CopyToClipboardWrapper = ({
+export default function CopyToClipboardWrapper({
   value,
   children,
   sx = {},
@@ -15,7 +15,7 @@ export const CopyToClipboardWrapper = ({
   value?: string | number
   children?: ReactNode | Element | string
   sx?: SxProps
-}) => {
+}) {
   const [isCopied, setIsCopied] = useState(false)
   const t = useI18n()
 

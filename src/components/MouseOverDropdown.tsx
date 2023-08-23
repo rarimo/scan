@@ -1,7 +1,7 @@
 import { Select, SelectChangeEvent, useTheme } from '@mui/material'
 import { ReactNode, useState } from 'react'
 
-export const MouseOverDropdown = ({
+export default function MouseOverDropdown({
   variant = 'outlined',
   value,
   handleChange,
@@ -11,7 +11,7 @@ export const MouseOverDropdown = ({
   children: ReactNode
   value?: string
   handleChange: (event: SelectChangeEvent) => void
-}) => {
+}) {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
 
@@ -45,6 +45,7 @@ export const MouseOverDropdown = ({
           '& > .MuiPaper-root': {
             width: 220,
             top: '89px !important',
+            boxShadow: 'var(--ui-dropdown-shadow)',
           },
         },
       }}

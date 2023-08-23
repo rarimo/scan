@@ -1,2 +1,2 @@
-export * from './BlockDetails'
-export * from './Blocks'
+export { default as BlockDetails } from './BlockDetails'
+export { default as Blocks } from './Blocks'

@@ -3,10 +3,9 @@
 import { useEffect, useState } from 'react'
 
 import { client, getClient } from '@/client'
-import { apolloClient } from '@/graphql'
+import { apolloClient, GetAccountValidatorInfos, GetAccountValidatorInfosQuery } from '@/graphql'
 import { ErrorHandler, isWindow } from '@/helpers'
 import { useAppState } from '@/hooks/useAppState'
-import { GetAccountValidatorInfos, GetAccountValidatorInfosQuery } from '@/types'
 
 export const useWeb3 = () => {
   const {

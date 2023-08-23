@@ -18,7 +18,7 @@ import SnackbarInfo from './SnackbarInfo'
 
 const STATUS_MESSAGE_AUTO_HIDE_DURATION = 10000
 
-export const StatusMessage = () => {
+export default function StatusMessage() {
   const t = useI18n()
   const [isStatusMessageShown, setIsStatusMessageShown] = useState(false)
   const [statusMessage, setStatusMessage] = useState('')

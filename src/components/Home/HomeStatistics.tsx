@@ -3,16 +3,15 @@
 import { Stack, Typography, useTheme } from '@mui/material'
 
 import { getStatisticData } from '@/callers'
+import ContentSection from '@/components/Content/ContentSection'
+import HomeStatisticsRow from '@/components/Home/HomeStatisticsRow'
 import { CONFIG } from '@/config'
+import { GetStatisticQuery } from '@/graphql'
 import { formatCurrency, formatSeconds } from '@/helpers'
 import { useInterval, useLoading } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { GetStatisticQuery } from '@/types'
 
-import { ContentSection } from '../Content/ContentSection'
-import { HomeStatisticsRow } from './HomeStatisticsRow'
-
-export const HomeStatistics = () => {
+export default function HomeStatistics() {
   const theme = useTheme()
   const t = useI18n()
   const { data, isLoading, isLoadingError, update } = useLoading<GetStatisticQuery>(

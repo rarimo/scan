@@ -1,13 +1,13 @@
 import { Paper, Stack, SxProps, useTheme } from '@mui/material'
 import { ReactNode } from 'react'
 
-export const ContentBox = ({
+export default function ContentBox({
   children,
   sx,
 }: {
   children: ReactNode
   sx?: SxProps
-} & JSX.IntrinsicAttributes) => {
+} & JSX.IntrinsicAttributes) {
   const theme = useTheme()
 
   return (

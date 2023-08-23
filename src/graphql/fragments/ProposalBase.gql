@@ -1,0 +1,7 @@
+fragment ProposalBase on proposal {
+  id
+  proposer_address
+  content
+  metadata
+  status
+}

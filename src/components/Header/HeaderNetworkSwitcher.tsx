@@ -3,11 +3,11 @@
 import { MenuItem, SelectChangeEvent } from '@mui/material'
 import { useEffect, useState } from 'react'
 
-import { MouseOverDropdown } from '@/components/MouseOverDropdown'
+import MouseOverDropdown from '@/components/MouseOverDropdown'
 import { CONFIG } from '@/config'
 import { useI18n } from '@/locales/client'
 
-export const HeaderNetworkSwitcher = () => {
+export default function HeaderNetworkSwitcher() {
   const t = useI18n()
 
   const [link, setLink] = useState('')

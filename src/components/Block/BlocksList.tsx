@@ -2,22 +2,22 @@
 
 import { TableCell } from '@mui/material'
 
+import BlocksListRow from '@/components/Block/BlocksListRow'
 import { ContentWrapper } from '@/components/Content'
-import { TableWithPagination } from '@/components/TableWithPagination'
+import TableWithPagination from '@/components/TableWithPagination'
+import { BlockListFragment } from '@/graphql'
 import { useI18n } from '@/locales/client'
-import { BlockListFragment, TableColumn, TableListProps } from '@/types'
+import { TableColumn, TableListProps } from '@/types'
 
-import { BlocksListRow } from './BlocksListRow'
-
-export enum ColumnIds {
-  BLOCK = 'block',
-  TXN = 'txn',
-  DATE = 'date',
-  VALIDATOR = 'validator',
-  GAS = 'gas',
+export enum BlocksColumnIds {
+  Block = 'block',
+  TxN = 'txn',
+  Date = 'date',
+  Validator = 'validator',
+  Gas = 'gas',
 }
 
-export const BlocksList = ({
+export default function BlocksList({
   isLoading,
   isLoadingError,
   limit,
@@ -26,7 +26,7 @@ export const BlocksList = ({
   count,
   handleChangePage,
   handleChangeRowsPerPage,
-}: TableListProps<BlockListFragment>) => {
+}: TableListProps<BlockListFragment>) {
   const t = useI18n()
 
   const overflow = {
@@ -34,23 +34,23 @@ export const BlocksList = ({
     textOverflow: 'ellipsis',
   }
 
-  const columns: readonly TableColumn<ColumnIds>[] = [
+  const columns: readonly TableColumn<BlocksColumnIds>[] = [
     {
-      id: ColumnIds.BLOCK,
+      id: BlocksColumnIds.Block,
       label: t('block-list.block-col-lbl'),
       sx: {
         minWidth: 260,
       },
     },
     {
-      id: ColumnIds.DATE,
+      id: BlocksColumnIds.Date,
       label: t('block-list.date-col-lbl'),
       sx: {
         minWidth: 260,
       },
     },
     {
-      id: ColumnIds.VALIDATOR,
+      id: BlocksColumnIds.Validator,
       label: t('block-list.validator-col-lbl'),
       sx: {
         ...overflow,
@@ -58,7 +58,7 @@ export const BlocksList = ({
       },
     },
     {
-      id: ColumnIds.GAS,
+      id: BlocksColumnIds.Gas,
       label: t('block-list.gas-col-lbl'),
       sx: {
         minWidth: 120,
@@ -66,7 +66,7 @@ export const BlocksList = ({
       align: 'right',
     },
     {
-      id: ColumnIds.TXN,
+      id: BlocksColumnIds.TxN,
       label: t('block-list.tnx-col-lbl'),
       sx: {
         minWidth: 120,

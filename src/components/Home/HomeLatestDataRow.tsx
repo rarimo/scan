@@ -28,7 +28,7 @@ const sx = {
   },
 }
 
-export const HomeLatestDataRow = ({
+export default function HomeLatestDataRow({
   head,
   subfooter,
   footer,
@@ -40,7 +40,7 @@ export const HomeLatestDataRow = ({
   footer?: ReactNode
   subfooter?: ReactNode
   subhead?: ReactNode
-}) => {
+}) {
   const theme = useTheme()
   const withSkeleton = (children: ReactNode) => (isLoading ? <Skeleton /> : children)
 

@@ -1,3 +1,4 @@
+/* stylelint-disable unit-disallowed-list */
 @import 'light-theme-colors';
 @import 'functions';
 
@@ -19,5 +20,6 @@
     --ui-app-home-gradient:
       radial-gradient(84.49% 84.49% at 50% -29.58%, rgba(138 181 164 / 0.3) 0%, rgba(138 181 164 / 0) 100%),
       linear-gradient(0deg, rgba(255 255 255 / 0.01), rgba(255 255 255 / 0.01));
+    --ui-dropdown-shadow: 0 5px 5px -3px rgba(0 0 0 / 0.2), 0 8px 10px 1px rgba(0 0 0 / 0.14), 0 3px 14px 2px rgba(0 0 0 / 0.12);
   }
 }

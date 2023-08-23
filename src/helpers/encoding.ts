@@ -3,12 +3,8 @@ import { fromHex, toBech32 } from '@cosmjs/encoding'
 import { isHex } from '@distributedlab/tools'
 
 import { CONFIG } from '@/config'
-import {
-  TransactionBaseFragment,
-  TransactionEVMLog,
-  TransactionFragment,
-  TransactionListFragment,
-} from '@/types'
+import { TransactionBaseFragment, TransactionFragment, TransactionListFragment } from '@/graphql'
+import { TransactionEVMLog } from '@/types'
 
 export const parseAddress = (
   tx?: TransactionBaseFragment | TransactionListFragment | TransactionFragment,

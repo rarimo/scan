@@ -7,21 +7,22 @@ import { ReactNode } from 'react'
 
 import { AvatarName } from '@/components/Avatar'
 import { RoutePaths } from '@/enums'
+import { BlockListFragment } from '@/graphql'
 import { createColumnMap, generatePath } from '@/helpers'
-import { BlockListFragment, TableColumn } from '@/types'
+import { TableColumn } from '@/types'
 
-import { ColumnIds } from './BlocksList'
+import { BlocksColumnIds } from './BlocksList'
 
-export const BlocksListRow = ({
+export default function BlocksListRow({
   block,
   columns,
   isLoading,
 }: {
-  columns: readonly TableColumn<ColumnIds>[]
+  columns: readonly TableColumn<BlocksColumnIds>[]
   block?: BlockListFragment
   isLoading: boolean
-}) => {
-  const columnMap = createColumnMap<ColumnIds>(columns)
+}) {
+  const columnMap = createColumnMap<BlocksColumnIds>(columns)
 
   const overflow = {
     overflow: 'hidden',
@@ -39,7 +40,7 @@ export const BlocksListRow = ({
     <TableRow hover role='checkbox' tabIndex={-1}>
       <TableCell
         sx={{
-          ...columnMap[ColumnIds.BLOCK]?.sx,
+          ...columnMap[BlocksColumnIds.Block]?.sx,
           ...overflow,
         }}
       >
@@ -55,12 +56,12 @@ export const BlocksListRow = ({
         )}
       </TableCell>
 
-      <TableCell sx={{ ...columnMap[ColumnIds.DATE]?.sx }}>
+      <TableCell sx={{ ...columnMap[BlocksColumnIds.Date]?.sx }}>
         {withSkeleton(time(block?.timestamp, { utc: true }).fromNow, 0, '140px')}
       </TableCell>
       <TableCell
         sx={{
-          ...columnMap[ColumnIds.VALIDATOR]?.sx,
+          ...columnMap[BlocksColumnIds.Validator]?.sx,
           ...overflow,
         }}
       >
@@ -75,11 +76,17 @@ export const BlocksListRow = ({
           '439px',
         )}
       </TableCell>
-      <TableCell sx={columnMap[ColumnIds.GAS]?.sx} align={columnMap[ColumnIds.GAS]?.align}>
+      <TableCell
+        sx={columnMap[BlocksColumnIds.Gas]?.sx}
+        align={columnMap[BlocksColumnIds.Gas]?.align}
+      >
         {withSkeleton(block?.total_gas, undefined, '90px', 'auto')}
       </TableCell>
 
-      <TableCell sx={columnMap[ColumnIds.TXN]?.sx} align={columnMap[ColumnIds.TXN]?.align}>
+      <TableCell
+        sx={columnMap[BlocksColumnIds.TxN]?.sx}
+        align={columnMap[BlocksColumnIds.TxN]?.align}
+      >
         {withSkeleton(block?.transactions_aggregate?.aggregate?.count, undefined, '60px', 'auto')}
       </TableCell>
     </TableRow>

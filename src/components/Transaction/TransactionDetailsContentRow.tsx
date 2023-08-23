@@ -2,17 +2,16 @@
 
 import { useMemo } from 'react'
 
+import JsonViewer from '@/components/JsonViewer'
+import TableCollapseRow from '@/components/TableCollapseRow'
+import { TransactionFragment } from '@/graphql'
 import { useI18n } from '@/locales/client'
-import { TransactionFragment } from '@/types'
 
-import { JsonViewer } from '../JsonViewer'
-import { TableCollapseRow } from '../TableCollapseRow'
-
-export const TransactionDetailsContentRow = ({
+export default function TransactionDetailsContentRow({
   transaction,
 }: {
   transaction: TransactionFragment
-}) => {
+}) {
   const t = useI18n()
 
   const log = useMemo(() => {

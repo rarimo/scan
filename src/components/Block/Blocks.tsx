@@ -1,14 +1,14 @@
 'use client'
 
 import { getBlockCount, getBlocksList } from '@/callers'
+import { BlockListFragment } from '@/graphql'
 import { useLoading, useTablePagination } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { BlockListFragment } from '@/types'
 
 import { ContentBox, ContentSection } from '../Content'
-import { BlocksList } from './BlocksList'
+import BlocksList from './BlocksList'
 
-export const Blocks = () => {
+export default function Blocks() {
   const t = useI18n()
 
   const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination()

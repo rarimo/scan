@@ -5,11 +5,11 @@ import { PublicKey } from '@rarimo/client'
 import { getTransactionCount, getTransactionsList } from '@/callers'
 import { ContentBox, ContentSection } from '@/components/Content'
 import { TransactionList } from '@/components/Transaction'
+import { TransactionListFragment } from '@/graphql'
 import { useLoading, useTablePagination } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { TransactionListFragment } from '@/types'
 
-export const AccountTransactions = ({ sender }: { sender: PublicKey }) => {
+export default function AccountTransactions({ sender }: { sender: PublicKey }) {
   const t = useI18n()
 
   const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination()

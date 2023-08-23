@@ -6,7 +6,7 @@ const config: CodegenConfig = {
   schema: process.env.GRAPHQL_URL,
   documents: ['src/**/*.gql'],
   generates: {
-    'src/types/graphql.ts': {
+    'src/graphql/generated.ts': {
       plugins: ['typescript', 'typescript-operations', 'typescript-document-nodes'],
     },
   },

@@ -6,7 +6,7 @@ import { Button, List, Stack, useTheme } from '@mui/material'
 import { useWeb3 } from '@/hooks'
 import { useI18n } from '@/locales/client'
 
-export const NavbarMenuList = () => {
+export default function NavbarMenuList() {
   const t = useI18n()
   const theme = useTheme()
   // const menuItemList = usePages()

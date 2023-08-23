@@ -6,15 +6,14 @@ import { ReactNode } from 'react'
 
 import { getClient } from '@/client'
 import { ContentBox, ContentSection, ContentWrapper } from '@/components/Content'
-import { OverviewTable } from '@/components/OverviewTable'
+import CopyToClipboardWrapper from '@/components/CopyToClipboardWrapper'
+import OverviewTable from '@/components/OverviewTable'
 import { CONFIG } from '@/config'
 import { formatCurrencyWithDenom } from '@/helpers'
 import { useLoading } from '@/hooks'
 import { useI18n } from '@/locales/client'
 
-import { CopyToClipboardWrapper } from '../CopyToClipboardWrapper'
-
-export const AccountDetails = ({ address }: { address: string }) => {
+export default function AccountDetails({ address }: { address: string }) {
   const t = useI18n()
 
   const { data, isLoading, isLoadingError, isEmpty } = useLoading<Coin[] | undefined>(

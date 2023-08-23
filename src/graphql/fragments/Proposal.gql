@@ -1,0 +1,15 @@
+fragment Proposal on proposal {
+    content
+    deposit_end_block
+    id
+    proposer_address
+    status
+    submit_block
+    metadata
+    voting_end_block
+    voting_start_block
+    proposal_tally_result {
+      ...TallyResult
+    }
+}
+

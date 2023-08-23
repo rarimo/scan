@@ -21,12 +21,12 @@ const sx = {
   wordBreak: 'break-word',
 }
 
-export const HomeStatisticsRow = ({
+export default function HomeStatisticsRow({
   isLoading,
   header,
   footer,
   direction = 'vertical',
-}: HomeStatisticsBoxProps) => {
+}: HomeStatisticsBoxProps) {
   const theme = useTheme()
   const isVertical = useMemo(() => direction === 'vertical', [direction])
 

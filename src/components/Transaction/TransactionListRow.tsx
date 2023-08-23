@@ -4,26 +4,27 @@ import Link from 'next/link'
 import { ReactNode } from 'react'
 
 import { AvatarName } from '@/components/Avatar'
+import { TxsColumnIds } from '@/components/Transaction/TransactionList'
+import TransactionStatus from '@/components/Transaction/TransactionStatus'
+import { OVERFLOW_SX } from '@/const'
 import { RoutePaths } from '@/enums'
+import { TransactionListFragment } from '@/graphql'
 import { generatePath } from '@/helpers'
 import { createColumnMap, parseAddress } from '@/helpers'
 import { useLocalize } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { TableColumn, TransactionListFragment } from '@/types'
+import { TableColumn } from '@/types'
 
-import { ColumnIds } from './TransactionList'
-import { TransactionStatus } from './TransactionStatus'
-
-export const TransactionListRow = ({
+export default function TransactionListRow({
   transaction,
   columns,
   isLoading,
 }: {
-  columns: readonly TableColumn<ColumnIds>[]
+  columns: readonly TableColumn<TxsColumnIds>[]
   transaction?: TransactionListFragment
   isLoading: boolean
-}) => {
-  const columnMap = createColumnMap<ColumnIds>(columns)
+}) {
+  const columnMap = createColumnMap<TxsColumnIds>(columns)
 
   const t = useI18n()
   const { localizeMsgType } = useLocalize()
@@ -39,10 +40,9 @@ export const TransactionListRow = ({
     <TableRow hover role='checkbox' tabIndex={-1}>
       <TableCell
         sx={{
-          minWidth: columnMap[ColumnIds.HASH]?.minWidth,
-          maxWidth: columnMap[ColumnIds.HASH]?.maxWidth,
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
+          ...OVERFLOW_SX,
+          minWidth: columnMap[TxsColumnIds.Hash]?.minWidth,
+          maxWidth: columnMap[TxsColumnIds.Hash]?.maxWidth,
         }}
       >
         {withSkeleton(
@@ -59,20 +59,17 @@ export const TransactionListRow = ({
 
       <TableCell
         sx={{
-          minWidth: columnMap[ColumnIds.SENDER]?.minWidth,
-          maxWidth: columnMap[ColumnIds.SENDER]?.maxWidth,
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
+          ...OVERFLOW_SX,
+          minWidth: columnMap[TxsColumnIds.Sender]?.minWidth,
+          maxWidth: columnMap[TxsColumnIds.Sender]?.maxWidth,
         }}
       >
-        {withSkeleton(
-          <AvatarName address={parseAddress(transaction)} imageSize={20} fontSize={14} />,
-        )}
+        {withSkeleton(<AvatarName address={parseAddress(transaction)} />)}
       </TableCell>
 
       <TableCell
-        sx={{ minWidth: columnMap[ColumnIds.OPERATION]?.minWidth }}
-        align={columnMap[ColumnIds.OPERATION].align}
+        sx={{ minWidth: columnMap[TxsColumnIds.Operation]?.minWidth }}
+        align={columnMap[TxsColumnIds.Operation].align}
       >
         {withSkeleton(
           <Chip
@@ -85,7 +82,7 @@ export const TransactionListRow = ({
         )}
       </TableCell>
 
-      <TableCell sx={{ minWidth: columnMap[ColumnIds.BLOCK]?.minWidth }}>
+      <TableCell sx={{ minWidth: columnMap[TxsColumnIds.Block]?.minWidth }}>
         {withSkeleton(
           <MuiLink
             component={Link}
@@ -100,17 +97,16 @@ export const TransactionListRow = ({
 
       <TableCell
         sx={{
-          minWidth: columnMap[ColumnIds.DATE]?.minWidth,
+          ...OVERFLOW_SX,
+          minWidth: columnMap[TxsColumnIds.Date]?.minWidth,
           whiteSpace: 'nowrap',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
         }}
       >
         {withSkeleton(time(transaction?.block?.timestamp, { utc: true }).fromNow)}
       </TableCell>
       <TableCell
-        sx={{ minWidth: columnMap[ColumnIds.STATUS]?.minWidth }}
-        align={columnMap[ColumnIds.STATUS].align}
+        sx={{ minWidth: columnMap[TxsColumnIds.Status]?.minWidth }}
+        align={columnMap[TxsColumnIds.Status].align}
       >
         {withSkeleton(<TransactionStatus status={transaction?.success} />, 32, 'auto')}
       </TableCell>

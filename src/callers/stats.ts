@@ -1,5 +1,4 @@
-import { apolloClient } from '@/graphql'
-import { GetStatistic, GetStatisticQuery } from '@/types'
+import { apolloClient, GetStatistic, GetStatisticQuery } from '@/graphql'
 
 export const getStatisticData = async () => {
   const { data } = await apolloClient.query<GetStatisticQuery>({

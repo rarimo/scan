@@ -1,13 +1,13 @@
 import { Box, SxProps } from '@mui/material'
 import { ReactNode } from 'react'
 
-export const ContentWrapper = ({
+export default function ContentWrapper({
   children,
   sx,
 }: {
   children: ReactNode
   sx?: SxProps
-} & JSX.IntrinsicAttributes) => {
+} & JSX.IntrinsicAttributes) {
   return (
     <Box
       sx={{

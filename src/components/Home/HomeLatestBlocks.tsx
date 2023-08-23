@@ -5,16 +5,15 @@ import { Link as MuiLink } from '@mui/material'
 import Link from 'next/link'
 
 import { AvatarName } from '@/components/Avatar'
-import { NoDataRow } from '@/components/NoDataRow'
-import { PreviewList } from '@/components/PreviewList'
+import HomeLatestDataRow from '@/components/Home/HomeLatestDataRow'
+import NoDataRow from '@/components/NoDataRow'
+import PreviewList from '@/components/PreviewList'
 import { RoutePaths } from '@/enums'
+import { Block, BlockBaseFragment } from '@/graphql'
 import { generatePath } from '@/helpers'
 import { useI18n } from '@/locales/client'
-import { Block, BlockBaseFragment } from '@/types'
 
-import { HomeLatestDataRow } from './HomeLatestDataRow'
-
-export const HomeLatestBlocks = ({
+export default function HomeLatestBlocks({
   isLoading,
   isLoadingError,
   blockList,
@@ -24,7 +23,7 @@ export const HomeLatestBlocks = ({
   isLoading: boolean
   blockList: BlockBaseFragment[]
   limitRow: number
-}) => {
+}) {
   const t = useI18n()
 
   return (

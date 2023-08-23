@@ -1,6 +1,6 @@
 import { CONFIG } from '@/config'
-import { apolloClient } from '@/graphql'
 import {
+  apolloClient,
   BlockFragment,
   BlockListFragment,
   GetBlockByHeight,
@@ -9,7 +9,7 @@ import {
   GetBlockCountQuery,
   GetBlockList,
   GetBlockListQuery,
-} from '@/types'
+} from '@/graphql'
 
 const createWhereFilter = (operator?: string) => {
   const exp = { validator: {} }

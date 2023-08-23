@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { RoutePaths } from '@/enums'
 import { useAppState } from '@/hooks'
 
-export const Logo = ({
+export default function Logo({
   isInsideNavbar = false,
   withoutMarginTop = false,
   width = 102,
@@ -18,7 +18,7 @@ export const Logo = ({
   width?: number
   height?: number
   sx?: SxProps
-}) => {
+}) {
   const theme = useTheme()
   const { toggleMobileNavbar } = useAppState()
 

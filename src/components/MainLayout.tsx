@@ -4,15 +4,14 @@ import CloseIcon from '@mui/icons-material/Close'
 import { Backdrop, Box, IconButton, Stack, useTheme } from '@mui/material'
 import React, { ReactNode, useMemo } from 'react'
 
-import { Search } from '@/components/Search'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header/Header'
+import Navbar from '@/components/Navbar/Navbar'
+import Search from '@/components/Search'
 import { ThemeMode } from '@/enums'
 import { useAppState } from '@/hooks'
 
-import { Footer } from './Footer'
-import { Header } from './Header/Header'
-import { Navbar } from './Navbar/Navbar'
-
-export const MainLayout = ({ children }: { children: ReactNode }) => {
+export default function MainLayout({ children }: { children: ReactNode }) {
   const theme = useTheme()
   const isDarkMode = useMemo(() => theme.palette.mode === 'dark', [theme.palette.mode])
   const { isSearchOpened, setIsSearchOpened, themeMode } = useAppState()

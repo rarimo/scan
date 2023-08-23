@@ -1,8 +1,8 @@
 import { PublicKey } from '@rarimo/client'
 
 import { CONFIG } from '@/config'
-import { apolloClient } from '@/graphql'
 import {
+  apolloClient,
   GetLatestTxAndBlocks,
   GetLatestTxAndBlocksQuery,
   GetTransactionByHash,
@@ -15,7 +15,7 @@ import {
   GetTransactionListQuery,
   TransactionFragment,
   TransactionListFragment,
-} from '@/types'
+} from '@/graphql'
 
 const createWhereFilter = (sender: PublicKey | null, operator?: string) => {
   const exp = { signer_infos: {}, block: {} }

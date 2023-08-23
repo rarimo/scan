@@ -1,11 +1,10 @@
 import { SxProps, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material'
 import { ReactNode } from 'react'
 
+import NoDataTableRow from '@/components/NoDataTableRow'
 import { TABLE_OVERVIEW_CELL_HEIGHT } from '@/const'
 
-import { NoDataTableRow } from './NoDataTableRow'
-
-export const OverviewTable = ({
+export default function OverviewTable({
   rows,
   children,
   label,
@@ -21,7 +20,7 @@ export const OverviewTable = ({
   rows?: { head: string | ReactNode; body: string | ReactNode }[]
   children?: ReactNode
   sx?: SxProps
-}) => {
+}) {
   const content =
     children ||
     (!isEmpty && isLoadingError ? (

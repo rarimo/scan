@@ -1,12 +1,12 @@
 import { getTransactionsListByBlock } from '@/callers'
+import { TransactionListFragment } from '@/graphql'
 import { useLoading, useTablePagination } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { TransactionListFragment } from '@/types'
 
 import { ContentBox, ContentSection } from '../Content'
 import { TransactionList } from '../Transaction'
 
-export const BlockTransactions = ({
+export default function BlockTransactions({
   blockHeight,
   isBlockLoading,
   isBlockLoadingError,
@@ -16,7 +16,7 @@ export const BlockTransactions = ({
   amountTX: number
   isBlockLoading: boolean
   isBlockLoadingError: boolean
-}) => {
+}) {
   const t = useI18n()
 
   const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination()

@@ -6,28 +6,27 @@ import Link from 'next/link'
 import { ReactNode } from 'react'
 
 import { getTransactionByHash } from '@/callers'
+import { AvatarName } from '@/components/Avatar'
+import { ContentBox, ContentSection, ContentWrapper } from '@/components/Content'
+import CopyToClipboardWrapper from '@/components/CopyToClipboardWrapper'
+import OverviewTable from '@/components/OverviewTable'
+import TransactionDetailsContentRow from '@/components/Transaction/TransactionDetailsContentRow'
+import TransactionStatus from '@/components/Transaction/TransactionStatus'
 import { CONFIG } from '@/config'
 import {
-  TABLE_ADDRESS_SKELETON_SX,
-  TABLE_HASH_SKELETON_SX,
+  TABLE_BIG_SKELETON_SX,
+  TABLE_LARGE_SKELETON_SX,
   TABLE_MEDIUM_TEXT_SKELETON_SX,
   TABLE_SMALL_TEXT_SKELETON_SX,
   TABLE_TYPE_BOX_SKELETON_SX,
 } from '@/const'
 import { RoutePaths } from '@/enums'
+import { TransactionFragment } from '@/graphql'
 import { formatCurrencyWithDenom, generatePath, parseAddress } from '@/helpers'
 import { useLoading, useLocalize } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { TransactionFragment } from '@/types'
 
-import { AvatarName } from '../Avatar'
-import { ContentBox, ContentSection, ContentWrapper } from '../Content'
-import { CopyToClipboardWrapper } from '../CopyToClipboardWrapper'
-import { OverviewTable } from '../OverviewTable'
-import { TransactionDetailsContentRow } from './TransactionDetailsContentRow'
-import { TransactionStatus } from './TransactionStatus'
-
-export const TransactionDetailsSection = ({ hash }: { hash: string }) => {
+export default function Transaction({ hash }: { hash: string }) {
   const t = useI18n()
   const { localizeMsgType } = useLocalize()
 
@@ -50,7 +49,7 @@ export const TransactionDetailsSection = ({ hash }: { hash: string }) => {
         <CopyToClipboardWrapper value={transaction?.hash}>
           {transaction?.hash}
         </CopyToClipboardWrapper>,
-        TABLE_HASH_SKELETON_SX,
+        TABLE_BIG_SKELETON_SX,
       ),
     },
     {
@@ -85,7 +84,7 @@ export const TransactionDetailsSection = ({ hash }: { hash: string }) => {
       head: t('transaction-details.sender-lbl'),
       body: withSkeleton(
         <AvatarName abbrAddress={false} address={parseAddress(transaction)} />,
-        TABLE_ADDRESS_SKELETON_SX,
+        TABLE_LARGE_SKELETON_SX,
       ),
     },
     {
@@ -97,7 +96,7 @@ export const TransactionDetailsSection = ({ hash }: { hash: string }) => {
           name={transaction?.block?.validator?.validator_descriptions?.[0]?.moniker ?? ''}
           imageUrl={transaction?.block?.validator?.validator_descriptions?.[0]?.avatar_url ?? ''}
         />,
-        TABLE_ADDRESS_SKELETON_SX,
+        TABLE_LARGE_SKELETON_SX,
       ),
     },
     {
