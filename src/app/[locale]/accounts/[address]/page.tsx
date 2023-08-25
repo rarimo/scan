@@ -1,5 +1,6 @@
 import { Account as TAccount } from '@rarimo/client'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 import { getClient } from '@/client'
 import { Account, AccountTransactions, PageContainer } from '@/components'
@@ -24,6 +25,7 @@ export default async function AccountPage({
   params: { address: string }
 }) {
   const account = await getAccount(address)
+  if (account.isNotFound) notFound()
 
   return (
     <PageContainer>

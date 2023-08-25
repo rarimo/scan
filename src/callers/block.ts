@@ -55,5 +55,5 @@ export const getBlockByHeight = async (height: number): Promise<BlockFragment> =
     variables: { height: height },
   })
 
-  return data?.block[0] ?? []
+  return data?.block[0]
 }

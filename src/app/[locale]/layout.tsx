@@ -1,11 +1,9 @@
 import '@/styles/index.scss'
 
-import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import { ReactNode } from 'react'
 
 import { MainLayout, StatusMessage } from '@/components'
-import { craftPageTitle, METADATA } from '@/config'
 import {
   ApolloProvider,
   AppStateProvider,
@@ -50,11 +48,6 @@ const inter = localFont({
     },
   ],
 })
-
-export const metadata: Metadata = {
-  ...METADATA,
-  title: craftPageTitle('Home'),
-}
 
 export default function RootLayout({
   children,

@@ -112,5 +112,5 @@ export const getTransactionByHash = async (hash: string): Promise<TransactionFra
     variables: { hash: hash },
   })
 
-  return data?.transaction[0] ?? []
+  return data?.transaction[0]
 }

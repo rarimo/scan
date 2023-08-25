@@ -1,5 +1,11 @@
 // prettier-ignore
 export default {
+  "404": {
+    "title": "Sorry, this page not existed",
+    "homepage-link": "Home Page",
+    "transaction-link": "Transactions",
+    "block-link": "Blocks",
+  },
   "common": {
     "labels": {
       "something-wrong": "Something went wrong. Please try again.",

@@ -1,7 +1,9 @@
 import { Stack, Typography } from '@mui/material'
+import { Metadata } from 'next'
 import localFont from 'next/font/local'
 
 import { HomeLatestData, HomeRedirectEmitter, HomeStatistics, Search } from '@/components'
+import { craftPageTitle, METADATA } from '@/config'
 import { getI18n } from '@/locales/server'
 
 const oswald = localFont({
@@ -22,6 +24,11 @@ const TITLE_PARTS_PROPS = {
   fontWeight: 600,
   fontSize: '64px',
   lineHeight: 1.25,
+}
+
+export const metadata: Metadata = {
+  ...METADATA,
+  title: craftPageTitle('Home'),
 }
 
 export default async function HomePage() {
