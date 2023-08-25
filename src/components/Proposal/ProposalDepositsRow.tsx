@@ -1,14 +1,13 @@
 import { BN, time } from '@distributedlab/tools'
-import { Link as MuiLink, Skeleton, TableCell, TableRow } from '@mui/material'
+import { Link as MuiLink, TableCell, TableRow } from '@mui/material'
 import Link from 'next/link'
-import { ReactNode } from 'react'
 
 import { AvatarName } from '@/components'
 import { CONFIG } from '@/config'
-import { RoutePaths } from '@/enums'
 import { ProposalDepositFragment } from '@/graphql'
 import { createColumnMap, generatePath } from '@/helpers'
-import { TableColumn } from '@/types'
+import { useSkeleton } from '@/hooks'
+import { RoutePaths, TableColumn } from '@/types'
 
 import { ProposalDepositsColumnIds } from './ProposalDeposits'
 
@@ -23,12 +22,7 @@ export default function ProposalDepositsRow({
 }) {
   const columnMap = createColumnMap<ProposalDepositsColumnIds>(columns)
 
-  const withSkeleton = (children: ReactNode, height?: number, width = '100%', ml?: string) =>
-    isLoading ? (
-      <Skeleton width={width} {...(height && { height })} sx={{ ...(ml && { ml }) }} />
-    ) : (
-      children
-    )
+  const withSkeleton = useSkeleton(isLoading)
 
   const depositAmount = `${BN.fromBigInt(
     deposit?.amount?.[0]?.amount ?? '0',
@@ -45,7 +39,10 @@ export default function ProposalDepositsRow({
       >
         {withSkeleton(
           <AvatarName address={deposit?.depositor_address ?? ''} abbrAddress={false} />,
-          22,
+          {
+            width: '100%',
+            height: 22,
+          },
         )}
       </TableCell>
 
@@ -62,6 +59,9 @@ export default function ProposalDepositsRow({
           >
             {deposit?.block?.transactions[0].hash}
           </MuiLink>,
+          {
+            width: '100%',
+          },
         )}
       </TableCell>
 
@@ -78,6 +78,9 @@ export default function ProposalDepositsRow({
           >
             {deposit?.block?.height}
           </MuiLink>,
+          {
+            width: '100%',
+          },
         )}
       </TableCell>
 
@@ -85,13 +88,17 @@ export default function ProposalDepositsRow({
         sx={columnMap[ProposalDepositsColumnIds.Date]?.sx}
         align={columnMap[ProposalDepositsColumnIds.Date].align}
       >
-        {withSkeleton(time(deposit?.block?.timestamp, { utc: true }).fromNow)}
+        {withSkeleton(time(deposit?.block?.timestamp, { utc: true }).fromNow, {
+          width: '100%',
+        })}
       </TableCell>
       <TableCell
         sx={columnMap[ProposalDepositsColumnIds.Amount]?.sx}
         align={columnMap[ProposalDepositsColumnIds.Amount].align}
       >
-        {withSkeleton(depositAmount)}
+        {withSkeleton(depositAmount, {
+          width: '100%',
+        })}
       </TableCell>
     </TableRow>
   )

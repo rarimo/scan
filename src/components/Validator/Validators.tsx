@@ -13,15 +13,15 @@ import { useI18n } from '@/locales/client'
 import { ValidatorListSortBy } from '@/types'
 
 enum Filters {
-  ALL = 'all',
-  ACTIVE = 'active',
-  INACTIVE = 'inactive',
+  All = 'all',
+  Active = 'active',
+  Inactive = 'inactive',
 }
 
 const FILTERS_MAP = {
-  [Filters.ACTIVE]: 0,
-  [Filters.INACTIVE]: 1,
-  [Filters.ALL]: 2,
+  [Filters.Active]: 0,
+  [Filters.Inactive]: 1,
+  [Filters.All]: 2,
 }
 
 export default function Validators() {
@@ -59,7 +59,7 @@ export default function Validators() {
 
   const { filter, handleFilterChange } = useTabsFilter({
     queryKey: 'status',
-    defaultValue: FILTERS_MAP[Filters.ACTIVE],
+    defaultValue: FILTERS_MAP[Filters.Active],
     handler: async () => {
       setOffset(0)
       await reloadCount()
@@ -70,15 +70,15 @@ export default function Validators() {
   const filters = useMemo(
     () =>
       ({
-        [FILTERS_MAP[Filters.ACTIVE]]: {
+        [FILTERS_MAP[Filters.Active]]: {
           jailed: false,
           status: BondStatus.Bonded,
         },
-        [FILTERS_MAP[Filters.INACTIVE]]: {
+        [FILTERS_MAP[Filters.Inactive]]: {
           jailed: true,
           status: -1,
         },
-        [FILTERS_MAP[Filters.ALL]]: {},
+        [FILTERS_MAP[Filters.All]]: {},
       })[filter],
 
     [filter],
@@ -87,15 +87,15 @@ export default function Validators() {
   const tabs = [
     {
       label: t('validators.active-filter-lbl'),
-      value: FILTERS_MAP[Filters.ACTIVE],
+      value: FILTERS_MAP[Filters.Active],
     },
     {
       label: t('validators.inactive-filter-lbl'),
-      value: FILTERS_MAP[Filters.INACTIVE],
+      value: FILTERS_MAP[Filters.Inactive],
     },
     {
       label: t('validators.all-filter-lbl'),
-      value: FILTERS_MAP[Filters.ALL],
+      value: FILTERS_MAP[Filters.All],
     },
   ]
 
@@ -113,15 +113,6 @@ export default function Validators() {
               value={filter}
               onChange={handleFilterChange}
               aria-label={t('validators.tabs-lbl')}
-              sx={{
-                '& > .MuiTabs-scroller > .MuiTabs-flexContainer': {
-                  height: 64,
-
-                  '& > .MuiTab-root': {
-                    textTransform: 'uppercase',
-                  },
-                },
-              }}
             >
               {tabs.map((tab, idx) => (
                 <Tab key={idx} value={tab.value} label={tab.label} />

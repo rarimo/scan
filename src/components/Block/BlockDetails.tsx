@@ -1,8 +1,6 @@
 'use client'
 
 import { time } from '@distributedlab/tools'
-import { Skeleton, SxProps } from '@mui/material'
-import { ReactNode } from 'react'
 
 import { getBlockByHeight } from '@/callers'
 import { AvatarName } from '@/components/Avatar'
@@ -16,7 +14,7 @@ import {
   TABLE_SMALL_TEXT_SKELETON_SX,
 } from '@/const'
 import { BlockFragment } from '@/graphql'
-import { useLoading } from '@/hooks'
+import { useLoading, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
 
 export default function BlockDetails({ height }: { height: string }) {
@@ -29,8 +27,7 @@ export default function BlockDetails({ height }: { height: string }) {
     isEmpty,
   } = useLoading<BlockFragment>({} as BlockFragment, () => getBlockByHeight(Number(height)))
 
-  const withSkeleton = (children: ReactNode, sx?: SxProps) =>
-    isLoading ? <Skeleton sx={{ width: '100%', ...(sx || {}) }} /> : children
+  const withSkeleton = useSkeleton(isLoading)
 
   const rows = [
     {

@@ -8,8 +8,8 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header/Header'
 import Navbar from '@/components/Navbar/Navbar'
 import Search from '@/components/Search'
-import { ThemeMode } from '@/enums'
 import { useAppState } from '@/hooks'
+import { ThemeMode } from '@/types'
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   const theme = useTheme()

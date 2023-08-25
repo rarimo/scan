@@ -19135,13 +19135,14 @@ export const GetValidatorByAddress = gql`
     ...Validator
   }
   slashing_params {
-    params
+    ...SlashingParams
   }
   staking_pool {
     bonded_tokens
   }
 }
-    ${Validator}`;
+    ${Validator}
+${SlashingParams}`;
 export const GetValidatorByConsensusAddress = gql`
     query GetValidatorByConsensusAddress($address: String!) {
   validator(where: {validator_info: {consensus_address: {_eq: $address}}}) {

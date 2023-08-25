@@ -3,9 +3,11 @@
 import { ReactNode, useMemo, useState } from 'react'
 
 import { AppStateContext } from '@/contexts'
-import { useUiStore, useWeb3Store } from '@/hooks'
+import { useSearchParams, useUiStore, useWeb3Store } from '@/hooks'
 
 export const AppStateProvider = ({ children }: { children: ReactNode }) => {
+  const { setQueryParams } = useSearchParams()
+
   const {
     isInitialised: isUiInitialised,
     viewportWidth,
@@ -56,6 +58,7 @@ export const AppStateProvider = ({ children }: { children: ReactNode }) => {
       setIsMobileNavbarOpened,
       toggleMobileNavbar,
       setIsSearchOpened,
+      setQueryParams,
     }),
     [
       viewportWidth,
@@ -73,6 +76,7 @@ export const AppStateProvider = ({ children }: { children: ReactNode }) => {
       setThemeMode,
       setIsMobileNavbarOpened,
       setIsSearchOpened,
+      setQueryParams,
       toggleMobileNavbar,
     ],
   )

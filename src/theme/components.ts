@@ -137,4 +137,17 @@ export const COMPONENTS: Components<BaseTheme> = {
       },
     },
   },
+  MuiTabs: {
+    styleOverrides: {
+      root: {
+        '& > .MuiTabs-scroller > .MuiTabs-flexContainer': {
+          height: 64,
+
+          '& > .MuiTab-root': {
+            textTransform: 'uppercase',
+          },
+        },
+      },
+    },
+  },
 }

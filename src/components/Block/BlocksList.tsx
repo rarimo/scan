@@ -5,6 +5,7 @@ import { TableCell } from '@mui/material'
 import BlocksListRow from '@/components/Block/BlocksListRow'
 import { ContentWrapper } from '@/components/Content'
 import TableWithPagination from '@/components/TableWithPagination'
+import { OVERFLOW_SX } from '@/const'
 import { BlockListFragment } from '@/graphql'
 import { useI18n } from '@/locales/client'
 import { TableColumn, TableListProps } from '@/types'
@@ -26,13 +27,9 @@ export default function BlocksList({
   count,
   handleChangePage,
   handleChangeRowsPerPage,
+  isMinHeighted = true,
 }: TableListProps<BlockListFragment>) {
   const t = useI18n()
-
-  const overflow = {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  }
 
   const columns: readonly TableColumn<BlocksColumnIds>[] = [
     {
@@ -53,7 +50,7 @@ export default function BlocksList({
       id: BlocksColumnIds.Validator,
       label: t('block-list.validator-col-lbl'),
       sx: {
-        ...overflow,
+        ...OVERFLOW_SX,
         minWidth: 260,
       },
     },
@@ -88,6 +85,7 @@ export default function BlocksList({
   return (
     <ContentWrapper>
       <TableWithPagination
+        isMinHeighted={isMinHeighted}
         label={t('block-list.table-lbl')}
         noDataMessage={t('block-list.no-data-msg')}
         isLoadingError={isLoadingError}

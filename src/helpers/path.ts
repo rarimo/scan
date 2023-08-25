@@ -1,4 +1,4 @@
-import { RoutePaths } from '@/enums'
+import { RoutePaths } from '@/types'
 
 export const generatePath = (
   route: RoutePaths,

@@ -27,6 +27,7 @@ export default function TransactionList({
   count,
   handleChangePage,
   handleChangeRowsPerPage,
+  isMinHeighted = true,
 }: TableListProps<TransactionListFragment>) {
   const t = useI18n()
 
@@ -85,6 +86,7 @@ export default function TransactionList({
   return (
     <ContentWrapper>
       <TableWithPagination
+        isMinHeighted={isMinHeighted}
         label={t('transactions-list.table-lbl')}
         noDataMessage={t('transactions-list.no-data-msg')}
         isLoadingError={isLoadingError}

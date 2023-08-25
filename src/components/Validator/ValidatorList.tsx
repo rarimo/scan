@@ -5,10 +5,15 @@ import TableWithPagination from '@/components/TableWithPagination'
 import ValidatorConditionTableHead from '@/components/Validator/ValidatorConditionTableHead'
 import ValidatorListRow from '@/components/Validator/ValidatorListRow'
 import { OVERFLOW_SX } from '@/const'
-import { ValidatorListColumnIds } from '@/enums'
 import { SlashingParamsFragment, StakingPoolFragment, ValidatorBaseFragment } from '@/graphql'
 import { useI18n } from '@/locales/client'
-import { SortOrder, TableColumn, TableListProps, ValidatorListSortBy } from '@/types'
+import {
+  SortOrder,
+  TableColumn,
+  TableListProps,
+  ValidatorListColumnIds,
+  ValidatorListSortBy,
+} from '@/types'
 
 export default function ValidatorList({
   limit,
@@ -52,12 +57,12 @@ export default function ValidatorList({
     {
       id: ValidatorListColumnIds.Condition,
       label: t('validator-list.condition-col-lbl'),
-      sx: { minWidth: 40, maxWidth: 40 },
+      sx: { minWidth: 150, maxWidth: 150 },
     },
     {
       id: ValidatorListColumnIds.Status,
       label: t('validator-list.status-col-lbl'),
-      sx: { minWidth: 100, maxWidth: 100 },
+      sx: { minWidth: 120, maxWidth: 120 },
       align: 'right',
     },
   ]

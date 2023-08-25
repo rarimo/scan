@@ -1,15 +1,11 @@
-'use client'
-
-import { PublicKey } from '@rarimo/client'
-
 import { getTransactionCount, getTransactionsList } from '@/callers'
 import { ContentBox, ContentSection } from '@/components/Content'
-import { TransactionList } from '@/components/Transaction'
+import TransactionList from '@/components/Transaction/TransactionList'
 import { TransactionListFragment } from '@/graphql'
 import { useLoading, useTablePagination } from '@/hooks'
 import { useI18n } from '@/locales/client'
 
-export default function AccountTransactions({ sender }: { sender: PublicKey }) {
+export default function ValidatorTransactions({ operator }: { operator: string }) {
   const t = useI18n()
 
   const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination('txs')
@@ -18,7 +14,7 @@ export default function AccountTransactions({ sender }: { sender: PublicKey }) {
     data: transactionCount,
     isLoading: isLoadingTransactionCount,
     isLoadingError: isLoadingTransactionCountError,
-  } = useLoading<number>(0, () => getTransactionCount({ sender }))
+  } = useLoading<number>(0, () => getTransactionCount({ operator }))
 
   const {
     data: transactionList,
@@ -26,12 +22,12 @@ export default function AccountTransactions({ sender }: { sender: PublicKey }) {
     isLoadingError,
   } = useLoading<TransactionListFragment[]>(
     [],
-    () => getTransactionsList({ limit, offset, sender }),
+    () => getTransactionsList({ limit, offset, operator }),
     { loadArgs: [limit, offset] },
   )
 
   return (
-    <ContentSection title={t('account-transactions.title-lbl')}>
+    <ContentSection title={t('validator-transactions.title-lbl')}>
       <ContentBox>
         <TransactionList
           isMinHeighted={false}

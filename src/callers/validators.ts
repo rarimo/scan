@@ -2,7 +2,6 @@ import { BondStatus } from '@rarimo/client'
 import { isUndefined } from 'lodash-es'
 
 import { CONFIG } from '@/config'
-import { ValidatorListColumnIds } from '@/enums'
 import {
   apolloClient,
   GetValidatorBase,
@@ -22,7 +21,7 @@ import {
   GetValidatorUnbondingDelegationList,
   GetValidatorUnbondingDelegationListQuery,
 } from '@/graphql'
-import { SortOrder, ValidatorListSortBy } from '@/types'
+import { SortOrder, ValidatorListColumnIds, ValidatorListSortBy } from '@/types'
 
 const createValidatorWhere = (status?: number, jailed?: boolean) => {
   const where = {

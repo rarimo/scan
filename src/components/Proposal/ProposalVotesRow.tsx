@@ -2,15 +2,14 @@ import { time } from '@distributedlab/tools'
 import { Link as MuiLink, Skeleton, TableRow } from '@mui/material'
 import { TableCell } from '@mui/material'
 import Link from 'next/link'
-import { ReactNode } from 'react'
 
 import { AvatarName } from '@/components/Avatar'
 import ProposalVoteOption from '@/components/Proposal/ProposalVoteOption'
 import { ProposalVotesColumnIds } from '@/components/Proposal/ProposalVotes'
-import { RoutePaths } from '@/enums'
 import { ProposalVoteFragment } from '@/graphql'
 import { createColumnMap, generatePath } from '@/helpers'
-import { TableColumn } from '@/types'
+import { useSkeleton } from '@/hooks'
+import { RoutePaths, TableColumn } from '@/types'
 
 export default function ProposalVotesRow({
   vote,
@@ -23,12 +22,7 @@ export default function ProposalVotesRow({
 }) {
   const columnMap = createColumnMap<ProposalVotesColumnIds>(columns)
 
-  const withSkeleton = (children: ReactNode, height?: number, width = '100%', ml?: string) =>
-    isLoading ? (
-      <Skeleton width={width} {...(height && { height })} sx={{ ...(ml && { ml }) }} />
-    ) : (
-      children
-    )
+  const withSkeleton = useSkeleton(isLoading)
 
   return (
     <TableRow hover role='checkbox' tabIndex={-1}>
@@ -36,7 +30,10 @@ export default function ProposalVotesRow({
         sx={columnMap[ProposalVotesColumnIds.Voter]?.sx}
         align={columnMap[ProposalVotesColumnIds.Voter].align}
       >
-        {withSkeleton(<AvatarName address={vote?.voter_address ?? ''} abbrAddress={false} />, 22)}
+        {withSkeleton(<AvatarName address={vote?.voter_address ?? ''} abbrAddress={false} />, {
+          height: 22,
+          width: '100%',
+        })}
       </TableCell>
 
       <TableCell
@@ -52,7 +49,7 @@ export default function ProposalVotesRow({
               hash: `${vote?.block?.transactions[0]?.hash}`,
             })}
           >
-            {withSkeleton(vote?.block?.transactions[0]?.hash)}
+            {withSkeleton(vote?.block?.transactions[0]?.hash, { width: '100%' })}
           </MuiLink>
         )}
       </TableCell>
@@ -70,6 +67,7 @@ export default function ProposalVotesRow({
           >
             {vote?.height}
           </MuiLink>,
+          { width: '100%' },
         )}
       </TableCell>
 
@@ -77,13 +75,16 @@ export default function ProposalVotesRow({
         sx={columnMap[ProposalVotesColumnIds.Date]?.sx}
         align={columnMap[ProposalVotesColumnIds.Date].align}
       >
-        {withSkeleton(time(vote?.block?.timestamp, { utc: true }).fromNow)}
+        {withSkeleton(time(vote?.block?.timestamp, { utc: true }).fromNow, { width: '100%' })}
       </TableCell>
       <TableCell
         sx={columnMap[ProposalVotesColumnIds.Option]?.sx}
         align={columnMap[ProposalVotesColumnIds.Option].align}
       >
-        {withSkeleton(<ProposalVoteOption vote={vote?.option ?? ''} />, 32)}
+        {withSkeleton(<ProposalVoteOption vote={vote?.option ?? ''} />, {
+          width: '100%',
+          height: 32,
+        })}
       </TableCell>
     </TableRow>
   )

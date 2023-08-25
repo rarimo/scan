@@ -1,9 +1,8 @@
 'use client'
 
 import { time } from '@distributedlab/tools'
-import { Chip, Link as MuiLink, Skeleton, SxProps } from '@mui/material'
+import { Chip, Link as MuiLink } from '@mui/material'
 import Link from 'next/link'
-import { ReactNode } from 'react'
 
 import { getTransactionByHash } from '@/callers'
 import { AvatarName } from '@/components/Avatar'
@@ -20,11 +19,11 @@ import {
   TABLE_SMALL_TEXT_SKELETON_SX,
   TABLE_TYPE_BOX_SKELETON_SX,
 } from '@/const'
-import { RoutePaths } from '@/enums'
 import { TransactionFragment } from '@/graphql'
 import { formatCurrencyWithDenom, generatePath, parseAddress } from '@/helpers'
-import { useLoading, useLocalize } from '@/hooks'
+import { useLoading, useLocalize, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
+import { RoutePaths } from '@/types'
 
 export default function Transaction({ hash }: { hash: string }) {
   const t = useI18n()
@@ -39,8 +38,7 @@ export default function Transaction({ hash }: { hash: string }) {
     getTransactionByHash(hash as string),
   )
 
-  const withSkeleton = (children: ReactNode, sx?: SxProps) =>
-    isLoading ? <Skeleton sx={{ width: '100%', ...(sx || {}) }} /> : children
+  const withSkeleton = useSkeleton(isLoading)
 
   const rows = [
     {

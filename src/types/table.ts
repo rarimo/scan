@@ -17,6 +17,7 @@ export interface TableListProps<T> {
   list: T[]
   isLoading: boolean
   isLoadingError: boolean
+  isMinHeighted?: boolean
   handleChangePage(event: unknown, newPage: number): void
   handleChangeRowsPerPage(event: ChangeEvent<HTMLInputElement>): void
 }

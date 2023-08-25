@@ -5,7 +5,6 @@ import { Button, TextField, useTheme } from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { KeyboardEvent, useState } from 'react'
 
-import { RoutePaths } from '@/enums'
 import {
   apolloClient,
   Search as SearchQuery,
@@ -15,6 +14,7 @@ import {
 import { Bus, generatePath } from '@/helpers'
 import { useLoading } from '@/hooks'
 import { useI18n } from '@/locales/client'
+import { RoutePaths } from '@/types'
 
 const getSearchResults = async (value: string) => {
   const valueInt = Number(value)

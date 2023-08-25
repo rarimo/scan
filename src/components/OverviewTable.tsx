@@ -4,6 +4,8 @@ import { ReactNode } from 'react'
 import NoDataTableRow from '@/components/NoDataTableRow'
 import { TABLE_OVERVIEW_CELL_HEIGHT } from '@/const'
 
+const HEADING_WIDTH = 380
+
 export default function OverviewTable({
   rows,
   children,
@@ -31,14 +33,14 @@ export default function OverviewTable({
           <TableRow key={index}>
             <TableCell
               sx={{
-                width: { xs: 300, sm: 300 },
                 height: TABLE_OVERVIEW_CELL_HEIGHT,
-                minWidth: { xs: 300, sm: 'auto' },
+                minWidth: HEADING_WIDTH,
                 color: theme => theme.palette.text.secondary,
                 textTransform: 'unset',
                 fontSize: 14,
                 fontWeight: 400,
                 lineHeight: 1.42,
+                whiteSpace: 'nowrap',
               }}
               component='th'
               scope='row'
@@ -53,7 +55,11 @@ export default function OverviewTable({
     ))
 
   return (
-    <TableContainer>
+    <TableContainer
+      sx={{
+        maxWidth: 'var(--ui-max-width)',
+      }}
+    >
       <Table aria-label={label}>
         <TableBody
           sx={

@@ -13,7 +13,7 @@ import { formatCurrencyWithDenom } from '@/helpers'
 import { useLoading } from '@/hooks'
 import { useI18n } from '@/locales/client'
 
-export default function AccountDetails({ address }: { address: string }) {
+export default function Account({ address }: { address: string }) {
   const t = useI18n()
 
   const { data, isLoading, isLoadingError, isEmpty } = useLoading<Coin[] | undefined>(

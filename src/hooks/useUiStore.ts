@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 
-import { ThemeMode } from '@/enums'
 import { isWindow } from '@/helpers'
 import { UiStorage } from '@/storages'
+import { ThemeMode } from '@/types'
 
 export const useUiStore = () => {
   const [storage, setStorage] = useState<UiStorage | null>(null)

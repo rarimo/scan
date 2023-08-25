@@ -19,7 +19,7 @@ export default function BlockTransactions({
 }) {
   const t = useI18n()
 
-  const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination()
+  const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination('txs')
 
   const {
     data: transactionList,

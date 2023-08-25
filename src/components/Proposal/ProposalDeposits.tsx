@@ -23,7 +23,8 @@ export enum ProposalDepositsColumnIds {
 export default function ProposalDeposits({ id }: { id: string }) {
   const t = useI18n()
 
-  const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination()
+  const { limit, offset, handleChangePage, handleChangeRowsPerPage } =
+    useTablePagination('deposits')
 
   const {
     data: depositCount,

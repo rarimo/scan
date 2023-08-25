@@ -13,10 +13,10 @@ import HeaderBlockchainMenu from '@/components/Header/HeaderBlockchainMenu'
 import HeaderNetworkSwitcher from '@/components/Header/HeaderNetworkSwitcher'
 import Logo from '@/components/Logo'
 import { ColorModeContext } from '@/contexts'
-import { RoutePaths, ThemeMode } from '@/enums'
 import { abbr } from '@/helpers'
 import { useAppState, useWeb3 } from '@/hooks'
 import { useI18n } from '@/locales/client'
+import { RoutePaths, ThemeMode } from '@/types'
 
 const iconProps = {
   width: 24,

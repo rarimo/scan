@@ -3,9 +3,9 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import MouseOverDropdown from '@/components/MouseOverDropdown'
-import { RoutePaths } from '@/enums'
 import { Bus } from '@/helpers'
 import { useI18n } from '@/locales/client'
+import { RoutePaths } from '@/types'
 
 type AvailableRoutes =
   | RoutePaths.Validators

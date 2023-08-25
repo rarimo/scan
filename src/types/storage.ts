@@ -1,4 +1,9 @@
-import { ThemeMode } from '@/enums'
+import { ThemeMode } from './theme'
+
+export enum LocalStorageKeys {
+  Ui = 'rarimo-scan/ui',
+  Web3 = 'rarimo-scan/web3',
+}
 
 export type UiStorageState = {
   viewportWidth: number

@@ -1,9 +1,11 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
+// import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { CONFIG } from '@/config'
+import { useAppState } from '@/hooks/useAppState'
 import { SortOrder } from '@/types'
 
 const QUERY_KEYS = {
@@ -13,11 +15,12 @@ const QUERY_KEYS = {
   ORDER_BY: 'orderBy',
 }
 
-export const useTablePagination = <T = unknown>() => {
-  const router = useRouter()
+export const useTablePagination = <T = unknown>(tableKey?: string) => {
   const query = useSearchParams()!
-  const pathname = usePathname()
 
+  const { setQueryParams } = useAppState()
+
+  const [table, setTable] = useState(tableKey)
   const [limit, setLimit] = useState<number>(CONFIG.PAGE_LIMIT)
   const [offset, setOffset] = useState<number>(0)
   const [order, setOrder] = useState<SortOrder>('' as SortOrder)
@@ -58,30 +61,47 @@ export const useTablePagination = <T = unknown>() => {
     setOrderBy(sortOrderBy)
   }
 
-  useEffect(() => {
-    for (const [key, handler] of Object.entries(handlers)) {
-      const value = query.get(key)
-      if (value) handler(value)
-    }
-  }, [handlers, query])
-
-  const getQueryString = useCallback(() => {
-    const _query = new URLSearchParams(query.toString())
+  const setTableKey = (key: string) => {
+    const toRemove = new URLSearchParams()
 
     for (const [key, value] of Object.entries(values)) {
-      if (value || value === 0) _query.set(key, String(value))
+      toRemove.set(key, String(value))
     }
 
-    return _query.toString()
-  }, [query, values])
+    setTable(key)
+    setOffset(0)
+    setOrder('' as SortOrder)
+    setOrderBy('' as T)
+
+    setQueryParams(new URLSearchParams(), toRemove)
+  }
+
+  const getKey = useCallback((key: string) => (table ? `${table}[${key}]` : key), [table])
+
+  useEffect(() => {
+    for (const [key, handler] of Object.entries(handlers)) {
+      const value = query.get(getKey(key))
+      if (value) handler(value)
+    }
+  }, [getKey, handlers, query])
+
+  const getQuery = useCallback(() => {
+    const _query = new URLSearchParams()
+
+    for (const [key, value] of Object.entries(values)) {
+      if (value || value === 0) _query.set(getKey(key), String(value))
+    }
+
+    return _query
+  }, [getKey, values])
 
   const replaceUrl = useCallback(() => {
-    router.push(`${pathname}?${getQueryString()}`, { scroll: false })
-  }, [getQueryString, pathname, router])
+    setQueryParams(getQuery())
+  }, [getQuery, setQueryParams])
 
   useEffect(() => {
     replaceUrl()
-  }, [getQueryString, limit, offset, order, orderBy, pathname, replaceUrl, router])
+  }, [limit, offset, order, orderBy, replaceUrl, table])
 
   useEffect(() => {
     replaceUrl()
@@ -97,5 +117,6 @@ export const useTablePagination = <T = unknown>() => {
     handleChangeRowsPerPage,
     setSort,
     setOffset,
+    setTableKey,
   }
 }

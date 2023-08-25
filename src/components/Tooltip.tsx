@@ -44,7 +44,14 @@ export default function Tooltip({
       open={open}
       onClose={handleClose}
       onOpen={handleOpen}
-      componentsProps={{ tooltip: { sx } }}
+      componentsProps={{
+        tooltip: {
+          sx: {
+            ...sx,
+            bgcolor: '#616161',
+          },
+        },
+      }}
     >
       {children}
     </TooltipBase>

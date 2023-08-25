@@ -94,7 +94,7 @@ export default function TableWithPagination({
         }}
         sx={{
           '& > .MuiToolbar-root': {
-            ...(limit !== rows.length && { borderTop: 'var(--ui-border)' }),
+            ...(limit !== rows.length && isMinHeighted && { borderTop: 'var(--ui-border)' }),
             minHeight: 44,
             height: 44,
             '& > .MuiTablePagination-selectLabel': {

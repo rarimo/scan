@@ -8,10 +8,10 @@ import { AvatarName } from '@/components/Avatar'
 import HomeLatestDataRow from '@/components/Home/HomeLatestDataRow'
 import NoDataRow from '@/components/NoDataRow'
 import PreviewList from '@/components/PreviewList'
-import { RoutePaths } from '@/enums'
 import { Block, BlockBaseFragment } from '@/graphql'
 import { generatePath } from '@/helpers'
 import { useI18n } from '@/locales/client'
+import { RoutePaths } from '@/types'
 
 export default function HomeLatestBlocks({
   isLoading,

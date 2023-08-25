@@ -1,19 +1,17 @@
 import { time } from '@distributedlab/tools'
-import { Chip, Link as MuiLink, Skeleton, TableCell, TableRow } from '@mui/material'
+import { Chip, Link as MuiLink, TableCell, TableRow } from '@mui/material'
 import Link from 'next/link'
-import { ReactNode } from 'react'
 
 import { AvatarName } from '@/components/Avatar'
 import { TxsColumnIds } from '@/components/Transaction/TransactionList'
 import TransactionStatus from '@/components/Transaction/TransactionStatus'
 import { OVERFLOW_SX } from '@/const'
-import { RoutePaths } from '@/enums'
 import { TransactionListFragment } from '@/graphql'
 import { generatePath } from '@/helpers'
 import { createColumnMap, parseAddress } from '@/helpers'
-import { useLocalize } from '@/hooks'
+import { useLocalize, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { TableColumn } from '@/types'
+import { RoutePaths, TableColumn } from '@/types'
 
 export default function TransactionListRow({
   transaction,
@@ -29,12 +27,7 @@ export default function TransactionListRow({
   const t = useI18n()
   const { localizeMsgType } = useLocalize()
 
-  const withSkeleton = (children: ReactNode, height?: number, ml?: string) =>
-    isLoading ? (
-      <Skeleton width={'100%'} {...(height && { height })} {...(ml && { ml })} />
-    ) : (
-      children
-    )
+  const withSkeleton = useSkeleton(isLoading)
 
   return (
     <TableRow hover role='checkbox' tabIndex={-1}>
@@ -54,6 +47,7 @@ export default function TransactionListRow({
           >
             {transaction?.hash}
           </MuiLink>,
+          { width: '100%' },
         )}
       </TableCell>
 
@@ -64,7 +58,7 @@ export default function TransactionListRow({
           maxWidth: columnMap[TxsColumnIds.Sender]?.maxWidth,
         }}
       >
-        {withSkeleton(<AvatarName address={parseAddress(transaction)} />)}
+        {withSkeleton(<AvatarName address={parseAddress(transaction)} />, { width: '100%' })}
       </TableCell>
 
       <TableCell
@@ -78,7 +72,7 @@ export default function TransactionListRow({
               t('message-types.unknown-lbl')
             }
           />,
-          32,
+          { width: '100%', height: 32 },
         )}
       </TableCell>
 
@@ -92,6 +86,7 @@ export default function TransactionListRow({
           >
             {transaction?.block?.height}
           </MuiLink>,
+          { width: '100%' },
         )}
       </TableCell>
 
@@ -102,13 +97,19 @@ export default function TransactionListRow({
           whiteSpace: 'nowrap',
         }}
       >
-        {withSkeleton(time(transaction?.block?.timestamp, { utc: true }).fromNow)}
+        {withSkeleton(time(transaction?.block?.timestamp, { utc: true }).fromNow, {
+          width: '100%',
+        })}
       </TableCell>
       <TableCell
         sx={{ minWidth: columnMap[TxsColumnIds.Status]?.minWidth }}
         align={columnMap[TxsColumnIds.Status].align}
       >
-        {withSkeleton(<TransactionStatus status={transaction?.success} />, 32, 'auto')}
+        {withSkeleton(<TransactionStatus status={transaction?.success} />, {
+          width: '100%',
+          ml: 'auto',
+          height: 32,
+        })}
       </TableCell>
     </TableRow>
   )

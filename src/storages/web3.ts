@@ -1,5 +1,4 @@
-import { LocalStorageKeys } from '@/enums'
-import { StorageGetter, Web3StorageState } from '@/types'
+import { LocalStorageKeys, StorageGetter, Web3StorageState } from '@/types'
 
 import { BaseStorage } from './base'
 

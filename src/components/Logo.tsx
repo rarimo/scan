@@ -3,8 +3,8 @@
 import { Box, SxProps, useTheme } from '@mui/material'
 import Link from 'next/link'
 
-import { RoutePaths } from '@/enums'
 import { useAppState } from '@/hooks'
+import { RoutePaths } from '@/types'
 
 export default function Logo({
   isInsideNavbar = false,

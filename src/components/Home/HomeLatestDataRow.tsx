@@ -1,8 +1,9 @@
 import ReceiptLong from '@mui/icons-material/ReceiptLong'
-import { Box, Grid, Skeleton, Stack, Typography, useTheme } from '@mui/material'
+import { Box, Grid, Stack, Typography, useTheme } from '@mui/material'
 import { Property } from 'csstype'
 import { ReactNode } from 'react'
 import FlexDirection = Property.FlexDirection
+import { useSkeleton } from '@/hooks'
 
 const sx = {
   textBlock: {
@@ -42,7 +43,7 @@ export default function HomeLatestDataRow({
   subhead?: ReactNode
 }) {
   const theme = useTheme()
-  const withSkeleton = (children: ReactNode) => (isLoading ? <Skeleton /> : children)
+  const withSkeleton = useSkeleton(isLoading)
 
   return (
     <Stack

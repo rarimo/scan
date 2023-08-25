@@ -1,15 +1,14 @@
 'use client'
 
 import { time } from '@distributedlab/tools'
-import { Link as MuiLink, Skeleton, TableCell, TableRow } from '@mui/material'
+import { Link as MuiLink, TableCell, TableRow } from '@mui/material'
 import Link from 'next/link'
-import { ReactNode } from 'react'
 
 import { AvatarName } from '@/components/Avatar'
-import { RoutePaths } from '@/enums'
 import { BlockListFragment } from '@/graphql'
 import { createColumnMap, generatePath } from '@/helpers'
-import { TableColumn } from '@/types'
+import { useSkeleton } from '@/hooks'
+import { RoutePaths, TableColumn } from '@/types'
 
 import { BlocksColumnIds } from './BlocksList'
 
@@ -29,12 +28,7 @@ export default function BlocksListRow({
     textOverflow: 'ellipsis',
   }
 
-  const withSkeleton = (children: ReactNode, height?: number, width = '100%', ml?: string) =>
-    isLoading ? (
-      <Skeleton width={width} {...(height && { height })} sx={{ ...(ml && { ml }) }} />
-    ) : (
-      children
-    )
+  const withSkeleton = useSkeleton(isLoading)
 
   return (
     <TableRow hover role='checkbox' tabIndex={-1}>
@@ -51,13 +45,14 @@ export default function BlocksListRow({
           >
             {block?.height}
           </MuiLink>,
-          0,
-          '100px',
+          {
+            width: 100,
+          },
         )}
       </TableCell>
 
       <TableCell sx={{ ...columnMap[BlocksColumnIds.Date]?.sx }}>
-        {withSkeleton(time(block?.timestamp, { utc: true }).fromNow, 0, '140px')}
+        {withSkeleton(time(block?.timestamp, { utc: true }).fromNow, { width: '140px' })}
       </TableCell>
       <TableCell
         sx={{
@@ -72,22 +67,24 @@ export default function BlocksListRow({
             imageUrl={block?.validator?.validator_descriptions?.[0]?.avatar_url ?? ''}
             abbrAddress={false}
           />,
-          22,
-          '439px',
+          {
+            height: 22,
+            width: 439,
+          },
         )}
       </TableCell>
       <TableCell
         sx={columnMap[BlocksColumnIds.Gas]?.sx}
         align={columnMap[BlocksColumnIds.Gas]?.align}
       >
-        {withSkeleton(block?.total_gas, undefined, '90px', 'auto')}
+        {withSkeleton(block?.total_gas, { width: 90, ml: 'auto' })}
       </TableCell>
 
       <TableCell
         sx={columnMap[BlocksColumnIds.TxN]?.sx}
         align={columnMap[BlocksColumnIds.TxN]?.align}
       >
-        {withSkeleton(block?.transactions_aggregate?.aggregate?.count, undefined, '60px', 'auto')}
+        {withSkeleton(block?.transactions_aggregate?.aggregate?.count, { width: 60, ml: 'auto' })}
       </TableCell>
     </TableRow>
   )

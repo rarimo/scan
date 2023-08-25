@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { useMemo } from 'react'
 
 import { CONFIG } from '@/config'
-import { RoutePaths } from '@/enums'
 import { abbr, generatePath } from '@/helpers'
+import { RoutePaths } from '@/types'
 
 import Avatar from './Avatar'
 

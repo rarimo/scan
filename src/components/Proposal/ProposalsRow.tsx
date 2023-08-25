@@ -1,16 +1,14 @@
-import { Chip, Link as MuiLink, Skeleton, TableCell, TableRow } from '@mui/material'
+import { Chip, Link as MuiLink, TableCell, TableRow } from '@mui/material'
 import Link from 'next/link'
-import { ReactNode } from 'react'
 
 import { AvatarName } from '@/components/Avatar'
 import { ProposalsColumnIds } from '@/components/Proposal/Proposals'
 import ProposalStatus from '@/components/Proposal/ProposalStatus'
 import { OVERFLOW_SX } from '@/const'
-import { RoutePaths } from '@/enums'
 import { ProposalBaseFragment } from '@/graphql'
 import { createColumnMap, generatePath } from '@/helpers'
-import { useProposalMetadata } from '@/hooks'
-import { TableColumn } from '@/types'
+import { useProposalMetadata, useSkeleton } from '@/hooks'
+import { RoutePaths, TableColumn } from '@/types'
 
 export default function ProposalsRow({
   proposal,
@@ -25,12 +23,7 @@ export default function ProposalsRow({
 
   const { metadata } = useProposalMetadata(proposal)
 
-  const withSkeleton = (children: ReactNode, height?: number, width = '100%', ml?: string) =>
-    isLoading ? (
-      <Skeleton width={width} {...(height && { height })} sx={{ ...(ml && { ml }) }} />
-    ) : (
-      children
-    )
+  const withSkeleton = useSkeleton(isLoading)
 
   return (
     <TableRow hover role='checkbox' tabIndex={-1}>
@@ -42,7 +35,7 @@ export default function ProposalsRow({
         }}
         align={columnMap[ProposalsColumnIds.Id].align}
       >
-        {withSkeleton(`#${proposal?.id}`, 0, '50px')}
+        {withSkeleton(`#${proposal?.id}`, { width: '50px' })}
       </TableCell>
 
       <TableCell
@@ -59,8 +52,7 @@ export default function ProposalsRow({
           >
             {metadata?.title}
           </MuiLink>,
-          0,
-          '260px',
+          { width: '260px' },
         )}
       </TableCell>
 
@@ -71,7 +63,7 @@ export default function ProposalsRow({
           maxWidth: columnMap[ProposalsColumnIds.Type]?.maxWidth,
         }}
       >
-        {withSkeleton(<Chip label={metadata?.type} />, 32)}
+        {withSkeleton(<Chip label={metadata?.type} />, { height: 32, width: '100%' })}
       </TableCell>
 
       <TableCell
@@ -83,8 +75,10 @@ export default function ProposalsRow({
       >
         {withSkeleton(
           <AvatarName address={proposal?.proposer_address ?? ''} abbrAddress={false} />,
-          22,
-          '430px',
+          {
+            height: 22,
+            width: '430px',
+          },
         )}
       </TableCell>
 
@@ -95,7 +89,10 @@ export default function ProposalsRow({
         }}
         align={columnMap[ProposalsColumnIds.Status]?.align}
       >
-        {withSkeleton(<ProposalStatus status={proposal?.status ?? ''} />, 32)}
+        {withSkeleton(<ProposalStatus status={proposal?.status ?? ''} />, {
+          height: 32,
+          width: '100%',
+        })}
       </TableCell>
     </TableRow>
   )

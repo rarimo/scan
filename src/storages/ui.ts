@@ -1,6 +1,6 @@
 import { omit } from 'lodash-es'
 
-import { LocalStorageKeys } from '@/enums'
+import { LocalStorageKeys } from '@/types'
 import { StorageGetter, UiStorageState } from '@/types'
 
 import { BaseStorage } from './base'

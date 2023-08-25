@@ -3,7 +3,7 @@ query GetValidatorByAddress($address: String!) {
    ...Validator
   }
   slashing_params {
-    params
+    ...SlashingParams
   }
   staking_pool {
     bonded_tokens

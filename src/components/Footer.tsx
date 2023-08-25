@@ -7,8 +7,8 @@ import { Variant } from '@mui/material/styles/createTypography'
 
 import Logo from '@/components/Logo'
 import { CONFIG } from '@/config'
-import { RoutePaths } from '@/enums'
 import { useI18n } from '@/locales/client'
+import { RoutePaths } from '@/types'
 
 const SCROLL_ICON_SIZE = 36
 const LINKS_SPACING = 2.7

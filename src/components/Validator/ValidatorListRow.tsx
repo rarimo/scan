@@ -1,16 +1,14 @@
-import { Skeleton, SxProps, TableCell, TableRow } from '@mui/material'
+import { TableCell, TableRow } from '@mui/material'
 import { BondStatus } from '@rarimo/client'
-import { ReactNode } from 'react'
 
 import { AvatarName } from '@/components/Avatar'
 import ValidatorCondition from '@/components/Validator/ValidatorCondition'
 import ValidatorStatus from '@/components/Validator/ValidatorStatus'
 import ValidatorVotingPower from '@/components/Validator/ValidatorVotingPower'
-import { ValidatorListColumnIds } from '@/enums'
 import { SlashingParamsFragment, ValidatorBaseFragment } from '@/graphql'
 import { createColumnMap, formatToPercent } from '@/helpers'
-import { useValidatorStats } from '@/hooks'
-import { TableColumn } from '@/types'
+import { useSkeleton, useValidatorStats } from '@/hooks'
+import { TableColumn, ValidatorListColumnIds } from '@/types'
 
 export default function ValidatorListRow({
   validator,
@@ -33,17 +31,7 @@ export default function ValidatorListRow({
     commission: validator?.validator_commissions?.[0]?.commission ?? 0,
   })
 
-  const withSkeleton = (children: ReactNode, sx = {} as SxProps) =>
-    isLoading ? (
-      <Skeleton
-        sx={{
-          width: '100%',
-          ...sx,
-        }}
-      />
-    ) : (
-      children
-    )
+  const withSkeleton = useSkeleton(isLoading)
 
   return (
     <TableRow hover role='checkbox' tabIndex={-1}>

@@ -1,17 +1,9 @@
 'use client'
 
-import {
-  Chip,
-  Link as MuiLink,
-  Skeleton,
-  Stack,
-  SxProps,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { Chip, Link as MuiLink, Stack, Typography, useTheme } from '@mui/material'
 import isEmpty from 'lodash-es/isEmpty'
 import Link from 'next/link'
-import { ReactNode, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { AvatarName } from '@/components/Avatar'
 import { ContentBox, ContentWrapper } from '@/components/Content'
@@ -24,11 +16,11 @@ import {
   TABLE_MEDIUM_TEXT_SKELETON_SX,
   TABLE_TYPE_BOX_SKELETON_SX,
 } from '@/const'
-import { RoutePaths } from '@/enums'
 import { ProposalFragment } from '@/graphql'
 import { calculateTallyResults, generatePath } from '@/helpers'
-import { useProposalMetadata } from '@/hooks'
+import { useProposalMetadata, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
+import { RoutePaths } from '@/types'
 
 export default function ProposalDetails({
   isLoading,
@@ -54,8 +46,7 @@ export default function ProposalDetails({
     [proposal],
   )
 
-  const withSkeleton = (children: ReactNode, sx?: SxProps) =>
-    isLoading ? <Skeleton sx={{ width: '100%', ...(sx || {}) }} /> : children
+  const withSkeleton = useSkeleton(isLoading)
 
   const tallyResultsStack = [
     {

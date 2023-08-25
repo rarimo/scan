@@ -3,9 +3,9 @@
 import { createTheme, useMediaQuery } from '@mui/material'
 import { useEffect, useMemo } from 'react'
 
-import { ThemeMode } from '@/enums'
 import { useAppState } from '@/hooks'
 import { COMPONENTS, PALETTE, typographyTheme } from '@/theme'
+import { ThemeMode } from '@/types'
 
 const THEME_CLASSES = {
   [ThemeMode.Light]: 'App__light',

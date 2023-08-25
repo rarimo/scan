@@ -3,7 +3,7 @@ import { Link as MuiLink, Stack, Typography, useTheme } from '@mui/material'
 import Link from 'next/link'
 import { ReactNode } from 'react'
 
-import { RoutePaths } from '@/enums'
+import { RoutePaths } from '@/types'
 
 export default function PreviewList({
   title,

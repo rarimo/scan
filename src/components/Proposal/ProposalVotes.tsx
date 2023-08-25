@@ -25,7 +25,7 @@ export enum ProposalVotesColumnIds {
 export default function ProposalVotes({ id }: { id: string }) {
   const t = useI18n()
 
-  const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination()
+  const { limit, offset, handleChangePage, handleChangeRowsPerPage } = useTablePagination('votes')
 
   const {
     data: voteCount,

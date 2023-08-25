@@ -9,10 +9,10 @@ import AvatarName from '@/components/Avatar/AvatarName'
 import HomeLatestDataRow from '@/components/Home/HomeLatestDataRow'
 import NoDataRow from '@/components/NoDataRow'
 import PreviewList from '@/components/PreviewList'
-import { RoutePaths } from '@/enums'
 import { TransactionBaseFragment } from '@/graphql'
 import { abbr, generatePath, parseAddress } from '@/helpers'
 import { useI18n } from '@/locales/client'
+import { RoutePaths } from '@/types'
 
 const LINK_PROPS = {
   display: 'inline',

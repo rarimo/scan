@@ -1,7 +1,6 @@
 import { PaletteOptions } from '@mui/material/styles'
 
-import { ThemeMode } from '@/enums'
-import { PaletteColors } from '@/types'
+import { PaletteColors, ThemeMode } from '@/types'
 
 import { DARK_COLORS, LIGHT_COLORS } from './variables'
 
