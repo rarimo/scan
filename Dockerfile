@@ -5,6 +5,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json ./
 COPY yarn.lock ./
+COPY .yarn ./
 RUN yarn install --immutable
 
 # Rebuild the source code only when needed
