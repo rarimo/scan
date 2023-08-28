@@ -75,7 +75,10 @@ export default function ValidatorUnbondingDelegationList({
     <TableWithPagination
       isMinHeighted={false}
       label={t('validator-unbonding-delegation-list.table-lbl')}
-      noDataMessage={t('validator-unbonding-delegation-list.no-data-msg')}
+      noDataTitle={t('validator-unbonding-delegation-list.no-data-title')}
+      noDataSubtitle={t('validator-unbonding-delegation-list.no-data-subtitle')}
+      errorTitle={t('validator-unbonding-delegation-list.error-title')}
+      errorSubtitle={t('validator-unbonding-delegation-list.error-subtitle')}
       isLoadingError={isLoadingError}
       isLoading={isLoading}
       limit={limit}

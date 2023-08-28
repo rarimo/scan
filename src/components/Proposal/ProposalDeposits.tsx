@@ -101,7 +101,10 @@ export default function ProposalDeposits({ id }: { id: string }) {
         <ContentWrapper>
           <TableWithPagination
             label={t('proposal-deposits.title-lbl')}
-            noDataMessage={t('proposal-deposits.no-data-msg')}
+            noDataTitle={t('proposal-deposits.no-data-title')}
+            noDataSubtitle={t('proposal-deposits.no-data-subtitle')}
+            errorTitle={t('proposal-deposits.error-title')}
+            errorSubtitle={t('proposal-deposits.error-subtitle')}
             isLoadingError={isLoadingError || isLoadingDepositCountError}
             isMinHeighted={false}
             isLoading={isLoading || isLoadingDepositCount}

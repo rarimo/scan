@@ -34,37 +34,37 @@ export default function TransactionList({
   const columns: readonly TableColumn<TxsColumnIds>[] = [
     {
       id: TxsColumnIds.Hash,
-      label: t('transactions-list.hash-col-lbl'),
+      label: t('transaction-list.hash-col-lbl'),
       minWidth: 260,
       maxWidth: 262,
     },
     {
       id: TxsColumnIds.Sender,
-      label: t('transactions-list.sender-col-lbl'),
+      label: t('transaction-list.sender-col-lbl'),
       minWidth: 260,
       maxWidth: 260,
     },
     {
       id: TxsColumnIds.Operation,
-      label: t('transactions-list.operation-col-lbl'),
+      label: t('transaction-list.operation-col-lbl'),
       minWidth: 260,
       maxWidth: 260,
     },
     {
       id: TxsColumnIds.Block,
-      label: t('transactions-list.block-col-lbl'),
+      label: t('transaction-list.block-col-lbl'),
       maxWidth: 175,
       minWidth: 175,
     },
     {
       id: TxsColumnIds.Date,
-      label: t('transactions-list.date-col-lbl'),
+      label: t('transaction-list.date-col-lbl'),
       minWidth: 150,
       maxWidth: 150,
     },
     {
       id: TxsColumnIds.Status,
-      label: t('transactions-list.status-col-lbl'),
+      label: t('transaction-list.status-col-lbl'),
       minWidth: 220,
       maxWidth: 220,
       align: 'right',
@@ -87,8 +87,11 @@ export default function TransactionList({
     <ContentWrapper>
       <TableWithPagination
         isMinHeighted={isMinHeighted}
-        label={t('transactions-list.table-lbl')}
-        noDataMessage={t('transactions-list.no-data-msg')}
+        label={t('transaction-list.table-lbl')}
+        noDataTitle={t('transaction-list.no-data-title')}
+        noDataSubtitle={t('transaction-list.no-data-subtitle')}
+        errorTitle={t('transaction-list.error-title')}
+        errorSubtitle={t('transaction-list.error-subtitle')}
         isLoadingError={isLoadingError}
         isLoading={isLoading}
         limit={limit}

@@ -109,7 +109,10 @@ export default function ProposalVotes({ id }: { id: string }) {
         <ContentWrapper>
           <TableWithPagination
             label={t('proposal-votes.title-lbl')}
-            noDataMessage={t('proposal-votes.no-data-msg')}
+            noDataTitle={t('proposal-votes.no-data-title')}
+            noDataSubtitle={t('proposal-votes.no-data-subtitle')}
+            errorTitle={t('proposal-votes.error-title')}
+            errorSubtitle={t('proposal-votes.error-subtitle')}
             isLoadingError={isLoadingError || isLoadingVotesCountError}
             isLoading={isLoading || isLoadingVotesCount}
             isMinHeighted={false}

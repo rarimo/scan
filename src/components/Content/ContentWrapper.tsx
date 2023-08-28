@@ -12,6 +12,7 @@ export default function ContentWrapper({
     <Box
       sx={{
         width: '100%',
+        height: '100%',
         overflow: 'hidden',
         border: 'var(--ui-border)',
         ...(sx ? sx : {}),

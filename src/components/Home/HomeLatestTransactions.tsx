@@ -6,8 +6,9 @@ import Link from 'next/link'
 import { useMemo } from 'react'
 
 import AvatarName from '@/components/Avatar/AvatarName'
+import { ContentWrapper } from '@/components/Content'
 import HomeLatestDataRow from '@/components/Home/HomeLatestDataRow'
-import NoDataRow from '@/components/NoDataRow'
+import NoData from '@/components/NoData'
 import PreviewList from '@/components/PreviewList'
 import { TransactionBaseFragment } from '@/graphql'
 import { abbr, generatePath, parseAddress } from '@/helpers'
@@ -34,7 +35,7 @@ export default function HomeLatestTransactions({
 }) {
   const t = useI18n()
 
-  const list = useMemo(() => {
+  const txList = useMemo(() => {
     return transactionList.map(i => {
       return {
         ...i,
@@ -43,43 +44,52 @@ export default function HomeLatestTransactions({
     })
   }, [transactionList])
 
-  return (
+  const list = (
     <PreviewList
       actions={{
-        label: t('transactions-list.view-all'),
+        label: t('transaction-list.view-all'),
         link: RoutePaths.Transactions,
       }}
-      title={t('transactions-list.title')}
+      title={t('transaction-list.title')}
       isError={isLoadingError}
       isLoading={isLoading}
     >
-      <>
-        {!isLoading && (!transactionList.length || isLoadingError) && (
-          <NoDataRow message={t('transactions-list.no-data-msg')} error={isLoadingError} />
-        )}
-        {(isLoading ? new Array(limitRow).fill({} as TransactionBaseFragment) : list).map(
-          (el, idx) => (
-            <HomeLatestDataRow
-              key={idx}
-              isLoading={isLoading}
-              head={
-                <MuiLink
-                  component={Link}
-                  href={generatePath(RoutePaths.Transaction, {
-                    hash: `${el?.hash}`,
-                  })}
-                  sx={LINK_PROPS}
-                >
-                  {abbr(el?.hash ?? '')}
-                </MuiLink>
-              }
-              subhead={time(el.block?.timestamp, { utc: true })?.fromNow}
-              footer={t('transactions-list.from') + ':'}
-              subfooter={<AvatarName address={el?.sender ?? ''} />}
-            />
-          ),
-        )}
-      </>
+      {(isLoading ? new Array(limitRow).fill({} as TransactionBaseFragment) : txList).map(
+        (el, idx) => (
+          <HomeLatestDataRow
+            key={idx}
+            isLoading={isLoading}
+            head={
+              <MuiLink
+                component={Link}
+                href={generatePath(RoutePaths.Transaction, {
+                  hash: `${el?.hash}`,
+                })}
+                sx={LINK_PROPS}
+              >
+                {abbr(el?.hash ?? '')}
+              </MuiLink>
+            }
+            subhead={time(el.block?.timestamp, { utc: true })?.fromNow}
+            footer={t('transaction-list.from') + ':'}
+            subfooter={<AvatarName address={el?.sender ?? ''} />}
+          />
+        ),
+      )}
     </PreviewList>
+  )
+
+  return !isLoading && (!transactionList.length || isLoadingError) ? (
+    <ContentWrapper>
+      <NoData
+        title={t('transaction-list.no-data-title')}
+        subtitle={t('transaction-list.no-data-subtitle')}
+        errorTitle={t('transaction-list.error-title')}
+        errorSubtitle={t('transaction-list.error-subtitle')}
+        isError={isLoadingError}
+      />
+    </ContentWrapper>
+  ) : (
+    list
   )
 }

@@ -10,7 +10,7 @@ export default function TransactionStatus({ status }: { status?: boolean }) {
   return (
     <Chip
       color={status ? 'success' : 'error'}
-      label={status ? t('transactions-list.successful') : t('transactions-list.unsuccessful')}
+      label={status ? t('transaction-list.successful') : t('transaction-list.unsuccessful')}
       variant={'outlined'}
     />
   )

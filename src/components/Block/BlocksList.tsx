@@ -87,7 +87,10 @@ export default function BlocksList({
       <TableWithPagination
         isMinHeighted={isMinHeighted}
         label={t('block-list.table-lbl')}
-        noDataMessage={t('block-list.no-data-msg')}
+        noDataTitle={t('block-list.no-data-title')}
+        noDataSubtitle={t('block-list.no-data-subtitle')}
+        errorTitle={t('block-list.error-title')}
+        errorSubtitle={t('block-list.error-subtitle')}
         isLoadingError={isLoadingError}
         isLoading={isLoading}
         limit={limit}

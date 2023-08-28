@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import { ChangeEvent, ReactNode } from 'react'
 
-import NoDataTableRow from '@/components/NoDataTableRow'
+import NoData from '@/components/NoData'
 import { TABLE_LIST_BODY_ROW_HEIGHT, TABLE_LIST_HEAD_ROW_HEIGHT } from '@/const'
 
 const footerFont = {
@@ -22,7 +22,10 @@ export default function TableWithPagination({
   label,
   headCells,
   rows,
-  noDataMessage,
+  noDataTitle,
+  noDataSubtitle,
+  errorTitle,
+  errorSubtitle,
   isMinHeighted = true,
   isLoadingError,
   isLoading,
@@ -35,7 +38,10 @@ export default function TableWithPagination({
   label: string
   rows: ReactNode[]
   headCells: ReactNode[]
-  noDataMessage?: string
+  noDataTitle?: string
+  noDataSubtitle?: string
+  errorTitle?: string
+  errorSubtitle?: string
   isMinHeighted?: boolean
   isLoadingError: boolean
   isLoading: boolean
@@ -46,7 +52,8 @@ export default function TableWithPagination({
   handleChangeRowsPerPage: (event: ChangeEvent<HTMLInputElement>) => void
 }) {
   const theme = useTheme()
-  return (
+
+  const table = (
     <>
       <TableContainer
         sx={{
@@ -77,13 +84,6 @@ export default function TableWithPagination({
             }}
           >
             {rows}
-            {!isLoading && (!rows?.length || isLoadingError) && (
-              <NoDataTableRow
-                message={noDataMessage}
-                colSpan={headCells?.length}
-                error={isLoadingError}
-              />
-            )}
           </TableBody>
         </Table>
       </TableContainer>
@@ -126,5 +126,17 @@ export default function TableWithPagination({
         count={count}
       />
     </>
+  )
+
+  return !isLoading && (!rows?.length || isLoadingError) ? (
+    <NoData
+      isError={isLoadingError}
+      title={noDataTitle}
+      subtitle={noDataSubtitle}
+      errorTitle={errorTitle}
+      errorSubtitle={errorSubtitle}
+    />
+  ) : (
+    table
   )
 }

@@ -68,7 +68,10 @@ export default function ValidatorDelegationList({
     <TableWithPagination
       isMinHeighted={false}
       label={t('validator-delegation-list.table-lbl')}
-      noDataMessage={t('validator-delegation-list.no-data-msg')}
+      noDataTitle={t('validator-delegation-list.no-data-title')}
+      noDataSubtitle={t('validator-delegation-list.no-data-subtitle')}
+      errorTitle={t('validator-delegation-list.error-title')}
+      errorSubtitle={t('validator-delegation-list.error-subtitle')}
       isLoadingError={isLoadingError}
       isLoading={isLoading}
       limit={limit}

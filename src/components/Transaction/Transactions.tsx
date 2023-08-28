@@ -27,7 +27,7 @@ export default function Transactions() {
   })
 
   return (
-    <ContentSection withBackButton title={t('transactions-list.table-lbl')}>
+    <ContentSection withBackButton title={t('transaction-list.table-lbl')}>
       <ContentBox>
         <TransactionList
           limit={limit}

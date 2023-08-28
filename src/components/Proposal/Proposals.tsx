@@ -88,7 +88,10 @@ export default function Proposals() {
         <ContentWrapper>
           <TableWithPagination
             label={t('proposals.table-lbl')}
-            noDataMessage={t('proposals.no-data-msg')}
+            noDataTitle={t('proposals.no-data-title')}
+            noDataSubtitle={t('proposals.no-data-subtitle')}
+            errorTitle={t('proposals.error-title')}
+            errorSubtitle={t('proposals.error-subtitle')}
             isLoadingError={isLoadingError || isLoadingProposalCountError}
             isLoading={isLoading || isLoadingProposalCount}
             limit={limit}

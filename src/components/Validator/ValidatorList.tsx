@@ -134,7 +134,10 @@ export default function ValidatorList({
   return (
     <TableWithPagination
       label={t('validator-list.table-lbl')}
-      noDataMessage={t('validator-list.no-data-msg')}
+      noDataTitle={t('validator-list.no-data-title')}
+      noDataSubtitle={t('validator-list.no-data-subtitle')}
+      errorTitle={t('validator-list.error-title')}
+      errorSubtitle={t('validator-list.error-subtitle')}
       isLoadingError={isLoadingError}
       isLoading={isLoading}
       limit={limit}

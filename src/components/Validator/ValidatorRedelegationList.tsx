@@ -85,7 +85,10 @@ export default function ValidatorRedelegationList({
     <TableWithPagination
       isMinHeighted={false}
       label={t('validator-redelegation-list.table-lbl')}
-      noDataMessage={t('validator-redelegation-list.no-data-msg')}
+      noDataTitle={t('validator-redelegation-list.no-data-title')}
+      noDataSubtitle={t('validator-redelegation-list.no-data-subtitle')}
+      errorTitle={t('validator-redelegation-list.error-title')}
+      errorSubtitle={t('validator-redelegation-list.error-subtitle')}
       isLoadingError={isLoadingError}
       isLoading={isLoading}
       limit={limit}
