@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 
 import { getClient } from '@/client'
 import { Account, AccountTransactions, PageContainer } from '@/components'
-import { craftPageTitle, METADATA } from '@/config'
+import { createMetadata } from '@/config'
 import { getServerSideProps } from '@/helpers'
 
 const getAccount = async (address: string) => {
@@ -13,10 +13,7 @@ const getAccount = async (address: string) => {
 }
 
 export function generateMetadata({ params }: { params: { address: string } }): Metadata {
-  return {
-    ...METADATA,
-    title: craftPageTitle(`Account ${params.address} Details`),
-  }
+  return createMetadata(`Account ${params.address} Details`)
 }
 
 export default async function AccountPage({

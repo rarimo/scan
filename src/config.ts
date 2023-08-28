@@ -33,7 +33,6 @@ export const CONFIG = {
 } as const
 
 export const METADATA: Metadata = {
-  metadataBase: new URL(CONFIG.APP_URL),
   description: CONFIG.APP_DESCRIPTION,
   applicationName: CONFIG.APP_NAME,
   themeColor: [
@@ -45,7 +44,6 @@ export const METADATA: Metadata = {
     'width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0',
   creator: 'Rarimo Team',
   openGraph: {
-    title: CONFIG.APP_NAME,
     description: CONFIG.APP_DESCRIPTION,
     locale: 'en_GB',
     type: 'website',
@@ -56,12 +54,27 @@ export const METADATA: Metadata = {
   },
   alternates: {
     canonical: '/',
-    languages: {
-      'en-US': '/en',
-    },
   },
 }
 
-export const craftPageTitle = (pageName: string): string => {
+const createPageTitle = (pageName: string): string => {
   return `${pageName} | ${CONFIG.APP_NAME}`
+}
+
+export const createMetadata = (pageName: string): Metadata => {
+  const title = createPageTitle(pageName)
+
+  return {
+    metadataBase: new URL(CONFIG.APP_URL),
+    title,
+    ...METADATA,
+    openGraph: {
+      ...METADATA.openGraph,
+      title,
+    },
+    twitter: {
+      ...METADATA.twitter,
+      title,
+    },
+  }
 }

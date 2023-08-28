@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { getBlockByHeight } from '@/callers'
 import { BlockDetails, PageContainer } from '@/components'
-import { craftPageTitle, METADATA } from '@/config'
+import { createMetadata } from '@/config'
 import { BlockFragment } from '@/graphql'
 import { ensureNotFoundNumber, getServerSideProps } from '@/helpers'
 
@@ -15,10 +15,7 @@ const getBlock = (height: string) => {
 }
 
 export function generateMetadata({ params }: { params: { height: string } }): Metadata {
-  return {
-    ...METADATA,
-    title: craftPageTitle(`Block ${params.height} Details`),
-  }
+  return createMetadata(`Block ${params.height} Details`)
 }
 
 export default async function BlockPage({ params: { height } }: { params: { height: string } }) {

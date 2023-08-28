@@ -1,11 +1,10 @@
 import { Metadata } from 'next'
 
 import { PageContainer, Proposals } from '@/components'
-import { craftPageTitle, METADATA } from '@/config'
+import { createMetadata } from '@/config'
 
-export const metadata: Metadata = {
-  ...METADATA,
-  title: craftPageTitle('Proposals'),
+export function generateMetadata(): Metadata {
+  return createMetadata(`Proposals`)
 }
 
 export default function ProposalsPage() {

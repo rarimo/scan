@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import localFont from 'next/font/local'
 
 import { HomeLatestData, HomeRedirectEmitter, HomeStatistics, Search } from '@/components'
-import { craftPageTitle, METADATA } from '@/config'
+import { createMetadata } from '@/config'
 import { getI18n } from '@/locales/server'
 
 const oswald = localFont({
@@ -26,9 +26,8 @@ const TITLE_PARTS_PROPS = {
   lineHeight: 1.25,
 }
 
-export const metadata: Metadata = {
-  ...METADATA,
-  title: craftPageTitle('Home'),
+export function generateMetadata(): Metadata {
+  return createMetadata('Home')
 }
 
 export default async function HomePage() {

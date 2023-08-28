@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { getProposalByID } from '@/callers'
 import { PageContainer, Proposal, ProposalDeposits, ProposalVotes } from '@/components'
-import { craftPageTitle, METADATA } from '@/config'
+import { createMetadata } from '@/config'
 import { ProposalFragment } from '@/graphql'
 import { ensureNotFoundNumber, getServerSideProps } from '@/helpers'
 
@@ -15,10 +15,7 @@ const getProposal = async (id: string) => {
 }
 
 export function generateMetadata({ params }: { params: { id: string } }): Metadata {
-  return {
-    ...METADATA,
-    title: craftPageTitle(`Proposal #${params.id} Details`),
-  }
+  return createMetadata(`Proposal #${params.id} Details`)
 }
 
 export default async function ProposalPage({ params: { id } }: { params: { id: string } }) {

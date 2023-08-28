@@ -1,11 +1,10 @@
 import { Metadata } from 'next'
 
 import { Blocks, PageContainer } from '@/components'
-import { craftPageTitle, METADATA } from '@/config'
+import { createMetadata } from '@/config'
 
-export const metadata: Metadata = {
-  ...METADATA,
-  title: craftPageTitle('Blocks'),
+export function generateMetadata(): Metadata {
+  return createMetadata(`Blocks`)
 }
 
 export default function BlocksPage() {

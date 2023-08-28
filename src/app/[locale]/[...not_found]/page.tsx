@@ -1,11 +1,10 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { craftPageTitle, METADATA } from '@/config'
+import { createMetadata } from '@/config'
 
-export const metadata: Metadata = {
-  ...METADATA,
-  title: craftPageTitle('404'),
+export function generateMetadata(): Metadata {
+  return createMetadata('404')
 }
 
 export default function NotFoundCatchAll() {

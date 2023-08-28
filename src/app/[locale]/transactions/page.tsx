@@ -1,11 +1,10 @@
 import { Metadata } from 'next'
 
 import { PageContainer, Transactions } from '@/components'
-import { craftPageTitle, METADATA } from '@/config'
+import { createMetadata } from '@/config'
 
-export const metadata: Metadata = {
-  ...METADATA,
-  title: craftPageTitle('Transactions'),
+export function generateMetadata(): Metadata {
+  return createMetadata('Transactions')
 }
 
 export default function TransactionsPage() {
