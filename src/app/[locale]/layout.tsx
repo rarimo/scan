@@ -1,7 +1,8 @@
 import '@/styles/index.scss'
 
+import { isString } from 'lodash-es'
 import localFont from 'next/font/local'
-import { ReactNode } from 'react'
+import { ReactNode, useMemo } from 'react'
 
 import { MainLayout, StatusMessage } from '@/components'
 import {
@@ -12,6 +13,7 @@ import {
   ViewportProvider,
   YupProvider,
 } from '@/providers'
+import { Locale } from '@/types'
 
 const inter = localFont({
   display: 'swap',
@@ -49,6 +51,9 @@ const inter = localFont({
   ],
 })
 
+const AVAILABLE_LOCALES = Object.values(Locale).filter(i => isString(i) && !Number.isNaN(Number(i)))
+const DEFAULT_LOCALE = Locale.English
+
 export default function RootLayout({
   children,
   params,
@@ -56,13 +61,20 @@ export default function RootLayout({
   children: ReactNode
   params: { locale: string }
 }) {
+  const locale = useMemo(() => {
+    if (!params.locale || !AVAILABLE_LOCALES.includes(params.locale as Locale)) {
+      return DEFAULT_LOCALE
+    }
+    return params.locale as Locale
+  }, [params.locale])
+
   return (
-    <html lang={params.locale} className={inter.className}>
+    <html lang={locale} className={inter.className}>
       <body>
         <AppStateProvider>
           <ThemeProvider options={{ key: 'mui' }}>
             <ViewportProvider>
-              <I18nProvider locale={params.locale}>
+              <I18nProvider locale={locale}>
                 <YupProvider>
                   <ApolloProvider>
                     <MainLayout>{children}</MainLayout>
