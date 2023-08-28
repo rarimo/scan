@@ -15,6 +15,11 @@ export default function MainLayout({ children }: { children: ReactNode }) {
   const theme = useTheme()
   const isDarkMode = useMemo(() => theme.palette.mode === 'dark', [theme.palette.mode])
   const { isSearchOpened, setIsSearchOpened, themeMode } = useAppState()
+
+  const closeSearch = () => {
+    setIsSearchOpened(false)
+  }
+
   const layoutMixin = {
     spacing: {
       xs: theme.spacing(4.5),
@@ -103,12 +108,12 @@ export default function MainLayout({ children }: { children: ReactNode }) {
             right: 40,
             ...(isLightTheme && { color: theme.palette.primary.contrastText }),
           }}
-          onClick={() => setIsSearchOpened(false)}
+          onClick={closeSearch}
         >
           <CloseIcon />
         </IconButton>
         <Box sx={{ maxWidth: 700, width: '100%' }}>
-          <Search size={'big'} />
+          <Search size={'big'} onRedirect={closeSearch} />
         </Box>
       </Backdrop>
     </>

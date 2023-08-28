@@ -31,59 +31,68 @@ const getSearchResults = async (value: string) => {
   return data
 }
 
-export default function Search({ size = 'default' }: { size?: 'default' | 'big' }) {
+export default function Search({
+  size = 'default',
+  onRedirect,
+}: {
+  size?: 'default' | 'big'
+  onRedirect?: () => void
+}) {
   const t = useI18n()
   const router = useRouter()
   const theme = useTheme()
 
   const [searchValue, setSearchValue] = useState('')
 
-  const { data, isLoading, reload } = useLoading<TSearchQuery>(
+  const { isLoading, reload } = useLoading<TSearchQuery>(
     {
       transaction: [],
       block: [],
       account: [],
     },
     () => getSearchResults(searchValue),
-    { loadOnMount: false },
+    {
+      loadOnMount: false,
+      onLoad: data => {
+        const { transaction, account, block } = data
+
+        if (transaction?.length) {
+          redirect(RoutePaths.Transaction, {
+            hash: transaction?.[0]?.hash ?? '',
+          })
+          return
+        }
+
+        if (block?.length) {
+          redirect(RoutePaths.Block, {
+            height: block?.[0]?.height ?? '',
+          })
+          return
+        }
+
+        if (account?.length) {
+          redirect(RoutePaths.Account, {
+            address: account?.[0]?.address ?? '',
+          })
+          return
+        }
+
+        if (!isLoading) {
+          Bus.info(t('search.no-results-msg'))
+          return
+        }
+      },
+    },
   )
 
   const redirect = (route: RoutePaths, params: Record<string, string | number>) => {
     router.push(generatePath(route, params))
+    onRedirect?.()
   }
 
   const searchAndRedirect = async () => {
     if (!searchValue || isLoading) return
-
     await reload()
-
-    const { transaction, account, block } = data
-
-    if (transaction?.length) {
-      redirect(RoutePaths.Transaction, {
-        hash: transaction?.[0]?.hash ?? '',
-      })
-      return
-    }
-
-    if (block?.length) {
-      redirect(RoutePaths.Block, {
-        height: block?.[0]?.height ?? '',
-      })
-      return
-    }
-
-    if (account?.length) {
-      redirect(RoutePaths.Account, {
-        address: account?.[0]?.address ?? '',
-      })
-      return
-    }
-
-    if (!isLoading) {
-      Bus.info(t('search.no-results-msg'))
-      return
-    }
   }
 
   const handleEnterPress = async (event: KeyboardEvent<HTMLDivElement>) => {

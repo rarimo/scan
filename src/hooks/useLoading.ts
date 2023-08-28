@@ -9,6 +9,7 @@ export const useLoading = <T>(
   initialState: T,
   loadFn: () => Promise<T>,
   options?: {
+    onLoad?: (data: T) => void | Promise<void>
     loadArgs?: any[] | null
     loadOnMount?: boolean
   },
@@ -20,7 +21,7 @@ export const useLoading = <T>(
   isEmpty: boolean
   update: () => Promise<void>
 } => {
-  const { loadArgs, loadOnMount: _loadOnMount } = options ?? {}
+  const { loadArgs, loadOnMount: _loadOnMount, onLoad } = options ?? {}
   const loadOnMount = useMemo(() => _loadOnMount ?? true, [_loadOnMount])
   const [isLoading, setIsLoading] = useState(loadOnMount)
   const [isLoadingError, setIsLoadingError] = useState(false)
@@ -36,7 +37,9 @@ export const useLoading = <T>(
     setIsLoadingError(false)
     setData(initialState as T)
     try {
-      setData(await loadFn())
+      const _data = await loadFn()
+      setData(_data)
+      await onLoad?.(_data)
     } catch (e) {
       setIsLoadingError(true)
       ErrorHandler.process(e)
