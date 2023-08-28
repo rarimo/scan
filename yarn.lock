@@ -7797,14 +7797,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-international@npm:^0.8.1":
-  version: 0.8.1
-  resolution: "next-international@npm:0.8.1"
+"next-international@npm:^0.9.3":
+  version: 0.9.3
+  resolution: "next-international@npm:0.9.3"
   dependencies:
     client-only: ^0.0.1
     international-types: ^0.8.0
     server-only: ^0.0.1
-  checksum: 4d5df496fb98b409492311d72bcb2bcf3453fbda9138e6ab7f5d4c194168881c089252b3320397fa7abf3221858e690f0f73fb3456ae3e9a20329b300c636ed5
+  checksum: f0896749aab31c92686f13ebd28693ff72abbdacbe8ace8b489867eb0cf8244fee002393a4a775a4f2b16c11baf6675eeec1e3a67dbab6e845a49bce909c0ccc
   languageName: node
   linkType: hard
 
@@ -9500,7 +9500,7 @@ __metadata:
     mitt: ^3.0.1
     negotiator: ^0.6.3
     next: 13.4.12
-    next-international: ^0.8.1
+    next-international: ^0.9.3
     prettier: ^3.0.0
     react: 18.2.0
     react-dom: 18.2.0
