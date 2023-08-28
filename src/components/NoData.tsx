@@ -30,17 +30,17 @@ export default function NoData({
 
   const iconColor = useMemo(
     () => (isError ? theme.palette.error.main : theme.palette.action.active),
-    [isError],
+    [isError, theme.palette.error.main, theme.palette.action.active],
   )
 
   const titleColor = useMemo(
     () => (isError ? theme.palette.error.main : theme.palette.text.primary),
-    [isError],
+    [isError, theme.palette.error.main, theme.palette.text.primary],
   )
 
   const subtitleColor = useMemo(
     () => (isError ? theme.palette.error.main : theme.palette.text.secondary),
-    [isError],
+    [isError, theme.palette.error.main, theme.palette.text.secondary],
   )
 
   const _title = useMemo(() => {
