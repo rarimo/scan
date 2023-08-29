@@ -7,7 +7,7 @@ import MouseOverDropdown from '@/components/MouseOverDropdown'
 import { CONFIG } from '@/config'
 import { useI18n } from '@/locales/client'
 
-export default function HeaderNetworkSwitcher() {
+export default function HeaderNetworkSwitcher({ size = 'medium' }: { size?: 'medium' | 'large' }) {
   const t = useI18n()
 
   const [link, setLink] = useState('')
@@ -39,7 +39,7 @@ export default function HeaderNetworkSwitcher() {
   }, [])
 
   return (
-    <MouseOverDropdown value={link} handleChange={handleChange}>
+    <MouseOverDropdown size={size} value={link} handleChange={handleChange}>
       {itemList.map((item, idx) => (
         <MenuItem value={item.link} key={idx}>
           {item.label}

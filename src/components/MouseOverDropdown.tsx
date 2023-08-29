@@ -3,11 +3,13 @@ import { ReactNode, useState } from 'react'
 
 export default function MouseOverDropdown({
   variant = 'outlined',
+  size = 'medium',
   value,
   handleChange,
   children,
 }: {
   variant?: 'outlined' | 'text'
+  size?: 'medium' | 'large'
   children: ReactNode
   value?: string
   handleChange: (event: SelectChangeEvent) => void
@@ -17,6 +19,7 @@ export default function MouseOverDropdown({
 
   const isOutlined = variant === 'outlined'
   const borderColor = isOutlined ? 'var(--col-primary-outlined-border)' : 'transparent'
+  const isLargeSize = size === 'large'
 
   const handleClose = () => {
     setOpen(false)
@@ -44,15 +47,15 @@ export default function MouseOverDropdown({
         sx: {
           '& > .MuiPaper-root': {
             width: 220,
-            top: '89px !important',
+            top: `${isLargeSize ? '340px' : '89px'} !important`,
             boxShadow: 'var(--ui-dropdown-shadow)',
           },
         },
       }}
       sx={{
-        height: isOutlined ? 40 : 'auto',
+        height: isOutlined ? (isLargeSize ? 48 : 40) : 'auto',
         textTransform: 'uppercase',
-        fontSize: 14,
+        fontSize: isLargeSize ? 17 : 14,
         color: theme.palette.primary.main,
         lineHeight: 1.7,
         fontWeight: 700,
@@ -73,9 +76,14 @@ export default function MouseOverDropdown({
           borderColor,
         },
         '& > .MuiSvgIcon-root': {
-          ...(!isOutlined && { top: '6px' }),
+          ...(!isOutlined && { top: isLargeSize ? 13 : 6 }),
           color: theme.palette.primary.main,
           transform: 'rotate(0deg)',
+        },
+        '& > .MuiSvgIcon-root.MuiSelect-icon': {
+          width: isLargeSize ? 24 : 20,
+          height: isLargeSize ? 24 : 20,
+          top: isLargeSize ? 13 : 6,
         },
       }}
     >

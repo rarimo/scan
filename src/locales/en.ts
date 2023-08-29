@@ -448,4 +448,13 @@ export default {
     "error-title-lbl": "Error acquiring data",
     "error-subtitle-lbl": "There was an error while loading, please try again later.",
   },
+  "navbar-links": {
+    "blocks-lbl": "Blocks",
+    "transactions-lbl": "Transactions",
+    "validators-lbl": "Validators",
+    "proposals-lbl": "Proposals",
+    "discord-lbl": "Discord",
+    "twitter-lbl": "Twitter",
+    "telegram-lbl": "Telegram",
+  },
 } as const

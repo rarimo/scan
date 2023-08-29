@@ -2,8 +2,9 @@
 
 import { ArrowUpward } from '@mui/icons-material'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward'
-import { Divider, IconButton, Link, Stack, Typography, useTheme } from '@mui/material'
+import { Divider, IconButton, Link as MuiLink, Stack, Typography, useTheme } from '@mui/material'
 import { Variant } from '@mui/material/styles/createTypography'
+import Link from 'next/link'
 
 import Logo from '@/components/Logo'
 import { CONFIG } from '@/config'
@@ -154,17 +155,16 @@ export default function Footer() {
             <Stack sx={HIDE_ON_MOBILE_SX} spacing={theme.spacing(LINKS_SPACING)}>
               <Typography {...linksHeaderTypoProps}>{t('footer.navigation-links-lbl')}</Typography>
               {internalLinks.map(({ href, label }, idx) => (
-                <Typography {...linkProps} component={Link} href={href} key={idx}>
+                <MuiLink {...linkProps} component={Link} href={href} key={idx}>
                   {label}
-                </Typography>
+                </MuiLink>
               ))}
             </Stack>
             <Stack sx={HIDE_ON_MOBILE_SX} spacing={theme.spacing(LINKS_SPACING)}>
               <Typography {...linksHeaderTypoProps}>{t('footer.follow-us-links-lbl')}</Typography>
               {externalLinks.map(({ href, label }, idx) => (
-                <Typography
+                <MuiLink
                   {...linkProps}
-                  component={Link}
                   href={href}
                   target={'_blank'}
                   rel={'noopener noreferrer'}
@@ -182,7 +182,7 @@ export default function Footer() {
                     }}
                     key={`${idx}-icon`}
                   />
-                </Typography>
+                </MuiLink>
               ))}
             </Stack>
           </Stack>

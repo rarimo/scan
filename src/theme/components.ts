@@ -42,6 +42,12 @@ export const COMPONENTS: Components<BaseTheme> = {
       containedSizeMedium: {
         height: 40,
         padding: '8px 16px',
+        fontSize: '15px',
+        lineHeight: 1.73,
+      },
+      containedSizeLarge: {
+        height: 48,
+        padding: '11px 22px',
       },
       containedSizeSmall: {
         height: 32,
@@ -147,6 +153,13 @@ export const COMPONENTS: Components<BaseTheme> = {
             textTransform: 'uppercase',
           },
         },
+      },
+    },
+  },
+  MuiBackdrop: {
+    styleOverrides: {
+      root: {
+        bgcolor: 'rgba(0, 0, 0, 0.87)',
       },
     },
   },

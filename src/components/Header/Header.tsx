@@ -96,22 +96,6 @@ export default function Header() {
         },
       }}
     >
-      <IconButton
-        size='small'
-        color='inherit'
-        aria-label={String(isMobileNavbarOpened ? t('common.close-btn') : t('common.open-btn'))}
-        edge='start'
-        onClick={toggleMobileNavbar}
-        sx={{
-          color: theme.palette.text.primary,
-          display: { md: 'none' },
-          width: HEADER_CONTENT_HEIGHT,
-          height: HEADER_CONTENT_HEIGHT,
-        }}
-      >
-        <Menu {...iconProps} />
-      </IconButton>
-
       <Stack
         flexDirection='row'
         alignItems='center'
@@ -123,16 +107,7 @@ export default function Header() {
           maxHeight: HEADER_CONTENT_HEIGHT,
         }}
       >
-        <Box
-          component='div'
-          width={24}
-          aria-hidden='true'
-          sx={{
-            display: { xs: 'block', md: 'none' },
-          }}
-        />
-
-        <Logo sx={{ width: { xs: '100%', md: 'auto' } }} />
+        <Logo />
 
         <Stack
           direction={'row'}
@@ -170,12 +145,12 @@ export default function Header() {
 
             <IconButton
               size='small'
-              color='inherit'
               onClick={colorMode.toggleColorMode}
               sx={{
                 color: theme.palette.action.active,
                 width: HEADER_CONTENT_HEIGHT,
                 height: HEADER_CONTENT_HEIGHT,
+                p: { xs: 0, sm: '5px' },
               }}
             >
               {isDarkMode ? (
@@ -183,6 +158,24 @@ export default function Header() {
               ) : (
                 <DarkModeOutlinedIcon {...iconProps} />
               )}
+            </IconButton>
+            <IconButton
+              size='small'
+              aria-label={String(
+                isMobileNavbarOpened ? t('common.close-btn') : t('common.open-btn'),
+              )}
+              edge='start'
+              onClick={toggleMobileNavbar}
+              sx={{
+                color: theme.palette.action.active,
+                display: { md: 'none' },
+                ml: 0.5,
+                p: 0,
+                width: HEADER_CONTENT_HEIGHT,
+                height: HEADER_CONTENT_HEIGHT,
+              }}
+            >
+              <Menu {...iconProps} />
             </IconButton>
           </Stack>
         </Stack>

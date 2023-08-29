@@ -96,10 +96,7 @@ export default function MainLayout({ children }: { children: ReactNode }) {
         </Stack>
         <Footer />
       </Box>
-      <Backdrop
-        sx={{ bgcolor: 'rgba(0, 0, 0, 0.8)', zIndex: theme => theme.zIndex.drawer + 1, p: 3 }}
-        open={isSearchOpened}
-      >
+      <Backdrop sx={{ zIndex: theme => theme.zIndex.drawer + 1, p: 3 }} open={isSearchOpened}>
         <IconButton
           sx={{
             zIndex: -1,

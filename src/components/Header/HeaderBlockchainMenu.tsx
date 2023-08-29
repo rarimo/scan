@@ -20,7 +20,7 @@ const AVAILABLE_ROUTES: AvailableRoutes[] = [
   RoutePaths.Blocks,
 ]
 
-export default function HeaderBlockchainMenu() {
+export default function HeaderBlockchainMenu({ displayXs = false }: { displayXs?: boolean }) {
   const router = useRouter()
   const pathname = usePathname()
   const theme = useTheme()
@@ -58,7 +58,7 @@ export default function HeaderBlockchainMenu() {
       spacing={2}
       sx={{
         display: {
-          xs: 'none',
+          xs: displayXs ? 'flex' : 'none',
           md: 'flex',
         },
       }}
