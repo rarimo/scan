@@ -27,7 +27,7 @@ export default function HomeLatestData() {
 
   return (
     <ContentSection>
-      <Stack spacing={theme.spacing(4)} direction={{ xs: 'column', md: 'row' }}>
+      <Stack spacing={theme.spacing(4)} direction={{ xs: 'column-reverse', md: 'row' }}>
         <ContentBox {...ITEM_PROPS}>
           <HomeLatestTransactions
             isLoadingError={isLoadingError}

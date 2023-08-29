@@ -39,7 +39,12 @@ export default function AvatarName({
   )
 
   return (
-    <Stack flexDirection={'row'} alignItems={'center'}>
+    <Stack
+      flexDirection={{ xs: 'row-reverse', md: 'row' }}
+      alignItems={'center'}
+      justifyContent={{ xs: 'space-between', md: 'start' }}
+      width={{ xs: '100%', md: 'auto' }}
+    >
       <Avatar name={name} imageUrl={imageUrl} imageSize={imageSize} />
       <Stack paddingLeft={padding || 1} sx={{ overflow: 'hidden' }}>
         <MuiLink

@@ -20,6 +20,7 @@ const LINK_PROPS = {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+  pl: { xs: 1, md: 0 },
 }
 
 export default function HomeLatestTransactions({
@@ -70,6 +71,7 @@ export default function HomeLatestTransactions({
                 {abbr(el?.hash ?? '')}
               </MuiLink>
             }
+            headLabel={t('block-list.transaction') + ':' + ' '}
             subhead={time(el.block?.timestamp, { utc: true })?.fromNow}
             footer={t('transaction-list.from') + ':'}
             subfooter={<AvatarName address={el?.sender ?? ''} />}
