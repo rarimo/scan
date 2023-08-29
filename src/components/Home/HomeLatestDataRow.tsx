@@ -14,7 +14,7 @@ const sx = {
   item: {
     item: true,
     display: 'flex',
-    flexDirection: { xs: 'row', md: 'column' as FlexDirection },
+    flexDirection: { xs: 'row' as FlexDirection, md: 'column' as FlexDirection },
     alignItems: 'flex-start',
     justifyContent: { xs: 'space-between', md: 'start' },
     sx: {
