@@ -45,10 +45,12 @@ export default function HomeLatestBlocks({
                 href={generatePath(RoutePaths.Block, {
                   height: String(el.height),
                 })}
+                sx={{ pl: { xs: 1, md: 0 } }}
               >
                 {el?.height}
               </MuiLink>
             }
+            headLabel={t('block-list.block') + ':'}
             subhead={time(el.timestamp, { utc: true }).fromNow}
             footer={t('block-list.validator') + ':'}
             subfooter={
@@ -56,6 +58,7 @@ export default function HomeLatestBlocks({
                 address={el?.validator?.validator_info?.operator_address ?? ''}
                 name={el?.validator?.validator_descriptions?.[0]?.moniker ?? ''}
                 imageUrl={el?.validator?.validator_descriptions?.[0]?.avatar_url ?? ''}
+                direction={{ xs: 'row-reverse', md: 'row' }}
               />
             }
           />
