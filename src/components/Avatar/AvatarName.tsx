@@ -1,4 +1,5 @@
 import { Link as MuiLink, Stack } from '@mui/material'
+import { ResponsiveStyleValue } from '@mui/system/styleFunctionSx'
 import Link from 'next/link'
 import { useMemo } from 'react'
 
@@ -16,6 +17,7 @@ export default function AvatarName({
   fontSize = 14,
   padding,
   abbrAddress = true,
+  direction = 'row',
 }: {
   imageUrl?: string
   name?: string
@@ -24,6 +26,7 @@ export default function AvatarName({
   fontSize?: number | string
   padding?: number | string
   abbrAddress?: boolean
+  direction?: ResponsiveStyleValue<'row' | 'row-reverse' | 'column' | 'column-reverse'>
 }) {
   const route = useMemo(
     () =>
@@ -39,7 +42,12 @@ export default function AvatarName({
   )
 
   return (
-    <Stack flexDirection={'row'} alignItems={'center'}>
+    <Stack
+      alignItems={'center'}
+      flexDirection={direction}
+      justifyContent={{ xs: 'space-between', md: 'flex-start' }}
+      width={{ xs: '100%', md: 'auto' }}
+    >
       <Avatar name={name} imageUrl={imageUrl} imageSize={imageSize} />
       <Stack paddingLeft={padding || 1} sx={{ overflow: 'hidden' }}>
         <MuiLink

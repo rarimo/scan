@@ -14,9 +14,11 @@ const sx = {
   item: {
     item: true,
     display: 'flex',
-    flexDirection: 'column' as FlexDirection,
+    flexDirection: { xs: 'row' as FlexDirection, md: 'column' as FlexDirection },
+    alignItems: 'flex-start',
+    justifyContent: { xs: 'space-between', md: 'start' },
     sx: {
-      height: 45,
+      height: { md: 45 },
     },
   },
   iconWrapper: {
@@ -26,6 +28,10 @@ const sx = {
       bgcolor: 'var(--col-divider)',
       p: 1.5,
     },
+    display: { xs: 'none', md: 'block' },
+  },
+  skeleton: {
+    width: '100%',
   },
 }
 
@@ -35,9 +41,11 @@ export default function HomeLatestDataRow({
   footer,
   subhead,
   isLoading,
+  headLabel,
 }: {
   isLoading?: boolean
   head?: ReactNode
+  headLabel?: ReactNode
   footer?: ReactNode
   subfooter?: ReactNode
   subhead?: ReactNode
@@ -49,7 +57,7 @@ export default function HomeLatestDataRow({
     <Stack
       direction={'row'}
       alignItems={'center'}
-      spacing={3}
+      spacing={{ xs: 0, md: 3 }}
       sx={{
         borderBottom: 'var(--ui-border)',
         p: theme.spacing(2, 0),
@@ -61,27 +69,53 @@ export default function HomeLatestDataRow({
       }}
     >
       <Box {...sx.iconWrapper}>
-        <ReceiptLong sx={{ color: theme.palette.action.active, width: 16, height: 16 }} />
+        <ReceiptLong
+          sx={{
+            color: theme.palette.action.active,
+            width: 16,
+            height: 16,
+          }}
+        />
       </Box>
       <Grid container>
-        <Grid {...sx.item} sm={5} xs={7}>
-          {withSkeleton(head)}
+        <Grid {...sx.item} sm={5} xs={12}>
+          <Box width={'90%'}>
+            <Typography
+              variant={'overline'}
+              component={'span'}
+              sx={{
+                display: { xs: 'inline', md: 'none' },
+                mt: 0.5,
+                fontSize: 10,
+                lineHeight: 1.2,
+                color: theme.palette.text.secondary,
+                mr: 0.5,
+              }}
+            >
+              {withSkeleton(headLabel, sx.skeleton)}
+            </Typography>
+            {withSkeleton(head, sx.skeleton)}
+          </Box>
           <Typography
             component={'p'}
             variant={'caption'}
             {...sx.textBlock}
             sx={{
-              mt: 1,
+              mt: {
+                xs: 0,
+                sm: 1,
+              },
               color: theme.palette.text.secondary,
+              width: '90%',
             }}
           >
-            {withSkeleton(subhead)}
+            {withSkeleton(subhead, sx.skeleton)}
           </Typography>
         </Grid>
         <Grid
           {...sx.item}
           sm={7}
-          xs={9}
+          xs={12}
           sx={{
             mt: {
               xs: 1,
@@ -94,15 +128,17 @@ export default function HomeLatestDataRow({
             variant={'overline'}
             component={'p'}
             sx={{
-              mb: 1,
+              mt: { xs: 0.5, md: 0 },
+              mb: { xs: 0, md: 1 },
               fontSize: 10,
               lineHeight: 1.2,
               color: theme.palette.text.secondary,
+              width: '100%',
             }}
           >
-            {withSkeleton(footer)}
+            {withSkeleton(footer, sx.skeleton)}
           </Typography>
-          {withSkeleton(subfooter)}
+          {withSkeleton(subfooter, sx.skeleton)}
         </Grid>
       </Grid>
     </Stack>

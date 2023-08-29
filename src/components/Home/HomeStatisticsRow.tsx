@@ -95,7 +95,7 @@ export default function HomeStatisticsRow({
   )
 
   const horizontal = () => (
-    <Stack spacing={4} direction={'row'} flex={1}>
+    <Stack spacing={4} direction={{ xs: 'column', sm: 'row' }} flex={1}>
       {vertical()}
     </Stack>
   )

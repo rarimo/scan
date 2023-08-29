@@ -96,6 +96,8 @@ export default {
   },
   "block-list": {
     "title": "Latest blocks",
+    "block": "block",
+    "transaction": "tx#",
     "validator": "Validator",
     "view-all": "View all",
     "no-data-title": "There are no blocks",
