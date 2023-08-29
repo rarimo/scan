@@ -30,6 +30,9 @@ const sx = {
     },
     display: { xs: 'none', md: 'block' },
   },
+  skeleton: {
+    width: '100%',
+  },
 }
 
 export default function HomeLatestDataRow({
@@ -76,7 +79,7 @@ export default function HomeLatestDataRow({
       </Box>
       <Grid container>
         <Grid {...sx.item} sm={5} xs={12}>
-          <Box>
+          <Box width={'90%'}>
             <Typography
               variant={'overline'}
               component={'span'}
@@ -89,9 +92,9 @@ export default function HomeLatestDataRow({
                 mr: 0.5,
               }}
             >
-              {withSkeleton(headLabel)}
+              {withSkeleton(headLabel, sx.skeleton)}
             </Typography>
-            {withSkeleton(head)}
+            {withSkeleton(head, sx.skeleton)}
           </Box>
           <Typography
             component={'p'}
@@ -103,9 +106,10 @@ export default function HomeLatestDataRow({
                 sm: 1,
               },
               color: theme.palette.text.secondary,
+              width: '90%',
             }}
           >
-            {withSkeleton(subhead)}
+            {withSkeleton(subhead, sx.skeleton)}
           </Typography>
         </Grid>
         <Grid
@@ -129,11 +133,12 @@ export default function HomeLatestDataRow({
               fontSize: 10,
               lineHeight: 1.2,
               color: theme.palette.text.secondary,
+              width: '100%',
             }}
           >
-            {withSkeleton(footer)}
+            {withSkeleton(footer, sx.skeleton)}
           </Typography>
-          {withSkeleton(subfooter)}
+          {withSkeleton(subfooter, sx.skeleton)}
         </Grid>
       </Grid>
     </Stack>
