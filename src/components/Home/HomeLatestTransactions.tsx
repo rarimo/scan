@@ -74,7 +74,9 @@ export default function HomeLatestTransactions({
             headLabel={t('block-list.transaction') + ':' + ' '}
             subhead={time(el.block?.timestamp, { utc: true })?.fromNow}
             footer={t('transaction-list.from') + ':'}
-            subfooter={<AvatarName address={el?.sender ?? ''} />}
+            subfooter={
+              <AvatarName address={el?.sender ?? ''} direction={{ xs: 'row-reverse', md: 'row' }} />
+            }
           />
         ),
       )}

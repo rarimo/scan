@@ -58,6 +58,7 @@ export default function HomeLatestBlocks({
                 address={el?.validator?.validator_info?.operator_address ?? ''}
                 name={el?.validator?.validator_descriptions?.[0]?.moniker ?? ''}
                 imageUrl={el?.validator?.validator_descriptions?.[0]?.avatar_url ?? ''}
+                direction={{ xs: 'row-reverse', md: 'row' }}
               />
             }
           />
