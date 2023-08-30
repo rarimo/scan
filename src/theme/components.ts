@@ -42,7 +42,7 @@ export const COMPONENTS: Components<BaseTheme> = {
       containedSizeMedium: {
         height: 40,
         padding: '8px 16px',
-        fontSize: '15px',
+        fontSize: 14,
         lineHeight: 1.73,
       },
       containedSizeLarge: {
@@ -100,6 +100,9 @@ export const COMPONENTS: Components<BaseTheme> = {
     styleOverrides: {
       root: {
         caretColor: 'var(--col-primary-main)',
+        '& > input::placeholder, & > input::-webkit-input-placeholder': {
+          color: 'var(--col-txt-focus-visible)',
+        },
       },
     },
   },

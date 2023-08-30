@@ -47,7 +47,10 @@ export default function MouseOverDropdown({
         sx: {
           '& > .MuiPaper-root': {
             width: 220,
-            top: `${isLargeSize ? '340px' : '89px'} !important`,
+            top: {
+              xs: 'unset',
+              md: '89px !important',
+            },
             boxShadow: 'var(--ui-dropdown-shadow)',
           },
         },
@@ -57,17 +60,16 @@ export default function MouseOverDropdown({
         textTransform: 'uppercase',
         fontSize: isLargeSize ? 17 : 14,
         color: theme.palette.primary.main,
+        cursor: 'pointer',
         lineHeight: 1.7,
         fontWeight: 700,
+        ...(open && { backgroundColor: 'var(--col-primary-hover)' }),
         p: isOutlined ? theme.spacing(1, 2) : 0.5,
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
           borderColor,
         },
         '&:hover .MuiOutlinedInput-notchedOutline': {
           borderColor,
-        },
-        '&:has(> .MuiSelect-select[aria-expanded="true"])': {
-          backgroundColor: 'var(--col-primary-hover)',
         },
         '& > .MuiSelect-select': {
           p: 0,
@@ -83,7 +85,7 @@ export default function MouseOverDropdown({
         '& > .MuiSvgIcon-root.MuiSelect-icon': {
           width: isLargeSize ? 24 : 20,
           height: isLargeSize ? 24 : 20,
-          top: isLargeSize ? 13 : 6,
+          top: isLargeSize ? 13 : isOutlined ? 10 : 6,
         },
       }}
     >

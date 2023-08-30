@@ -1,4 +1,4 @@
-import { MenuItem, SelectChangeEvent, Stack, Typography, useTheme } from '@mui/material'
+import { MenuItem, SelectChangeEvent, Stack } from '@mui/material'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -23,7 +23,6 @@ const AVAILABLE_ROUTES: AvailableRoutes[] = [
 export default function HeaderBlockchainMenu({ displayXs = false }: { displayXs?: boolean }) {
   const router = useRouter()
   const pathname = usePathname()
-  const theme = useTheme()
   const t = useI18n()
   const [route, setRoute] = useState<AvailableRoutes>('' as AvailableRoutes)
 
@@ -34,7 +33,7 @@ export default function HeaderBlockchainMenu({ displayXs = false }: { displayXs?
   }
 
   const itemList = [
-    { label: 'SELECT', href: '' },
+    { label: t('header-blockchain-menu.menu-lbl'), href: '' },
     { label: t('header-blockchain-menu.validators-lbl'), href: RoutePaths.Validators },
     { label: t('header-blockchain-menu.proposals-lbl'), href: RoutePaths.Proposals },
     { label: t('header-blockchain-menu.transactions-lbl'), href: RoutePaths.Transactions },
@@ -63,9 +62,6 @@ export default function HeaderBlockchainMenu({ displayXs = false }: { displayXs?
         },
       }}
     >
-      <Typography variant={'subtitle2'} color={theme.palette.text.secondary}>
-        {t('header-blockchain-menu.menu-lbl')}
-      </Typography>
       <MouseOverDropdown variant={'text'} value={route} handleChange={handleChange}>
         {itemList.map((item, idx) => (
           <MenuItem value={item.href} key={idx} disabled={!item.href}>

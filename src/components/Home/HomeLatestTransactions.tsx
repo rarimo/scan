@@ -1,7 +1,7 @@
 'use client'
 
 import { time } from '@distributedlab/tools'
-import { Link as MuiLink } from '@mui/material'
+import { Link as MuiLink, Typography } from '@mui/material'
 import Link from 'next/link'
 import { useMemo } from 'react'
 
@@ -71,7 +71,20 @@ export default function HomeLatestTransactions({
                 {abbr(el?.hash ?? '')}
               </MuiLink>
             }
-            headLabel={t('block-list.transaction') + ':' + ' '}
+            headLabel={
+              <Typography
+                sx={{
+                  minWidth: {
+                    xs: 40,
+                    md: 'unset',
+                  },
+                  font: 'inherit',
+                  color: 'inherit',
+                }}
+              >
+                {t('block-list.transaction') + ':' + ' '}
+              </Typography>
+            }
             subhead={time(el.block?.timestamp, { utc: true })?.fromNow}
             footer={t('transaction-list.from') + ':'}
             subfooter={

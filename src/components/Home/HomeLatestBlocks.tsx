@@ -1,8 +1,9 @@
 'use client'
 
 import { time } from '@distributedlab/tools'
-import { Link as MuiLink } from '@mui/material'
+import { Link as MuiLink, Typography } from '@mui/material'
 import Link from 'next/link'
+import { ReactNode } from 'react'
 
 import { AvatarName } from '@/components/Avatar'
 import { ContentWrapper } from '@/components/Content'
@@ -27,6 +28,21 @@ export default function HomeLatestBlocks({
 }) {
   const t = useI18n()
 
+  const typoWithMinWidth = (minWidth: number, children: ReactNode) => (
+    <Typography
+      sx={{
+        minWidth: {
+          xs: minWidth,
+          md: 'unset',
+        },
+        font: 'inherit',
+        color: 'inherit',
+      }}
+    >
+      {children}
+    </Typography>
+  )
+
   const list = (
     <PreviewList
       actions={{ label: t('block-list.view-all'), link: RoutePaths.Blocks }}
@@ -50,9 +66,9 @@ export default function HomeLatestBlocks({
                 {el?.height}
               </MuiLink>
             }
-            headLabel={t('block-list.block') + ':'}
+            headLabel={typoWithMinWidth(57, t('block-list.block') + ':')}
             subhead={time(el.timestamp, { utc: true }).fromNow}
-            footer={t('block-list.validator') + ':'}
+            footer={typoWithMinWidth(62, t('block-list.validator') + ':')}
             subfooter={
               <AvatarName
                 address={el?.validator?.validator_info?.operator_address ?? ''}

@@ -39,7 +39,7 @@ export default {
     "mainnet-lbl": "Mainnet",
   },
   "header-blockchain-menu": {
-    "menu-lbl": "Blockchain:",
+    "menu-lbl": "Blockchain",
     "blocks-lbl": "Blocks",
     "transactions-lbl": "Transactions",
     "validators-lbl": "Validators",
@@ -113,6 +113,7 @@ export default {
   },
   "search": {
     "placeholder-lbl": "Search for a block, transaction, or address",
+    "placeholder-small-lbl": "Search...",
     "no-results-msg": "No results found",
     "search-btn": "Search",
   },

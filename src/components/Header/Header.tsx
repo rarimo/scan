@@ -4,19 +4,18 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import Menu from '@mui/icons-material/Menu'
-import SearchIcon from '@mui/icons-material/Search'
 import { AppBar, Box, Button, IconButton, Stack, useMediaQuery, useTheme } from '@mui/material'
-import { usePathname } from 'next/navigation'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 
 import HeaderBlockchainMenu from '@/components/Header/HeaderBlockchainMenu'
 import HeaderNetworkSwitcher from '@/components/Header/HeaderNetworkSwitcher'
 import Logo from '@/components/Logo'
+import Search from '@/components/Search'
 import { ColorModeContext } from '@/contexts'
 import { abbr } from '@/helpers'
 import { useAppState, useWeb3 } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { RoutePaths, ThemeMode } from '@/types'
+import { ThemeMode } from '@/types'
 
 const iconProps = {
   width: 24,
@@ -29,11 +28,10 @@ const HEADER_CONTENT_HEIGHT = 40
 export default function Header() {
   const t = useI18n()
   const theme = useTheme()
-  const pathname = usePathname()
   const colorMode = useContext(ColorModeContext)
   const [isOnTopPositioned, setIsOnTopPositioned] = useState(true)
   const isPrefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-  const { themeMode, setIsSearchOpened } = useAppState()
+  const { themeMode } = useAppState()
 
   const { connect, disconnect, isConnected, isConnecting, address } = useWeb3()
   const { isMobileNavbarOpened, toggleMobileNavbar } = useAppState()
@@ -59,16 +57,6 @@ export default function Header() {
       window.removeEventListener('wheel', setTopPositioned)
     }
   }, [])
-
-  const isHomePage = useMemo(() => pathname === RoutePaths.Main || pathname === '', [pathname])
-
-  const searchButton = isHomePage ? (
-    <></>
-  ) : (
-    <IconButton sx={{ p: 0.5, width: 32, height: 32 }} onClick={() => setIsSearchOpened(true)}>
-      <SearchIcon />
-    </IconButton>
-  )
 
   return (
     <AppBar
@@ -117,13 +105,27 @@ export default function Header() {
         >
           <Stack direction={'row'} alignItems={'center'} spacing={6}>
             <HeaderBlockchainMenu />
-            {searchButton}
           </Stack>
 
-          <Stack spacing={{ xs: 0, md: 2 }} direction={'row'} sx={{ ml: { xs: 'auto', md: 0 } }}>
+          <Stack
+            spacing={{ xs: 0, md: 2 }}
+            direction={'row'}
+            alignItems={'center'}
+            sx={{
+              ml: { xs: 'auto', md: 0 },
+            }}
+          >
+            <Box
+              sx={{
+                pr: 2,
+                display: { xs: 'none', md: 'flex' },
+              }}
+            >
+              <Search size={'small'} />
+            </Box>
             <Button
               sx={{
-                minWidth: 170,
+                minWidth: 190,
                 display: { xs: 'none', md: 'flex' },
                 flexDirection: 'row',
               }}

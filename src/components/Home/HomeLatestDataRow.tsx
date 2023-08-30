@@ -14,8 +14,9 @@ const sx = {
   item: {
     item: true,
     display: 'flex',
+    overflow: 'hidden',
     flexDirection: { xs: 'row' as FlexDirection, md: 'column' as FlexDirection },
-    alignItems: 'flex-start',
+    alignItems: { xs: 'center', md: 'flex-start' },
     justifyContent: { xs: 'space-between', md: 'start' },
     sx: {
       height: { md: 45 },
@@ -78,26 +79,22 @@ export default function HomeLatestDataRow({
         />
       </Box>
       <Grid container>
-        <Grid {...sx.item} sm={5} xs={12}>
-          <Box width={'90%'}>
-            <Typography
-              variant={'overline'}
-              component={'span'}
-              sx={{
-                display: { xs: 'inline', md: 'none' },
-                mt: 0.5,
-                fontSize: 10,
-                lineHeight: 1.2,
-                color: theme.palette.text.secondary,
-                mr: 0.5,
-              }}
-            >
-              {withSkeleton(headLabel, sx.skeleton)}
-            </Typography>
-            {withSkeleton(head, sx.skeleton)}
-          </Box>
+        <Grid {...sx.item} md={5} xs={12}>
           <Typography
-            component={'p'}
+            variant={'overline'}
+            sx={{
+              display: { xs: 'inline', md: 'none' },
+              mt: 0.5,
+              fontSize: 10,
+              lineHeight: 1.2,
+              color: theme.palette.text.secondary,
+              mr: 0.5,
+            }}
+          >
+            {withSkeleton(headLabel, sx.skeleton)}
+          </Typography>
+          {withSkeleton(head, sx.skeleton)}
+          <Typography
             variant={'caption'}
             {...sx.textBlock}
             sx={{
@@ -105,8 +102,11 @@ export default function HomeLatestDataRow({
                 xs: 0,
                 sm: 1,
               },
+              ml: {
+                xs: 'auto',
+                md: 0,
+              },
               color: theme.palette.text.secondary,
-              width: '90%',
             }}
           >
             {withSkeleton(subhead, sx.skeleton)}
@@ -114,7 +114,7 @@ export default function HomeLatestDataRow({
         </Grid>
         <Grid
           {...sx.item}
-          sm={7}
+          md={7}
           xs={12}
           sx={{
             mt: {
@@ -124,16 +124,13 @@ export default function HomeLatestDataRow({
           }}
         >
           <Typography
-            {...sx.textBlock}
             variant={'overline'}
-            component={'p'}
             sx={{
               mt: { xs: 0.5, md: 0 },
               mb: { xs: 0, md: 1 },
               fontSize: 10,
               lineHeight: 1.2,
               color: theme.palette.text.secondary,
-              width: '100%',
             }}
           >
             {withSkeleton(footer, sx.skeleton)}

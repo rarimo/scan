@@ -78,7 +78,7 @@ export default function Navbar({ children }: { children: ReactNode }) {
             width: NAVBAR_HEADER_CONTENT_HEIGHT,
             height: NAVBAR_HEADER_CONTENT_HEIGHT,
             p: { xs: 0, sm: '5px' },
-            display: { sm: 'none' },
+            display: { md: 'none' },
           }}
         >
           {isDarkMode ? (
@@ -96,7 +96,7 @@ export default function Navbar({ children }: { children: ReactNode }) {
             width: NAVBAR_HEADER_CONTENT_HEIGHT,
             height: NAVBAR_HEADER_CONTENT_HEIGHT,
             p: { xs: 0, sm: '5px' },
-            display: { sm: 'none' },
+            display: { md: 'none' },
           }}
         >
           <CloseIcon {...iconProps} />

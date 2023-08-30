@@ -1,24 +1,15 @@
 'use client'
 
-import CloseIcon from '@mui/icons-material/Close'
-import { Backdrop, Box, IconButton, Stack, useTheme } from '@mui/material'
+import { Box, Stack, useTheme } from '@mui/material'
 import React, { ReactNode, useMemo } from 'react'
 
 import Footer from '@/components/Footer'
 import Header from '@/components/Header/Header'
 import Navbar from '@/components/Navbar/Navbar'
-import Search from '@/components/Search'
-import { useAppState } from '@/hooks'
-import { ThemeMode } from '@/types'
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   const theme = useTheme()
   const isDarkMode = useMemo(() => theme.palette.mode === 'dark', [theme.palette.mode])
-  const { isSearchOpened, setIsSearchOpened, themeMode } = useAppState()
-
-  const closeSearch = () => {
-    setIsSearchOpened(false)
-  }
 
   const layoutMixin = {
     spacing: {
@@ -41,8 +32,6 @@ export default function MainLayout({ children }: { children: ReactNode }) {
       },
     },
   }
-
-  const isLightTheme = themeMode === ThemeMode.Light
 
   return (
     <>
@@ -96,23 +85,6 @@ export default function MainLayout({ children }: { children: ReactNode }) {
         </Stack>
         <Footer />
       </Box>
-      <Backdrop sx={{ zIndex: theme => theme.zIndex.drawer + 1, p: 3 }} open={isSearchOpened}>
-        <IconButton
-          sx={{
-            zIndex: -1,
-            position: 'absolute',
-            top: 40,
-            right: 40,
-            ...(isLightTheme && { color: theme.palette.primary.contrastText }),
-          }}
-          onClick={closeSearch}
-        >
-          <CloseIcon />
-        </IconButton>
-        <Box sx={{ maxWidth: 700, width: '100%' }}>
-          <Search size={'big'} onRedirect={closeSearch} />
-        </Box>
-      </Backdrop>
     </>
   )
 }

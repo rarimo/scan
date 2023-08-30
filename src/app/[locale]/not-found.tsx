@@ -1,5 +1,4 @@
-import { Stack, Typography } from '@mui/material'
-import Image from 'next/image'
+import { Box, Stack, Typography } from '@mui/material'
 
 import Links404 from '@/components/Links404'
 import { getI18n } from '@/locales/server'
@@ -9,7 +8,13 @@ export default async function NotFoundPage() {
 
   return (
     <Stack alignItems={'center'} spacing={2}>
-      <Image src={'/404.svg'} width={611} height={365} alt={'404'} />
+      <Box
+        component={'img'}
+        src={'/404.svg'}
+        width={{ xs: 300, md: 611 }}
+        height={{ xs: 215, md: 365 }}
+        alt={'404'}
+      />
       <Stack spacing={4}>
         <Typography fontSize={30} fontWeight={600} lineHeight={1.2}>
           {t('404.title')}

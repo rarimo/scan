@@ -35,12 +35,14 @@ export default function Search({
   size = 'default',
   onRedirect,
 }: {
-  size?: 'default' | 'big'
+  size?: 'default' | 'small'
   onRedirect?: () => void
 }) {
   const t = useI18n()
   const router = useRouter()
   const theme = useTheme()
+
+  const isSmallSize = size === 'small'
 
   const [searchValue, setSearchValue] = useState('')
 
@@ -87,6 +89,7 @@ export default function Search({
 
   const redirect = (route: RoutePaths, params: Record<string, string | number>) => {
     router.push(generatePath(route, params))
+    setSearchValue('')
     onRedirect?.()
   }
 
@@ -95,8 +98,9 @@ export default function Search({
     await reload()
   }
 
-  const handleEnterPress = async (event: KeyboardEvent<HTMLDivElement>) => {
+  const handleEnterPress = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== 'Enter') return
+    ;(event?.target as HTMLInputElement)?.blur?.()
     await searchAndRedirect()
   }
 
@@ -111,26 +115,33 @@ export default function Search({
       value={searchValue}
       onChange={event => setSearchValue(event.target.value)}
       onKeyDown={handleEnterPress}
-      placeholder={t('search.placeholder-lbl')}
+      placeholder={isSmallSize ? t('search.placeholder-small-lbl') : t('search.placeholder-lbl')}
       autoComplete={'off'}
       InputProps={{
         startAdornment: (
-          <SearchIcon style={{ marginRight: 16, color: theme.palette.action.active }} />
+          <SearchIcon
+            style={{ marginRight: 16, color: theme.palette.action.active, width: 24, height: 24 }}
+            width={24}
+            height={24}
+          />
         ),
-        endAdornment,
+        ...(!isSmallSize && { endAdornment }),
       }}
       sx={{
         '& > .MuiInputBase-root.MuiOutlinedInput-root': {
-          p: theme.spacing(0, 2),
-          ...(size === 'big' && { bgcolor: theme.palette.background.paper }),
+          p: theme.spacing(0, isSmallSize ? 1 : 2),
+          bgcolor: theme.palette.background.paper,
 
           '& > .MuiOutlinedInput-input': {
-            p: theme.spacing(size === 'default' ? 2 : 2.5, 0),
+            p: theme.spacing(isSmallSize ? 1 : 2, 0),
+            fontSize: isSmallSize ? 14 : 16,
+          },
+          '& > .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'var(--col-divider)',
+            borderWidth: 1,
           },
         },
-        '& > .MuiOutlinedInput-notchedOutline': {
-          border: 'var(--ui-border)',
-        },
+        height: 'fit-content',
         width: '100%',
       }}
     />

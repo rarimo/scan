@@ -36,7 +36,7 @@ export default async function HomePage() {
   return (
     <>
       <HomeRedirectEmitter />
-      <Stack spacing={13}>
+      <Stack spacing={{ xs: 6, md: 13 }}>
         <Stack sx={{ maxWidth: 700 }} spacing={4}>
           <Typography>
             <Typography {...TITLE_PARTS_PROPS}>{t('home.title-part-1')}</Typography>
