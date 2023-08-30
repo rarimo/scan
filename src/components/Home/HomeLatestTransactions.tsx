@@ -74,6 +74,7 @@ export default function HomeLatestTransactions({
             headLabel={
               <Typography
                 sx={{
+                  width: '100%',
                   minWidth: {
                     xs: 40,
                     md: 'unset',

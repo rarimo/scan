@@ -32,7 +32,7 @@ const sx = {
     display: { xs: 'none', md: 'block' },
   },
   skeleton: {
-    width: '100%',
+    width: '90%',
   },
 }
 
@@ -123,18 +123,23 @@ export default function HomeLatestDataRow({
             },
           }}
         >
-          <Typography
-            variant={'overline'}
-            sx={{
-              mt: { xs: 0.5, md: 0 },
-              mb: { xs: 0, md: 1 },
-              fontSize: 10,
-              lineHeight: 1.2,
-              color: theme.palette.text.secondary,
-            }}
-          >
-            {withSkeleton(footer, sx.skeleton)}
-          </Typography>
+          {withSkeleton(
+            <Typography
+              variant={'overline'}
+              sx={{
+                ...(isLoading && { width: '100%' }),
+                mt: { xs: 0.5, md: 0 },
+                mb: { xs: 0, md: 1 },
+                fontSize: 10,
+                lineHeight: 1.2,
+                color: theme.palette.text.secondary,
+              }}
+            >
+              {footer}
+            </Typography>,
+            sx.skeleton,
+          )}
+
           {withSkeleton(subfooter, sx.skeleton)}
         </Grid>
       </Grid>
