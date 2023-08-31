@@ -75,6 +75,7 @@ export default function HomeLatestBlocks({
                 name={el?.validator?.validator_descriptions?.[0]?.moniker ?? ''}
                 imageUrl={el?.validator?.validator_descriptions?.[0]?.avatar_url ?? ''}
                 direction={{ xs: 'row-reverse', md: 'row' }}
+                justifyContent={{ xs: 'space-between', md: 'flex-start' }}
               />
             }
           />

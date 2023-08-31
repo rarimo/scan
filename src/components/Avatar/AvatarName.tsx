@@ -1,11 +1,11 @@
 import { Link as MuiLink, Stack } from '@mui/material'
-import { ResponsiveStyleValue } from '@mui/system/styleFunctionSx'
 import Link from 'next/link'
 import { useMemo } from 'react'
 
 import { CONFIG } from '@/config'
+import { OVERFLOW_SX } from '@/const'
 import { abbr, generatePath } from '@/helpers'
-import { RoutePaths } from '@/types'
+import { FlexboxDirection, FlexboxJustifyContent, RoutePaths } from '@/types'
 
 import Avatar from './Avatar'
 
@@ -18,6 +18,7 @@ export default function AvatarName({
   padding,
   abbrAddress = true,
   direction = 'row',
+  justifyContent = 'flex-start',
 }: {
   imageUrl?: string
   name?: string
@@ -26,7 +27,8 @@ export default function AvatarName({
   fontSize?: number | string
   padding?: number | string
   abbrAddress?: boolean
-  direction?: ResponsiveStyleValue<'row' | 'row-reverse' | 'column' | 'column-reverse'>
+  direction?: FlexboxDirection
+  justifyContent?: FlexboxJustifyContent
 }) {
   const route = useMemo(
     () =>
@@ -45,7 +47,7 @@ export default function AvatarName({
     <Stack
       alignItems={'center'}
       flexDirection={direction}
-      justifyContent={{ xs: 'space-between', md: 'flex-start' }}
+      justifyContent={justifyContent}
       width={{ xs: '100%', md: 'auto' }}
     >
       <Avatar name={name} imageUrl={imageUrl} imageSize={imageSize} />
@@ -53,9 +55,7 @@ export default function AvatarName({
         <MuiLink
           component={Link}
           sx={{
-            overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            textOverflow: 'ellipsis',
+            ...OVERFLOW_SX,
             fontSize,
           }}
           href={route}

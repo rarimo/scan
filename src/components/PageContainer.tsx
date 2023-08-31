@@ -6,6 +6,7 @@ export default function PageContainer({ children }: { children: ReactNode }) {
     <Stack
       className='App__page'
       spacing={{
+        xs: 5,
         md: 9.5,
       }}
     >

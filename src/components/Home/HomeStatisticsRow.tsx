@@ -1,7 +1,8 @@
 import ReceiptLong from '@mui/icons-material/ReceiptLong'
 import { Box, Paper, Skeleton, Stack, Typography, useTheme } from '@mui/material'
-import { ResponsiveStyleValue } from '@mui/system'
 import { ReactNode, useMemo } from 'react'
+
+import { FlexboxDirection } from '@/types'
 
 interface HomeStatisticsBoxProps {
   direction?: 'vertical' | 'horizontal'
@@ -76,9 +77,7 @@ export default function HomeStatisticsRow({
   const blockProps = {
     p: isVertical ? 0 : 3,
     border: isVertical ? 'none' : 'var(--ui-border)',
-    direction: (isVertical ? 'row' : 'column-reverse') as ResponsiveStyleValue<
-      'row' | 'column-reverse'
-    >,
+    direction: (isVertical ? 'row' : 'column-reverse') as FlexboxDirection,
     alignItems: isVertical ? 'center' : 'flex-start',
     justifyContent: isVertical ? 'unset' : 'space-between',
     component: isVertical ? 'div' : Paper,

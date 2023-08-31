@@ -1,5 +1,6 @@
 export * from './base'
 export * from './context'
+export * from './proposal'
 export * from './routes'
 export * from './storage'
 export * from './table'

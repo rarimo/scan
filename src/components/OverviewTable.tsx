@@ -6,6 +6,34 @@ import { TABLE_OVERVIEW_CELL_HEIGHT } from '@/const'
 
 const HEADING_WIDTH = 380
 
+const CELL_SX = {
+  height: { xs: 'auto', md: TABLE_OVERVIEW_CELL_HEIGHT },
+  display: {
+    xs: 'flex',
+    md: 'table-cell',
+  },
+  '&:first-child': {
+    padding: {
+      xs: '16px 16px 8px',
+      md: 2,
+    },
+    alignItems: {
+      xs: 'flex-end',
+      md: 'unset',
+    },
+  },
+  '&:last-child': {
+    padding: {
+      xs: '0 16px 16px',
+      md: 2,
+    },
+    alignItems: {
+      xs: 'flex-start',
+      md: 'unset',
+    },
+  },
+}
+
 export default function OverviewTable({
   rows,
   children,
@@ -30,10 +58,28 @@ export default function OverviewTable({
     ) : (
       <>
         {rows?.map(({ head, body }, index) => (
-          <TableRow key={index}>
+          <TableRow
+            sx={{
+              display: {
+                xs: 'flex',
+                md: 'table-row',
+              },
+              flexDirection: {
+                xs: 'column',
+                md: 'unset',
+              },
+              '& > .MuiTableCell-root:first-child': {
+                borderBottom: {
+                  xs: 'none',
+                  md: 'var(--ui-border)',
+                },
+              },
+            }}
+            key={index}
+          >
             <TableCell
               sx={{
-                height: TABLE_OVERVIEW_CELL_HEIGHT,
+                ...CELL_SX,
                 minWidth: HEADING_WIDTH,
                 color: theme => theme.palette.text.secondary,
                 textTransform: 'unset',
@@ -48,7 +94,7 @@ export default function OverviewTable({
             >
               {head}
             </TableCell>
-            <TableCell sx={{ height: TABLE_OVERVIEW_CELL_HEIGHT }}>{body}</TableCell>
+            <TableCell sx={{ ...CELL_SX }}>{body}</TableCell>
           </TableRow>
         ))}
       </>
@@ -58,6 +104,7 @@ export default function OverviewTable({
     <TableContainer
       sx={{
         maxWidth: 'var(--ui-max-width)',
+        overflowY: 'hidden',
       }}
     >
       <Table aria-label={label}>

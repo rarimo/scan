@@ -20,7 +20,13 @@ const AVAILABLE_ROUTES: AvailableRoutes[] = [
   RoutePaths.Blocks,
 ]
 
-export default function HeaderBlockchainMenu({ displayXs = false }: { displayXs?: boolean }) {
+export default function HeaderBlockchainMenu({
+  displayXs = false,
+  onClick,
+}: {
+  displayXs?: boolean
+  onClick?: () => void
+}) {
   const router = useRouter()
   const pathname = usePathname()
   const t = useI18n()
@@ -64,7 +70,7 @@ export default function HeaderBlockchainMenu({ displayXs = false }: { displayXs?
     >
       <MouseOverDropdown variant={'text'} value={route} handleChange={handleChange}>
         {itemList.map((item, idx) => (
-          <MenuItem value={item.href} key={idx} disabled={!item.href}>
+          <MenuItem value={item.href} key={idx} disabled={!item.href} onClick={onClick}>
             {item.label}
           </MenuItem>
         ))}

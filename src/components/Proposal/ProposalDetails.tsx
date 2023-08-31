@@ -1,6 +1,6 @@
 'use client'
 
-import { Chip, Link as MuiLink, Stack, Typography, useTheme } from '@mui/material'
+import { Chip, Link as MuiLink, Stack } from '@mui/material'
 import isEmpty from 'lodash-es/isEmpty'
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -9,6 +9,7 @@ import { AvatarName } from '@/components/Avatar'
 import { ContentBox, ContentWrapper } from '@/components/Content'
 import OverviewTable from '@/components/OverviewTable'
 import ProposalDetailsContentRow from '@/components/Proposal/ProposalDetailsContentRow'
+import ProposalDetailsTallyResult from '@/components/Proposal/ProposalDetailsTallyResult'
 import ProposalStatus from '@/components/Proposal/ProposalStatus'
 import {
   TABLE_BIG_SKELETON_SX,
@@ -32,7 +33,6 @@ export default function ProposalDetails({
   proposal: ProposalFragment
 }) {
   const t = useI18n()
-  const theme = useTheme()
 
   const isProposalExist = useMemo(() => !isEmpty(proposal), [proposal])
 
@@ -47,25 +47,6 @@ export default function ProposalDetails({
   )
 
   const withSkeleton = useSkeleton(isLoading)
-
-  const tallyResultsStack = [
-    {
-      label: t('proposal-details.tally-result-yes-lbl'),
-      percent: tallyResults?.yes,
-    },
-    {
-      label: t('proposal-details.tally-result-abstain-lbl'),
-      percent: tallyResults?.abstain,
-    },
-    {
-      label: t('proposal-details.tally-result-no-lbl'),
-      percent: tallyResults?.no,
-    },
-    {
-      label: t('proposal-details.tally-result-no-with-veto-lbl'),
-      percent: tallyResults?.no_with_veto,
-    },
-  ]
 
   const rows = [
     {
@@ -161,24 +142,7 @@ export default function ProposalDetails({
       ? [
           {
             head: t('proposal-details.tally-result-lbl'),
-            body: (
-              <Stack spacing={theme.spacing(4)} direction={'row'}>
-                {tallyResultsStack.map((item, idx) => (
-                  <Typography key={idx} component={'span'}>
-                    <Typography component={'span'} variant={'body2'}>
-                      {item.label}
-                    </Typography>
-                    <Typography
-                      component={'span'}
-                      variant={'body2'}
-                      color={theme.palette.text.secondary}
-                    >
-                      {item.percent + '%'}
-                    </Typography>
-                  </Typography>
-                ))}
-              </Stack>
-            ),
+            body: <ProposalDetailsTallyResult result={tallyResults} />,
           },
         ]
       : []),

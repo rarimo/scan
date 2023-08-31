@@ -128,6 +128,11 @@ export default function Search({
         ...(!isSmallSize && { endAdornment }),
       }}
       sx={{
+        ...(isSmallSize && {
+          '& > .MuiInputBase-root': {
+            height: 40,
+          },
+        }),
         '& > .MuiInputBase-root.MuiOutlinedInput-root': {
           p: theme.spacing(0, isSmallSize ? 1 : 2),
           bgcolor: theme.palette.background.paper,

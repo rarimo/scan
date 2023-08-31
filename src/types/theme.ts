@@ -1,4 +1,5 @@
 import { Theme } from '@mui/material/styles'
+import { ResponsiveStyleValue } from '@mui/system'
 
 import { ColorString } from '@/types'
 
@@ -118,3 +119,11 @@ export type PaletteColors = {
   colBgPrimary: ColorString
   colBgPaper: ColorString
 }
+
+export type FlexboxDirection = ResponsiveStyleValue<
+  'row' | 'row-reverse' | 'column' | 'column-reverse'
+>
+
+export type FlexboxJustifyContent = ResponsiveStyleValue<
+  'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around'
+>

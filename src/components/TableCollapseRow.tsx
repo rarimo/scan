@@ -3,7 +3,7 @@ import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined'
 import { Box, Collapse, IconButton, TableCell, TableRow } from '@mui/material'
 import { ReactNode, useState } from 'react'
 
-import { TABLE_OVERVIEW_CELL_HEIGHT } from '@/const'
+import { TABLE_OVERVIEW_CELL_HEIGHT, TABLE_OVERVIEW_CELL_HEIGHT_XS } from '@/const'
 import { useI18n } from '@/locales/client'
 
 const arrowIconStyleProps = {
@@ -39,7 +39,7 @@ export default function TableCollapseRow({
             width: { xs: 200, sm: 300 },
             minWidth: { xs: 200, sm: 'auto' },
             p: 0,
-            height: TABLE_OVERVIEW_CELL_HEIGHT,
+            height: { xs: TABLE_OVERVIEW_CELL_HEIGHT_XS, md: TABLE_OVERVIEW_CELL_HEIGHT },
           }}
           colSpan={2}
         >
@@ -52,7 +52,7 @@ export default function TableCollapseRow({
             sx={{
               p: 2,
               color: 'inherit',
-              height: TABLE_OVERVIEW_CELL_HEIGHT,
+              height: { xs: TABLE_OVERVIEW_CELL_HEIGHT_XS, md: TABLE_OVERVIEW_CELL_HEIGHT },
               fontSize: 14,
               lineHeight: 1.42,
               fontWeight: 400,

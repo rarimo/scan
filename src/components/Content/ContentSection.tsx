@@ -23,13 +23,14 @@ export default function ContentSection({
   const router = useRouter()
 
   return (
-    <Stack component='section' spacing={theme.spacing(withBackButton ? 8 : 3)}>
+    <Stack component='section' spacing={{ xs: 5, md: theme.spacing(withBackButton ? 8 : 3) }}>
       {(title || action) && (
         <Stack direction='row' alignItems='center' flex={1}>
           {withBackButton && (
             <IconButton
               onClick={router.back}
               sx={{
+                display: { xs: 'none', md: 'flex' },
                 width: theme.spacing(5),
                 height: theme.spacing(5),
                 mr: theme.spacing(6),

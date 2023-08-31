@@ -127,7 +127,7 @@ export const COMPONENTS: Components<BaseTheme> = {
         borderColor: 'var(--col-divider)',
       },
       head: {
-        background: 'var(--col-bg-secondary)',
+        background: 'transparent',
         textTransform: 'uppercase',
         fontSize: 12,
         lineHeight: 2,

@@ -25,6 +25,8 @@ import { useAppState } from '@/hooks'
 import { useI18n } from '@/locales/client'
 import { ThemeMode } from '@/types'
 
+import Search from '../Search'
+
 const container = isWindow() ? () => window.document.body : undefined
 
 const iconProps = {
@@ -67,26 +69,17 @@ export default function Navbar({ children }: { children: ReactNode }) {
           },
       }}
     >
-      <Logo isInsideNavbar={true} />
+      <Logo isInsideNavbar isSmall withoutMarginTop />
 
-      <Stack spacing={0.5} direction={'row'}>
-        <IconButton
-          size='small'
-          onClick={colorMode.toggleColorMode}
-          sx={{
-            color: theme.palette.action.active,
-            width: NAVBAR_HEADER_CONTENT_HEIGHT,
-            height: NAVBAR_HEADER_CONTENT_HEIGHT,
-            p: { xs: 0, sm: '5px' },
-            display: { md: 'none' },
-          }}
-        >
-          {isDarkMode ? (
-            <LightModeOutlinedIcon {...iconProps} />
-          ) : (
-            <DarkModeOutlinedIcon {...iconProps} />
-          )}
-        </IconButton>
+      <Stack
+        spacing={0.5}
+        direction={'row'}
+        flex={1}
+        sx={{
+          ml: 4,
+        }}
+      >
+        <Search size={'small'} onRedirect={toggleMobileNavbar} />
         <IconButton
           size='small'
           aria-label={t('common.close-btn')}
@@ -126,7 +119,26 @@ export default function Navbar({ children }: { children: ReactNode }) {
       }}
     >
       {menuToolbar}
-      <HeaderBlockchainMenu displayXs={true} />
+      <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
+        <HeaderBlockchainMenu displayXs={true} onClick={toggleMobileNavbar} />
+        <IconButton
+          size='small'
+          onClick={colorMode.toggleColorMode}
+          sx={{
+            color: theme.palette.action.active,
+            width: NAVBAR_HEADER_CONTENT_HEIGHT,
+            height: NAVBAR_HEADER_CONTENT_HEIGHT,
+            p: { xs: 0, sm: '5px' },
+            display: { md: 'none' },
+          }}
+        >
+          {isDarkMode ? (
+            <LightModeOutlinedIcon {...iconProps} />
+          ) : (
+            <DarkModeOutlinedIcon {...iconProps} />
+          )}
+        </IconButton>
+      </Stack>
       {divider}
       <NavbarActionsList />
       {divider}

@@ -3,6 +3,7 @@ import { omit } from 'lodash-es'
 
 import { CONFIG } from '@/config'
 import { TallyResultFragment } from '@/graphql'
+import { TallyResult } from '@/types'
 
 const CFG_FORMAT = { decimals: 2 }
 const ONE_HUNDRED = 100
@@ -15,18 +16,15 @@ export const calculateTallyResults = (tally: TallyResultFragment) => {
     .add(BN.fromBigInt(abstain, CONFIG.DECIMALS))
     .add(BN.fromBigInt(no_with_veto, CONFIG.DECIMALS))
 
-  return Object.entries(omit(tally, '__typename')).reduce(
-    (acc, [key, value]) => {
-      acc[key] = BN.fromRaw(ONE_HUNDRED, CONFIG.DECIMALS)
-        .mul(
-          BN.fromBigInt(value, CONFIG.DECIMALS).div(
-            total.isZero ? BN.fromBigInt(1, CONFIG.DECIMALS) : total,
-          ),
-        )
-        .format(CFG_FORMAT)
+  return Object.entries(omit(tally, '__typename')).reduce((acc, [key, value]) => {
+    acc[key as keyof TallyResult] = BN.fromRaw(ONE_HUNDRED, CONFIG.DECIMALS)
+      .mul(
+        BN.fromBigInt(value, CONFIG.DECIMALS).div(
+          total.isZero ? BN.fromBigInt(1, CONFIG.DECIMALS) : total,
+        ),
+      )
+      .format(CFG_FORMAT)
 
-      return acc
-    },
-    {} as Record<string, string>,
-  )
+    return acc
+  }, {} as TallyResult)
 }
