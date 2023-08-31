@@ -111,11 +111,15 @@ export default function Header() {
             spacing={{ xs: 0, md: 2 }}
             direction={'row'}
             alignItems={'center'}
+            justifyContent={'flex-end'}
+            flex={1}
             sx={{
               ml: { xs: 'auto', md: 0 },
             }}
           >
             <Box
+              flex={1}
+              justifyContent={'flex-end'}
               sx={{
                 pr: 2,
                 display: { xs: 'none', md: 'flex' },

@@ -74,6 +74,7 @@ export default function Navbar({ children }: { children: ReactNode }) {
       <Stack
         spacing={0.5}
         direction={'row'}
+        justifyContent={'flex-end'}
         flex={1}
         sx={{
           ml: 4,

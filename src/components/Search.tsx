@@ -129,6 +129,7 @@ export default function Search({
       }}
       sx={{
         ...(isSmallSize && {
+          maxWidth: 300,
           '& > .MuiInputBase-root': {
             height: 40,
           },
