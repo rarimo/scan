@@ -56,6 +56,13 @@ export default function HeaderBlockchainMenu({
     setRoute((pathname ?? '') as AvailableRoutes)
   }, [pathname])
 
+  useEffect(() => {
+    AVAILABLE_ROUTES.forEach(route => {
+      if (pathname.startsWith(route)) setRoute(route as AvailableRoutes)
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <Stack
       direction={'row'}
@@ -70,7 +77,15 @@ export default function HeaderBlockchainMenu({
     >
       <MouseOverDropdown variant={'text'} value={route} handleChange={handleChange}>
         {itemList.map((item, idx) => (
-          <MenuItem value={item.href} key={idx} disabled={!item.href} onClick={onClick}>
+          <MenuItem
+            value={item.href}
+            key={idx}
+            disabled={!item.href}
+            onClick={() => {
+              onClick?.()
+              if (route === item.href) router.push(item.href)
+            }}
+          >
             {item.label}
           </MenuItem>
         ))}
