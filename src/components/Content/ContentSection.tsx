@@ -25,7 +25,7 @@ export default function ContentSection({
   return (
     <Stack component='section' spacing={{ xs: 5, md: theme.spacing(withBackButton ? 8 : 3) }}>
       {(title || action) && (
-        <Stack direction='row' alignItems='center' flex={1}>
+        <Stack direction={'row'} alignItems='center' flex={1}>
           {withBackButton && (
             <IconButton
               onClick={router.back}
@@ -43,11 +43,11 @@ export default function ContentSection({
 
           <Stack
             className='Section__header'
-            direction='row'
-            alignItems='center'
+            direction={{ xs: 'column', md: 'row' }}
+            alignItems={{ xs: 'flex-start', md: 'center' }}
             flex={1}
+            spacing={2}
             justifyContent='space-between'
-            height='56px'
           >
             {title && (
               <Typography variant='h4' sx={{ fontSize: 30 }}>

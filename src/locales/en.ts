@@ -326,6 +326,7 @@ export default {
     "not-validator-msg": "Only validators allowed to vote for proposals.",
     "vote-not-allowed-msg": "Not allowed proposal's status for voting.",
     "vote-btn": "Vote",
+    "dialog-action-btn": "Confirm",
     "vote-dialog-heading": "Vote for proposal #{id}",
   },
   "proposal-details": {
@@ -459,5 +460,10 @@ export default {
     "discord-lbl": "Discord",
     "twitter-lbl": "Twitter",
     "telegram-lbl": "Telegram",
+  },
+  "vote-form": {
+    "voting-time-expired-error": "Voting time has expired",
+    "submitted-msg": "Vote for proposal #{id} successfully submitted.",
+    "helper-text": "Please select your preferred vote option by marking the appropriate radio button.",
   },
 } as const

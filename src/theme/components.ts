@@ -3,6 +3,13 @@ import { Components } from '@mui/material'
 
 import { BaseTheme } from '@/types'
 
+const MEDIUM_BUTTON_SX = {
+  height: 40,
+  padding: '8px 16px',
+  fontSize: 14,
+  lineHeight: 1.73,
+}
+
 export const COMPONENTS: Components<BaseTheme> = {
   MuiLink: {
     styleOverrides: {
@@ -34,16 +41,20 @@ export const COMPONENTS: Components<BaseTheme> = {
         textTransform: 'uppercase',
         whiteSpace: 'nowrap',
         boxShadow: 'unset',
+
+        '&.Mui-disabled': {
+          cursor: 'not-allowed',
+          pointerEvents: 'unset',
+        },
       },
       outlinedSizeMedium: {
-        height: 40,
-        padding: '8 16px',
+        ...MEDIUM_BUTTON_SX,
       },
       containedSizeMedium: {
-        height: 40,
-        padding: '8px 16px',
-        fontSize: 14,
-        lineHeight: 1.73,
+        ...MEDIUM_BUTTON_SX,
+      },
+      textSizeMedium: {
+        ...MEDIUM_BUTTON_SX,
       },
       containedSizeLarge: {
         height: 48,
@@ -163,6 +174,13 @@ export const COMPONENTS: Components<BaseTheme> = {
     styleOverrides: {
       root: {
         bgcolor: 'rgba(0, 0, 0, 0.87)',
+      },
+    },
+  },
+  MuiFormControlLabel: {
+    styleOverrides: {
+      root: {
+        color: 'var(--col-txt-secondary)',
       },
     },
   },
