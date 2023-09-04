@@ -46,6 +46,10 @@ export const COMPONENTS: Components<BaseTheme> = {
           cursor: 'not-allowed',
           pointerEvents: 'unset',
         },
+
+        '&:hover': {
+          boxShadow: 'unset',
+        },
       },
       outlinedSizeMedium: {
         ...MEDIUM_BUTTON_SX,
@@ -181,6 +185,15 @@ export const COMPONENTS: Components<BaseTheme> = {
     styleOverrides: {
       root: {
         color: 'var(--col-txt-secondary)',
+      },
+    },
+  },
+  MuiMenu: {
+    styleOverrides: {
+      paper: {
+        marginTop: '16px',
+        padding: '8px 0',
+        backgroundColor: 'var(--ui-paper-elevation-8)',
       },
     },
   },

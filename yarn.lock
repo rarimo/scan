@@ -8942,6 +8942,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-number-format@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "react-number-format@npm:5.3.0"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: d9a8ba4a58f2dac03976562b3fedacd423468c04fe884ca31f38224fe46e326d03a3afc613b347aa3b4a64cb213b6e8fe1f82fffe4b2b265f784991c42fb9e3b
+  languageName: node
+  linkType: hard
+
 "react-textarea-autosize@npm:^8.3.2":
   version: 8.5.2
   resolution: "react-textarea-autosize@npm:8.5.2"
@@ -9525,6 +9537,7 @@ __metadata:
     react-dom: 18.2.0
     react-hook-form: ^7.45.4
     react-json-view: ^1.21.3
+    react-number-format: ^5.3.0
     sass: ^1.64.2
     stylelint: ^15.10.2
     stylelint-config-prettier: ^9.0.5

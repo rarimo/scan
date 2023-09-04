@@ -23,7 +23,7 @@ export default function FormWrapper({
         }}
         open={isFormDisabled}
       >
-        <CircularProgress color='inherit' />
+        <CircularProgress color='primary' />
       </Backdrop>
       <Stack spacing={3}>{children}</Stack>
     </Box>

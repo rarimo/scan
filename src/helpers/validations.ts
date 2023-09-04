@@ -6,14 +6,14 @@ import { CONFIG } from '@/config'
 export const maxNumber = (max: number | string) => {
   return (value?: string) => {
     const v = BN.fromBigInt(max, CONFIG.DECIMALS)
-    return BN.fromBigInt(value || '0', CONFIG.DECIMALS).lte(v)
+    return BN.fromRaw(value || '0', CONFIG.DECIMALS).lte(v)
   }
 }
 
 export const minNumber = (min: number | string) => {
   return (value?: string) => {
     const v = BN.fromBigInt(min, CONFIG.DECIMALS)
-    return BN.fromBigInt(value || '0', CONFIG.DECIMALS).gte(v)
+    return BN.fromRaw(value || '0', CONFIG.DECIMALS).gte(v)
   }
 }
 

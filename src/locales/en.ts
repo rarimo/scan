@@ -401,7 +401,7 @@ export default {
     "delegation-submitted-msg": "Successfully delegated {amount} to {address}",
     "delegation-commission-submitted-msg": "Successfully received commission {amount} to {address}",
     "undelegation-submitted-msg": "Successfully undelegated {amount} from {address}",
-    "reward-submitted-msg": "Successfully get reward {amount} to {address}",
+    "reward-submitted-msg": "Successfully get rewards {amount} to {address}",
   },
   "validator-delegations": {
     "title-lbl": "Delegations",
@@ -465,5 +465,10 @@ export default {
     "voting-time-expired-error": "Voting time has expired",
     "submitted-msg": "Vote for proposal #{id} successfully submitted.",
     "helper-text": "Please select your preferred vote option by marking the appropriate radio button.",
+  },
+  "delegate-form": {
+    "amount-lbl": "Amount",
+    "delegation-lbl": "Please enter the amount of tokens you would like to delegate.",
+    "undelegation-lbl": "Please enter the amount of tokens you would like to undelegate.",
   },
 } as const

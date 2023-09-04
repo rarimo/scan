@@ -1,6 +1,8 @@
-import { BondStatus } from '@rarimo/client'
+import { FetcherError } from '@distributedlab/fetcher'
+import { BondStatus, Coin, DelegationResponse } from '@rarimo/client'
 import { isUndefined } from 'lodash-es'
 
+import { getClient } from '@/client'
 import { CONFIG } from '@/config'
 import {
   apolloClient,
@@ -21,7 +23,10 @@ import {
   GetValidatorUnbondingDelegationList,
   GetValidatorUnbondingDelegationListQuery,
 } from '@/graphql'
+import { ErrorHandler } from '@/helpers'
 import { SortOrder, ValidatorListColumnIds, ValidatorListSortBy } from '@/types'
+
+type OnSubmitHandler = (args: { address: string; amount: string }) => Promise<void>
 
 const createValidatorWhere = (status?: number, jailed?: boolean) => {
   const where = {
@@ -208,4 +213,68 @@ export const getValidatorCommissionAmount = async ({
   })
 
   return data.action_validator_commission_amount?.coins?.[0]?.amount
+}
+
+export const getValidatorDelegations = async (
+  delegator: string,
+  operator: string,
+): Promise<DelegationResponse> => {
+  let resp = {} as DelegationResponse
+  try {
+    const client = await getClient()
+    resp = await client.query.getDelegation(delegator, operator)
+  } catch (e) {
+    if (!(e instanceof FetcherError)) throw e
+    if (e.response.status === 404) return resp
+  }
+  return resp
+}
+
+export const getDelegationRewards = async (
+  delegator: string,
+  operator: string,
+): Promise<Coin[]> => {
+  let resp: Coin[] = []
+  try {
+    const client = await getClient()
+    resp = await client.query.getDelegationRewards(delegator, operator)
+  } catch (e) {
+    if (!(e instanceof FetcherError)) throw e
+    if (e.response.status === 400 || e.response.status === 500) return resp
+  }
+  return resp
+}
+
+export const withdrawDelegationReward = async (
+  delegator: string,
+  operator: string,
+  amount: string,
+  onSubmit: OnSubmitHandler,
+) => {
+  try {
+    const client = await getClient()
+    await client.tx.withdrawDelegatorReward(delegator, operator)
+    await onSubmit({
+      amount,
+      address: delegator,
+    })
+  } catch (e) {
+    ErrorHandler.process(e)
+  }
+}
+
+export const withdrawValidatorCommission = async (address: string, onSubmit: OnSubmitHandler) => {
+  try {
+    const validatorCommissionAmount = await getValidatorCommissionAmount({
+      address,
+    })
+    const client = await getClient()
+    await client.tx.withdrawValidatorCommission(address)
+    await onSubmit({
+      amount: `${validatorCommissionAmount} ${CONFIG.DENOM}`,
+      address,
+    })
+  } catch (e) {
+    ErrorHandler.process(e)
+  }
 }

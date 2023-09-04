@@ -47,10 +47,7 @@ export default function MouseOverDropdown({
         sx: {
           '& > .MuiPaper-root': {
             width: 220,
-            top: {
-              xs: 'unset',
-              md: '89px !important',
-            },
+            mt: 2,
             boxShadow: 'var(--ui-dropdown-shadow)',
           },
         },

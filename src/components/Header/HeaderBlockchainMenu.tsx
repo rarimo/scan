@@ -81,6 +81,9 @@ export default function HeaderBlockchainMenu({
             value={item.href}
             key={idx}
             disabled={!item.href}
+            sx={{
+              minWidth: 220,
+            }}
             onClick={() => {
               onClick?.()
               if (route === item.href) router.push(item.href)
