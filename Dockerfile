@@ -4,7 +4,7 @@ FROM node:alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY . ./
-RUN yarn install --immutable
+RUN yarn install
 
 # Rebuild the source code only when needed
 FROM node:alpine AS builder
@@ -12,7 +12,7 @@ WORKDIR /app
 COPY . ./
 COPY --from=deps /app/node_modules ./node_modules
 
-RUN yarn build && yarn install --immutable
+RUN yarn build && yarn install
 
 # Production image, copy all the files and run next
 FROM node:alpine AS runner
