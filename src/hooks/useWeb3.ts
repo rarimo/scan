@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react'
 
-import { client } from '@/client'
+import { getClient } from '@/client'
 import { apolloClient, GetAccountValidatorInfos, GetAccountValidatorInfosQuery } from '@/graphql'
 import { ErrorHandler, isWindow } from '@/helpers'
-import { useAppState } from '@/hooks/useAppState'
+import { useAppState } from '@/hooks'
 
 export const useWeb3 = () => {
   const {
@@ -38,6 +38,7 @@ export const useWeb3 = () => {
   const connect = async () => {
     setIsConnecting(true)
     try {
+      const client = getClient()
       await client.connect()
 
       setIsConnected(true)
@@ -55,7 +56,7 @@ export const useWeb3 = () => {
   }
 
   const disconnect = () => {
-    client.disconnect()
+    getClient().disconnect()
     setIsValidator(false)
     setAddress('')
     setIsConnected(false)

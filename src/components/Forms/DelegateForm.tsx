@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { Controller } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 
-import { client } from '@/client'
+import { getClient } from '@/client'
 import FormWrapper from '@/components/Forms/FormWrapper'
 import { CONFIG } from '@/config'
 import { ErrorHandler } from '@/helpers'
@@ -80,6 +80,7 @@ export default function DelegateForm({
     disableForm()
     setIsDialogDisabled(true)
     try {
+      const client = getClient()
       const txFn = isDelegation ? client.tx.delegate : client.tx.undelegate
       await txFn(address, String(operator), {
         denom: CONFIG.MINIMAL_DENOM,

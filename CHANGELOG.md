@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## [Unreleased]
 
+## [1.0.1] - 2023-09-04
+### Fixed
+- Move the Rarimo client to the function instead of constant to omit exceptions during build
+
 ## [1.0.0] - 2023-09-04
 
 ## [0.1.0] - 2023-08-02
@@ -13,7 +17,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.0...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.1...HEAD
+[1.0.1]: https://gitlab.com/rarimo/scan/compare/1.0.0...1.0.1
 [1.0.0]: https://gitlab.com/rarimo/scan/compare/0.1.0...1.0.0
 [0.1.0]: https://gitlab.com/rarimo/scan/tags/0.1.0
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/

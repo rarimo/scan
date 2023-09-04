@@ -2,13 +2,13 @@ import { Account as TAccount } from '@rarimo/client'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { client } from '@/client'
+import { getClient } from '@/client'
 import { Account, AccountTransactions, PageContainer } from '@/components'
 import { createMetadata } from '@/config'
 import { getServerSideProps } from '@/helpers'
 
 const getAccount = async (address: string) => {
-  return getServerSideProps<TAccount>(() => client.query.getAccount(address))
+  return getServerSideProps<TAccount>(() => getClient().query.getAccount(address))
 }
 
 export function generateMetadata({ params }: { params: { address: string } }): Metadata {

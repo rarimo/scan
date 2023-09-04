@@ -3,7 +3,7 @@ import { ProposalStatus, proposalStatusFromJSON, VoteOption } from '@rarimo/clie
 import { omit } from 'lodash-es'
 import { Controller } from 'react-hook-form'
 
-import { client } from '@/client'
+import { getClient } from '@/client'
 import FormWrapper from '@/components/Forms/FormWrapper'
 import { Bus, ErrorHandler } from '@/helpers'
 import { useForm, useLocalize, useWeb3 } from '@/hooks'
@@ -46,6 +46,7 @@ export default function VoteForm({
     disableForm()
     setIsDialogDisabled(true)
     try {
+      const client = getClient()
       const proposal = await client.query.getProposal(proposalId)
       const enumStatus = proposalStatusFromJSON(proposal?.status)
       if (enumStatus !== ProposalStatus.VotingPeriod) {

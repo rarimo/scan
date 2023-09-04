@@ -2,7 +2,7 @@ import { FetcherError } from '@distributedlab/fetcher'
 import { BondStatus, Coin, DelegationResponse } from '@rarimo/client'
 import { isUndefined } from 'lodash-es'
 
-import { client } from '@/client'
+import { getClient } from '@/client'
 import { CONFIG } from '@/config'
 import {
   apolloClient,
@@ -221,7 +221,7 @@ export const getValidatorDelegations = async (
 ): Promise<DelegationResponse> => {
   let resp = {} as DelegationResponse
   try {
-    resp = await client.query.getDelegation(delegator, operator)
+    resp = await getClient().query.getDelegation(delegator, operator)
   } catch (e) {
     if (!(e instanceof FetcherError)) throw e
     if (e.response.status === 404) return resp
@@ -235,7 +235,7 @@ export const getDelegationRewards = async (
 ): Promise<Coin[]> => {
   let resp: Coin[] = []
   try {
-    resp = await client.query.getDelegationRewards(delegator, operator)
+    resp = await getClient().query.getDelegationRewards(delegator, operator)
   } catch (e) {
     if (!(e instanceof FetcherError)) throw e
     if (e.response.status === 400 || e.response.status === 500) return resp
@@ -250,7 +250,7 @@ export const withdrawDelegationReward = async (
   onSubmit: OnSubmitHandler,
 ) => {
   try {
-    await client.tx.withdrawDelegatorReward(delegator, operator)
+    await getClient().tx.withdrawDelegatorReward(delegator, operator)
     await onSubmit({
       amount,
       address: delegator,
@@ -265,7 +265,7 @@ export const withdrawValidatorCommission = async (address: string, onSubmit: OnS
     const validatorCommissionAmount = await getValidatorCommissionAmount({
       address,
     })
-    await client.tx.withdrawValidatorCommission(address)
+    await getClient().tx.withdrawValidatorCommission(address)
     await onSubmit({
       amount: `${validatorCommissionAmount} ${CONFIG.DENOM}`,
       address,
