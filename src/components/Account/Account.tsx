@@ -4,7 +4,7 @@ import { Skeleton } from '@mui/material'
 import { Coin } from '@rarimo/client'
 import { ReactNode } from 'react'
 
-import { getClient } from '@/client'
+import { client } from '@/client'
 import { ContentBox, ContentSection, ContentWrapper } from '@/components/Content'
 import CopyToClipboardWrapper from '@/components/CopyToClipboardWrapper'
 import OverviewTable from '@/components/OverviewTable'
@@ -19,7 +19,6 @@ export default function Account({ address }: { address: string }) {
   const { data, isLoading, isLoadingError, isEmpty } = useLoading<Coin[] | undefined>(
     [],
     async () => {
-      const client = await getClient()
       return client.query.getAllBalances(address)
     },
   )

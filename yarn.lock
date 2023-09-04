@@ -2467,27 +2467,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rarimo/client@npm:^2.0.0-rc.17":
-  version: 2.0.0-rc.17
-  resolution: "@rarimo/client@npm:2.0.0-rc.17"
+"@rarimo/client@npm:^2.0.0-rc.22":
+  version: 2.0.0-rc.22
+  resolution: "@rarimo/client@npm:2.0.0-rc.22"
   dependencies:
     "@cosmjs/launchpad": ^0.27.1
     "@cosmjs/proto-signing": ^0.31.0
     "@cosmjs/stargate": ^0.31.0
     "@distributedlab/fetcher": ^1.0.0-rc.6
     "@distributedlab/reactivity": ^1.0.0-rc.6
-    "@rarimo/shared": ^2.0.0-rc.17
-  checksum: 60820ecbafcb2e41b942aa539cb97dd88f8c4f2a317b8b8b41db8cdd3546dac93319005d12e32b74c9497dae375d9bd57b8f161ef51140b9348f334bcc395f15
+    "@rarimo/shared": ^2.0.0-rc.22
+  checksum: 91c0918aac38b54d25e7e3f3af7ca708eee3d19cbe817cd840eb0257ab67eb76647c4d436b2a3fa8f229c9738e53afd7d5dc7091fea435d55c958d991e31cf77
   languageName: node
   linkType: hard
 
-"@rarimo/shared@npm:^2.0.0-rc.17":
-  version: 2.0.0-rc.17
-  resolution: "@rarimo/shared@npm:2.0.0-rc.17"
+"@rarimo/shared@npm:^2.0.0-rc.22":
+  version: 2.0.0-rc.22
+  resolution: "@rarimo/shared@npm:2.0.0-rc.22"
   dependencies:
     "@distributedlab/jac": ^1.0.0-rc.6
     "@distributedlab/tools": ^1.0.0-rc.6
-  checksum: 3a480133b4618d31fcd1e6579709ea63d115c9d56b7b73ed1ea8580a68047a3d2472391adaec9e4268b4352503e660a47fb387462d8ed7d53f58696b23084fda
+  checksum: 45d3037698b3475dc2b42ac7f0f4756ee14fb78cf65eba4e85704366523b4531c581bc51d67294e4517f731b0c5a95c3596f442ec790aa85f037670d64220192
   languageName: node
   linkType: hard
 
@@ -9511,7 +9511,7 @@ __metadata:
     "@hookform/resolvers": ^3.3.1
     "@mui/icons-material": ^5.14.3
     "@mui/material": ^5.14.3
-    "@rarimo/client": ^2.0.0-rc.17
+    "@rarimo/client": ^2.0.0-rc.22
     "@types/lodash-es": ^4
     "@types/negotiator": ^0
     "@types/node": 20.4.5

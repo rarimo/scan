@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-import { client, getClient } from '@/client'
+import { client } from '@/client'
 import { apolloClient, GetAccountValidatorInfos, GetAccountValidatorInfosQuery } from '@/graphql'
 import { ErrorHandler, isWindow } from '@/helpers'
 import { useAppState } from '@/hooks/useAppState'
@@ -38,7 +38,6 @@ export const useWeb3 = () => {
   const connect = async () => {
     setIsConnecting(true)
     try {
-      await getClient()
       await client.connect()
 
       setIsConnected(true)
@@ -71,7 +70,6 @@ export const useWeb3 = () => {
   useEffect(() => {
     if (!isWindow()) return
     async function init() {
-      await getClient()
       if (isInitialised && isConnected) await connect()
     }
 
