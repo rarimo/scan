@@ -38,3 +38,5 @@ export const OVERFLOW_SX = {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
 }
+
+export const MEDIUM_BREAKPOINT = 600
