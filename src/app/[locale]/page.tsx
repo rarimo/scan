@@ -2,7 +2,7 @@ import { Stack, Typography } from '@mui/material'
 import { Metadata } from 'next'
 import localFont from 'next/font/local'
 
-import { HomeLatestData, HomeRedirectEmitter, HomeStatistics, Search } from '@/components'
+import { HomeLatestData, HomeRedirectEmitter, HomeSearch, HomeStatistics } from '@/components'
 import { createMetadata } from '@/config'
 import { getI18n } from '@/locales/server'
 
@@ -53,7 +53,7 @@ export default async function HomePage() {
             </Typography>
             <Typography {...TITLE_PARTS_PROPS}>{t('home.title-part-3')}</Typography>
           </Typography>
-          <Search />
+          <HomeSearch />
         </Stack>
         <Stack spacing={4}>
           <HomeStatistics />

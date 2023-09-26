@@ -35,7 +35,7 @@ export default function Search({
   size = 'default',
   onRedirect,
 }: {
-  size?: 'default' | 'small'
+  size?: 'default' | 'small' | 'medium'
   onRedirect?: () => void
 }) {
   const t = useI18n()
@@ -43,6 +43,7 @@ export default function Search({
   const theme = useTheme()
 
   const isSmallSize = size === 'small'
+  const isMediumSize = size === 'medium'
 
   const [searchValue, setSearchValue] = useState('')
 
@@ -115,7 +116,11 @@ export default function Search({
       value={searchValue}
       onChange={event => setSearchValue(event.target.value)}
       onKeyDown={handleEnterPress}
-      placeholder={isSmallSize ? t('search.placeholder-small-lbl') : t('search.placeholder-lbl')}
+      placeholder={
+        isSmallSize || isMediumSize
+          ? t('search.placeholder-small-lbl')
+          : t('search.placeholder-lbl')
+      }
       autoComplete={'off'}
       InputProps={{
         startAdornment: (
@@ -125,7 +130,7 @@ export default function Search({
             height={24}
           />
         ),
-        ...(!isSmallSize && { endAdornment }),
+        ...(!isSmallSize && !isMediumSize && { endAdornment }),
       }}
       sx={{
         ...(isSmallSize && {

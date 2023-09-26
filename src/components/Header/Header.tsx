@@ -52,9 +52,13 @@ export default function Header() {
     setIsOnTopPositioned(window.scrollY === 0)
 
     window.addEventListener('wheel', setTopPositioned)
+    window.addEventListener('touchmove', setTopPositioned)
+    window.addEventListener('scroll', setTopPositioned)
 
     return () => {
       window.removeEventListener('wheel', setTopPositioned)
+      window.addEventListener('touchmove', setTopPositioned)
+      window.addEventListener('scroll', setTopPositioned)
     }
   }, [])
 
