@@ -34,7 +34,7 @@
     "loglevel": "^1.8.1",
     "mitt": "^3.0.1",
     "negotiator": "^0.6.3",
-    "next": "13.4.12",
+    "next": "13.5.3",
     "next-international": "^0.9.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
