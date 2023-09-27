@@ -130,7 +130,7 @@ export default function Search({
             height={24}
           />
         ),
-        ...(!isSmallSize && !isMediumSize && { endAdornment }),
+        ...(!isSmallSize && { endAdornment }),
       }}
       sx={{
         ...(isSmallSize && {
