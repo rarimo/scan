@@ -4,7 +4,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY . ./
 
-RUN yarn install && yarn build
+RUN npm install --legacy-peer-deps && npm run build --legacy-peer-deps
 
 # Production image, copy all the files and run next
 FROM node:18-alpine AS runner
