@@ -19,6 +19,7 @@ export const CONFIG = {
   GAS_PRICE_STEP_HIGH: String(process.env.GAS_PRICE_STEP_HIGH),
   GAS_PRICE: String(process.env.GAS_PRICE),
   DEVNET_URL: String(process.env.DEVNET_URL),
+  TESTNET_URL: String(process.env.TESTNET_URL),
   MAINNET_URL: String(process.env.MAINNET_URL),
   // Internal
   DECIMALS: 6,
