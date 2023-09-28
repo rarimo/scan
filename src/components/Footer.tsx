@@ -9,7 +9,6 @@ import Link from 'next/link'
 import Logo from '@/components/Logo'
 import { CONFIG } from '@/config'
 import { useI18n } from '@/locales/client'
-import { RoutePaths } from '@/types'
 
 const SCROLL_ICON_SIZE = 36
 const LINKS_SPACING = 2.7
@@ -49,11 +48,19 @@ export default function Footer() {
     },
   ]
 
-  const internalLinks = [
-    { label: t('footer.validators-lbl'), href: RoutePaths.Validators },
-    { label: t('footer.proposals-lbl'), href: RoutePaths.Proposals },
-    { label: t('footer.transactions-lbl'), href: RoutePaths.Transactions },
-    { label: t('footer.blocks-lbl'), href: RoutePaths.Blocks },
+  const includeLinks = [
+    {
+      label: t('footer.use-cases-lbl'),
+      href: CONFIG.USE_CASES_URL,
+    },
+    {
+      label: t('footer.documentation-lbl'),
+      href: CONFIG.DOCUMENTATION_URL,
+    },
+    {
+      label: t('footer.support-lbl'),
+      href: CONFIG.SUPPORT_URL,
+    },
   ]
 
   let interval: NodeJS.Timer | undefined
@@ -154,8 +161,15 @@ export default function Footer() {
             </Stack>
             <Stack sx={HIDE_ON_MOBILE_SX} spacing={theme.spacing(LINKS_SPACING)}>
               <Typography {...linksHeaderTypoProps}>{t('footer.navigation-links-lbl')}</Typography>
-              {internalLinks.map(({ href, label }, idx) => (
-                <MuiLink {...linkProps} component={Link} href={href} key={idx}>
+              {includeLinks.map(({ href, label }, idx) => (
+                <MuiLink
+                  {...linkProps}
+                  component={Link}
+                  href={href}
+                  target={'_blank'}
+                  rel={'noopener noreferrer'}
+                  key={idx}
+                >
                   {label}
                 </MuiLink>
               ))}

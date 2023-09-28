@@ -5,6 +5,7 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import Menu from '@mui/icons-material/Menu'
 import { AppBar, Box, Button, IconButton, Stack, useMediaQuery, useTheme } from '@mui/material'
+import { usePathname } from 'next/navigation'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 
 import HeaderBlockchainMenu from '@/components/Header/HeaderBlockchainMenu'
@@ -15,7 +16,7 @@ import { ColorModeContext } from '@/contexts'
 import { abbr } from '@/helpers'
 import { useAppState, useWeb3 } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { ThemeMode } from '@/types'
+import { RoutePaths, ThemeMode } from '@/types'
 
 const iconProps = {
   width: 24,
@@ -35,6 +36,9 @@ export default function Header() {
 
   const { connect, disconnect, isConnected, isConnecting, address } = useWeb3()
   const { isMobileNavbarOpened, toggleMobileNavbar } = useAppState()
+  const pathName = usePathname()
+
+  const isHome = pathName === RoutePaths.Main
 
   const mode = useMemo(() => {
     if (themeMode) return themeMode
@@ -121,16 +125,18 @@ export default function Header() {
               ml: { xs: 'auto', md: 0 },
             }}
           >
-            <Box
-              flex={1}
-              justifyContent={'flex-end'}
-              sx={{
-                pr: 2,
-                display: { xs: 'none', md: 'flex' },
-              }}
-            >
-              <Search size={'small'} />
-            </Box>
+            {!isHome && (
+              <Box
+                flex={1}
+                justifyContent={'flex-end'}
+                sx={{
+                  pr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                }}
+              >
+                <Search size={'small'} />
+              </Box>
+            )}
             <Button
               sx={{
                 minWidth: 190,
@@ -148,11 +154,9 @@ export default function Header() {
                 />
               )}
             </Button>
-
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
               <HeaderNetworkSwitcher />
             </Box>
-
             <IconButton
               size='small'
               onClick={colorMode.toggleColorMode}
