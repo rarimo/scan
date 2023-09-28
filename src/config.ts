@@ -30,6 +30,9 @@ export const CONFIG = {
   DISCORD_URL: 'https://discord.gg/Bzjm5MDXrU',
   TELEGRAM_URL: 'https://t.me/+m_vvj8nFk5g4NTgy',
   TWITTER_URL: 'https://twitter.com/Rarimo_protocol',
+  DOCUMENTATION_URL: 'https://docs.rarimo.com',
+  SUPPORT_URL: 'https://rarimo.com#community-section',
+  USE_CASES_URL: 'https://rarimo.com#use-cases-section',
 } as const
 
 export const METADATA: Metadata = {
