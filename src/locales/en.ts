@@ -34,7 +34,6 @@ export default {
     "title-lbl": "Transactions",
   },
   "header-network-switcher": {
-    "testnet-lbl": "Testnet",
     "devnet-lbl": "Devnet",
     "mainnet-lbl": "Mainnet",
   },

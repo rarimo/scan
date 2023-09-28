@@ -18,10 +18,6 @@ export default function HeaderNetworkSwitcher({ size = 'medium' }: { size?: 'med
       link: CONFIG.DEVNET_URL,
     },
     {
-      label: t('header-network-switcher.testnet-lbl'),
-      link: CONFIG.TESTNET_URL,
-    },
-    {
       label: t('header-network-switcher.mainnet-lbl'),
       link: CONFIG.MAINNET_URL,
     },
@@ -34,7 +30,6 @@ export default function HeaderNetworkSwitcher({ size = 'medium' }: { size?: 'med
 
   useEffect(() => {
     if (CONFIG.CHAIN_RPC_URL.includes('devnet')) setLink(CONFIG.DEVNET_URL)
-    if (CONFIG.CHAIN_RPC_URL.includes('testnet')) setLink(CONFIG.TESTNET_URL)
     if (CONFIG.CHAIN_RPC_URL.includes('mainnet')) setLink(CONFIG.DEVNET_URL)
   }, [])
 
