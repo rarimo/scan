@@ -46,7 +46,6 @@ export default {
     "proposals-lbl": "Proposals",
   },
   "footer": {
-    "promo-lbl": "An interoperability protocol for the next generation of multi-chain assets & identities",
     "navigation-links-lbl": "Navigation",
     "documentation-lbl": "Documentation",
     "use-cases-lbl": "Use cases",
