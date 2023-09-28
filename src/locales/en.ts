@@ -452,10 +452,9 @@ export default {
     "error-subtitle-lbl": "There was an error while loading, please try again later.",
   },
   "navbar-links": {
-    "blocks-lbl": "Blocks",
-    "transactions-lbl": "Transactions",
-    "validators-lbl": "Validators",
-    "proposals-lbl": "Proposals",
+    "documentation-lbl": "Documentation",
+    "use-cases-lbl": "Use cases",
+    "support-lbl": "Support",
     "discord-lbl": "Discord",
     "twitter-lbl": "Twitter",
     "telegram-lbl": "Telegram",

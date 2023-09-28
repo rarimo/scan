@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { CONFIG } from '@/config'
 import { useAppState } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { RoutePaths } from '@/types'
 
 const LINK_ICON_SIZE = 16
 
@@ -47,18 +46,33 @@ export default function NavbarLinks() {
     },
   ]
 
-  const internalLinks = [
-    { label: t('navbar-links.validators-lbl'), href: RoutePaths.Validators },
-    { label: t('navbar-links.proposals-lbl'), href: RoutePaths.Proposals },
-    { label: t('navbar-links.transactions-lbl'), href: RoutePaths.Transactions },
-    { label: t('navbar-links.blocks-lbl'), href: RoutePaths.Blocks },
+  const includeLinks = [
+    {
+      label: t('navbar-links.use-cases-lbl'),
+      href: CONFIG.USE_CASES_URL,
+    },
+    {
+      label: t('navbar-links.documentation-lbl'),
+      href: CONFIG.DOCUMENTATION_URL,
+    },
+    {
+      label: t('navbar-links.support-lbl'),
+      href: CONFIG.SUPPORT_URL,
+    },
   ]
 
   return (
     <Stack direction={'row'} spacing={3} flex={1}>
       <Stack flex={1} spacing={2.625}>
-        {internalLinks.map(({ href, label }, idx) => (
-          <MuiLink {...linkProps} component={Link} href={href} key={idx}>
+        {includeLinks.map(({ href, label }, idx) => (
+          <MuiLink
+            {...linkProps}
+            component={Link}
+            href={href}
+            target={'_blank'}
+            rel={'noopener noreferrer'}
+            key={idx}
+          >
             {label}
           </MuiLink>
         ))}
