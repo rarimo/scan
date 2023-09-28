@@ -147,14 +147,6 @@ export default function Footer() {
               }}
             >
               <Logo withoutMarginTop width={93} height={24} />
-              <Typography
-                {...descriptionTypoProps}
-                mt={theme.spacing(4)}
-                maxWidth={260}
-                sx={HIDE_ON_MOBILE_SX}
-              >
-                {t('footer.promo-lbl')}
-              </Typography>
               <Typography {...descriptionTypoProps} mt={{ xs: 0, sm: theme.spacing(8) }}>
                 {'© ' + new Date().getFullYear()}
               </Typography>
