@@ -35,7 +35,7 @@ export default function HeaderNetworkSwitcher({ size = 'medium' }: { size?: 'med
   useEffect(() => {
     if (CONFIG.CHAIN_RPC_URL.includes('devnet')) setLink(CONFIG.DEVNET_URL)
     if (CONFIG.CHAIN_RPC_URL.includes('testnet')) setLink(CONFIG.TESTNET_URL)
-    if (CONFIG.CHAIN_RPC_URL.includes('mainnet')) setLink(CONFIG.DEVNET_URL)
+    if (CONFIG.CHAIN_RPC_URL.includes('mainnet')) setLink(CONFIG.MAINNET_URL)
   }, [])
 
   return (
