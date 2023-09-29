@@ -11,7 +11,7 @@ const env = (value: string | undefined): string => {
 export const CONFIG = {
   APP_URL: env(process.env.URL),
   APP_NAME: 'Rarimo Blockchain Explorer',
-  APP_DESCRIPTION: 'The Rarimo Blockchain Explorer allows you to explore and search the Rarimo blockchain for transactions, accounts, validators, proposals, and other activities.',
+  APP_DESCRIPTION: 'Rarimo Blockchain Explorer allows you to explore and search the Rarimo blockchain for transactions, accounts, validators, proposals, and other activities.',
   CHAIN_API_URL: env(process.env.CHAIN_API_URL),
   CHAIN_RPC_URL: env(process.env.CHAIN_RPC_URL),
   CHAIN_ID: env(process.env.CHAIN_ID),

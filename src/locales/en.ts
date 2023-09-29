@@ -56,7 +56,7 @@ export default {
     "telegram-lbl": "Telegram",
   },
   "home": {
-    "title-part-1": "THE RARIMO ",
+    "title-part-1": "RARIMO ",
     "title-part-2": "BLOCKCHAIN ",
     "title-part-3": "EXPLORER",
   },
