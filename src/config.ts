@@ -1,26 +1,33 @@
 import { Metadata } from 'next'
 
+const EMPTY_VALUE = '__EMPTY_VALUE__'
+
+const env = (value: string | undefined): string => {
+  if (!value || value === EMPTY_VALUE) return ''
+  return value
+}
+
 // prettier-ignore
 export const CONFIG = {
-  APP_URL: String(process.env.URL),
+  APP_URL: env(process.env.URL),
   APP_NAME: 'Rarimo Blockchain Explorer',
   APP_DESCRIPTION: 'The Rarimo Blockchain Explorer allows you to explore and search the Rarimo blockchain for transactions, accounts, validators, proposals, and other activities.',
-  CHAIN_API_URL: String(process.env.CHAIN_API_URL),
-  CHAIN_RPC_URL: String(process.env.CHAIN_RPC_URL),
-  CHAIN_ID: String(process.env.CHAIN_ID),
-  CHAIN_ADDR_PREFIX: String(process.env.CHAIN_ADDR_PREFIX),
-  CHAIN_NAME: String(process.env.CHAIN_NAME),
+  CHAIN_API_URL: env(process.env.CHAIN_API_URL),
+  CHAIN_RPC_URL: env(process.env.CHAIN_RPC_URL),
+  CHAIN_ID: env(process.env.CHAIN_ID),
+  CHAIN_ADDR_PREFIX: env(process.env.CHAIN_ADDR_PREFIX),
+  CHAIN_NAME: env(process.env.CHAIN_NAME),
   CHAIN_ICON_URL: 'https://raw.githubusercontent.com/rarimo/js-sdk/2.0.0-rc.14/assets/logos/ra-dark-logo.png',
-  DENOM: String(process.env.DENOM),
-  MINIMAL_DENOM: String(process.env.MINIMAL_DENOM),
-  GRAPHQL_URL: String(process.env.GRAPHQL_URL),
-  GAS_PRICE_STEP_LOW: String(process.env.GAS_PRICE_STEP_LOW),
-  GAS_PRICE_STEP_AVG: String(process.env.GAS_PRICE_STEP_AVG),
-  GAS_PRICE_STEP_HIGH: String(process.env.GAS_PRICE_STEP_HIGH),
-  GAS_PRICE: String(process.env.GAS_PRICE),
-  DEVNET_URL: String(process.env.DEVNET_URL ?? ''),
-  TESTNET_URL: String(process.env.TESTNET_URL ?? ''),
-  MAINNET_URL: String(process.env.MAINNET_URL ?? ''),
+  DENOM: env(process.env.DENOM),
+  MINIMAL_DENOM: env(process.env.MINIMAL_DENOM),
+  GRAPHQL_URL: env(process.env.GRAPHQL_URL),
+  GAS_PRICE_STEP_LOW: env(process.env.GAS_PRICE_STEP_LOW),
+  GAS_PRICE_STEP_AVG: env(process.env.GAS_PRICE_STEP_AVG),
+  GAS_PRICE_STEP_HIGH: env(process.env.GAS_PRICE_STEP_HIGH),
+  GAS_PRICE: env(process.env.GAS_PRICE),
+  DEVNET_URL: env(process.env.DEVNET_URL),
+  TESTNET_URL: env(process.env.TESTNET_URL),
+  MAINNET_URL: env(process.env.MAINNET_URL),
   // Internal
   DECIMALS: 6,
   PERCENT_DECIMALS: 2,
