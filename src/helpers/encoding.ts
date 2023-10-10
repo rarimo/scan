@@ -22,7 +22,8 @@ export const parseAddress = (
 
   if (!tx?.raw_log) return ''
 
-  const logs = JSON.parse(tx.raw_log) as TransactionEVMLog[]
+  const logs = tryParseJSON<TransactionEVMLog[]>(tx.raw_log)
+  if (!logs) return ''
   const senderEvent = logs?.[0]?.events?.find(i => i.type === 'message')
 
   if (!senderEvent) return ''
@@ -38,4 +39,13 @@ export const parseAddress = (
 export const hexToBech32 = (address: string, prefix: string) => {
   const addressBuffer = fromHex(address)
   return toBech32(prefix, addressBuffer)
+}
+
+const tryParseJSON = <T>(jsonString: string): T | null => {
+  try {
+    const o = JSON.parse(jsonString)
+    return o as T
+  } catch (e) {
+    return null
+  }
 }
