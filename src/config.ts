@@ -14,6 +14,7 @@ export const CONFIG = {
   APP_DESCRIPTION: 'Rarimo Blockchain Explorer allows you to explore and search the Rarimo blockchain for transactions, accounts, validators, proposals, and other activities.',
   CHAIN_API_URL: env(process.env.CHAIN_API_URL),
   CHAIN_RPC_URL: env(process.env.CHAIN_RPC_URL),
+  PROTOCOL_ENV: env(process.env.PROTOCOL_ENV),
   CHAIN_ID: env(process.env.CHAIN_ID),
   CHAIN_ADDR_PREFIX: env(process.env.CHAIN_ADDR_PREFIX),
   CHAIN_NAME: env(process.env.CHAIN_NAME),

@@ -13,6 +13,7 @@ module.exports = {
     CHAIN_ADDR_PREFIX: process.env.CHAIN_ADDR_PREFIX,
     CHAIN_NAME: process.env.CHAIN_NAME,
     DENOM: process.env.DENOM,
+    PROTOCOL_ENV: process.env.PROTOCOL_ENV,
     MINIMAL_DENOM: process.env.MINIMAL_DENOM,
     GAS_PRICE_STEP_LOW: process.env.GAS_PRICE_STEP_LOW,
     GAS_PRICE_STEP_AVG: process.env.GAS_PRICE_STEP_AVG,

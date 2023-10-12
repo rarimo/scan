@@ -7,10 +7,22 @@ import MouseOverDropdown from '@/components/MouseOverDropdown'
 import { CONFIG } from '@/config'
 import { useI18n } from '@/locales/client'
 
+enum ProtocolEnv {
+  DEVNET = 'devnet',
+  TESTNET = 'testnet',
+  MAINNET = 'mainnet',
+}
+
 export default function HeaderNetworkSwitcher({ size = 'medium' }: { size?: 'medium' | 'large' }) {
   const t = useI18n()
 
   const [link, setLink] = useState('')
+
+  const LINKS_MAP = {
+    [ProtocolEnv.DEVNET]: CONFIG.DEVNET_URL,
+    [ProtocolEnv.TESTNET]: CONFIG.TESTNET_URL,
+    [ProtocolEnv.MAINNET]: CONFIG.MAINNET_URL,
+  }
 
   const itemList = [
     {
@@ -33,9 +45,8 @@ export default function HeaderNetworkSwitcher({ size = 'medium' }: { size?: 'med
   }
 
   useEffect(() => {
-    if (CONFIG.CHAIN_RPC_URL.includes('devnet')) setLink(CONFIG.DEVNET_URL)
-    if (CONFIG.CHAIN_RPC_URL.includes('testnet')) setLink(CONFIG.TESTNET_URL)
-    if (CONFIG.CHAIN_RPC_URL.includes('mainnet')) setLink(CONFIG.MAINNET_URL)
+    setLink(LINKS_MAP[CONFIG.PROTOCOL_ENV as ProtocolEnv])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
