@@ -186,6 +186,7 @@ export default {
     "oracle-unjail-lbl": "Oracle Unjail",
     "unknown-lbl": "Unknown",
     "ethereum-tx-lbl": "Ethereum Tx",
+    "create-identity-default-transfer-op-lbl": "Create Identity Transfer",
   },
   "proposal-status": {
     "unspecified-lbl": "Unknown",

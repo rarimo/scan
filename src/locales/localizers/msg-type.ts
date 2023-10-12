@@ -58,4 +58,5 @@ export const localizeMsgType = (t: TFunction, type: string) =>
     '/rarimo.rarimocore.oraclemanager.MsgCreateTransferOp': t('message-types.create-transfer-op-lbl'),
     '/rarimo.rarimocore.oraclemanager.MsgVote': t('message-types.oracle-vote-lbl'),
     '/rarimo.rarimocore.oraclemanager.MsgUnjail': t('message-types.oracle-unjail-lbl'),
+    '/rarimo.rarimocore.oraclemanager.MsgCreateIdentityDefaultTransferOp': t('message-types.create-identity-default-transfer-op-lbl'),
   })[type]
