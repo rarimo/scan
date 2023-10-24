@@ -23,3 +23,6 @@ Run the Docker image
 ```bash
 docker run -p 8095:8095 --env-file .env -it scan
 ```
+
+## License
+[MIT](./LICENSE)
