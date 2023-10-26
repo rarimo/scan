@@ -1,34 +1,29 @@
 import { Metadata } from 'next'
 
-const EMPTY_VALUE = '__EMPTY_VALUE__'
-
-const env = (value: string | undefined): string => {
-  if (!value || value === EMPTY_VALUE) return ''
-  return value
-}
+const env = (value?: string): string => value ?? ''
 
 // prettier-ignore
 export const CONFIG = {
-  APP_URL: env(process.env.URL),
+  APP_URL: env(process.env.NEXT_PUBLIC_URL),
   APP_NAME: 'Rarimo Blockchain Explorer',
   APP_DESCRIPTION: 'Rarimo Blockchain Explorer allows you to explore and search the Rarimo blockchain for transactions, accounts, validators, proposals, and other activities.',
-  CHAIN_API_URL: env(process.env.CHAIN_API_URL),
-  CHAIN_RPC_URL: env(process.env.CHAIN_RPC_URL),
-  PROTOCOL_ENV: env(process.env.PROTOCOL_ENV),
-  CHAIN_ID: env(process.env.CHAIN_ID),
-  CHAIN_ADDR_PREFIX: env(process.env.CHAIN_ADDR_PREFIX),
-  CHAIN_NAME: env(process.env.CHAIN_NAME),
+  CHAIN_API_URL: env(process.env.NEXT_PUBLIC_CHAIN_API_URL),
+  CHAIN_RPC_URL: env(process.env.NEXT_PUBLIC_CHAIN_RPC_URL),
+  PROTOCOL_ENV: env(process.env.NEXT_PUBLIC_PROTOCOL_ENV),
+  CHAIN_ID: env(process.env.NEXT_PUBLIC_CHAIN_ID),
+  CHAIN_ADDR_PREFIX: env(process.env.NEXT_PUBLIC_CHAIN_ADDR_PREFIX),
+  CHAIN_NAME: env(process.env.NEXT_PUBLIC_CHAIN_NAME),
   CHAIN_ICON_URL: 'https://raw.githubusercontent.com/rarimo/js-sdk/2.0.0-rc.14/assets/logos/ra-dark-logo.png',
-  DENOM: env(process.env.DENOM),
-  MINIMAL_DENOM: env(process.env.MINIMAL_DENOM),
-  GRAPHQL_URL: env(process.env.GRAPHQL_URL),
-  GAS_PRICE_STEP_LOW: env(process.env.GAS_PRICE_STEP_LOW),
-  GAS_PRICE_STEP_AVG: env(process.env.GAS_PRICE_STEP_AVG),
-  GAS_PRICE_STEP_HIGH: env(process.env.GAS_PRICE_STEP_HIGH),
-  GAS_PRICE: env(process.env.GAS_PRICE),
-  DEVNET_URL: env(process.env.DEVNET_URL),
-  TESTNET_URL: env(process.env.TESTNET_URL),
-  MAINNET_URL: env(process.env.MAINNET_URL),
+  DENOM: env(process.env.NEXT_PUBLIC_DENOM),
+  MINIMAL_DENOM: env(process.env.NEXT_PUBLIC_MINIMAL_DENOM),
+  GRAPHQL_URL: env(process.env.NEXT_PUBLIC_GRAPHQL_URL),
+  GAS_PRICE_STEP_LOW: env(process.env.NEXT_PUBLIC_GAS_PRICE_STEP_LOW),
+  GAS_PRICE_STEP_AVG: env(process.env.NEXT_PUBLIC_GAS_PRICE_STEP_AVG),
+  GAS_PRICE_STEP_HIGH: env(process.env.NEXT_PUBLIC_GAS_PRICE_STEP_HIGH),
+  GAS_PRICE: env(process.env.NEXT_PUBLIC_GAS_PRICE),
+  DEVNET_URL: env(process.env.NEXT_PUBLIC_DEVNET_URL),
+  TESTNET_URL: env(process.env.NEXT_PUBLIC_TESTNET_URL),
+  MAINNET_URL: env(process.env.NEXT_PUBLIC_MAINNET_URL),
   // Internal
   DECIMALS: 6,
   PERCENT_DECIMALS: 2,
@@ -44,6 +39,7 @@ export const CONFIG = {
 } as const
 
 export const METADATA: Metadata = {
+  metadataBase: new URL(CONFIG.APP_URL),
   description: CONFIG.APP_DESCRIPTION,
   applicationName: CONFIG.APP_NAME,
   themeColor: [
@@ -75,7 +71,6 @@ export const createMetadata = (pageName: string): Metadata => {
   const title = createPageTitle(pageName)
 
   return {
-    metadataBase: new URL(CONFIG.APP_URL),
     title,
     ...METADATA,
     openGraph: {
