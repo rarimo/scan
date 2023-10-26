@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## [Unreleased]
 
+## [1.0.3] - 2023-10-26
+### Removed
+- `.env.local` file
+
 ## [1.0.2] - 2023-10-26
 ### Changed
 - Moved to GitHub
@@ -24,7 +28,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.2...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.3...HEAD
+[1.0.3]: https://gitlab.com/rarimo/scan/compare/1.0.2...1.0.3
 [1.0.2]: https://gitlab.com/rarimo/scan/compare/1.0.1...1.0.2
 [1.0.1]: https://gitlab.com/rarimo/scan/compare/1.0.0...1.0.1
 [1.0.0]: https://gitlab.com/rarimo/scan/compare/0.1.0...1.0.0
