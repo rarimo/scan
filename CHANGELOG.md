@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 ## [Unreleased]
 
+## [1.0.4] - 2023-10-27
+### Fixed
+- Devnet coin name
+
 ## [1.0.3] - 2023-10-26
 ### Removed
 - `.env.local` file
@@ -28,7 +32,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.3...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.4...HEAD
+[1.0.4]: https://gitlab.com/rarimo/scan/compare/1.0.3...1.0.4
 [1.0.3]: https://gitlab.com/rarimo/scan/compare/1.0.2...1.0.3
 [1.0.2]: https://gitlab.com/rarimo/scan/compare/1.0.1...1.0.2
 [1.0.1]: https://gitlab.com/rarimo/scan/compare/1.0.0...1.0.1
