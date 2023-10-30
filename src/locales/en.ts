@@ -468,5 +468,6 @@ export default {
     "amount-lbl": "Amount",
     "delegation-lbl": "Please enter the amount of tokens you would like to delegate.",
     "undelegation-lbl": "Please enter the amount of tokens you would like to undelegate.",
+    "execution-type-lbl": "On behalf of",
   },
 } as const

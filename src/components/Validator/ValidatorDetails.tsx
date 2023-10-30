@@ -61,6 +61,9 @@ export default function ValidatorDetails({
     isDialogOpened,
     condition,
     comission,
+    grants,
+    isGrantsLoading,
+    isGrantsLoadingError,
   } = useValidatorDetails(operator, reload)
 
   const withSkeleton = useSkeleton(isLoading)
@@ -194,6 +197,8 @@ export default function ValidatorDetails({
       isDelegationLoadingError={isDelegationLoadingError}
       isRewardLoading={isRewardLoading}
       isRewardLoadingError={isRewardLoadingError}
+      isGrantsLoading={isGrantsLoading}
+      isGrantsLoadingError={isGrantsLoadingError}
       reloadReward={reloadReward}
       onSubmit={onSubmit}
       openDialog={openDialog}
@@ -228,9 +233,10 @@ export default function ValidatorDetails({
           <DelegateForm
             id={DELEGATE_FORM_ID}
             operator={validator?.validator_info?.operator_address ?? ''}
+            grants={grants}
             minDelegationAmount={validator?.validator_commissions?.[0]?.min_self_delegation ?? ''}
             delegateType={delegateType}
-            maxUndelegationAmount={accountDelegations?.delegation_response?.balance?.amount}
+            accountDelegations={accountDelegations}
             reloadDelegation={reloadDelegation}
             onSubmit={onSubmit}
             setIsDialogDisabled={setIsDisabled}

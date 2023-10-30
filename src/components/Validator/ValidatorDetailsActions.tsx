@@ -20,6 +20,8 @@ export default function ValidatorDetailsActions({
   isDelegationLoadingError,
   isRewardLoading,
   isRewardLoadingError,
+  isGrantsLoading,
+  isGrantsLoadingError,
   reloadReward,
   onSubmit,
   openDialog,
@@ -37,6 +39,8 @@ export default function ValidatorDetailsActions({
   isDelegationLoadingError: boolean
   isRewardLoading: boolean
   isRewardLoadingError: boolean
+  isGrantsLoading: boolean
+  isGrantsLoadingError: boolean
   reloadReward: () => Promise<void>
   onSubmit(params: { message: string }): Promise<void>
   openDialog(): void
@@ -77,13 +81,19 @@ export default function ValidatorDetailsActions({
     openDialog()
   }
 
+  const isDelegationLoadingComp = useMemo(() => {
+    return (
+      isDelegationLoading || isDelegationLoadingError || isGrantsLoading || isGrantsLoadingError
+    )
+  }, [isGrantsLoading, isGrantsLoadingError, isDelegationLoading, isDelegationLoadingError])
+
   const actions = useMemo(
     () => {
       const result = [
         {
           label: t('validator-details.delegate-btn'),
           handler: () => delegate(DelegateTypes.Delegate),
-          isDisabled: isDelegationLoading || isDelegationLoadingError,
+          isDisabled: isDelegationLoadingComp,
         },
       ]
 
@@ -91,7 +101,7 @@ export default function ValidatorDetailsActions({
         result.push({
           label: t('validator-details.undelegate-btn'),
           handler: () => delegate(DelegateTypes.Undelegate),
-          isDisabled: isDelegationLoading || isDelegationLoadingError,
+          isDisabled: isDelegationLoadingComp,
         })
       }
 

@@ -1,5 +1,11 @@
-import { FetcherError } from '@distributedlab/fetcher'
-import { BondStatus, Coin, DelegationResponse } from '@rarimo/client'
+import {
+  AuthorizationTypes,
+  BondStatus,
+  Coin,
+  DelegationResponse,
+  GrantAuthorization,
+  MessageTypeUrls,
+} from '@rarimo/client'
 import { isUndefined } from 'lodash-es'
 
 import { getClient } from '@/client'
@@ -27,6 +33,7 @@ import { ErrorHandler } from '@/helpers'
 import { SortOrder, ValidatorListColumnIds, ValidatorListSortBy } from '@/types'
 
 type OnSubmitHandler = (args: { address: string; amount: string }) => Promise<void>
+type ErrorWithStatusCode = { response: { status: number } }
 
 const createValidatorWhere = (status?: number, jailed?: boolean) => {
   const where = {
@@ -223,8 +230,9 @@ export const getValidatorDelegations = async (
   try {
     resp = await getClient().query.getDelegation(delegator, operator)
   } catch (e) {
-    if (!(e instanceof FetcherError)) throw e
-    if (e.response.status === 404) return resp
+    const status = (e as ErrorWithStatusCode)?.response?.status
+    if (status === 404 || status === 400 || status === 500) return resp
+    throw e
   }
   return resp
 }
@@ -237,8 +245,9 @@ export const getDelegationRewards = async (
   try {
     resp = await getClient().query.getDelegationRewards(delegator, operator)
   } catch (e) {
-    if (!(e instanceof FetcherError)) throw e
-    if (e.response.status === 400 || e.response.status === 500) return resp
+    const status = (e as ErrorWithStatusCode)?.response?.status
+    if (status === 404 || status === 400 || status === 500) return resp
+    throw e
   }
   return resp
 }
@@ -273,4 +282,31 @@ export const withdrawValidatorCommission = async (address: string, onSubmit: OnS
   } catch (e) {
     ErrorHandler.process(e)
   }
+}
+
+export const getGrants = async (grantee: string): Promise<GrantAuthorization[]> => {
+  let resp: GrantAuthorization[] = []
+  try {
+    resp = await getClient().query.getGrantAuthorizationsByGrantee(grantee)
+  } catch (e) {
+    ErrorHandler.process(e)
+  }
+  return resp
+}
+
+export const filterGrantsByMessageType = (
+  grants: GrantAuthorization[],
+  types: MessageTypeUrls[],
+): GrantAuthorization[] => {
+  if (!grants.length) return []
+
+  return grants.reduce<GrantAuthorization[]>((acc, grant) => {
+    const auth = grant.authorization
+    if (auth?.['@type'] !== AuthorizationTypes.GenericAuthorization) return acc
+    if (types.includes(auth.msg as MessageTypeUrls)) {
+      acc.push(grant)
+    }
+
+    return acc
+  }, [])
 }

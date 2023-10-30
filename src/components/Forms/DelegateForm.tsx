@@ -1,10 +1,26 @@
-import { BN } from '@distributedlab/tools'
-import { InputAdornment, TextField, Typography } from '@mui/material'
-import { DelegateTypes } from '@rarimo/client'
+import { BN, isFixedPointString } from '@distributedlab/tools'
+import {
+  FormControl,
+  FormHelperText,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material'
+import {
+  DelegateTypes,
+  DelegationResponse,
+  GenericAuthorization,
+  GrantAuthorization,
+  MessageTypeUrls,
+} from '@rarimo/client'
 import { useMemo } from 'react'
 import { Controller } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 
+import { filterGrantsByMessageType } from '@/callers'
 import { getClient } from '@/client'
 import FormWrapper from '@/components/Forms/FormWrapper'
 import { CONFIG } from '@/config'
@@ -13,16 +29,18 @@ import { useForm, useWeb3 } from '@/hooks'
 import { useI18n } from '@/locales/client'
 import { FormProps } from '@/types'
 
+const EXECUTE_OPTIONS_LABEL_ID = 'sender-label-id'
+
 enum DelegateFormFieldNames {
   Validator = 'validator',
   Amount = 'amount',
+  Delegator = 'delegator',
 }
 
-const defaultValues = {
-  [DelegateFormFieldNames.Amount]: '',
+const DELEGATE_TYPE_BY_MSG: { [key in MessageTypeUrls]?: DelegateTypes } = {
+  [MessageTypeUrls.Delegate]: DelegateTypes.Delegate,
+  [MessageTypeUrls.Undelegate]: DelegateTypes.Undelegate,
 }
-
-export type DelegateFormData = typeof defaultValues
 
 export default function DelegateForm({
   id,
@@ -31,19 +49,43 @@ export default function DelegateForm({
   operator,
   minDelegationAmount,
   delegateType,
+  grants,
   reloadDelegation,
-  maxUndelegationAmount,
+  accountDelegations,
 }: FormProps & {
   operator?: string
+  grants: GrantAuthorization[]
+  accountDelegations: DelegationResponse[]
   minDelegationAmount?: string
   delegateType: DelegateTypes
-  maxUndelegationAmount?: string
   reloadDelegation: () => Promise<void>
 }) {
   const { address } = useWeb3()
   const t = useI18n()
 
   const isDelegation = useMemo(() => delegateType === DelegateTypes.Delegate, [delegateType])
+  const availableUndelegators = useMemo(() => {
+    return accountDelegations.map(i => i.delegation_response.delegation.delegator_address)
+  }, [accountDelegations])
+
+  const defaultValues = {
+    [DelegateFormFieldNames.Amount]: '',
+    [DelegateFormFieldNames.Delegator]: isDelegation
+      ? address
+      : availableUndelegators.includes(address)
+      ? address
+      : availableUndelegators[0],
+  }
+
+  const granters = useMemo(() => {
+    return filterGrantsByMessageType(grants, [
+      MessageTypeUrls.Delegate,
+      MessageTypeUrls.Undelegate,
+    ]).map(i => ({
+      granter: i.granter,
+      type: DELEGATE_TYPE_BY_MSG[(i.authorization as GenericAuthorization).msg as MessageTypeUrls],
+    }))
+  }, [grants])
 
   const {
     handleSubmit,
@@ -59,33 +101,43 @@ export default function DelegateForm({
         [DelegateFormFieldNames.Amount]: yup
           .string()
           .required()
-          .when(DelegateFormFieldNames.Amount, {
-            is: () => isDelegation,
-            then: rule => {
-              return rule.minNumber(
-                BN.fromBigInt(String(minDelegationAmount), CONFIG.DECIMALS).value,
-              )
-            },
-          })
-          .when(DelegateFormFieldNames.Amount, {
-            is: () => !isDelegation,
-            then: rule => rule.maxNumber(String(maxUndelegationAmount)),
+          .when(DelegateFormFieldNames.Delegator, ([delegator], schema) => {
+            const delegation = accountDelegations.find(
+              i => i.delegation_response.delegation.delegator_address === delegator,
+            )
+
+            return isDelegation
+              ? schema.minNumber(BN.fromBigInt(String(minDelegationAmount), CONFIG.DECIMALS).value)
+              : schema.maxNumber(
+                  BN.fromBigInt(
+                    delegation?.delegation_response.balance.amount ?? '0',
+                    CONFIG.DECIMALS,
+                  ).value,
+                )
           }),
+        [DelegateFormFieldNames.Delegator]: yup.string().required(),
       },
-      [[DelegateFormFieldNames.Amount, DelegateFormFieldNames.Amount]],
+      [[DelegateFormFieldNames.Delegator, DelegateFormFieldNames.Delegator]],
     ),
   )
 
-  const submit = async (formData: DelegateFormData) => {
+  const submit = async (formData: typeof defaultValues) => {
     disableForm()
     setIsDialogDisabled(true)
     try {
       const client = getClient()
+      const isExec = formData.delegator !== address
       const txFn = isDelegation ? client.tx.delegate : client.tx.undelegate
-      await txFn(address, String(operator), {
+      const txExecFn = isDelegation ? client.tx.execDelegate : client.tx.execUndelegate
+      const validator = String(operator)
+      const amount = {
         denom: CONFIG.MINIMAL_DENOM,
         amount: BN.fromRaw(formData.amount, CONFIG.DECIMALS).value,
-      })
+      }
+
+      isExec
+        ? await txExecFn(address, formData.delegator, validator, amount)
+        : await txFn(address, validator, amount)
 
       const args = {
         amount: `${formData.amount} ${CONFIG.DENOM}`,
@@ -104,6 +156,11 @@ export default function DelegateForm({
     enableForm()
     setIsDialogDisabled(false)
   }
+
+  const delegatorItems = useMemo(() => {
+    const grantersByType = granters.filter(i => i.type === delegateType)
+    return [...(isDelegation ? [{ granter: address, type: delegateType }] : []), ...grantersByType]
+  }, [address, delegateType, granters, isDelegation])
 
   return (
     <FormWrapper id={id} onSubmit={handleSubmit(submit)} isFormDisabled={isFormDisabled}>
@@ -131,12 +188,51 @@ export default function DelegateForm({
             label={t('delegate-form.amount-lbl')}
             error={Boolean(formErrors[DelegateFormFieldNames.Amount])}
             disabled={isFormDisabled}
-            onValueChange={values => onChange(values.floatValue)}
+            onValueChange={values => {
+              const isValid = isFixedPointString(values.value)
+              if (isValid) onChange(values.value)
+            }}
             onBlur={onBlur}
             helperText={getErrorMessage(formErrors[DelegateFormFieldNames.Amount])}
           />
         )}
       />
+      {granters.length ? (
+        <Controller
+          name={DelegateFormFieldNames.Delegator}
+          control={control}
+          render={({ field }) => (
+            <FormControl>
+              <InputLabel
+                id={EXECUTE_OPTIONS_LABEL_ID}
+                error={Boolean(formErrors[DelegateFormFieldNames.Delegator])}
+              >
+                {t('delegate-form.execution-type-lbl')}
+              </InputLabel>
+              <Select
+                {...field}
+                labelId={EXECUTE_OPTIONS_LABEL_ID}
+                label={t('delegate-form.execution-type-lbl')}
+                disabled={isFormDisabled}
+                error={Boolean(formErrors[DelegateFormFieldNames.Delegator])}
+              >
+                {delegatorItems.map((item, idx) => (
+                  <MenuItem value={item.granter} key={idx}>
+                    {item.granter}
+                  </MenuItem>
+                ))}
+              </Select>
+              {Boolean(formErrors[DelegateFormFieldNames.Delegator]) && (
+                <FormHelperText error>
+                  {getErrorMessage(formErrors[DelegateFormFieldNames.Delegator])}
+                </FormHelperText>
+              )}
+            </FormControl>
+          )}
+        />
+      ) : (
+        <></>
+      )}
     </FormWrapper>
   )
 }
