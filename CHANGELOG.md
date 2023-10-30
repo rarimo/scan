@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
+### Added
+- Ability to delegate, undelegate and vote proposal via authorization grants
+
+### Changed
+- Updated the Rarimo client to the latest version
+- Updated next to the latest version
 
 ## [1.0.3] - 2023-10-26
 ### Removed
