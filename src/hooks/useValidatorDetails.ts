@@ -1,7 +1,20 @@
-import { Coin, DelegateTypes, DelegationResponse } from '@rarimo/client'
+import {
+  Coin,
+  DelegateTypes,
+  DelegationResponse,
+  GrantAuthorization,
+  MessageTypeUrls,
+} from '@rarimo/client'
+import { isEmpty as _isEmpty } from 'lodash-es'
 import { useMemo, useState } from 'react'
 
-import { getDelegationRewards, getValidatorByAddress, getValidatorDelegations } from '@/callers'
+import {
+  filterGrantsByMessageType,
+  getDelegationRewards,
+  getGrants,
+  getValidatorByAddress,
+  getValidatorDelegations,
+} from '@/callers'
 import { GetValidatorByAddressQuery } from '@/graphql'
 import { useContentSectionAction } from '@/hooks/useContentSectionAction'
 import { useLoading } from '@/hooks/useLoading'
@@ -24,15 +37,34 @@ export const useValidatorDetails = (operator: string, reload: () => Promise<void
   const { isConnected, address } = useWeb3()
 
   const {
+    data: grants,
+    isLoading: isGrantsLoading,
+    isLoadingError: isGrantsLoadingError,
+    isEmpty: isGrantsEmpty,
+  } = useLoading<GrantAuthorization[]>([], () => getGrants(address), {
+    loadOnMount: isConnected,
+    loadArgs: [address],
+  })
+
+  const {
     data: accountDelegations,
     isLoading: isDelegationLoading,
     isLoadingError: isDelegationLoadingError,
     isEmpty: isDelegationEmpty,
     reload: reloadDelegation,
-  } = useLoading<DelegationResponse>(
-    {} as DelegationResponse,
-    () => {
-      return getValidatorDelegations(address, validator?.validator_info?.operator_address ?? '')
+  } = useLoading<DelegationResponse[]>(
+    [],
+    async () => {
+      const grants = filterGrantsByMessageType(await getGrants(address), [MessageTypeUrls.Delegate])
+
+      const resp = await Promise.all([
+        getValidatorDelegations(address, validator?.validator_info?.operator_address ?? ''),
+        ...grants.map(grant =>
+          getValidatorDelegations(grant.granter, validator?.validator_info?.operator_address ?? ''),
+        ),
+      ])
+
+      return resp.filter(i => !_isEmpty(i))
     },
     {
       loadOnMount: isConnected && !isEmpty,
@@ -91,5 +123,9 @@ export const useValidatorDetails = (operator: string, reload: () => Promise<void
     isDialogOpened,
     condition,
     comission,
+    grants,
+    isGrantsLoading,
+    isGrantsLoadingError,
+    isGrantsEmpty,
   }
 }

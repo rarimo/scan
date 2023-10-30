@@ -1,12 +1,17 @@
 'use client'
 
 import { Button, Tooltip } from '@mui/material'
-import { ProposalStatus, proposalStatusFromJSON } from '@rarimo/client'
+import {
+  GrantAuthorization,
+  MessageTypeUrls,
+  ProposalStatus,
+  proposalStatusFromJSON,
+} from '@rarimo/client'
 import { sleep } from '@rarimo/shared'
 import isEmpty from 'lodash-es/isEmpty'
 import { useMemo } from 'react'
 
-import { getProposalByID } from '@/callers'
+import { filterGrantsByMessageType, getGrants, getProposalByID } from '@/callers'
 import { ContentSection } from '@/components/Content'
 import { DialogFormWrapper } from '@/components/Dialog'
 import { VoteForm } from '@/components/Forms'
@@ -21,11 +26,27 @@ const VOTE_FORM_ID = 'vote-form'
 
 export default function Proposal({ id }: { id: string }) {
   const t = useI18n()
-  const { isConnected, isValidator } = useWeb3()
+  const { isConnected, isValidator, address } = useWeb3()
 
   const { data, isLoading, isLoadingError, reload } = useLoading<ProposalFragment>(
     {} as ProposalFragment,
     () => getProposalByID(id),
+  )
+
+  const {
+    data: grants,
+    isLoading: isGrantsLoading,
+    isLoadingError: isGrantsLoadingError,
+    isEmpty: isGrantsEmpty,
+  } = useLoading<GrantAuthorization[]>(
+    [],
+    async () => {
+      return filterGrantsByMessageType(await getGrants(address), [MessageTypeUrls.Vote])
+    },
+    {
+      loadOnMount: isConnected,
+      loadArgs: [address],
+    },
   )
 
   const { closeDialog, openDialog, setIsDisabled, onSubmit, isDisabled, isDialogOpened } =
@@ -44,10 +65,15 @@ export default function Proposal({ id }: { id: string }) {
   const tooltipText = useMemo(() => {
     if (!isVotingAllowed) return t('proposal.vote-not-allowed-msg')
     if (!isConnected) return t('proposal.connect-wallet-msg')
-    if (!isValidator) return t('proposal.not-validator-msg')
+    if (!isValidator && isGrantsEmpty) return t('proposal.not-validator-msg')
 
     return ''
-  }, [isValidator, isVotingAllowed, isConnected, t])
+  }, [isValidator, isVotingAllowed, isGrantsEmpty, isConnected, t])
+
+  const isTooltipListenersDisable = useMemo(
+    () => (isValidator || !isGrantsEmpty) && isVotingAllowed && isConnected,
+    [isValidator, isGrantsEmpty, isVotingAllowed, isConnected],
+  )
 
   const sectionAction = (
     <Tooltip
@@ -56,13 +82,15 @@ export default function Proposal({ id }: { id: string }) {
         minWidth: 'auto',
         textAlign: 'center',
       }}
-      disableHoverListener={isValidator && isVotingAllowed && isConnected}
-      disableTouchListener={isValidator && isVotingAllowed && isConnected}
+      disableHoverListener={isTooltipListenersDisable}
+      disableTouchListener={isTooltipListenersDisable}
     >
       <span>
         <Button
           onClick={openDialog}
-          disabled={isDisabled || !isVotingAllowed || !isValidator || !isConnected}
+          disabled={
+            isDisabled || !isVotingAllowed || (!isValidator && isGrantsEmpty) || !isConnected
+          }
         >
           {t('proposal.vote-btn')}
         </Button>
@@ -72,7 +100,11 @@ export default function Proposal({ id }: { id: string }) {
 
   return (
     <ContentSection withBackButton title={t('proposal.title', { id })} action={sectionAction}>
-      <ProposalDetails proposal={data} isLoading={isLoading} isLoadingError={isLoadingError} />
+      <ProposalDetails
+        proposal={data}
+        isLoading={isLoading || isGrantsLoading}
+        isLoadingError={isLoadingError || isGrantsLoadingError}
+      />
       <DialogFormWrapper
         formId={VOTE_FORM_ID}
         isDisabled={isDisabled}
@@ -83,6 +115,7 @@ export default function Proposal({ id }: { id: string }) {
       >
         <VoteForm
           id={VOTE_FORM_ID}
+          grants={grants}
           proposalId={Number(id)}
           onSubmit={onSubmit}
           setIsDialogDisabled={setIsDisabled}

@@ -1,9 +1,10 @@
 import ReceiptLong from '@mui/icons-material/ReceiptLong'
 import { Box, Grid, Stack, Typography, useTheme } from '@mui/material'
-import { Property } from 'csstype'
 import { ReactNode } from 'react'
-import FlexDirection = Property.FlexDirection
+
 import { useSkeleton } from '@/hooks'
+
+type FlexDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse'
 
 const sx = {
   textBlock: {

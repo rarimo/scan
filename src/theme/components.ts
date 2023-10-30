@@ -104,7 +104,7 @@ export const COMPONENTS: Components<BaseTheme> = {
         width: 20,
         height: 20,
         pointerEvents: 'none',
-        top: 10,
+        top: 18,
       },
     },
     defaultProps: {
