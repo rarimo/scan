@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 ## [Unreleased]
 ### Added
 - Ability to delegate, undelegate and vote proposal via authorization grants
+- Ability to withdraw rewards via authorization grants
 
 ### Changed
 - Updated the Rarimo client to the latest version
