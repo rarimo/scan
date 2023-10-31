@@ -396,6 +396,7 @@ export default {
     "get-commission-btn": "Get Commission",
     "dialog-heading-delegate": "Delegate",
     "dialog-heading-undelegate": "Undelegate",
+    "dialog-heading-withdraw-rewards": "Withdraw Delegator's Rewards",
     "delegate-btn-tip-lbl": "Please connect your wallet to be able to delegate.",
     "delegation-submitted-msg": "Successfully delegated {amount} to {address}",
     "delegation-commission-submitted-msg": "Successfully received commission {amount} to {address}",
@@ -469,5 +470,9 @@ export default {
     "delegation-lbl": "Please enter the amount of tokens you would like to delegate.",
     "undelegation-lbl": "Please enter the amount of tokens you would like to undelegate.",
     "execution-type-lbl": "On behalf of",
+  },
+  "withdraw-rewards-form": {
+    "delegator-lbl": "On behalf of",
+    "tip-lbl": "Please select on behalf of which account you would like to withdraw delegator's rewards.",
   },
 } as const

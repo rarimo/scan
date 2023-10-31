@@ -1,11 +1,14 @@
 import { Link } from '@mui/material'
 import { BondStatus, DelegateTypes } from '@rarimo/client'
+import { useMemo } from 'react'
 
+import { withdrawDelegationReward } from '@/callers'
 import { AvatarName } from '@/components/Avatar'
 import { ContentBox, ContentSection, ContentWrapper } from '@/components/Content'
 import CopyToClipboardWrapper from '@/components/CopyToClipboardWrapper'
 import { DialogFormWrapper } from '@/components/Dialog'
 import DelegateForm from '@/components/Forms/DelegateForm'
+import WithdrawRewardsForm from '@/components/Forms/WithdrawRewardsForm'
 import OverviewTable from '@/components/OverviewTable'
 import TableHeadCellWithTip from '@/components/TableHeadCellWithTip'
 import ValidatorCondition from '@/components/Validator/ValidatorCondition'
@@ -13,6 +16,7 @@ import ValidatorConditionTableHead from '@/components/Validator/ValidatorConditi
 import ValidatorDetailsActions from '@/components/Validator/ValidatorDetailsActions'
 import ValidatorStatus from '@/components/Validator/ValidatorStatus'
 import ValidatorVotingPower from '@/components/Validator/ValidatorVotingPower'
+import { CONFIG } from '@/config'
 import {
   TABLE_LARGE_SKELETON_SX,
   TABLE_SMALL_TEXT_SKELETON_SX,
@@ -23,6 +27,7 @@ import { useSkeleton, useValidatorDetails } from '@/hooks'
 import { useI18n } from '@/locales/client'
 
 const DELEGATE_FORM_ID = 'delegate-form'
+const REWARDS_FORM_ID = 'withdraw-rewards-form'
 
 export default function ValidatorDetails({
   operator,
@@ -42,17 +47,19 @@ export default function ValidatorDetails({
     isLoadingError,
     isConnected,
     delegateType,
+    isWithdrawRewards,
     accountDelegations,
     isDelegationLoading,
     isDelegationLoadingError,
     isDelegationEmpty,
     reloadDelegation,
     accountReward,
+    isRewardEmpty,
     isRewardLoading,
     isRewardLoadingError,
-    isRewardEmpty,
     reloadReward,
     setDelegateType,
+    setIsWithdrawRewards,
     closeDialog,
     openDialog,
     setIsDisabled,
@@ -183,28 +190,60 @@ export default function ValidatorDetails({
     },
   ]
 
+  const getRewards = () => {
+    if (accountReward.length === 1 && accountReward[0]?.delegator === address) {
+      _getRewards()
+      return
+    }
+
+    openDialog()
+    setIsWithdrawRewards(true)
+  }
+
+  const _getRewards = async () => {
+    await withdrawDelegationReward(
+      address,
+      validator?.validator_info?.operator_address ?? '',
+      `${accountReward.find(i => i.delegator === address)?.coins?.[0]?.amount} ${CONFIG.DENOM}`,
+      async args => {
+        await reloadReward()
+        await onSubmit({
+          message: t('validator-details.reward-submitted-msg', args),
+        })
+      },
+    )
+  }
+
   const action = (
     <ValidatorDetailsActions
       address={address}
       validator={validator}
-      accountReward={accountReward}
       isEmpty={isEmpty}
       isDisabled={isDisabled}
       isConnected={isConnected}
       isDelegationEmpty={isDelegationEmpty}
-      isRewardEmpty={isRewardEmpty}
       isDelegationLoading={isDelegationLoading}
       isDelegationLoadingError={isDelegationLoadingError}
+      isRewardEmpty={isRewardEmpty}
       isRewardLoading={isRewardLoading}
       isRewardLoadingError={isRewardLoadingError}
       isGrantsLoading={isGrantsLoading}
       isGrantsLoadingError={isGrantsLoadingError}
-      reloadReward={reloadReward}
       onSubmit={onSubmit}
       openDialog={openDialog}
       setDelegateType={setDelegateType}
+      setIsWithdrawRewards={setIsWithdrawRewards}
+      getRewards={getRewards}
     />
   )
+
+  const formTitle = useMemo(() => {
+    if (isWithdrawRewards) return t('validator-details.dialog-heading-withdraw-rewards')
+
+    return delegateType === DelegateTypes.Delegate
+      ? t('validator-details.dialog-heading-delegate')
+      : t('validator-details.dialog-heading-undelegate')
+  }, [delegateType, isWithdrawRewards, t])
 
   return (
     <ContentSection withBackButton title={t('validator-details.title')} action={action}>
@@ -219,28 +258,36 @@ export default function ValidatorDetails({
           />
         </ContentWrapper>
         <DialogFormWrapper
-          formId={DELEGATE_FORM_ID}
+          formId={isWithdrawRewards ? REWARDS_FORM_ID : DELEGATE_FORM_ID}
           isDisabled={isDisabled}
           isDialogOpened={isDialogOpened}
           closeDialog={closeDialog}
           actionBtnText={t('common.submit-btn')}
-          title={
-            delegateType === DelegateTypes.Delegate
-              ? t('validator-details.dialog-heading-delegate')
-              : t('validator-details.dialog-heading-undelegate')
-          }
+          title={formTitle}
         >
-          <DelegateForm
-            id={DELEGATE_FORM_ID}
-            operator={validator?.validator_info?.operator_address ?? ''}
-            grants={grants}
-            minDelegationAmount={validator?.validator_commissions?.[0]?.min_self_delegation ?? ''}
-            delegateType={delegateType}
-            accountDelegations={accountDelegations}
-            reloadDelegation={reloadDelegation}
-            onSubmit={onSubmit}
-            setIsDialogDisabled={setIsDisabled}
-          />
+          {isWithdrawRewards ? (
+            <WithdrawRewardsForm
+              id={REWARDS_FORM_ID}
+              operator={validator?.validator_info?.operator_address ?? ''}
+              accountReward={accountReward}
+              onSubmit={onSubmit}
+              setIsDialogDisabled={setIsDisabled}
+              grants={grants}
+              reloadReward={reloadReward}
+            />
+          ) : (
+            <DelegateForm
+              id={DELEGATE_FORM_ID}
+              operator={validator?.validator_info?.operator_address ?? ''}
+              grants={grants}
+              minDelegationAmount={validator?.validator_commissions?.[0]?.min_self_delegation ?? ''}
+              delegateType={delegateType}
+              accountDelegations={accountDelegations}
+              reloadDelegation={reloadDelegation}
+              onSubmit={onSubmit}
+              setIsDialogDisabled={setIsDisabled}
+            />
+          )}
         </DialogFormWrapper>
       </ContentBox>
     </ContentSection>

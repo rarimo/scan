@@ -1,16 +1,14 @@
 import { Tooltip } from '@mui/material'
-import { Coin, DelegateTypes } from '@rarimo/client'
+import { DelegateTypes } from '@rarimo/client'
 import { Dispatch, SetStateAction, useMemo } from 'react'
 
-import { withdrawDelegationReward, withdrawValidatorCommission } from '@/callers'
+import { withdrawValidatorCommission } from '@/callers'
 import MultipleActionsButton from '@/components/MultipleActionsButton'
-import { CONFIG } from '@/config'
 import { ValidatorFragment } from '@/graphql'
 import { useI18n } from '@/locales/client'
 
 export default function ValidatorDetailsActions({
   validator,
-  accountReward,
   address,
   isDisabled,
   isConnected,
@@ -22,13 +20,13 @@ export default function ValidatorDetailsActions({
   isRewardLoadingError,
   isGrantsLoading,
   isGrantsLoadingError,
-  reloadReward,
   onSubmit,
   openDialog,
   setDelegateType,
+  setIsWithdrawRewards,
+  getRewards,
 }: {
   address: string
-  accountReward: Coin[]
   validator: ValidatorFragment
   isEmpty: boolean
   isDisabled: boolean
@@ -41,26 +39,13 @@ export default function ValidatorDetailsActions({
   isRewardLoadingError: boolean
   isGrantsLoading: boolean
   isGrantsLoadingError: boolean
-  reloadReward: () => Promise<void>
   onSubmit(params: { message: string }): Promise<void>
   openDialog(): void
+  getRewards(): void
   setDelegateType: Dispatch<SetStateAction<DelegateTypes>>
+  setIsWithdrawRewards: Dispatch<SetStateAction<boolean>>
 }) {
   const t = useI18n()
-
-  const getRewards = async () => {
-    await withdrawDelegationReward(
-      address,
-      validator?.validator_info?.operator_address ?? '',
-      `${accountReward?.[0]?.amount} ${CONFIG.DENOM}`,
-      async args => {
-        await reloadReward()
-        await onSubmit({
-          message: t('validator-details.reward-submitted-msg', args),
-        })
-      },
-    )
-  }
 
   const getValidatorCommission = async () => {
     const validatorAddress = String(validator?.validator_info?.operator_address)
@@ -77,6 +62,7 @@ export default function ValidatorDetailsActions({
   )
 
   const delegate = (type: DelegateTypes) => {
+    setIsWithdrawRewards(false)
     setDelegateType(type)
     openDialog()
   }

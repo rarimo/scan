@@ -23,6 +23,7 @@ import { useWeb3 } from '@/hooks/useWeb3'
 
 export const useValidatorDetails = (operator: string, reload: () => Promise<void>) => {
   const [delegateType, setDelegateType] = useState<DelegateTypes>(DelegateTypes.Delegate)
+  const [isWithdrawRewards, setIsWithdrawRewards] = useState(false)
 
   const { closeDialog, openDialog, setIsDisabled, onSubmit, isDisabled, isDialogOpened } =
     useContentSectionAction(reload)
@@ -78,10 +79,31 @@ export const useValidatorDetails = (operator: string, reload: () => Promise<void
     isLoadingError: isRewardLoadingError,
     isEmpty: isRewardEmpty,
     reload: reloadReward,
-  } = useLoading<Coin[]>(
+  } = useLoading<{ delegator: string; coins: Coin[] }[]>(
     [],
-    () => {
-      return getDelegationRewards(address, validator?.validator_info?.operator_address ?? '')
+    async () => {
+      const grants = filterGrantsByMessageType(await getGrants(address), [
+        MessageTypeUrls.WithdrawDelegatorReward,
+      ])
+
+      const result: { delegator: string; coins: Coin[] }[] = [
+        { delegator: address, coins: [] },
+        ...grants.map(grant => ({ delegator: grant.granter, coins: [] })),
+      ]
+
+      const resp = await Promise.all([
+        getDelegationRewards(address, validator?.validator_info?.operator_address ?? ''),
+        ...grants.map(grant =>
+          getDelegationRewards(grant.granter, validator?.validator_info?.operator_address ?? ''),
+        ),
+      ])
+
+      resp.forEach((item, idx) => {
+        if (_isEmpty(item)) return
+        result[idx].coins = item
+      })
+
+      return result.filter(i => i.coins.length)
     },
     {
       loadOnMount: isConnected && !isEmpty,
@@ -104,6 +126,7 @@ export const useValidatorDetails = (operator: string, reload: () => Promise<void
     isLoading,
     isLoadingError,
     delegateType,
+    isWithdrawRewards,
     accountDelegations,
     isDelegationLoading,
     isDelegationLoadingError,
@@ -115,6 +138,7 @@ export const useValidatorDetails = (operator: string, reload: () => Promise<void
     isRewardEmpty,
     reloadReward,
     setDelegateType,
+    setIsWithdrawRewards,
     closeDialog,
     openDialog,
     setIsDisabled,
