@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
-## [Unreleased]
+## [1.0.5] - 2023-11-02
 ### Added
 - Ability to delegate, undelegate and vote proposal via authorization grants
 - Ability to withdraw rewards via authorization grants
@@ -39,7 +39,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.4...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.5...HEAD
+[1.0.5]: https://gitlab.com/rarimo/scan/compare/1.0.4...1.0.5
 [1.0.4]: https://gitlab.com/rarimo/scan/compare/1.0.3...1.0.4
 [1.0.3]: https://gitlab.com/rarimo/scan/compare/1.0.2...1.0.3
 [1.0.2]: https://gitlab.com/rarimo/scan/compare/1.0.1...1.0.2
