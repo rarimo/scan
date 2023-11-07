@@ -5,6 +5,8 @@ export * from './Transaction'
 export * from './Block'
 export * from './Proposal'
 export * from './Validator'
+export * from './TSS'
+export * from './Oracles'
 
 export { default as Avatar } from './Avatar/Avatar'
 export { default as AvatarName } from './Avatar/AvatarName'

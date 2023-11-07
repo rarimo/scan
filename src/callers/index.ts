@@ -1,5 +1,6 @@
 export * from './block'
 export * from './proposal'
+export * from './rarimocore'
 export * from './stats'
 export * from './tx'
 export * from './validators'

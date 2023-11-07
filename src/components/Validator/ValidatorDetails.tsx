@@ -113,10 +113,12 @@ export default function ValidatorDetails({
     {
       head: t('validator-details.validator-address-lbl'),
       body: withSkeleton(
-        <AvatarName
-          address={validator?.validator_info?.account?.address ?? ''}
-          abbrAddress={false}
-        />,
+        <CopyToClipboardWrapper value={validator?.validator_info?.account?.address ?? ''}>
+          <AvatarName
+            address={validator?.validator_info?.account?.address ?? ''}
+            abbrAddress={false}
+          />
+        </CopyToClipboardWrapper>,
         TABLE_TYPE_BOX_SKELETON_SX,
       ),
     },

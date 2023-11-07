@@ -4,7 +4,7 @@ import { Stack, Typography, useTheme } from '@mui/material'
 
 import { getStatisticData } from '@/callers'
 import ContentSection from '@/components/Content/ContentSection'
-import HomeStatisticsRow from '@/components/Home/HomeStatisticsRow'
+import DataBox from '@/components/DataBox'
 import { CONFIG } from '@/config'
 import { GetStatisticQuery } from '@/graphql'
 import { formatCurrency, formatSeconds } from '@/helpers'
@@ -31,7 +31,7 @@ export default function HomeStatistics() {
             justifyContent={'space-between'}
             flex={'1'}
           >
-            <HomeStatisticsRow
+            <DataBox
               direction={'horizontal'}
               header={{
                 title: t('home-statistics.height-lbl'),
@@ -44,7 +44,7 @@ export default function HomeStatistics() {
               isLoading={isLoading}
             />
             <Stack flex={1}>
-              <HomeStatisticsRow
+              <DataBox
                 header={{
                   title: t('home-statistics.supply-lbl'),
                   body: (

@@ -1,0 +1,11 @@
+fragment Oracle on oracle {
+    account
+    chain
+    status
+    stake
+    missed_count
+    freeze_end_block
+    violations_count
+    votes_count
+    create_operations_count
+}

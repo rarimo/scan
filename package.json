@@ -14,7 +14,7 @@
     "lint:scripts": "next lint",
     "lint:styles": "stylelint \"src/**/*.{css,sass,scss}\" --max-warnings=0",
     "rsc": "node scripts/release-sanity-check.mjs",
-    "codegen-generate": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env"
+    "codegen-generate": "graphql-codegen --require dotenv/config --config codegen.ts dotenv_config_path=.env.local"
   },
   "dependencies": {
     "@apollo/client": "^3.7.17",
@@ -72,5 +72,23 @@
     "stylelint-scss": "^5.0.1",
     "yorkie": "^2.0.0"
   },
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@3.6.1",
+  "resolutions": {
+    "rarimo-js-sdk-monorepo-root": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk",
+    "@rarimo/auth-zkp-iden3": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/auth-zkp-iden3",
+    "@rarimo/bridge": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/bridge",
+    "@rarimo/client": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/client",
+    "@rarimo/identity-gen-iden3": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/identity-gen-iden3",
+    "@rarimo/nft-checkout": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/nft-checkout",
+    "@rarimo/provider": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/provider",
+    "@rarimo/providers-evm": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/providers-evm",
+    "@rarimo/providers-near": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/providers-near",
+    "@rarimo/providers-solana": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/providers-solana",
+    "@rarimo/react-nft-checkout": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/react-nft-checkout",
+    "@rarimo/react-provider": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/react-provider",
+    "@rarimo/shared": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/shared",
+    "@rarimo/shared-zkp-iden3": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/shared-zkp-iden3",
+    "@rarimo/swap": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/swap",
+    "@rarimo/zkp-gen-iden3": "portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/zkp-gen-iden3"
+  }
 }

@@ -1,15 +1,17 @@
 'use client'
 
-import { BondStatus, ProposalType } from '@rarimo/client'
+import { BondStatus, OracleStatus, PartyStatus, ProposalType } from '@rarimo/client'
 import { AnyObject, Flags, Maybe, Schema } from 'yup'
 
 import { createYupInitFn } from '@/helpers'
 import { useI18n } from '@/locales/client'
 import {
   localizeMsgType,
+  localizeOracleStatus,
   localizeProposalStatus,
   localizeProposalType,
   localizeProposalVoteOption,
+  localizeTSSStatus,
   localizeValidatorStatus,
 } from '@/locales/localizers'
 
@@ -36,6 +38,8 @@ export const useLocalize = () => {
     localizeProposalVoteOption: (option: unknown) => localizeProposalVoteOption(t, option),
     localizeProposalType: (type: ProposalType) => localizeProposalType(t, type),
     localizeMsgType: (type: string) => localizeMsgType(t, type),
+    localizeTSSStatus: (status: PartyStatus) => localizeTSSStatus(t, status),
+    localizeOracleStatus: (status: OracleStatus) => localizeOracleStatus(t, status),
     localizeValidatorStatus: (status: BondStatus, jailed: boolean) =>
       localizeValidatorStatus(t, status, jailed),
   }

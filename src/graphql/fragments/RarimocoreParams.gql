@@ -1,0 +1,6 @@
+fragment RarimocoreParams on rarimocore_params {
+    is_update_required
+    key_ecdsa
+    threshold
+    max_violations_count
+}

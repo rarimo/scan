@@ -1,0 +1,5 @@
+query GetOracleByAddress($address: String!) {
+  oracle(where: {account: {_eq: $address}}) {
+    ...Oracle
+  }
+}

@@ -18461,6 +18461,10 @@ export type BlockBaseFragment = { __typename?: 'block', height: any, timestamp: 
 
 export type BlockListFragment = { __typename?: 'block', height: any, timestamp: any, total_gas?: any | null, transactions_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null };
 
+export type OracleFragment = { __typename?: 'oracle', account: string, chain: string, status: number, stake: string, missed_count: number, freeze_end_block: number, violations_count: number, votes_count: number, create_operations_count: number };
+
+export type OracleBaseFragment = { __typename?: 'oracle', account: string, chain: string, status: number, stake: string };
+
 export type ProposalFragment = { __typename?: 'proposal', content: any, deposit_end_block?: any | null, id: number, proposer_address: string, status?: string | null, submit_block: any, metadata: string, voting_end_block?: any | null, voting_start_block?: any | null, proposal_tally_result?: { __typename?: 'proposal_tally_result', abstain: string, no: string, no_with_veto: string, yes: string } | null };
 
 export type ProposalBaseFragment = { __typename?: 'proposal', id: number, proposer_address: string, content: any, metadata: string, status?: string | null };
@@ -18469,9 +18473,15 @@ export type ProposalDepositFragment = { __typename?: 'proposal_deposit', amount?
 
 export type ProposalVoteFragment = { __typename?: 'proposal_vote', voter_address: string, option: string, height: any, block: { __typename?: 'block', timestamp: any, transactions: Array<{ __typename?: 'transaction', hash: string }> } };
 
+export type RarimocoreParamsFragment = { __typename?: 'rarimocore_params', is_update_required: boolean, key_ecdsa: string, threshold: any, max_violations_count?: number | null };
+
 export type SlashingParamsFragment = { __typename?: 'slashing_params', params: any };
 
 export type StakingPoolFragment = { __typename?: 'staking_pool', bonded_tokens: string };
+
+export type TssFragment = { __typename?: 'parties', account: string, delegator?: string | null, status?: number | null, violations_count?: number | null, address: string, committed_global_public_key?: string | null, freeze_end_block?: number | null, pub_key: string, reported_sessions?: any | null };
+
+export type TssListFragment = { __typename?: 'parties', account: string, delegator?: string | null, status?: number | null, violations_count?: number | null };
 
 export type TallyResultFragment = { __typename?: 'proposal_tally_result', abstain: string, no: string, no_with_veto: string, yes: string };
 
@@ -18522,6 +18532,26 @@ export type GetLatestTxAndBlocksQueryVariables = Exact<{
 
 
 export type GetLatestTxAndBlocksQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } }>, block: Array<{ __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null }> };
+
+export type GetOracleBaseQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetOracleBaseQuery = { __typename?: 'query_root', oracle: Array<{ __typename?: 'oracle', account: string, chain: string, status: number, stake: string }> };
+
+export type GetOracleByAddressQueryVariables = Exact<{
+  address: Scalars['String']['input'];
+}>;
+
+
+export type GetOracleByAddressQuery = { __typename?: 'query_root', oracle: Array<{ __typename?: 'oracle', account: string, chain: string, status: number, stake: string, missed_count: number, freeze_end_block: number, violations_count: number, votes_count: number, create_operations_count: number }> };
+
+export type GetOracleCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetOracleCountQuery = { __typename?: 'query_root', oracle_aggregate: { __typename?: 'oracle_aggregate', aggregate?: { __typename?: 'oracle_aggregate_fields', count: number } | null } };
 
 export type GetProposalBaseQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -18575,10 +18605,35 @@ export type GetProposalVotesCountByIdQueryVariables = Exact<{
 
 export type GetProposalVotesCountByIdQuery = { __typename?: 'query_root', proposal: Array<{ __typename?: 'proposal', proposal_votes_aggregate: { __typename?: 'proposal_vote_aggregate', aggregate?: { __typename?: 'proposal_vote_aggregate_fields', count: number } | null } }> };
 
+export type GetRarimocoreParamsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetRarimocoreParamsQuery = { __typename?: 'query_root', rarimocore_params: Array<{ __typename?: 'rarimocore_params', is_update_required: boolean, key_ecdsa: string, threshold: any, max_violations_count?: number | null }> };
+
 export type GetStatisticQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetStatisticQuery = { __typename?: 'query_root', block: Array<{ __typename?: 'block', timestamp: any, height: any }>, transaction_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, supply: Array<{ __typename?: 'supply', coins: any }>, averageBlockTime: Array<{ __typename?: 'average_block_time_per_minute', averageTime: any }> };
+
+export type GetTssByAddressQueryVariables = Exact<{
+  address: Scalars['String']['input'];
+}>;
+
+
+export type GetTssByAddressQuery = { __typename?: 'query_root', parties: Array<{ __typename?: 'parties', account: string, delegator?: string | null, status?: number | null, violations_count?: number | null, address: string, committed_global_public_key?: string | null, freeze_end_block?: number | null, pub_key: string, reported_sessions?: any | null }> };
+
+export type GetTssCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTssCountQuery = { __typename?: 'query_root', parties_aggregate: { __typename?: 'parties_aggregate', aggregate?: { __typename?: 'parties_aggregate_fields', count: number } | null } };
+
+export type GetTssListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetTssListQuery = { __typename?: 'query_root', parties: Array<{ __typename?: 'parties', account: string, delegator?: string | null, status?: number | null, violations_count?: number | null }> };
 
 export type GetTransactionBaseQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -18747,6 +18802,27 @@ export const BlockList = gql`
   }
 }
     `;
+export const Oracle = gql`
+    fragment Oracle on oracle {
+  account
+  chain
+  status
+  stake
+  missed_count
+  freeze_end_block
+  violations_count
+  votes_count
+  create_operations_count
+}
+    `;
+export const OracleBase = gql`
+    fragment OracleBase on oracle {
+  account
+  chain
+  status
+  stake
+}
+    `;
 export const TallyResult = gql`
     fragment TallyResult on proposal_tally_result {
   abstain
@@ -18807,6 +18883,14 @@ export const ProposalVote = gql`
   }
 }
     `;
+export const RarimocoreParams = gql`
+    fragment RarimocoreParams on rarimocore_params {
+  is_update_required
+  key_ecdsa
+  threshold
+  max_violations_count
+}
+    `;
 export const SlashingParams = gql`
     fragment SlashingParams on slashing_params {
   params
@@ -18815,6 +18899,27 @@ export const SlashingParams = gql`
 export const StakingPool = gql`
     fragment StakingPool on staking_pool {
   bonded_tokens
+}
+    `;
+export const Tss = gql`
+    fragment TSS on parties {
+  account
+  delegator
+  status
+  violations_count
+  address
+  committed_global_public_key
+  freeze_end_block
+  pub_key
+  reported_sessions
+}
+    `;
+export const TssList = gql`
+    fragment TSSList on parties {
+  account
+  delegator
+  status
+  violations_count
 }
     `;
 export const Transaction = gql`
@@ -18974,6 +19079,29 @@ export const GetLatestTxAndBlocks = gql`
 }
     ${TransactionBase}
 ${BlockBase}`;
+export const GetOracleBase = gql`
+    query GetOracleBase($limit: Int, $offset: Int) {
+  oracle(limit: $limit, offset: $offset) {
+    ...OracleBase
+  }
+}
+    ${OracleBase}`;
+export const GetOracleByAddress = gql`
+    query GetOracleByAddress($address: String!) {
+  oracle(where: {account: {_eq: $address}}) {
+    ...Oracle
+  }
+}
+    ${Oracle}`;
+export const GetOracleCount = gql`
+    query GetOracleCount {
+  oracle_aggregate {
+    aggregate {
+      count(columns: account)
+    }
+  }
+}
+    `;
 export const GetProposalBase = gql`
     query GetProposalBase($limit: Int, $offset: Int) {
   proposal(limit: $limit, offset: $offset, order_by: {id: desc}) {
@@ -19037,6 +19165,13 @@ export const GetProposalVotesCountById = gql`
   }
 }
     `;
+export const GetRarimocoreParams = gql`
+    query GetRarimocoreParams {
+  rarimocore_params {
+    ...RarimocoreParams
+  }
+}
+    ${RarimocoreParams}`;
 export const GetStatistic = gql`
     query GetStatistic {
   block(order_by: {height: desc}, limit: 1) {
@@ -19059,6 +19194,29 @@ export const GetStatistic = gql`
   }
 }
     `;
+export const GetTssByAddress = gql`
+    query GetTSSByAddress($address: String!) {
+  parties(where: {account: {_eq: $address}}) {
+    ...TSS
+  }
+}
+    ${Tss}`;
+export const GetTssCount = gql`
+    query GetTSSCount {
+  parties_aggregate {
+    aggregate {
+      count(columns: account)
+    }
+  }
+}
+    `;
+export const GetTssList = gql`
+    query GetTSSList($limit: Int, $offset: Int) {
+  parties(limit: $limit, offset: $offset) {
+    ...TSSList
+  }
+}
+    ${TssList}`;
 export const GetTransactionBase = gql`
     query GetTransactionBase($limit: Int, $offset: Int) {
   transaction(

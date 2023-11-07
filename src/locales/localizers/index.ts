@@ -1,5 +1,7 @@
 export * from './msg-type'
+export * from './oracle'
 export * from './proposal-status'
 export * from './proposal-type'
 export * from './proposal-vote-option'
+export * from './tss'
 export * from './validator-status'

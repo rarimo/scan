@@ -16,6 +16,7 @@ import {
 import React, { ReactNode, useContext, useMemo } from 'react'
 
 import HeaderBlockchainMenu from '@/components/Header/HeaderBlockchainMenu'
+import HeaderBridgeMenu from '@/components/Header/HeaderBridgeMenu'
 import Logo from '@/components/Logo'
 import NavbarActionsList from '@/components/Navbar/NavbarActionsList'
 import NavbarLinks from '@/components/Navbar/NavbarLinks'
@@ -121,7 +122,10 @@ export default function Navbar({ children }: { children: ReactNode }) {
     >
       {menuToolbar}
       <Stack direction={'row'} alignItems={'center'} justifyContent={'space-between'}>
-        <HeaderBlockchainMenu displayXs={true} onClick={toggleMobileNavbar} />
+        <Stack direction={'row'} spacing={2}>
+          <HeaderBlockchainMenu displayXs={true} onClick={toggleMobileNavbar} />
+          <HeaderBridgeMenu displayXs={true} onClick={toggleMobileNavbar} />
+        </Stack>
         <IconButton
           size='small'
           onClick={colorMode.toggleColorMode}

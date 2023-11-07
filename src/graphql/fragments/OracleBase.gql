@@ -1,0 +1,6 @@
+fragment OracleBase on oracle {
+    account
+    chain
+    status
+    stake
+}

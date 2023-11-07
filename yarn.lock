@@ -2489,29 +2489,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rarimo/client@npm:^2.0.0-rc.28":
-  version: 2.0.0-rc.28
-  resolution: "@rarimo/client@npm:2.0.0-rc.28"
+"@rarimo/client@portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/client::locator=scan%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@rarimo/client@portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/client::locator=scan%40workspace%3A."
   dependencies:
     "@cosmjs/launchpad": ^0.27.1
     "@cosmjs/proto-signing": ^0.31.0
     "@cosmjs/stargate": ^0.31.0
     "@distributedlab/fetcher": ^1.0.0-rc.6
     "@distributedlab/reactivity": ^1.0.0-rc.6
-    "@rarimo/shared": ^2.0.0-rc.28
-  checksum: 456e2ecb40dfea6e4548bc7e2e27a6d95568035556c0c9cd196100b02f4cacd7e7c5a1d1b14630a70f387da1a491d85dd4433eff07e85449a66109898b94c6fa
+    "@rarimo/shared": "workspace:^"
   languageName: node
-  linkType: hard
+  linkType: soft
 
-"@rarimo/shared@npm:^2.0.0-rc.28":
-  version: 2.0.0-rc.28
-  resolution: "@rarimo/shared@npm:2.0.0-rc.28"
+"@rarimo/shared@portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/shared::locator=scan%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@rarimo/shared@portal:/Users/napalmpapalam/Projects/RARIMO/js-sdk/packages/shared::locator=scan%40workspace%3A."
   dependencies:
     "@distributedlab/jac": ^1.0.0-rc.6
     "@distributedlab/tools": ^1.0.0-rc.6
-  checksum: f06876af41b1dd2c9d85b89d67ed098e8296de16d2fa8abd8a704765a6e41d352884009d0b49af18b6ef0f329fe305787a8120563dd0fffcaa4cedbf86a06f8f
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@repeaterjs/repeater@npm:^3.0.4":
   version: 3.0.4
