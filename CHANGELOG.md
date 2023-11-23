@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [1.0.8] - 2023-11-23
+### Changed
+- Disabled eslint during the build in the next.config.js
+
 ## [1.0.7] - 2023-11-23
 ### Fixed
 - Build issues
@@ -47,7 +51,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.7...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.8...HEAD
+[1.0.8]: https://gitlab.com/rarimo/scan/compare/1.0.7...1.0.8
 [1.0.7]: https://gitlab.com/rarimo/scan/compare/1.0.6...1.0.7
 [1.0.6]: https://gitlab.com/rarimo/scan/compare/1.0.5...1.0.6
 [1.0.5]: https://gitlab.com/rarimo/scan/compare/1.0.4...1.0.5
