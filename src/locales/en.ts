@@ -187,6 +187,8 @@ export default {
     "unknown-lbl": "Unknown",
     "ethereum-tx-lbl": "Ethereum Tx",
     "create-identity-default-transfer-op-lbl": "Create Identity Transfer",
+    "create-identity-gist-transfer-op-lbl": "Create Identity GIST Transfer",
+    "create-identity-state-transfer-op-lbl": "Create Identity State Transfer",
   },
   "proposal-status": {
     "unspecified-lbl": "Unknown",
