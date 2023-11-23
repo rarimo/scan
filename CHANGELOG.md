@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [1.0.7] - 2023-11-23
+### Fixed
+- Build issues
+
 ## [1.0.6] - 2023-11-23
 ### Added
 - CreateIdentityGISTTransferOp, CreateIdentityStateTransferOp message types localization
@@ -43,7 +47,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.6...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.7...HEAD
+[1.0.7]: https://gitlab.com/rarimo/scan/compare/1.0.6...1.0.7
 [1.0.6]: https://gitlab.com/rarimo/scan/compare/1.0.5...1.0.6
 [1.0.5]: https://gitlab.com/rarimo/scan/compare/1.0.4...1.0.5
 [1.0.4]: https://gitlab.com/rarimo/scan/compare/1.0.3...1.0.4
