@@ -1,0 +1,11 @@
+fragment Confirmation on confirmation {
+    creator
+    height
+    tx
+    root
+    indexes
+    signature_ecdsa
+    block {
+        timestamp
+    }
+}

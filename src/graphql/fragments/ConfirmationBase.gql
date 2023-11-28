@@ -1,0 +1,9 @@
+fragment ConfirmationBase on confirmation {
+    root
+    creator
+    height
+    tx
+    block {
+        timestamp
+    }
+}

@@ -1,0 +1,5 @@
+query GetOperationList($limit: Int, $offset: Int) {
+  operation(order_by: { timestamp: desc }, limit: $limit, offset: $offset) {
+    ...Operation
+  }
+}

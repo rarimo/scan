@@ -1,16 +1,16 @@
 import { Metadata } from 'next'
 
-import { PageContainer, TSSs } from '@/components'
+import { Operations, PageContainer } from '@/components'
 import { createMetadata } from '@/config'
 
 export function generateMetadata(): Metadata {
-  return createMetadata('TSS')
+  return createMetadata(`Operations`)
 }
 
-export default function TSSsPage() {
+export default function OperationsPage() {
   return (
     <PageContainer>
-      <TSSs />
+      <Operations />
     </PageContainer>
   )
 }

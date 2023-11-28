@@ -2103,12 +2103,18 @@ export type Community_Pool_Variance_Fields = {
 /** columns and relationships of "confirmation" */
 export type Confirmation = {
   __typename?: 'confirmation';
+  /** An object relationship */
+  block?: Maybe<Block>;
   creator: Scalars['String']['output'];
   /** An object relationship */
   creator_account?: Maybe<Account>;
+  height: Scalars['bigint']['output'];
   indexes: Scalars['_text']['output'];
   root: Scalars['String']['output'];
   signature_ecdsa: Scalars['String']['output'];
+  /** An object relationship */
+  transaction?: Maybe<Transaction>;
+  tx?: Maybe<Scalars['String']['output']>;
 };
 
 /** aggregated selection of "confirmation" */
@@ -2121,9 +2127,17 @@ export type Confirmation_Aggregate = {
 /** aggregate fields of "confirmation" */
 export type Confirmation_Aggregate_Fields = {
   __typename?: 'confirmation_aggregate_fields';
+  avg?: Maybe<Confirmation_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Confirmation_Max_Fields>;
   min?: Maybe<Confirmation_Min_Fields>;
+  stddev?: Maybe<Confirmation_Stddev_Fields>;
+  stddev_pop?: Maybe<Confirmation_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Confirmation_Stddev_Samp_Fields>;
+  sum?: Maybe<Confirmation_Sum_Fields>;
+  var_pop?: Maybe<Confirmation_Var_Pop_Fields>;
+  var_samp?: Maybe<Confirmation_Var_Samp_Fields>;
+  variance?: Maybe<Confirmation_Variance_Fields>;
 };
 
 
@@ -2133,41 +2147,59 @@ export type Confirmation_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+/** aggregate avg on columns */
+export type Confirmation_Avg_Fields = {
+  __typename?: 'confirmation_avg_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+};
+
 /** Boolean expression to filter rows from the table "confirmation". All fields are combined with a logical 'AND'. */
 export type Confirmation_Bool_Exp = {
   _and?: InputMaybe<Array<Confirmation_Bool_Exp>>;
   _not?: InputMaybe<Confirmation_Bool_Exp>;
   _or?: InputMaybe<Array<Confirmation_Bool_Exp>>;
+  block?: InputMaybe<Block_Bool_Exp>;
   creator?: InputMaybe<String_Comparison_Exp>;
   creator_account?: InputMaybe<Account_Bool_Exp>;
+  height?: InputMaybe<Bigint_Comparison_Exp>;
   indexes?: InputMaybe<_Text_Comparison_Exp>;
   root?: InputMaybe<String_Comparison_Exp>;
   signature_ecdsa?: InputMaybe<String_Comparison_Exp>;
+  transaction?: InputMaybe<Transaction_Bool_Exp>;
+  tx?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** aggregate max on columns */
 export type Confirmation_Max_Fields = {
   __typename?: 'confirmation_max_fields';
   creator?: Maybe<Scalars['String']['output']>;
+  height?: Maybe<Scalars['bigint']['output']>;
   root?: Maybe<Scalars['String']['output']>;
   signature_ecdsa?: Maybe<Scalars['String']['output']>;
+  tx?: Maybe<Scalars['String']['output']>;
 };
 
 /** aggregate min on columns */
 export type Confirmation_Min_Fields = {
   __typename?: 'confirmation_min_fields';
   creator?: Maybe<Scalars['String']['output']>;
+  height?: Maybe<Scalars['bigint']['output']>;
   root?: Maybe<Scalars['String']['output']>;
   signature_ecdsa?: Maybe<Scalars['String']['output']>;
+  tx?: Maybe<Scalars['String']['output']>;
 };
 
 /** Ordering options when selecting data from "confirmation". */
 export type Confirmation_Order_By = {
+  block?: InputMaybe<Block_Order_By>;
   creator?: InputMaybe<Order_By>;
   creator_account?: InputMaybe<Account_Order_By>;
+  height?: InputMaybe<Order_By>;
   indexes?: InputMaybe<Order_By>;
   root?: InputMaybe<Order_By>;
   signature_ecdsa?: InputMaybe<Order_By>;
+  transaction?: InputMaybe<Transaction_Order_By>;
+  tx?: InputMaybe<Order_By>;
 };
 
 /** select columns of table "confirmation" */
@@ -2175,12 +2207,34 @@ export enum Confirmation_Select_Column {
   /** column name */
   Creator = 'creator',
   /** column name */
+  Height = 'height',
+  /** column name */
   Indexes = 'indexes',
   /** column name */
   Root = 'root',
   /** column name */
-  SignatureEcdsa = 'signature_ecdsa'
+  SignatureEcdsa = 'signature_ecdsa',
+  /** column name */
+  Tx = 'tx'
 }
+
+/** aggregate stddev on columns */
+export type Confirmation_Stddev_Fields = {
+  __typename?: 'confirmation_stddev_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Confirmation_Stddev_Pop_Fields = {
+  __typename?: 'confirmation_stddev_pop_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Confirmation_Stddev_Samp_Fields = {
+  __typename?: 'confirmation_stddev_samp_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+};
 
 /** Streaming cursor of the table "confirmation" */
 export type Confirmation_Stream_Cursor_Input = {
@@ -2193,9 +2247,35 @@ export type Confirmation_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Confirmation_Stream_Cursor_Value_Input = {
   creator?: InputMaybe<Scalars['String']['input']>;
+  height?: InputMaybe<Scalars['bigint']['input']>;
   indexes?: InputMaybe<Scalars['_text']['input']>;
   root?: InputMaybe<Scalars['String']['input']>;
   signature_ecdsa?: InputMaybe<Scalars['String']['input']>;
+  tx?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Confirmation_Sum_Fields = {
+  __typename?: 'confirmation_sum_fields';
+  height?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** aggregate var_pop on columns */
+export type Confirmation_Var_Pop_Fields = {
+  __typename?: 'confirmation_var_pop_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Confirmation_Var_Samp_Fields = {
+  __typename?: 'confirmation_var_samp_fields';
+  height?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Confirmation_Variance_Fields = {
+  __typename?: 'confirmation_variance_fields';
+  height?: Maybe<Scalars['Float']['output']>;
 };
 
 /** columns and relationships of "contract_upgrade" */
@@ -2204,6 +2284,8 @@ export type Contract_Upgrade = {
   buffer_account: Scalars['String']['output'];
   chain: Scalars['String']['output'];
   hash: Scalars['String']['output'];
+  /** An object relationship */
+  network?: Maybe<Network>;
   new_implementation_contract: Scalars['String']['output'];
   nonce: Scalars['String']['output'];
   /** An object relationship */
@@ -2257,6 +2339,7 @@ export type Contract_Upgrade_Bool_Exp = {
   buffer_account?: InputMaybe<String_Comparison_Exp>;
   chain?: InputMaybe<String_Comparison_Exp>;
   hash?: InputMaybe<String_Comparison_Exp>;
+  network?: InputMaybe<Network_Bool_Exp>;
   new_implementation_contract?: InputMaybe<String_Comparison_Exp>;
   nonce?: InputMaybe<String_Comparison_Exp>;
   operation?: InputMaybe<Operation_Bool_Exp>;
@@ -2296,6 +2379,7 @@ export type Contract_Upgrade_Order_By = {
   buffer_account?: InputMaybe<Order_By>;
   chain?: InputMaybe<Order_By>;
   hash?: InputMaybe<Order_By>;
+  network?: InputMaybe<Network_Order_By>;
   new_implementation_contract?: InputMaybe<Order_By>;
   nonce?: InputMaybe<Order_By>;
   operation?: InputMaybe<Operation_Order_By>;
@@ -3386,6 +3470,8 @@ export type Fee_Token_Management = {
   chain: Scalars['String']['output'];
   fee_token_amount: Scalars['String']['output'];
   fee_token_contract: Scalars['String']['output'];
+  /** An object relationship */
+  network?: Maybe<Network>;
   nonce: Scalars['String']['output'];
   op_type: Scalars['Int']['output'];
   /** An object relationship */
@@ -3438,6 +3524,7 @@ export type Fee_Token_Management_Bool_Exp = {
   chain?: InputMaybe<String_Comparison_Exp>;
   fee_token_amount?: InputMaybe<String_Comparison_Exp>;
   fee_token_contract?: InputMaybe<String_Comparison_Exp>;
+  network?: InputMaybe<Network_Bool_Exp>;
   nonce?: InputMaybe<String_Comparison_Exp>;
   op_type?: InputMaybe<Int_Comparison_Exp>;
   operation?: InputMaybe<Operation_Bool_Exp>;
@@ -3474,6 +3561,7 @@ export type Fee_Token_Management_Order_By = {
   chain?: InputMaybe<Order_By>;
   fee_token_amount?: InputMaybe<Order_By>;
   fee_token_contract?: InputMaybe<Order_By>;
+  network?: InputMaybe<Network_Order_By>;
   nonce?: InputMaybe<Order_By>;
   op_type?: InputMaybe<Order_By>;
   operation?: InputMaybe<Operation_Order_By>;
@@ -4111,6 +4199,8 @@ export type Identity_Default_Transfer = {
   gistreplaced_by: Scalars['String']['output'];
   id: Scalars['String']['output'];
   /** An object relationship */
+  network?: Maybe<Network>;
+  /** An object relationship */
   operation?: Maybe<Operation>;
   operation_index: Scalars['String']['output'];
   replaced_gist_hash: Scalars['String']['output'];
@@ -4155,6 +4245,7 @@ export type Identity_Default_Transfer_Bool_Exp = {
   gisthash?: InputMaybe<String_Comparison_Exp>;
   gistreplaced_by?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<String_Comparison_Exp>;
+  network?: InputMaybe<Network_Bool_Exp>;
   operation?: InputMaybe<Operation_Bool_Exp>;
   operation_index?: InputMaybe<String_Comparison_Exp>;
   replaced_gist_hash?: InputMaybe<String_Comparison_Exp>;
@@ -4212,6 +4303,7 @@ export type Identity_Default_Transfer_Order_By = {
   gisthash?: InputMaybe<Order_By>;
   gistreplaced_by?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  network?: InputMaybe<Network_Order_By>;
   operation?: InputMaybe<Operation_Order_By>;
   operation_index?: InputMaybe<Order_By>;
   replaced_gist_hash?: InputMaybe<Order_By>;
@@ -4278,6 +4370,270 @@ export type Identity_Default_Transfer_Stream_Cursor_Value_Input = {
   state_created_at_timestamp?: InputMaybe<Scalars['String']['input']>;
   state_hash?: InputMaybe<Scalars['String']['input']>;
   state_replaced_by?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "identity_gist_transfer" */
+export type Identity_Gist_Transfer = {
+  __typename?: 'identity_gist_transfer';
+  chain: Scalars['String']['output'];
+  contract: Scalars['String']['output'];
+  gistcreated_at_block: Scalars['String']['output'];
+  gistcreated_at_timestamp: Scalars['String']['output'];
+  gisthash: Scalars['String']['output'];
+  /** An object relationship */
+  network?: Maybe<Network>;
+  /** An object relationship */
+  operation?: Maybe<Operation>;
+  operation_index: Scalars['String']['output'];
+  replaced_gist_hash: Scalars['String']['output'];
+};
+
+/** aggregated selection of "identity_gist_transfer" */
+export type Identity_Gist_Transfer_Aggregate = {
+  __typename?: 'identity_gist_transfer_aggregate';
+  aggregate?: Maybe<Identity_Gist_Transfer_Aggregate_Fields>;
+  nodes: Array<Identity_Gist_Transfer>;
+};
+
+/** aggregate fields of "identity_gist_transfer" */
+export type Identity_Gist_Transfer_Aggregate_Fields = {
+  __typename?: 'identity_gist_transfer_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<Identity_Gist_Transfer_Max_Fields>;
+  min?: Maybe<Identity_Gist_Transfer_Min_Fields>;
+};
+
+
+/** aggregate fields of "identity_gist_transfer" */
+export type Identity_Gist_Transfer_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Identity_Gist_Transfer_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "identity_gist_transfer". All fields are combined with a logical 'AND'. */
+export type Identity_Gist_Transfer_Bool_Exp = {
+  _and?: InputMaybe<Array<Identity_Gist_Transfer_Bool_Exp>>;
+  _not?: InputMaybe<Identity_Gist_Transfer_Bool_Exp>;
+  _or?: InputMaybe<Array<Identity_Gist_Transfer_Bool_Exp>>;
+  chain?: InputMaybe<String_Comparison_Exp>;
+  contract?: InputMaybe<String_Comparison_Exp>;
+  gistcreated_at_block?: InputMaybe<String_Comparison_Exp>;
+  gistcreated_at_timestamp?: InputMaybe<String_Comparison_Exp>;
+  gisthash?: InputMaybe<String_Comparison_Exp>;
+  network?: InputMaybe<Network_Bool_Exp>;
+  operation?: InputMaybe<Operation_Bool_Exp>;
+  operation_index?: InputMaybe<String_Comparison_Exp>;
+  replaced_gist_hash?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Identity_Gist_Transfer_Max_Fields = {
+  __typename?: 'identity_gist_transfer_max_fields';
+  chain?: Maybe<Scalars['String']['output']>;
+  contract?: Maybe<Scalars['String']['output']>;
+  gistcreated_at_block?: Maybe<Scalars['String']['output']>;
+  gistcreated_at_timestamp?: Maybe<Scalars['String']['output']>;
+  gisthash?: Maybe<Scalars['String']['output']>;
+  operation_index?: Maybe<Scalars['String']['output']>;
+  replaced_gist_hash?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Identity_Gist_Transfer_Min_Fields = {
+  __typename?: 'identity_gist_transfer_min_fields';
+  chain?: Maybe<Scalars['String']['output']>;
+  contract?: Maybe<Scalars['String']['output']>;
+  gistcreated_at_block?: Maybe<Scalars['String']['output']>;
+  gistcreated_at_timestamp?: Maybe<Scalars['String']['output']>;
+  gisthash?: Maybe<Scalars['String']['output']>;
+  operation_index?: Maybe<Scalars['String']['output']>;
+  replaced_gist_hash?: Maybe<Scalars['String']['output']>;
+};
+
+/** Ordering options when selecting data from "identity_gist_transfer". */
+export type Identity_Gist_Transfer_Order_By = {
+  chain?: InputMaybe<Order_By>;
+  contract?: InputMaybe<Order_By>;
+  gistcreated_at_block?: InputMaybe<Order_By>;
+  gistcreated_at_timestamp?: InputMaybe<Order_By>;
+  gisthash?: InputMaybe<Order_By>;
+  network?: InputMaybe<Network_Order_By>;
+  operation?: InputMaybe<Operation_Order_By>;
+  operation_index?: InputMaybe<Order_By>;
+  replaced_gist_hash?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "identity_gist_transfer" */
+export enum Identity_Gist_Transfer_Select_Column {
+  /** column name */
+  Chain = 'chain',
+  /** column name */
+  Contract = 'contract',
+  /** column name */
+  GistcreatedAtBlock = 'gistcreated_at_block',
+  /** column name */
+  GistcreatedAtTimestamp = 'gistcreated_at_timestamp',
+  /** column name */
+  Gisthash = 'gisthash',
+  /** column name */
+  OperationIndex = 'operation_index',
+  /** column name */
+  ReplacedGistHash = 'replaced_gist_hash'
+}
+
+/** Streaming cursor of the table "identity_gist_transfer" */
+export type Identity_Gist_Transfer_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Identity_Gist_Transfer_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Identity_Gist_Transfer_Stream_Cursor_Value_Input = {
+  chain?: InputMaybe<Scalars['String']['input']>;
+  contract?: InputMaybe<Scalars['String']['input']>;
+  gistcreated_at_block?: InputMaybe<Scalars['String']['input']>;
+  gistcreated_at_timestamp?: InputMaybe<Scalars['String']['input']>;
+  gisthash?: InputMaybe<Scalars['String']['input']>;
+  operation_index?: InputMaybe<Scalars['String']['input']>;
+  replaced_gist_hash?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "identity_state_transfer" */
+export type Identity_State_Transfer = {
+  __typename?: 'identity_state_transfer';
+  chain: Scalars['String']['output'];
+  contract: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  /** An object relationship */
+  network?: Maybe<Network>;
+  /** An object relationship */
+  operation?: Maybe<Operation>;
+  operation_index: Scalars['String']['output'];
+  replaced_state_hash: Scalars['String']['output'];
+  state_created_at_block: Scalars['String']['output'];
+  state_created_at_timestamp: Scalars['String']['output'];
+  state_hash: Scalars['String']['output'];
+};
+
+/** aggregated selection of "identity_state_transfer" */
+export type Identity_State_Transfer_Aggregate = {
+  __typename?: 'identity_state_transfer_aggregate';
+  aggregate?: Maybe<Identity_State_Transfer_Aggregate_Fields>;
+  nodes: Array<Identity_State_Transfer>;
+};
+
+/** aggregate fields of "identity_state_transfer" */
+export type Identity_State_Transfer_Aggregate_Fields = {
+  __typename?: 'identity_state_transfer_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<Identity_State_Transfer_Max_Fields>;
+  min?: Maybe<Identity_State_Transfer_Min_Fields>;
+};
+
+
+/** aggregate fields of "identity_state_transfer" */
+export type Identity_State_Transfer_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Identity_State_Transfer_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "identity_state_transfer". All fields are combined with a logical 'AND'. */
+export type Identity_State_Transfer_Bool_Exp = {
+  _and?: InputMaybe<Array<Identity_State_Transfer_Bool_Exp>>;
+  _not?: InputMaybe<Identity_State_Transfer_Bool_Exp>;
+  _or?: InputMaybe<Array<Identity_State_Transfer_Bool_Exp>>;
+  chain?: InputMaybe<String_Comparison_Exp>;
+  contract?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<String_Comparison_Exp>;
+  network?: InputMaybe<Network_Bool_Exp>;
+  operation?: InputMaybe<Operation_Bool_Exp>;
+  operation_index?: InputMaybe<String_Comparison_Exp>;
+  replaced_state_hash?: InputMaybe<String_Comparison_Exp>;
+  state_created_at_block?: InputMaybe<String_Comparison_Exp>;
+  state_created_at_timestamp?: InputMaybe<String_Comparison_Exp>;
+  state_hash?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Identity_State_Transfer_Max_Fields = {
+  __typename?: 'identity_state_transfer_max_fields';
+  chain?: Maybe<Scalars['String']['output']>;
+  contract?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  operation_index?: Maybe<Scalars['String']['output']>;
+  replaced_state_hash?: Maybe<Scalars['String']['output']>;
+  state_created_at_block?: Maybe<Scalars['String']['output']>;
+  state_created_at_timestamp?: Maybe<Scalars['String']['output']>;
+  state_hash?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Identity_State_Transfer_Min_Fields = {
+  __typename?: 'identity_state_transfer_min_fields';
+  chain?: Maybe<Scalars['String']['output']>;
+  contract?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
+  operation_index?: Maybe<Scalars['String']['output']>;
+  replaced_state_hash?: Maybe<Scalars['String']['output']>;
+  state_created_at_block?: Maybe<Scalars['String']['output']>;
+  state_created_at_timestamp?: Maybe<Scalars['String']['output']>;
+  state_hash?: Maybe<Scalars['String']['output']>;
+};
+
+/** Ordering options when selecting data from "identity_state_transfer". */
+export type Identity_State_Transfer_Order_By = {
+  chain?: InputMaybe<Order_By>;
+  contract?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  network?: InputMaybe<Network_Order_By>;
+  operation?: InputMaybe<Operation_Order_By>;
+  operation_index?: InputMaybe<Order_By>;
+  replaced_state_hash?: InputMaybe<Order_By>;
+  state_created_at_block?: InputMaybe<Order_By>;
+  state_created_at_timestamp?: InputMaybe<Order_By>;
+  state_hash?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "identity_state_transfer" */
+export enum Identity_State_Transfer_Select_Column {
+  /** column name */
+  Chain = 'chain',
+  /** column name */
+  Contract = 'contract',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  OperationIndex = 'operation_index',
+  /** column name */
+  ReplacedStateHash = 'replaced_state_hash',
+  /** column name */
+  StateCreatedAtBlock = 'state_created_at_block',
+  /** column name */
+  StateCreatedAtTimestamp = 'state_created_at_timestamp',
+  /** column name */
+  StateHash = 'state_hash'
+}
+
+/** Streaming cursor of the table "identity_state_transfer" */
+export type Identity_State_Transfer_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Identity_State_Transfer_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Identity_State_Transfer_Stream_Cursor_Value_Input = {
+  chain?: InputMaybe<Scalars['String']['input']>;
+  contract?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  operation_index?: InputMaybe<Scalars['String']['input']>;
+  replaced_state_hash?: InputMaybe<Scalars['String']['input']>;
+  state_created_at_block?: InputMaybe<Scalars['String']['input']>;
+  state_created_at_timestamp?: InputMaybe<Scalars['String']['input']>;
+  state_hash?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** columns and relationships of "inflation" */
@@ -5392,6 +5748,8 @@ export type Multisig_Proposal_Variance_Fields = {
 /** columns and relationships of "multisig_proposal_vote" */
 export type Multisig_Proposal_Vote = {
   __typename?: 'multisig_proposal_vote';
+  /** An object relationship */
+  block?: Maybe<Block>;
   index: Scalars['String']['output'];
   option: Scalars['Int']['output'];
   /** An object relationship */
@@ -5446,6 +5804,7 @@ export type Multisig_Proposal_Vote_Bool_Exp = {
   _and?: InputMaybe<Array<Multisig_Proposal_Vote_Bool_Exp>>;
   _not?: InputMaybe<Multisig_Proposal_Vote_Bool_Exp>;
   _or?: InputMaybe<Array<Multisig_Proposal_Vote_Bool_Exp>>;
+  block?: InputMaybe<Block_Bool_Exp>;
   index?: InputMaybe<String_Comparison_Exp>;
   option?: InputMaybe<Int_Comparison_Exp>;
   proposal?: InputMaybe<Multisig_Proposal_Bool_Exp>;
@@ -5477,6 +5836,7 @@ export type Multisig_Proposal_Vote_Min_Fields = {
 
 /** Ordering options when selecting data from "multisig_proposal_vote". */
 export type Multisig_Proposal_Vote_Order_By = {
+  block?: InputMaybe<Block_Order_By>;
   index?: InputMaybe<Order_By>;
   option?: InputMaybe<Order_By>;
   proposal?: InputMaybe<Multisig_Proposal_Order_By>;
@@ -5571,6 +5931,154 @@ export type Multisig_Proposal_Vote_Variance_Fields = {
   option?: Maybe<Scalars['Float']['output']>;
   proposal_id?: Maybe<Scalars['Float']['output']>;
   submit_block?: Maybe<Scalars['Float']['output']>;
+};
+
+/** columns and relationships of "network" */
+export type Network = {
+  __typename?: 'network';
+  name: Scalars['String']['output'];
+  params: Scalars['jsonb']['output'];
+  type: Scalars['Int']['output'];
+};
+
+
+/** columns and relationships of "network" */
+export type NetworkParamsArgs = {
+  path?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregated selection of "network" */
+export type Network_Aggregate = {
+  __typename?: 'network_aggregate';
+  aggregate?: Maybe<Network_Aggregate_Fields>;
+  nodes: Array<Network>;
+};
+
+/** aggregate fields of "network" */
+export type Network_Aggregate_Fields = {
+  __typename?: 'network_aggregate_fields';
+  avg?: Maybe<Network_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Network_Max_Fields>;
+  min?: Maybe<Network_Min_Fields>;
+  stddev?: Maybe<Network_Stddev_Fields>;
+  stddev_pop?: Maybe<Network_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Network_Stddev_Samp_Fields>;
+  sum?: Maybe<Network_Sum_Fields>;
+  var_pop?: Maybe<Network_Var_Pop_Fields>;
+  var_samp?: Maybe<Network_Var_Samp_Fields>;
+  variance?: Maybe<Network_Variance_Fields>;
+};
+
+
+/** aggregate fields of "network" */
+export type Network_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Network_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** aggregate avg on columns */
+export type Network_Avg_Fields = {
+  __typename?: 'network_avg_fields';
+  type?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Boolean expression to filter rows from the table "network". All fields are combined with a logical 'AND'. */
+export type Network_Bool_Exp = {
+  _and?: InputMaybe<Array<Network_Bool_Exp>>;
+  _not?: InputMaybe<Network_Bool_Exp>;
+  _or?: InputMaybe<Array<Network_Bool_Exp>>;
+  name?: InputMaybe<String_Comparison_Exp>;
+  params?: InputMaybe<Jsonb_Comparison_Exp>;
+  type?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Network_Max_Fields = {
+  __typename?: 'network_max_fields';
+  name?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['Int']['output']>;
+};
+
+/** aggregate min on columns */
+export type Network_Min_Fields = {
+  __typename?: 'network_min_fields';
+  name?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['Int']['output']>;
+};
+
+/** Ordering options when selecting data from "network". */
+export type Network_Order_By = {
+  name?: InputMaybe<Order_By>;
+  params?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "network" */
+export enum Network_Select_Column {
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Params = 'params',
+  /** column name */
+  Type = 'type'
+}
+
+/** aggregate stddev on columns */
+export type Network_Stddev_Fields = {
+  __typename?: 'network_stddev_fields';
+  type?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Network_Stddev_Pop_Fields = {
+  __typename?: 'network_stddev_pop_fields';
+  type?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Network_Stddev_Samp_Fields = {
+  __typename?: 'network_stddev_samp_fields';
+  type?: Maybe<Scalars['Float']['output']>;
+};
+
+/** Streaming cursor of the table "network" */
+export type Network_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Network_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Network_Stream_Cursor_Value_Input = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  params?: InputMaybe<Scalars['jsonb']['input']>;
+  type?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Network_Sum_Fields = {
+  __typename?: 'network_sum_fields';
+  type?: Maybe<Scalars['Int']['output']>;
+};
+
+/** aggregate var_pop on columns */
+export type Network_Var_Pop_Fields = {
+  __typename?: 'network_var_pop_fields';
+  type?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate var_samp on columns */
+export type Network_Var_Samp_Fields = {
+  __typename?: 'network_var_samp_fields';
+  type?: Maybe<Scalars['Float']['output']>;
+};
+
+/** aggregate variance on columns */
+export type Network_Variance_Fields = {
+  __typename?: 'network_variance_fields';
+  type?: Maybe<Scalars['Float']['output']>;
 };
 
 /** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
@@ -5688,6 +6196,10 @@ export type Operation = {
   fee_token_management?: Maybe<Fee_Token_Management>;
   /** An object relationship */
   identity_default_transfer?: Maybe<Identity_Default_Transfer>;
+  /** An object relationship */
+  identity_gist_transfer?: Maybe<Identity_Gist_Transfer>;
+  /** An object relationship */
+  identity_state_transfer?: Maybe<Identity_State_Transfer>;
   index: Scalars['String']['output'];
   operation_type: Scalars['Int']['output'];
   status: Scalars['Int']['output'];
@@ -5778,6 +6290,8 @@ export type Operation_Bool_Exp = {
   creator_account?: InputMaybe<Account_Bool_Exp>;
   fee_token_management?: InputMaybe<Fee_Token_Management_Bool_Exp>;
   identity_default_transfer?: InputMaybe<Identity_Default_Transfer_Bool_Exp>;
+  identity_gist_transfer?: InputMaybe<Identity_Gist_Transfer_Bool_Exp>;
+  identity_state_transfer?: InputMaybe<Identity_State_Transfer_Bool_Exp>;
   index?: InputMaybe<String_Comparison_Exp>;
   operation_type?: InputMaybe<Int_Comparison_Exp>;
   status?: InputMaybe<Int_Comparison_Exp>;
@@ -5831,6 +6345,8 @@ export type Operation_Order_By = {
   creator_account?: InputMaybe<Account_Order_By>;
   fee_token_management?: InputMaybe<Fee_Token_Management_Order_By>;
   identity_default_transfer?: InputMaybe<Identity_Default_Transfer_Order_By>;
+  identity_gist_transfer?: InputMaybe<Identity_Gist_Transfer_Order_By>;
+  identity_state_transfer?: InputMaybe<Identity_State_Transfer_Order_By>;
   index?: InputMaybe<Order_By>;
   operation_type?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
@@ -5983,6 +6499,8 @@ export type Oracle = {
   freeze_end_block: Scalars['Int']['output'];
   index: Scalars['String']['output'];
   missed_count: Scalars['Int']['output'];
+  /** An object relationship */
+  network?: Maybe<Network>;
   stake: Scalars['String']['output'];
   status: Scalars['Int']['output'];
   /** An object relationship */
@@ -6043,6 +6561,7 @@ export type Oracle_Bool_Exp = {
   freeze_end_block?: InputMaybe<Int_Comparison_Exp>;
   index?: InputMaybe<String_Comparison_Exp>;
   missed_count?: InputMaybe<Int_Comparison_Exp>;
+  network?: InputMaybe<Network_Bool_Exp>;
   stake?: InputMaybe<String_Comparison_Exp>;
   status?: InputMaybe<Int_Comparison_Exp>;
   user?: InputMaybe<Account_Bool_Exp>;
@@ -6088,6 +6607,7 @@ export type Oracle_Order_By = {
   freeze_end_block?: InputMaybe<Order_By>;
   index?: InputMaybe<Order_By>;
   missed_count?: InputMaybe<Order_By>;
+  network?: InputMaybe<Network_Order_By>;
   stake?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
   user?: InputMaybe<Account_Order_By>;
@@ -8900,6 +9420,18 @@ export type Query_Root = {
   identity_default_transfer_aggregate: Identity_Default_Transfer_Aggregate;
   /** fetch data from the table: "identity_default_transfer" using primary key columns */
   identity_default_transfer_by_pk?: Maybe<Identity_Default_Transfer>;
+  /** fetch data from the table: "identity_gist_transfer" */
+  identity_gist_transfer: Array<Identity_Gist_Transfer>;
+  /** fetch aggregated fields from the table: "identity_gist_transfer" */
+  identity_gist_transfer_aggregate: Identity_Gist_Transfer_Aggregate;
+  /** fetch data from the table: "identity_gist_transfer" using primary key columns */
+  identity_gist_transfer_by_pk?: Maybe<Identity_Gist_Transfer>;
+  /** fetch data from the table: "identity_state_transfer" */
+  identity_state_transfer: Array<Identity_State_Transfer>;
+  /** fetch aggregated fields from the table: "identity_state_transfer" */
+  identity_state_transfer_aggregate: Identity_State_Transfer_Aggregate;
+  /** fetch data from the table: "identity_state_transfer" using primary key columns */
+  identity_state_transfer_by_pk?: Maybe<Identity_State_Transfer>;
   /** fetch data from the table: "inflation" */
   inflation: Array<Inflation>;
   /** fetch aggregated fields from the table: "inflation" */
@@ -8948,6 +9480,12 @@ export type Query_Root = {
   multisig_proposal_vote_aggregate: Multisig_Proposal_Vote_Aggregate;
   /** fetch data from the table: "multisig_proposal_vote" using primary key columns */
   multisig_proposal_vote_by_pk?: Maybe<Multisig_Proposal_Vote>;
+  /** fetch data from the table: "network" */
+  network: Array<Network>;
+  /** fetch aggregated fields from the table: "network" */
+  network_aggregate: Network_Aggregate;
+  /** fetch data from the table: "network" using primary key columns */
+  network_by_pk?: Maybe<Network>;
   /** fetch data from the table: "on_chain_item" */
   on_chain_item: Array<On_Chain_Item>;
   /** fetch aggregated fields from the table: "on_chain_item" */
@@ -9062,10 +9600,6 @@ export type Query_Root = {
   token_unit: Array<Token_Unit>;
   /** fetch aggregated fields from the table: "token_unit" */
   token_unit_aggregate: Token_Unit_Aggregate;
-  /** fetch data from the table: "tokenmanager_params" */
-  tokenmanager_params: Array<Tokenmanager_Params>;
-  /** fetch aggregated fields from the table: "tokenmanager_params" */
-  tokenmanager_params_aggregate: Tokenmanager_Params_Aggregate;
   /** fetch data from the table: "transaction" */
   transaction: Array<Transaction>;
   /** fetch aggregated fields from the table: "transaction" */
@@ -9723,6 +10257,52 @@ export type Query_RootIdentity_Default_Transfer_By_PkArgs = {
 };
 
 
+export type Query_RootIdentity_Gist_TransferArgs = {
+  distinct_on?: InputMaybe<Array<Identity_Gist_Transfer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Identity_Gist_Transfer_Order_By>>;
+  where?: InputMaybe<Identity_Gist_Transfer_Bool_Exp>;
+};
+
+
+export type Query_RootIdentity_Gist_Transfer_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Identity_Gist_Transfer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Identity_Gist_Transfer_Order_By>>;
+  where?: InputMaybe<Identity_Gist_Transfer_Bool_Exp>;
+};
+
+
+export type Query_RootIdentity_Gist_Transfer_By_PkArgs = {
+  operation_index: Scalars['String']['input'];
+};
+
+
+export type Query_RootIdentity_State_TransferArgs = {
+  distinct_on?: InputMaybe<Array<Identity_State_Transfer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Identity_State_Transfer_Order_By>>;
+  where?: InputMaybe<Identity_State_Transfer_Bool_Exp>;
+};
+
+
+export type Query_RootIdentity_State_Transfer_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Identity_State_Transfer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Identity_State_Transfer_Order_By>>;
+  where?: InputMaybe<Identity_State_Transfer_Bool_Exp>;
+};
+
+
+export type Query_RootIdentity_State_Transfer_By_PkArgs = {
+  operation_index: Scalars['String']['input'];
+};
+
+
 export type Query_RootInflationArgs = {
   distinct_on?: InputMaybe<Array<Inflation_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -9914,6 +10494,29 @@ export type Query_RootMultisig_Proposal_Vote_AggregateArgs = {
 
 export type Query_RootMultisig_Proposal_Vote_By_PkArgs = {
   index: Scalars['String']['input'];
+};
+
+
+export type Query_RootNetworkArgs = {
+  distinct_on?: InputMaybe<Array<Network_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Network_Order_By>>;
+  where?: InputMaybe<Network_Bool_Exp>;
+};
+
+
+export type Query_RootNetwork_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Network_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Network_Order_By>>;
+  where?: InputMaybe<Network_Bool_Exp>;
+};
+
+
+export type Query_RootNetwork_By_PkArgs = {
+  name: Scalars['String']['input'];
 };
 
 
@@ -10375,24 +10978,6 @@ export type Query_RootToken_Unit_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Token_Unit_Order_By>>;
   where?: InputMaybe<Token_Unit_Bool_Exp>;
-};
-
-
-export type Query_RootTokenmanager_ParamsArgs = {
-  distinct_on?: InputMaybe<Array<Tokenmanager_Params_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Tokenmanager_Params_Order_By>>;
-  where?: InputMaybe<Tokenmanager_Params_Bool_Exp>;
-};
-
-
-export type Query_RootTokenmanager_Params_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Tokenmanager_Params_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Tokenmanager_Params_Order_By>>;
-  where?: InputMaybe<Tokenmanager_Params_Bool_Exp>;
 };
 
 
@@ -11615,6 +12200,22 @@ export type Subscription_Root = {
   identity_default_transfer_by_pk?: Maybe<Identity_Default_Transfer>;
   /** fetch data from the table in a streaming manner: "identity_default_transfer" */
   identity_default_transfer_stream: Array<Identity_Default_Transfer>;
+  /** fetch data from the table: "identity_gist_transfer" */
+  identity_gist_transfer: Array<Identity_Gist_Transfer>;
+  /** fetch aggregated fields from the table: "identity_gist_transfer" */
+  identity_gist_transfer_aggregate: Identity_Gist_Transfer_Aggregate;
+  /** fetch data from the table: "identity_gist_transfer" using primary key columns */
+  identity_gist_transfer_by_pk?: Maybe<Identity_Gist_Transfer>;
+  /** fetch data from the table in a streaming manner: "identity_gist_transfer" */
+  identity_gist_transfer_stream: Array<Identity_Gist_Transfer>;
+  /** fetch data from the table: "identity_state_transfer" */
+  identity_state_transfer: Array<Identity_State_Transfer>;
+  /** fetch aggregated fields from the table: "identity_state_transfer" */
+  identity_state_transfer_aggregate: Identity_State_Transfer_Aggregate;
+  /** fetch data from the table: "identity_state_transfer" using primary key columns */
+  identity_state_transfer_by_pk?: Maybe<Identity_State_Transfer>;
+  /** fetch data from the table in a streaming manner: "identity_state_transfer" */
+  identity_state_transfer_stream: Array<Identity_State_Transfer>;
   /** fetch data from the table: "inflation" */
   inflation: Array<Inflation>;
   /** fetch aggregated fields from the table: "inflation" */
@@ -11679,6 +12280,14 @@ export type Subscription_Root = {
   multisig_proposal_vote_by_pk?: Maybe<Multisig_Proposal_Vote>;
   /** fetch data from the table in a streaming manner: "multisig_proposal_vote" */
   multisig_proposal_vote_stream: Array<Multisig_Proposal_Vote>;
+  /** fetch data from the table: "network" */
+  network: Array<Network>;
+  /** fetch aggregated fields from the table: "network" */
+  network_aggregate: Network_Aggregate;
+  /** fetch data from the table: "network" using primary key columns */
+  network_by_pk?: Maybe<Network>;
+  /** fetch data from the table in a streaming manner: "network" */
+  network_stream: Array<Network>;
   /** fetch data from the table: "on_chain_item" */
   on_chain_item: Array<On_Chain_Item>;
   /** fetch aggregated fields from the table: "on_chain_item" */
@@ -11837,12 +12446,6 @@ export type Subscription_Root = {
   token_unit_aggregate: Token_Unit_Aggregate;
   /** fetch data from the table in a streaming manner: "token_unit" */
   token_unit_stream: Array<Token_Unit>;
-  /** fetch data from the table: "tokenmanager_params" */
-  tokenmanager_params: Array<Tokenmanager_Params>;
-  /** fetch aggregated fields from the table: "tokenmanager_params" */
-  tokenmanager_params_aggregate: Tokenmanager_Params_Aggregate;
-  /** fetch data from the table in a streaming manner: "tokenmanager_params" */
-  tokenmanager_params_stream: Array<Tokenmanager_Params>;
   /** fetch data from the table: "transaction" */
   transaction: Array<Transaction>;
   /** fetch aggregated fields from the table: "transaction" */
@@ -12601,6 +13204,66 @@ export type Subscription_RootIdentity_Default_Transfer_StreamArgs = {
 };
 
 
+export type Subscription_RootIdentity_Gist_TransferArgs = {
+  distinct_on?: InputMaybe<Array<Identity_Gist_Transfer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Identity_Gist_Transfer_Order_By>>;
+  where?: InputMaybe<Identity_Gist_Transfer_Bool_Exp>;
+};
+
+
+export type Subscription_RootIdentity_Gist_Transfer_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Identity_Gist_Transfer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Identity_Gist_Transfer_Order_By>>;
+  where?: InputMaybe<Identity_Gist_Transfer_Bool_Exp>;
+};
+
+
+export type Subscription_RootIdentity_Gist_Transfer_By_PkArgs = {
+  operation_index: Scalars['String']['input'];
+};
+
+
+export type Subscription_RootIdentity_Gist_Transfer_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Identity_Gist_Transfer_Stream_Cursor_Input>>;
+  where?: InputMaybe<Identity_Gist_Transfer_Bool_Exp>;
+};
+
+
+export type Subscription_RootIdentity_State_TransferArgs = {
+  distinct_on?: InputMaybe<Array<Identity_State_Transfer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Identity_State_Transfer_Order_By>>;
+  where?: InputMaybe<Identity_State_Transfer_Bool_Exp>;
+};
+
+
+export type Subscription_RootIdentity_State_Transfer_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Identity_State_Transfer_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Identity_State_Transfer_Order_By>>;
+  where?: InputMaybe<Identity_State_Transfer_Bool_Exp>;
+};
+
+
+export type Subscription_RootIdentity_State_Transfer_By_PkArgs = {
+  operation_index: Scalars['String']['input'];
+};
+
+
+export type Subscription_RootIdentity_State_Transfer_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Identity_State_Transfer_Stream_Cursor_Input>>;
+  where?: InputMaybe<Identity_State_Transfer_Bool_Exp>;
+};
+
+
 export type Subscription_RootInflationArgs = {
   distinct_on?: InputMaybe<Array<Inflation_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -12848,6 +13511,36 @@ export type Subscription_RootMultisig_Proposal_Vote_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Multisig_Proposal_Vote_Stream_Cursor_Input>>;
   where?: InputMaybe<Multisig_Proposal_Vote_Bool_Exp>;
+};
+
+
+export type Subscription_RootNetworkArgs = {
+  distinct_on?: InputMaybe<Array<Network_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Network_Order_By>>;
+  where?: InputMaybe<Network_Bool_Exp>;
+};
+
+
+export type Subscription_RootNetwork_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Network_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Network_Order_By>>;
+  where?: InputMaybe<Network_Bool_Exp>;
+};
+
+
+export type Subscription_RootNetwork_By_PkArgs = {
+  name: Scalars['String']['input'];
+};
+
+
+export type Subscription_RootNetwork_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Network_Stream_Cursor_Input>>;
+  where?: InputMaybe<Network_Bool_Exp>;
 };
 
 
@@ -13463,31 +14156,6 @@ export type Subscription_RootToken_Unit_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Token_Unit_Stream_Cursor_Input>>;
   where?: InputMaybe<Token_Unit_Bool_Exp>;
-};
-
-
-export type Subscription_RootTokenmanager_ParamsArgs = {
-  distinct_on?: InputMaybe<Array<Tokenmanager_Params_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Tokenmanager_Params_Order_By>>;
-  where?: InputMaybe<Tokenmanager_Params_Bool_Exp>;
-};
-
-
-export type Subscription_RootTokenmanager_Params_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Tokenmanager_Params_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Tokenmanager_Params_Order_By>>;
-  where?: InputMaybe<Tokenmanager_Params_Bool_Exp>;
-};
-
-
-export type Subscription_RootTokenmanager_Params_StreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Tokenmanager_Params_Stream_Cursor_Input>>;
-  where?: InputMaybe<Tokenmanager_Params_Bool_Exp>;
 };
 
 
@@ -14950,146 +15618,6 @@ export type Token_Unit_Variance_Fields = {
 /** order by variance() on columns of table "token_unit" */
 export type Token_Unit_Variance_Order_By = {
   exponent?: InputMaybe<Order_By>;
-};
-
-/** columns and relationships of "tokenmanager_params" */
-export type Tokenmanager_Params = {
-  __typename?: 'tokenmanager_params';
-  height: Scalars['bigint']['output'];
-  params: Scalars['jsonb']['output'];
-};
-
-
-/** columns and relationships of "tokenmanager_params" */
-export type Tokenmanager_ParamsParamsArgs = {
-  path?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** aggregated selection of "tokenmanager_params" */
-export type Tokenmanager_Params_Aggregate = {
-  __typename?: 'tokenmanager_params_aggregate';
-  aggregate?: Maybe<Tokenmanager_Params_Aggregate_Fields>;
-  nodes: Array<Tokenmanager_Params>;
-};
-
-/** aggregate fields of "tokenmanager_params" */
-export type Tokenmanager_Params_Aggregate_Fields = {
-  __typename?: 'tokenmanager_params_aggregate_fields';
-  avg?: Maybe<Tokenmanager_Params_Avg_Fields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<Tokenmanager_Params_Max_Fields>;
-  min?: Maybe<Tokenmanager_Params_Min_Fields>;
-  stddev?: Maybe<Tokenmanager_Params_Stddev_Fields>;
-  stddev_pop?: Maybe<Tokenmanager_Params_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Tokenmanager_Params_Stddev_Samp_Fields>;
-  sum?: Maybe<Tokenmanager_Params_Sum_Fields>;
-  var_pop?: Maybe<Tokenmanager_Params_Var_Pop_Fields>;
-  var_samp?: Maybe<Tokenmanager_Params_Var_Samp_Fields>;
-  variance?: Maybe<Tokenmanager_Params_Variance_Fields>;
-};
-
-
-/** aggregate fields of "tokenmanager_params" */
-export type Tokenmanager_Params_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Tokenmanager_Params_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** aggregate avg on columns */
-export type Tokenmanager_Params_Avg_Fields = {
-  __typename?: 'tokenmanager_params_avg_fields';
-  height?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "tokenmanager_params". All fields are combined with a logical 'AND'. */
-export type Tokenmanager_Params_Bool_Exp = {
-  _and?: InputMaybe<Array<Tokenmanager_Params_Bool_Exp>>;
-  _not?: InputMaybe<Tokenmanager_Params_Bool_Exp>;
-  _or?: InputMaybe<Array<Tokenmanager_Params_Bool_Exp>>;
-  height?: InputMaybe<Bigint_Comparison_Exp>;
-  params?: InputMaybe<Jsonb_Comparison_Exp>;
-};
-
-/** aggregate max on columns */
-export type Tokenmanager_Params_Max_Fields = {
-  __typename?: 'tokenmanager_params_max_fields';
-  height?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregate min on columns */
-export type Tokenmanager_Params_Min_Fields = {
-  __typename?: 'tokenmanager_params_min_fields';
-  height?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** Ordering options when selecting data from "tokenmanager_params". */
-export type Tokenmanager_Params_Order_By = {
-  height?: InputMaybe<Order_By>;
-  params?: InputMaybe<Order_By>;
-};
-
-/** select columns of table "tokenmanager_params" */
-export enum Tokenmanager_Params_Select_Column {
-  /** column name */
-  Height = 'height',
-  /** column name */
-  Params = 'params'
-}
-
-/** aggregate stddev on columns */
-export type Tokenmanager_Params_Stddev_Fields = {
-  __typename?: 'tokenmanager_params_stddev_fields';
-  height?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Tokenmanager_Params_Stddev_Pop_Fields = {
-  __typename?: 'tokenmanager_params_stddev_pop_fields';
-  height?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Tokenmanager_Params_Stddev_Samp_Fields = {
-  __typename?: 'tokenmanager_params_stddev_samp_fields';
-  height?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "tokenmanager_params" */
-export type Tokenmanager_Params_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Tokenmanager_Params_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Tokenmanager_Params_Stream_Cursor_Value_Input = {
-  height?: InputMaybe<Scalars['bigint']['input']>;
-  params?: InputMaybe<Scalars['jsonb']['input']>;
-};
-
-/** aggregate sum on columns */
-export type Tokenmanager_Params_Sum_Fields = {
-  __typename?: 'tokenmanager_params_sum_fields';
-  height?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregate var_pop on columns */
-export type Tokenmanager_Params_Var_Pop_Fields = {
-  __typename?: 'tokenmanager_params_var_pop_fields';
-  height?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type Tokenmanager_Params_Var_Samp_Fields = {
-  __typename?: 'tokenmanager_params_var_samp_fields';
-  height?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type Tokenmanager_Params_Variance_Fields = {
-  __typename?: 'tokenmanager_params_variance_fields';
-  height?: Maybe<Scalars['Float']['output']>;
 };
 
 /** columns and relationships of "transaction" */
@@ -18306,9 +18834,15 @@ export type Violation_Report_Variance_Fields = {
 /** columns and relationships of "vote" */
 export type Vote = {
   __typename?: 'vote';
+  /** An object relationship */
+  block?: Maybe<Block>;
+  height: Scalars['bigint']['output'];
   operation: Scalars['String']['output'];
   /** An object relationship */
   operation_info?: Maybe<Operation>;
+  /** An object relationship */
+  transaction?: Maybe<Transaction>;
+  tx?: Maybe<Scalars['String']['output']>;
   validator: Scalars['String']['output'];
   /** An object relationship */
   validator_info?: Maybe<Validator_Info>;
@@ -18348,6 +18882,7 @@ export type Vote_Aggregate_FieldsCountArgs = {
 /** aggregate avg on columns */
 export type Vote_Avg_Fields = {
   __typename?: 'vote_avg_fields';
+  height?: Maybe<Scalars['Float']['output']>;
   vote?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -18356,8 +18891,12 @@ export type Vote_Bool_Exp = {
   _and?: InputMaybe<Array<Vote_Bool_Exp>>;
   _not?: InputMaybe<Vote_Bool_Exp>;
   _or?: InputMaybe<Array<Vote_Bool_Exp>>;
+  block?: InputMaybe<Block_Bool_Exp>;
+  height?: InputMaybe<Bigint_Comparison_Exp>;
   operation?: InputMaybe<String_Comparison_Exp>;
   operation_info?: InputMaybe<Operation_Bool_Exp>;
+  transaction?: InputMaybe<Transaction_Bool_Exp>;
+  tx?: InputMaybe<String_Comparison_Exp>;
   validator?: InputMaybe<String_Comparison_Exp>;
   validator_info?: InputMaybe<Validator_Info_Bool_Exp>;
   vote?: InputMaybe<Int_Comparison_Exp>;
@@ -18366,7 +18905,9 @@ export type Vote_Bool_Exp = {
 /** aggregate max on columns */
 export type Vote_Max_Fields = {
   __typename?: 'vote_max_fields';
+  height?: Maybe<Scalars['bigint']['output']>;
   operation?: Maybe<Scalars['String']['output']>;
+  tx?: Maybe<Scalars['String']['output']>;
   validator?: Maybe<Scalars['String']['output']>;
   vote?: Maybe<Scalars['Int']['output']>;
 };
@@ -18374,15 +18915,21 @@ export type Vote_Max_Fields = {
 /** aggregate min on columns */
 export type Vote_Min_Fields = {
   __typename?: 'vote_min_fields';
+  height?: Maybe<Scalars['bigint']['output']>;
   operation?: Maybe<Scalars['String']['output']>;
+  tx?: Maybe<Scalars['String']['output']>;
   validator?: Maybe<Scalars['String']['output']>;
   vote?: Maybe<Scalars['Int']['output']>;
 };
 
 /** Ordering options when selecting data from "vote". */
 export type Vote_Order_By = {
+  block?: InputMaybe<Block_Order_By>;
+  height?: InputMaybe<Order_By>;
   operation?: InputMaybe<Order_By>;
   operation_info?: InputMaybe<Operation_Order_By>;
+  transaction?: InputMaybe<Transaction_Order_By>;
+  tx?: InputMaybe<Order_By>;
   validator?: InputMaybe<Order_By>;
   validator_info?: InputMaybe<Validator_Info_Order_By>;
   vote?: InputMaybe<Order_By>;
@@ -18391,7 +18938,11 @@ export type Vote_Order_By = {
 /** select columns of table "vote" */
 export enum Vote_Select_Column {
   /** column name */
+  Height = 'height',
+  /** column name */
   Operation = 'operation',
+  /** column name */
+  Tx = 'tx',
   /** column name */
   Validator = 'validator',
   /** column name */
@@ -18401,18 +18952,21 @@ export enum Vote_Select_Column {
 /** aggregate stddev on columns */
 export type Vote_Stddev_Fields = {
   __typename?: 'vote_stddev_fields';
+  height?: Maybe<Scalars['Float']['output']>;
   vote?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Vote_Stddev_Pop_Fields = {
   __typename?: 'vote_stddev_pop_fields';
+  height?: Maybe<Scalars['Float']['output']>;
   vote?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Vote_Stddev_Samp_Fields = {
   __typename?: 'vote_stddev_samp_fields';
+  height?: Maybe<Scalars['Float']['output']>;
   vote?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -18426,7 +18980,9 @@ export type Vote_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Vote_Stream_Cursor_Value_Input = {
+  height?: InputMaybe<Scalars['bigint']['input']>;
   operation?: InputMaybe<Scalars['String']['input']>;
+  tx?: InputMaybe<Scalars['String']['input']>;
   validator?: InputMaybe<Scalars['String']['input']>;
   vote?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -18434,24 +18990,28 @@ export type Vote_Stream_Cursor_Value_Input = {
 /** aggregate sum on columns */
 export type Vote_Sum_Fields = {
   __typename?: 'vote_sum_fields';
+  height?: Maybe<Scalars['bigint']['output']>;
   vote?: Maybe<Scalars['Int']['output']>;
 };
 
 /** aggregate var_pop on columns */
 export type Vote_Var_Pop_Fields = {
   __typename?: 'vote_var_pop_fields';
+  height?: Maybe<Scalars['Float']['output']>;
   vote?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate var_samp on columns */
 export type Vote_Var_Samp_Fields = {
   __typename?: 'vote_var_samp_fields';
+  height?: Maybe<Scalars['Float']['output']>;
   vote?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate variance on columns */
 export type Vote_Variance_Fields = {
   __typename?: 'vote_variance_fields';
+  height?: Maybe<Scalars['Float']['output']>;
   vote?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -18460,6 +19020,14 @@ export type BlockFragment = { __typename?: 'block', height: any, timestamp: any,
 export type BlockBaseFragment = { __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null };
 
 export type BlockListFragment = { __typename?: 'block', height: any, timestamp: any, total_gas?: any | null, transactions_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null };
+
+export type ConfirmationFragment = { __typename?: 'confirmation', creator: string, height: any, tx?: string | null, root: string, indexes: any, signature_ecdsa: string, block?: { __typename?: 'block', timestamp: any } | null };
+
+export type ConfirmationBaseFragment = { __typename?: 'confirmation', root: string, creator: string, height: any, tx?: string | null, block?: { __typename?: 'block', timestamp: any } | null };
+
+export type OperationFragment = { __typename?: 'operation', index: string, operation_type: number, status: number, creator: string, timestamp: any };
+
+export type OperationVoteFragment = { __typename?: 'vote', operation: string, height: any, tx?: string | null, validator: string, vote: number, block?: { __typename?: 'block', timestamp: any } | null };
 
 export type OracleFragment = { __typename?: 'oracle', account: string, chain: string, status: number, stake: string, missed_count: number, freeze_end_block: number, violations_count: number, votes_count: number, create_operations_count: number };
 
@@ -18525,6 +19093,51 @@ export type GetBlockListQueryVariables = Exact<{
 
 export type GetBlockListQuery = { __typename?: 'query_root', block: Array<{ __typename?: 'block', height: any, timestamp: any, total_gas?: any | null, transactions_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null }> };
 
+export type GetConfirmationByRootQueryVariables = Exact<{
+  root: Scalars['String']['input'];
+}>;
+
+
+export type GetConfirmationByRootQuery = { __typename?: 'query_root', confirmation: Array<{ __typename?: 'confirmation', creator: string, height: any, tx?: string | null, root: string, indexes: any, signature_ecdsa: string, block?: { __typename?: 'block', timestamp: any } | null }> };
+
+export type GetConfirmationCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetConfirmationCountQuery = { __typename?: 'query_root', confirmation_aggregate: { __typename?: 'confirmation_aggregate', aggregate?: { __typename?: 'confirmation_aggregate_fields', count: number } | null } };
+
+export type GetConfirmationListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetConfirmationListQuery = { __typename?: 'query_root', confirmation: Array<{ __typename?: 'confirmation', root: string, creator: string, height: any, tx?: string | null, block?: { __typename?: 'block', timestamp: any } | null }> };
+
+export type GetConfirmationOperationListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  where: Operation_Bool_Exp;
+}>;
+
+
+export type GetConfirmationOperationListQuery = { __typename?: 'query_root', operation: Array<{ __typename?: 'operation', index: string, operation_type: number, status: number, creator: string, timestamp: any }> };
+
+export type GetConfirmationOperationVoteCountQueryVariables = Exact<{
+  where: Vote_Bool_Exp;
+}>;
+
+
+export type GetConfirmationOperationVoteCountQuery = { __typename?: 'query_root', vote_aggregate: { __typename?: 'vote_aggregate', aggregate?: { __typename?: 'vote_aggregate_fields', count: number } | null } };
+
+export type GetConfirmationOperationVoteListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  where: Vote_Bool_Exp;
+}>;
+
+
+export type GetConfirmationOperationVoteListQuery = { __typename?: 'query_root', vote: Array<{ __typename?: 'vote', operation: string, height: any, tx?: string | null, validator: string, vote: number, block?: { __typename?: 'block', timestamp: any } | null }> };
+
 export type GetLatestTxAndBlocksQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -18532,6 +19145,42 @@ export type GetLatestTxAndBlocksQueryVariables = Exact<{
 
 
 export type GetLatestTxAndBlocksQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } }>, block: Array<{ __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null }> };
+
+export type GetOperationByIndexQueryVariables = Exact<{
+  index: Scalars['String']['input'];
+}>;
+
+
+export type GetOperationByIndexQuery = { __typename?: 'query_root', operation: Array<{ __typename?: 'operation', index: string, creator: string, operation_type: number, status: number, timestamp: any, change_parties?: { __typename?: 'change_parties', new_public_key: string, operation_index: string, parties: any, signature: string } | null, contract_upgrade?: { __typename?: 'contract_upgrade', buffer_account: string, chain: string, hash: string, new_implementation_contract: string, nonce: string, operation_index: string, target_contract: string, type: number, network?: { __typename?: 'network', name: string, params: any, type: number } | null } | null, fee_token_management?: { __typename?: 'fee_token_management', chain: string, fee_token_amount: string, fee_token_contract: string, nonce: string, op_type: number, operation_index: string, receiver: string, network?: { __typename?: 'network', name: string, params: any, type: number } | null } | null, identity_default_transfer?: { __typename?: 'identity_default_transfer', chain: string, contract: string, gistcreated_at_block: string, gistcreated_at_timestamp: string, gisthash: string, gistreplaced_by: string, id: string, operation_index: string, replaced_gist_hash: string, replaced_state_hash: string, state_created_at_block: string, state_created_at_timestamp: string, state_hash: string, state_replaced_by: string, network?: { __typename?: 'network', name: string, params: any, type: number } | null } | null, identity_gist_transfer?: { __typename?: 'identity_gist_transfer', chain: string, contract: string, gistcreated_at_block: string, gistcreated_at_timestamp: string, gisthash: string, operation_index: string, replaced_gist_hash: string, network?: { __typename?: 'network', name: string, params: any, type: number } | null } | null, identity_state_transfer?: { __typename?: 'identity_state_transfer', chain: string, contract: string, id: string, operation_index: string, replaced_state_hash: string, state_created_at_block: string, state_created_at_timestamp: string, state_hash: string } | null, transfer?: { __typename?: 'transfer', amount: string, bundle_data?: string | null, bundle_salt?: string | null, event_id: string, from: any, item_meta?: any | null, operation_index: string, origin: string, receiver: string, to: any, tx: string } | null }>, confirmation: Array<{ __typename?: 'confirmation', creator: string, height: any, tx?: string | null, root: string, indexes: any, signature_ecdsa: string, block?: { __typename?: 'block', timestamp: any } | null }>, transaction: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } }> };
+
+export type GetOperationCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetOperationCountQuery = { __typename?: 'query_root', operation_aggregate: { __typename?: 'operation_aggregate', aggregate?: { __typename?: 'operation_aggregate_fields', count: number } | null } };
+
+export type GetOperationListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetOperationListQuery = { __typename?: 'query_root', operation: Array<{ __typename?: 'operation', index: string, operation_type: number, status: number, creator: string, timestamp: any }> };
+
+export type GetOperationVoteCountQueryVariables = Exact<{
+  operation: Scalars['String']['input'];
+}>;
+
+
+export type GetOperationVoteCountQuery = { __typename?: 'query_root', vote_aggregate: { __typename?: 'vote_aggregate', aggregate?: { __typename?: 'vote_aggregate_fields', count: number } | null } };
+
+export type GetOperationVoteListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  operation: Scalars['String']['input'];
+}>;
+
+
+export type GetOperationVoteListQuery = { __typename?: 'query_root', vote: Array<{ __typename?: 'vote', operation: string, height: any, tx?: string | null, validator: string, vote: number, block?: { __typename?: 'block', timestamp: any } | null }> };
 
 export type GetOracleBaseQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -18802,6 +19451,51 @@ export const BlockList = gql`
   }
 }
     `;
+export const Confirmation = gql`
+    fragment Confirmation on confirmation {
+  creator
+  height
+  tx
+  root
+  indexes
+  signature_ecdsa
+  block {
+    timestamp
+  }
+}
+    `;
+export const ConfirmationBase = gql`
+    fragment ConfirmationBase on confirmation {
+  root
+  creator
+  height
+  tx
+  block {
+    timestamp
+  }
+}
+    `;
+export const Operation = gql`
+    fragment Operation on operation {
+  index
+  operation_type
+  status
+  creator
+  timestamp
+}
+    `;
+export const OperationVote = gql`
+    fragment OperationVote on vote {
+  operation
+  height
+  tx
+  validator
+  vote
+  block {
+    timestamp
+  }
+}
+    `;
 export const Oracle = gql`
     fragment Oracle on oracle {
   account
@@ -19064,6 +19758,57 @@ export const GetBlockList = gql`
   }
 }
     ${BlockList}`;
+export const GetConfirmationByRoot = gql`
+    query GetConfirmationByRoot($root: String!) {
+  confirmation(where: {root: {_eq: $root}}) {
+    ...Confirmation
+  }
+}
+    ${Confirmation}`;
+export const GetConfirmationCount = gql`
+    query GetConfirmationCount {
+  confirmation_aggregate {
+    aggregate {
+      count(columns: root)
+    }
+  }
+}
+    `;
+export const GetConfirmationList = gql`
+    query GetConfirmationList($limit: Int, $offset: Int) {
+  confirmation(limit: $limit, offset: $offset) {
+    ...ConfirmationBase
+  }
+}
+    ${ConfirmationBase}`;
+export const GetConfirmationOperationList = gql`
+    query GetConfirmationOperationList($limit: Int, $offset: Int, $where: operation_bool_exp!) {
+  operation(
+    order_by: {timestamp: desc}
+    limit: $limit
+    offset: $offset
+    where: $where
+  ) {
+    ...Operation
+  }
+}
+    ${Operation}`;
+export const GetConfirmationOperationVoteCount = gql`
+    query GetConfirmationOperationVoteCount($where: vote_bool_exp!) {
+  vote_aggregate(where: $where) {
+    aggregate {
+      count(columns: operation)
+    }
+  }
+}
+    `;
+export const GetConfirmationOperationVoteList = gql`
+    query GetConfirmationOperationVoteList($limit: Int, $offset: Int, $where: vote_bool_exp!) {
+  vote(order_by: {height: desc}, where: $where, limit: $limit, offset: $offset) {
+    ...OperationVote
+  }
+}
+    ${OperationVote}`;
 export const GetLatestTxAndBlocks = gql`
     query GetLatestTxAndBlocks($limit: Int, $offset: Int) {
   transaction(
@@ -19079,6 +19824,154 @@ export const GetLatestTxAndBlocks = gql`
 }
     ${TransactionBase}
 ${BlockBase}`;
+export const GetOperationByIndex = gql`
+    query GetOperationByIndex($index: String!) {
+  operation(where: {index: {_eq: $index}}) {
+    index
+    creator
+    operation_type
+    status
+    timestamp
+    change_parties {
+      new_public_key
+      operation_index
+      parties
+      signature
+    }
+    contract_upgrade {
+      buffer_account
+      chain
+      hash
+      new_implementation_contract
+      nonce
+      operation_index
+      target_contract
+      type
+      network {
+        name
+        params
+        type
+      }
+    }
+    fee_token_management {
+      chain
+      fee_token_amount
+      fee_token_contract
+      nonce
+      op_type
+      operation_index
+      receiver
+      network {
+        name
+        params
+        type
+      }
+    }
+    identity_default_transfer {
+      chain
+      contract
+      gistcreated_at_block
+      gistcreated_at_timestamp
+      gisthash
+      gistreplaced_by
+      id
+      operation_index
+      replaced_gist_hash
+      replaced_state_hash
+      state_created_at_block
+      state_created_at_timestamp
+      state_hash
+      state_replaced_by
+      network {
+        name
+        params
+        type
+      }
+    }
+    identity_gist_transfer {
+      chain
+      contract
+      gistcreated_at_block
+      gistcreated_at_timestamp
+      gisthash
+      operation_index
+      replaced_gist_hash
+      network {
+        name
+        params
+        type
+      }
+    }
+    identity_state_transfer {
+      chain
+      contract
+      id
+      operation_index
+      replaced_state_hash
+      state_created_at_block
+      state_created_at_timestamp
+      state_hash
+    }
+    transfer {
+      amount
+      bundle_data
+      bundle_salt
+      event_id
+      from
+      item_meta
+      operation_index
+      origin
+      receiver
+      to
+      tx
+    }
+  }
+  confirmation(where: {root: {_in: [$index]}}) {
+    ...Confirmation
+  }
+  transaction(where: {raw_log: {_regex: $index, _iregex: "new_operation"}}) {
+    ...TransactionBase
+  }
+}
+    ${Confirmation}
+${TransactionBase}`;
+export const GetOperationCount = gql`
+    query GetOperationCount {
+  operation_aggregate {
+    aggregate {
+      count(columns: index)
+    }
+  }
+}
+    `;
+export const GetOperationList = gql`
+    query GetOperationList($limit: Int, $offset: Int) {
+  operation(order_by: {timestamp: desc}, limit: $limit, offset: $offset) {
+    ...Operation
+  }
+}
+    ${Operation}`;
+export const GetOperationVoteCount = gql`
+    query GetOperationVoteCount($operation: String!) {
+  vote_aggregate(where: {operation: {_eq: $operation}}) {
+    aggregate {
+      count(columns: operation)
+    }
+  }
+}
+    `;
+export const GetOperationVoteList = gql`
+    query GetOperationVoteList($limit: Int, $offset: Int, $operation: String!) {
+  vote(
+    order_by: {height: desc}
+    where: {operation: {_eq: $operation}}
+    limit: $limit
+    offset: $offset
+  ) {
+    ...OperationVote
+  }
+}
+    ${OperationVote}`;
 export const GetOracleBase = gql`
     query GetOracleBase($limit: Int, $offset: Int) {
   oracle(limit: $limit, offset: $offset) {

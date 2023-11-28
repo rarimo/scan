@@ -27,7 +27,6 @@ export default function TSSList({
   count,
   handleChangePage,
   handleChangeRowsPerPage,
-  isMinHeighted = true,
 }: TableListProps<TssListFragment>) {
   const t = useI18n()
 
@@ -82,7 +81,7 @@ export default function TSSList({
     <ContentBox>
       <ContentWrapper>
         <TableWithPagination
-          isMinHeighted={isMinHeighted}
+          isMinHeighted={true}
           label={t('tss-list.table-lbl')}
           noDataTitle={t('tss-list.no-data-title')}
           noDataSubtitle={t('tss-list.no-data-subtitle')}

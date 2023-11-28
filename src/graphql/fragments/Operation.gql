@@ -1,0 +1,7 @@
+fragment Operation on operation {
+    index
+    operation_type
+    status
+    creator
+    timestamp
+}

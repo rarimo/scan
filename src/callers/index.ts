@@ -1,4 +1,6 @@
 export * from './block'
+export * from './confirmation'
+export * from './operation'
 export * from './proposal'
 export * from './rarimocore'
 export * from './stats'

@@ -18,7 +18,7 @@ import { abbr } from '@/helpers'
 import { useLoading, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
 
-export default function TSSDetails({ address }: { address: string }) {
+export default function TSS({ address }: { address: string }) {
   const t = useI18n()
 
   const {

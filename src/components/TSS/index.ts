@@ -1,2 +1,2 @@
-export { default as TSSDetails } from './TSSDetails'
+export { default as TSSDetails } from './TSS'
 export { default as TSSs } from './TSSs'

@@ -17,4 +17,8 @@ export enum RoutePaths {
   TSS = '/tss/[address]',
   Oracles = '/oracles',
   Oracle = '/oracles/[address]',
+  Operations = '/operations',
+  Operation = '/operations/[index]',
+  Confirmations = '/confirmations',
+  Confirmation = '/confirmations/[root]',
 }

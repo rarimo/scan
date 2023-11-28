@@ -10,6 +10,8 @@ export default function HeaderBridgeMenu(props: Omit<HeaderBridgeMenuProps, 'ite
     { label: t('header-bridge-menu.menu-lbl'), href: '' },
     { label: t('header-bridge-menu.tss-lbl'), href: RoutePaths.TSSs },
     { label: t('header-bridge-menu.oracles-lbl'), href: RoutePaths.Oracles },
+    { label: t('header-bridge-menu.operations-lbl'), href: RoutePaths.Operations },
+    { label: t('header-bridge-menu.confirmations-lbl'), href: RoutePaths.Confirmations },
   ]
 
   return <HeaderDropdownMenu {...props} items={itemList} />

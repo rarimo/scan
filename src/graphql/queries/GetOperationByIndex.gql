@@ -1,0 +1,109 @@
+query GetOperationByIndex($index: String!) {
+    operation(where: {index: {_eq: $index}}) {
+        index
+        creator
+        operation_type
+        status
+        timestamp
+        change_parties {
+            new_public_key
+            operation_index
+            parties
+            signature
+        }
+        contract_upgrade {
+            buffer_account
+            chain
+            hash
+            new_implementation_contract
+            nonce
+            operation_index
+            target_contract
+            type
+            network {
+                name
+                params
+                type
+            }
+        }
+        fee_token_management {
+            chain
+            fee_token_amount
+            fee_token_contract
+            nonce
+            op_type
+            operation_index
+            receiver
+            network {
+                name
+                params
+                type
+            }
+        }
+        identity_default_transfer {
+            chain
+            contract
+            gistcreated_at_block
+            gistcreated_at_timestamp
+            gisthash
+            gistreplaced_by
+            id
+            operation_index
+            replaced_gist_hash
+            replaced_state_hash
+            state_created_at_block
+            state_created_at_timestamp
+            state_hash
+            state_replaced_by
+            network {
+                name
+                params
+                type
+            }
+        }
+        identity_gist_transfer {
+            chain
+            contract
+            gistcreated_at_block
+            gistcreated_at_timestamp
+            gisthash
+            operation_index
+            replaced_gist_hash
+            network {
+                name
+                params
+                type
+            }
+        }
+        identity_state_transfer {
+            chain
+            contract
+            id
+            operation_index
+            replaced_state_hash
+            state_created_at_block
+            state_created_at_timestamp
+            state_hash
+        }
+        transfer {
+            amount
+            bundle_data
+            bundle_salt
+            event_id
+            from
+            item_meta
+            operation_index
+            origin
+            receiver
+            to
+            tx
+        }
+    }
+    confirmation(where: {root: {_in: [$index]}}) {
+        ...Confirmation
+    }
+    transaction(where: {raw_log: {_regex: $index, _iregex: "new_operation"}}) {
+        ...TransactionBase
+    }
+}
+

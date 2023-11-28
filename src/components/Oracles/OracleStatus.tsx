@@ -11,7 +11,7 @@ export default function OracleStatus({ status }: { status?: string | number }) {
   const getTSSStatusColor = (status?: string | number) => {
     switch (oracleStatusFromJSON(status!)) {
       case OracleStatusEnum.Inactive:
-      case OracleStatusEnum.Frozen:
+      case OracleStatusEnum.Freezed:
         return 'secondary'
       case OracleStatusEnum.Active:
         return 'primary'

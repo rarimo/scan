@@ -1,4 +1,7 @@
 export * from './msg-type'
+export * from './op-status'
+export * from './op-type'
+export * from './op-vote'
 export * from './oracle'
 export * from './proposal-status'
 export * from './proposal-type'

@@ -1,0 +1,7 @@
+query GetOperationVoteCount($operation: String!) {
+    vote_aggregate(where: { operation: { _eq: $operation } }) {
+        aggregate {
+            count(columns: operation)
+        }
+    }
+}

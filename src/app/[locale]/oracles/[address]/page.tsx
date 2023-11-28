@@ -18,11 +18,7 @@ export function generateMetadata({ params }: { params: { address: string } }): M
   return createMetadata(`Oracle ${params.address} Details`)
 }
 
-export default async function ProposalPage({
-  params: { address },
-}: {
-  params: { address: string }
-}) {
+export default async function OraclePage({ params: { address } }: { params: { address: string } }) {
   const { isNotFound } = await getOracle(address)
   if (isNotFound) notFound()
 

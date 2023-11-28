@@ -1,0 +1,5 @@
+query GetConfirmationList($limit: Int, $offset: Int) {
+    confirmation(limit: $limit, offset: $offset) {
+        ...ConfirmationBase
+    }
+}
