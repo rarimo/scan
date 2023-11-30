@@ -19025,6 +19025,8 @@ export type ConfirmationFragment = { __typename?: 'confirmation', creator: strin
 
 export type ConfirmationBaseFragment = { __typename?: 'confirmation', root: string, creator: string, height: any, tx?: string | null, block?: { __typename?: 'block', timestamp: any } | null };
 
+export type NetworkFragment = { __typename?: 'network', name: string, params: any, type: number };
+
 export type OperationFragment = { __typename?: 'operation', index: string, operation_type: number, status: number, creator: string, timestamp: any };
 
 export type OperationVoteFragment = { __typename?: 'vote', operation: string, height: any, tx?: string | null, validator: string, vote: number, block?: { __typename?: 'block', timestamp: any } | null };
@@ -19145,6 +19147,26 @@ export type GetLatestTxAndBlocksQueryVariables = Exact<{
 
 
 export type GetLatestTxAndBlocksQuery = { __typename?: 'query_root', transaction: Array<{ __typename?: 'transaction', height: any, hash: string, success: boolean, signer_infos: any, raw_log?: string | null, block: { __typename?: 'block', timestamp: any, height: any } }>, block: Array<{ __typename?: 'block', height: any, timestamp: any, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', avatar_url?: string | null, moniker?: string | null }> } | null }> };
+
+export type GetNetworkByNameQueryVariables = Exact<{
+  name: Scalars['String']['input'];
+}>;
+
+
+export type GetNetworkByNameQuery = { __typename?: 'query_root', network: Array<{ __typename?: 'network', name: string, params: any, type: number }> };
+
+export type GetNetworkCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetNetworkCountQuery = { __typename?: 'query_root', network_aggregate: { __typename?: 'network_aggregate', aggregate?: { __typename?: 'network_aggregate_fields', count: number } | null } };
+
+export type GetNetworkListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetNetworkListQuery = { __typename?: 'query_root', network: Array<{ __typename?: 'network', name: string, params: any, type: number }> };
 
 export type GetOperationByIndexQueryVariables = Exact<{
   index: Scalars['String']['input'];
@@ -19473,6 +19495,13 @@ export const ConfirmationBase = gql`
   block {
     timestamp
   }
+}
+    `;
+export const Network = gql`
+    fragment Network on network {
+  name
+  params
+  type
 }
     `;
 export const Operation = gql`
@@ -19824,6 +19853,29 @@ export const GetLatestTxAndBlocks = gql`
 }
     ${TransactionBase}
 ${BlockBase}`;
+export const GetNetworkByName = gql`
+    query GetNetworkByName($name: String!) {
+  network(where: {name: {_eq: $name}}) {
+    ...Network
+  }
+}
+    ${Network}`;
+export const GetNetworkCount = gql`
+    query GetNetworkCount {
+  network_aggregate {
+    aggregate {
+      count(columns: name)
+    }
+  }
+}
+    `;
+export const GetNetworkList = gql`
+    query GetNetworkList($limit: Int, $offset: Int) {
+  network(limit: $limit, offset: $offset) {
+    ...Network
+  }
+}
+    ${Network}`;
 export const GetOperationByIndex = gql`
     query GetOperationByIndex($index: String!) {
   operation(where: {index: {_eq: $index}}) {

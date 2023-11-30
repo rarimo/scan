@@ -1,5 +1,6 @@
 export * from './block'
 export * from './confirmation'
+export * from './network'
 export * from './operation'
 export * from './proposal'
 export * from './rarimocore'

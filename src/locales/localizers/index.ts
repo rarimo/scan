@@ -1,4 +1,5 @@
 export * from './msg-type'
+export * from './network-type'
 export * from './op-status'
 export * from './op-type'
 export * from './op-vote'

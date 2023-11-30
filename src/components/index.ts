@@ -9,6 +9,7 @@ export * from './TSS'
 export * from './Oracles'
 export * from './Operation'
 export * from './Confirmation'
+export * from './Network'
 
 export { default as Avatar } from './Avatar/Avatar'
 export { default as AvatarName } from './Avatar/AvatarName'

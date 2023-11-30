@@ -1,0 +1,6 @@
+query GetNetworkByName($name: String!) {
+    network(where: {name: {_eq: $name}}) {
+       ...Network
+    }
+}
+

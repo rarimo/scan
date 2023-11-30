@@ -21,4 +21,6 @@ export enum RoutePaths {
   Operation = '/operations/[index]',
   Confirmations = '/confirmations',
   Confirmation = '/confirmations/[root]',
+  Networks = '/networks',
+  Network = '/networks/[name]',
 }

@@ -1,0 +1,5 @@
+query GetNetworkList($limit: Int, $offset: Int) {
+    network(limit: $limit, offset: $offset) {
+        ...Network
+    }
+}

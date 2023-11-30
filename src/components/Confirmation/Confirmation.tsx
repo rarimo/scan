@@ -102,7 +102,6 @@ export default function Confirmation({ root }: { root: string }) {
             isEmpty={isEmpty}
             isLoadingError={isLoadingError}
             rows={rows}
-            sx={{}}
           />
         </ContentWrapper>
       </ContentBox>

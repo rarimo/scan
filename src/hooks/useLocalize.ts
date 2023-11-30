@@ -2,6 +2,8 @@
 
 import {
   BondStatus,
+  NetworkParamType,
+  NetworkType,
   OpStatus,
   OpType,
   OpVoteType,
@@ -15,6 +17,8 @@ import { createYupInitFn } from '@/helpers'
 import { useI18n } from '@/locales/client'
 import {
   localizeMsgType,
+  localizeNetworkParamType,
+  localizeNetworkType,
   localizeOperationStatus,
   localizeOperationType,
   localizeOperationVote,
@@ -56,6 +60,8 @@ export const useLocalize = () => {
     localizeOperationType: (type: OpType) => localizeOperationType(t, type),
     localizeOperationStatus: (status: OpStatus) => localizeOperationStatus(t, status),
     localizeOperationVote: (type: OpVoteType) => localizeOperationVote(t, type),
+    localizeNetworkType: (type: NetworkType) => localizeNetworkType(t, type),
+    localizeNetworkParamType: (type: NetworkParamType) => localizeNetworkParamType(t, type),
   }
 
   return {
