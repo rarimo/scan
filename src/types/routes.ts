@@ -23,4 +23,6 @@ export enum RoutePaths {
   Confirmation = '/confirmations/[root]',
   Networks = '/networks',
   Network = '/networks/[name]',
+  SupportedTokens = '/supported-tokens',
+  SupportedToken = '/supported-tokens/[index]',
 }

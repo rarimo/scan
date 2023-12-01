@@ -19021,6 +19021,10 @@ export type BlockBaseFragment = { __typename?: 'block', height: any, timestamp: 
 
 export type BlockListFragment = { __typename?: 'block', height: any, timestamp: any, total_gas?: any | null, transactions_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null };
 
+export type CollectionFragment = { __typename?: 'collection', data: any, index: string, meta: any, collection_data?: { __typename?: 'collection_data', collection?: string | null, decimals: number, index: any, index_key: string, token_type: number, wrapped: boolean } | null };
+
+export type CollectionBaseFragment = { __typename?: 'collection', index: string, data: any, meta: any };
+
 export type ConfirmationFragment = { __typename?: 'confirmation', creator: string, height: any, tx?: string | null, root: string, indexes: any, signature_ecdsa: string, block?: { __typename?: 'block', timestamp: any } | null };
 
 export type ConfirmationBaseFragment = { __typename?: 'confirmation', root: string, creator: string, height: any, tx?: string | null, block?: { __typename?: 'block', timestamp: any } | null };
@@ -19094,6 +19098,29 @@ export type GetBlockListQueryVariables = Exact<{
 
 
 export type GetBlockListQuery = { __typename?: 'query_root', block: Array<{ __typename?: 'block', height: any, timestamp: any, total_gas?: any | null, transactions_aggregate: { __typename?: 'transaction_aggregate', aggregate?: { __typename?: 'transaction_aggregate_fields', count: number } | null }, validator?: { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }> } | null }> };
+
+export type GetCollectionByIndexQueryVariables = Exact<{
+  index: Scalars['String']['input'];
+}>;
+
+
+export type GetCollectionByIndexQuery = { __typename?: 'query_root', collection: Array<{ __typename?: 'collection', data: any, index: string, meta: any, collection_data?: { __typename?: 'collection_data', collection?: string | null, decimals: number, index: any, index_key: string, token_type: number, wrapped: boolean } | null }> };
+
+export type GetCollectionCountQueryVariables = Exact<{
+  where: Collection_Bool_Exp;
+}>;
+
+
+export type GetCollectionCountQuery = { __typename?: 'query_root', collection_aggregate: { __typename?: 'collection_aggregate', aggregate?: { __typename?: 'collection_aggregate_fields', count: number } | null } };
+
+export type GetCollectionListQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  where: Collection_Bool_Exp;
+}>;
+
+
+export type GetCollectionListQuery = { __typename?: 'query_root', collection: Array<{ __typename?: 'collection', index: string, data: any, meta: any }> };
 
 export type GetConfirmationByRootQueryVariables = Exact<{
   root: Scalars['String']['input'];
@@ -19473,6 +19500,28 @@ export const BlockList = gql`
   }
 }
     `;
+export const Collection = gql`
+    fragment Collection on collection {
+  data
+  index
+  meta
+  collection_data {
+    collection
+    decimals
+    index
+    index_key
+    token_type
+    wrapped
+  }
+}
+    `;
+export const CollectionBase = gql`
+    fragment CollectionBase on collection {
+  index
+  data
+  meta
+}
+    `;
 export const Confirmation = gql`
     fragment Confirmation on confirmation {
   creator
@@ -19787,6 +19836,29 @@ export const GetBlockList = gql`
   }
 }
     ${BlockList}`;
+export const GetCollectionByIndex = gql`
+    query GetCollectionByIndex($index: String!) {
+  collection(where: {index: {_eq: $index}}) {
+    ...Collection
+  }
+}
+    ${Collection}`;
+export const GetCollectionCount = gql`
+    query GetCollectionCount($where: collection_bool_exp!) {
+  collection_aggregate(where: $where) {
+    aggregate {
+      count(columns: index)
+    }
+  }
+}
+    `;
+export const GetCollectionList = gql`
+    query GetCollectionList($limit: Int, $offset: Int, $where: collection_bool_exp!) {
+  collection(limit: $limit, offset: $offset, where: $where) {
+    ...CollectionBase
+  }
+}
+    ${CollectionBase}`;
 export const GetConfirmationByRoot = gql`
     query GetConfirmationByRoot($root: String!) {
   confirmation(where: {root: {_eq: $root}}) {

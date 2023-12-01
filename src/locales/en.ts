@@ -52,6 +52,7 @@ export default {
     "operations-lbl": "Operations",
     "confirmations-lbl": "Confirmations",
     "networks-lbl": "Networks",
+    "supported-tokens-lbl": "Supported Tokens",
   },
   "footer": {
     "navigation-links-lbl": "Navigation",
@@ -668,5 +669,30 @@ export default {
     "title": "Network Details",
     "no-data-msg": "There is no network with such name.",
     "parameters-col-lbl": "Parameters",
+  },
+  "supported-tokens": {
+    "table-lbl": "Supported Tokens",
+    "nft-filter-lbl": "Non-fungible",
+    "ft-filter-lbl": "Fungible",
+  },
+  "supported-token-list": {
+    "index-col-lbl": "Index",
+    "name-col-lbl": "Name",
+    "symbol-col-lbl": "Symbol",
+    "chains-col-lbl": "Chains",
+    "table-lbl": "Supported tokens",
+    "no-data-title": "There are no supported tokens",
+    "no-data-subtitle": "It will appear for a while",
+    "error-title": "There was an error while loading supported tokens",
+    "error-subtitle": "Please try again later",
+  },
+  "supported-token": {
+    "title": "Supported Token",
+    "no-data-msg": "There are no supported token with such index",
+    "index-col-lbl": "Index:",
+    "name-col-lbl": "Name:",
+    "symbol-col-lbl": "Symbol:",
+    "chains-col-lbl": "Chains",
+    "metadata-uri-col-lbl": "Metadata URI:",
   },
 } as const

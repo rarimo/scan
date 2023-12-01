@@ -1,0 +1,6 @@
+query GetCollectionByIndex($index: String!) {
+    collection(where: {index: {_eq: $index}}) {
+       ...Collection
+    }
+}
+

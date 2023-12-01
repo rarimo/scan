@@ -13,6 +13,7 @@ export default function HeaderBridgeMenu(props: Omit<HeaderBridgeMenuProps, 'ite
     { label: t('header-bridge-menu.operations-lbl'), href: RoutePaths.Operations },
     { label: t('header-bridge-menu.confirmations-lbl'), href: RoutePaths.Confirmations },
     { label: t('header-bridge-menu.networks-lbl'), href: RoutePaths.Networks },
+    { label: t('header-bridge-menu.supported-tokens-lbl'), href: RoutePaths.SupportedTokens },
   ]
 
   return <HeaderDropdownMenu {...props} items={itemList} />

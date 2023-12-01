@@ -1,0 +1,5 @@
+query GetCollectionList($limit: Int, $offset: Int, $where: collection_bool_exp!) {
+  collection(limit: $limit, offset: $offset, where: $where) {
+    ...CollectionBase
+  }
+}

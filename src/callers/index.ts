@@ -1,4 +1,5 @@
 export * from './block'
+export * from './collection'
 export * from './confirmation'
 export * from './network'
 export * from './operation'

@@ -1,0 +1,7 @@
+query GetCollectionCount($where: collection_bool_exp!) {
+    collection_aggregate(where: $where) {
+        aggregate {
+            count(columns: index)
+        }
+    }
+}
