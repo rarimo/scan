@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
-## [1.0.6] - 2023-12-01
+## [1.0.9] - 2023-12-01
 ### Added
 - TSS pages
 - Oracle pages
@@ -11,6 +11,18 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 - Confirmation pages
 - Network pages
 - Supported token pages
+
+## [1.0.8] - 2023-11-23
+### Changed
+- Disabled eslint during the build in the next.config.js
+
+## [1.0.7] - 2023-11-23
+### Fixed
+- Build issues
+
+## [1.0.6] - 2023-11-23
+### Added
+- CreateIdentityGISTTransferOp, CreateIdentityStateTransferOp message types localization
 
 ## [1.0.5] - 2023-11-02
 ### Added
@@ -48,7 +60,10 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.6...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.9...HEAD
+[1.0.9]: https://gitlab.com/rarimo/scan/compare/1.0.8...1.0.9
+[1.0.8]: https://gitlab.com/rarimo/scan/compare/1.0.7...1.0.8
+[1.0.7]: https://gitlab.com/rarimo/scan/compare/1.0.6...1.0.7
 [1.0.6]: https://gitlab.com/rarimo/scan/compare/1.0.5...1.0.6
 [1.0.5]: https://gitlab.com/rarimo/scan/compare/1.0.4...1.0.5
 [1.0.4]: https://gitlab.com/rarimo/scan/compare/1.0.3...1.0.4
