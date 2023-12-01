@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [1.0.9] - 2023-12-01
+### Added
+- TSS pages
+- Oracle pages
+- Operation pages
+- Confirmation pages
+- Network pages
+- Supported token pages
+
 ## [1.0.8] - 2023-11-23
 ### Changed
 - Disabled eslint during the build in the next.config.js
@@ -51,7 +60,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.8...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.0.9...HEAD
+[1.0.9]: https://gitlab.com/rarimo/scan/compare/1.0.8...1.0.9
 [1.0.8]: https://gitlab.com/rarimo/scan/compare/1.0.7...1.0.8
 [1.0.7]: https://gitlab.com/rarimo/scan/compare/1.0.6...1.0.7
 [1.0.6]: https://gitlab.com/rarimo/scan/compare/1.0.5...1.0.6

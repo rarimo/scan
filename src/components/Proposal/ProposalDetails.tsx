@@ -23,6 +23,8 @@ import { useProposalMetadata, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
 import { RoutePaths } from '@/types'
 
+import CopyToClipboardWrapper from '../CopyToClipboardWrapper'
+
 export default function ProposalDetails({
   isLoading,
   isLoadingError,
@@ -52,7 +54,9 @@ export default function ProposalDetails({
     {
       head: t('proposal-details.proposer-account-id-lbl'),
       body: withSkeleton(
-        <AvatarName address={proposal?.proposer_address ?? ''} abbrAddress={false} />,
+        <CopyToClipboardWrapper value={proposal?.proposer_address ?? ''}>
+          <AvatarName address={proposal?.proposer_address ?? ''} abbrAddress={false} />
+        </CopyToClipboardWrapper>,
         TABLE_LARGE_SKELETON_SX,
       ),
     },

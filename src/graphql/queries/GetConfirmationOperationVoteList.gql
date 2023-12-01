@@ -1,0 +1,5 @@
+query GetConfirmationOperationVoteList($limit: Int, $offset: Int, $where: vote_bool_exp!) {
+    vote(order_by: {height: desc}, where: $where, limit: $limit, offset: $offset) {
+        ...OperationVote
+    }
+}

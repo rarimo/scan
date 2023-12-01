@@ -1,0 +1,7 @@
+query GetOperationCount {
+  operation_aggregate {
+    aggregate {
+      count(columns: index)
+    }
+  }
+}

@@ -1,0 +1,7 @@
+query GetOracleCount {
+  oracle_aggregate {
+    aggregate {
+      count(columns: account)
+    }
+  }
+}

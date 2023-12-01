@@ -1,0 +1,5 @@
+fragment Network on network {
+    name
+    params
+    type
+}

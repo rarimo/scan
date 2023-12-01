@@ -1,0 +1,13 @@
+fragment Collection on collection {
+    data
+    index
+    meta
+    collection_data {
+        collection
+        decimals
+        index
+        index_key
+        token_type
+        wrapped
+    }
+}

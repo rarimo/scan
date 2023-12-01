@@ -3,6 +3,7 @@
 import { time } from '@distributedlab/tools'
 import { Chip, Link as MuiLink } from '@mui/material'
 import Link from 'next/link'
+import { useMemo } from 'react'
 
 import { getTransactionByHash } from '@/callers'
 import { AvatarName } from '@/components/Avatar'
@@ -40,6 +41,8 @@ export default function Transaction({ hash }: { hash: string }) {
 
   const withSkeleton = useSkeleton(isLoading)
 
+  const address = useMemo(() => parseAddress(transaction), [transaction])
+
   const rows = [
     {
       head: t('transaction-details.hash-lbl'),
@@ -60,14 +63,16 @@ export default function Transaction({ hash }: { hash: string }) {
     {
       head: t('transaction-details.block-lbl'),
       body: withSkeleton(
-        <MuiLink
-          component={Link}
-          href={generatePath(RoutePaths.Block, {
-            height: String(transaction?.height),
-          })}
-        >
-          {transaction?.height}
-        </MuiLink>,
+        <CopyToClipboardWrapper value={transaction?.height ?? ''}>
+          <MuiLink
+            component={Link}
+            href={generatePath(RoutePaths.Block, {
+              height: String(transaction?.height),
+            })}
+          >
+            {transaction?.height}
+          </MuiLink>
+        </CopyToClipboardWrapper>,
         TABLE_MEDIUM_TEXT_SKELETON_SX,
       ),
     },
@@ -81,7 +86,9 @@ export default function Transaction({ hash }: { hash: string }) {
     {
       head: t('transaction-details.sender-lbl'),
       body: withSkeleton(
-        <AvatarName abbrAddress={false} address={parseAddress(transaction)} />,
+        <CopyToClipboardWrapper value={address}>
+          <AvatarName abbrAddress={false} address={address} />
+        </CopyToClipboardWrapper>,
         TABLE_LARGE_SKELETON_SX,
       ),
     },

@@ -1,0 +1,7 @@
+query GetNetworkCount {
+  network_aggregate {
+    aggregate {
+      count(columns: name)
+    }
+  }
+}

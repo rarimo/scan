@@ -1,42 +1,9 @@
-import { MenuItem, SelectChangeEvent, Stack } from '@mui/material'
-import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
-
-import MouseOverDropdown from '@/components/MouseOverDropdown'
-import { Bus } from '@/helpers'
+import { HeaderBridgeMenuProps, HeaderDropdownMenu } from '@/components/Header/HeaderDropdownMenu'
 import { useI18n } from '@/locales/client'
 import { RoutePaths } from '@/types'
 
-type AvailableRoutes =
-  | RoutePaths.Validators
-  | RoutePaths.Proposals
-  | RoutePaths.Transactions
-  | RoutePaths.Blocks
-
-const AVAILABLE_ROUTES: AvailableRoutes[] = [
-  RoutePaths.Validators,
-  RoutePaths.Proposals,
-  RoutePaths.Transactions,
-  RoutePaths.Blocks,
-]
-
-export default function HeaderBlockchainMenu({
-  displayXs = false,
-  onClick,
-}: {
-  displayXs?: boolean
-  onClick?: () => void
-}) {
-  const router = useRouter()
-  const pathname = usePathname()
+export default function HeaderBlockchainMenu(props: Omit<HeaderBridgeMenuProps, 'items'>) {
   const t = useI18n()
-  const [route, setRoute] = useState<AvailableRoutes>('' as AvailableRoutes)
-
-  const handleChange = (event: SelectChangeEvent) => {
-    if (!event.target.value) return
-    setRoute(event.target.value as AvailableRoutes)
-    router.push(event.target.value)
-  }
 
   const itemList = [
     { label: t('header-blockchain-menu.menu-lbl'), href: '' },
@@ -46,53 +13,5 @@ export default function HeaderBlockchainMenu({
     { label: t('header-blockchain-menu.blocks-lbl'), href: RoutePaths.Blocks },
   ]
 
-  Bus.on(Bus.eventList.redirectToHome, () => {
-    if (String(route) === '') return
-    setRoute('' as AvailableRoutes)
-  })
-
-  useEffect(() => {
-    if (![...AVAILABLE_ROUTES, ''].includes(pathname as AvailableRoutes)) return
-    setRoute((pathname ?? '') as AvailableRoutes)
-  }, [pathname])
-
-  useEffect(() => {
-    AVAILABLE_ROUTES.forEach(route => {
-      if (pathname.startsWith(route)) setRoute(route as AvailableRoutes)
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return (
-    <Stack
-      direction={'row'}
-      alignItems={'center'}
-      spacing={2}
-      sx={{
-        display: {
-          xs: displayXs ? 'flex' : 'none',
-          md: 'flex',
-        },
-      }}
-    >
-      <MouseOverDropdown variant={'text'} value={route} handleChange={handleChange}>
-        {itemList.map((item, idx) => (
-          <MenuItem
-            value={item.href}
-            key={idx}
-            disabled={!item.href}
-            sx={{
-              minWidth: 220,
-            }}
-            onClick={() => {
-              onClick?.()
-              if (route === item.href) router.push(item.href)
-            }}
-          >
-            {item.label}
-          </MenuItem>
-        ))}
-      </MouseOverDropdown>
-    </Stack>
-  )
+  return <HeaderDropdownMenu {...props} items={itemList} />
 }

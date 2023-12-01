@@ -1,0 +1,7 @@
+query GetConfirmationCount {
+  confirmation_aggregate {
+    aggregate {
+      count(columns: root)
+    }
+  }
+}

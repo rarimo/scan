@@ -1,0 +1,7 @@
+query GetConfirmationOperationVoteCount($where: vote_bool_exp!) {
+    vote_aggregate(where: $where) {
+        aggregate {
+            count(columns: operation)
+        }
+    }
+}

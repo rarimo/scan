@@ -112,7 +112,7 @@ export default function OverviewTable({
           sx={
             sx || {
               '& > tr:last-child td, & > tr:last-child th': {
-                border: 0,
+                borderBottom: 'none!important',
               },
             }
           }

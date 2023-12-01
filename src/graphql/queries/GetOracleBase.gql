@@ -1,0 +1,5 @@
+query GetOracleBase($limit: Int, $offset: Int) {
+  oracle(limit: $limit, offset: $offset) {
+    ...OracleBase
+  }
+}

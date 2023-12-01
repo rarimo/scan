@@ -31,7 +31,7 @@ export default function ValidatorDelegationListRow({
       <TableCell sx={columnMap[ValidatorDelagationListColumnIds.Amount]?.sx}>
         {withSkeleton(
           formatCurrencyWithDenom(delegation?.coins?.[0]?.amount),
-          columnMap[ValidatorDelagationListColumnIds.Address]?.sx,
+          columnMap[ValidatorDelagationListColumnIds.Amount]?.sx,
         )}
       </TableCell>
     </TableRow>

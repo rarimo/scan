@@ -1,0 +1,10 @@
+fragment OperationVote on vote {
+    operation
+    height
+    tx
+    validator
+    vote
+    block {
+        timestamp
+    }
+}

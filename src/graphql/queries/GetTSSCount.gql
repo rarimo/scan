@@ -1,0 +1,7 @@
+query GetTSSCount {
+  parties_aggregate {
+    aggregate {
+      count(columns: account)
+    }
+  }
+}

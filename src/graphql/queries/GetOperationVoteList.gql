@@ -1,0 +1,5 @@
+query GetOperationVoteList($limit: Int, $offset: Int, $operation: String!) {
+    vote(order_by: {height: desc}, where: {operation: {_eq: $operation}}, limit: $limit, offset: $offset) {
+        ...OperationVote
+    }
+}

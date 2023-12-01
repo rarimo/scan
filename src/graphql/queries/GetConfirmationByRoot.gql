@@ -1,0 +1,6 @@
+query GetConfirmationByRoot($root: String!) {
+    confirmation(where: {root: {_eq: $root}}) {
+       ...Confirmation
+    }
+}
+

@@ -1,0 +1,12 @@
+fragment TSS on parties {
+    account
+    delegator
+    status
+    violations_count
+    address
+    committed_global_public_key
+    freeze_end_block
+    pub_key
+    reported_sessions
+}
+

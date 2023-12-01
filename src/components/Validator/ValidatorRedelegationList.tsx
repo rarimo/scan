@@ -58,7 +58,7 @@ export default function ValidatorRedelegationList({
       id: ValidatorRedelegationListColumnIds.Date,
       label: t('validator-redelegation-list.age-col-lbl'),
       minWidth: 120,
-      maxWidth: 120,
+      maxWidth: 150,
     },
   ]
 

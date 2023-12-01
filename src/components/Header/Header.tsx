@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 
 import HeaderBlockchainMenu from '@/components/Header/HeaderBlockchainMenu'
+import HeaderBridgeMenu from '@/components/Header/HeaderBridgeMenu'
 import HeaderNetworkSwitcher from '@/components/Header/HeaderNetworkSwitcher'
 import Logo from '@/components/Logo'
 import Search from '@/components/Search'
@@ -111,8 +112,9 @@ export default function Header() {
           flex={1}
           sx={{ ml: { xs: 0, md: 6 } }}
         >
-          <Stack direction={'row'} alignItems={'center'} spacing={6}>
+          <Stack direction={'row'} alignItems={'center'} spacing={3}>
             <HeaderBlockchainMenu />
+            <HeaderBridgeMenu />
           </Stack>
 
           <Stack
@@ -130,7 +132,7 @@ export default function Header() {
                 flex={1}
                 justifyContent={'flex-end'}
                 sx={{
-                  pr: 2,
+                  p: theme.spacing(0, 0, 0, 3),
                   display: { xs: 'none', md: 'flex' },
                 }}
               >

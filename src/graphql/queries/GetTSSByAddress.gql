@@ -1,0 +1,5 @@
+query GetTSSByAddress($address: String!) {
+  parties(where: {account: {_eq: $address}}) {
+   ...TSS
+  }
+}

@@ -4,7 +4,7 @@ import { ReactNode, useMemo } from 'react'
 
 import { FlexboxDirection } from '@/types'
 
-interface HomeStatisticsBoxProps {
+interface DataBoxProps {
   direction?: 'vertical' | 'horizontal'
   isLoading: boolean
   header: {
@@ -22,12 +22,12 @@ const sx = {
   wordBreak: 'break-word',
 }
 
-export default function HomeStatisticsRow({
+export default function DataBox({
   isLoading,
   header,
   footer,
   direction = 'vertical',
-}: HomeStatisticsBoxProps) {
+}: DataBoxProps) {
   const theme = useTheme()
   const isVertical = useMemo(() => direction === 'vertical', [direction])
 

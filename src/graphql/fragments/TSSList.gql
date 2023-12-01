@@ -1,0 +1,7 @@
+fragment TSSList on parties {
+    account
+    delegator
+    status
+    violations_count
+}
+

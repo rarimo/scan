@@ -1,0 +1,5 @@
+query GetTSSList($limit: Int, $offset: Int) {
+  parties(limit: $limit, offset: $offset) {
+    ...TSSList
+  }
+}

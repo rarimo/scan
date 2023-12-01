@@ -1,0 +1,5 @@
+query GetConfirmationOperationList($limit: Int, $offset: Int, $where: operation_bool_exp!) {
+  operation(order_by: { timestamp: desc }, limit: $limit, offset: $offset, where: $where) {
+    ...Operation
+  }
+}

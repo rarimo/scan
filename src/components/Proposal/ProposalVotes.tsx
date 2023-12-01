@@ -76,14 +76,14 @@ export default function ProposalVotes({ id }: { id: string }) {
       label: t('proposal-votes.block-height-col-lbl'),
       sx: {
         ...OVERFLOW_SX,
-        minWidth: 40,
-        maxWidth: 80,
+        minWidth: 120,
+        maxWidth: 150,
       },
     },
     {
       id: ProposalVotesColumnIds.Date,
       label: t('proposal-votes.age-col-lbl'),
-      sx: { ...OVERFLOW_SX, minWidth: 40, maxWidth: 80 },
+      sx: { ...OVERFLOW_SX, minWidth: 120, maxWidth: 150 },
     },
     {
       id: ProposalVotesColumnIds.Option,
