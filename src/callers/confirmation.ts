@@ -1,8 +1,8 @@
 import { CONFIG } from '@/config'
 import {
-  apolloClient,
   ConfirmationBaseFragment,
   ConfirmationFragment,
+  getApollo,
   GetConfirmationByRoot,
   GetConfirmationByRootQuery,
   GetConfirmationCount,
@@ -39,7 +39,7 @@ export const getConfirmationList = async (
   limit: number = CONFIG.PAGE_LIMIT,
   offset = 0,
 ): Promise<ConfirmationBaseFragment[]> => {
-  const { data } = await apolloClient.query<GetConfirmationListQuery>({
+  const { data } = await getApollo().query<GetConfirmationListQuery>({
     query: GetConfirmationList,
     fetchPolicy: 'network-only',
     variables: { limit, offset },
@@ -49,7 +49,7 @@ export const getConfirmationList = async (
 }
 
 export const getConfirmationCount = async (): Promise<number> => {
-  const { data } = await apolloClient.query<GetConfirmationCountQuery>({
+  const { data } = await getApollo().query<GetConfirmationCountQuery>({
     query: GetConfirmationCount,
     fetchPolicy: 'network-only',
   })
@@ -58,7 +58,7 @@ export const getConfirmationCount = async (): Promise<number> => {
 }
 
 export const getConfirmationByRoot = async (root: string): Promise<ConfirmationFragment> => {
-  const { data } = await apolloClient.query<GetConfirmationByRootQuery>({
+  const { data } = await getApollo().query<GetConfirmationByRootQuery>({
     query: GetConfirmationByRoot,
     fetchPolicy: 'network-only',
     variables: { root },
@@ -76,7 +76,7 @@ export const getConfirmationOperationList = async ({
   offset: number
   indexes: string[]
 }): Promise<OperationFragment[]> => {
-  const { data } = await apolloClient.query<GetConfirmationOperationListQuery>({
+  const { data } = await getApollo().query<GetConfirmationOperationListQuery>({
     query: GetConfirmationOperationList,
     fetchPolicy: 'network-only',
     variables: { limit, offset, where: buildOperationWhere(indexes) },
@@ -94,7 +94,7 @@ export const getConfirmationOperationVotes = async ({
   limit: number
   offset: number
 }): Promise<OperationVoteFragment[]> => {
-  const { data } = await apolloClient.query<GetConfirmationOperationVoteListQuery>({
+  const { data } = await getApollo().query<GetConfirmationOperationVoteListQuery>({
     query: GetConfirmationOperationVoteList,
     fetchPolicy: 'network-only',
     variables: { where: buildVoteWhere(indexes), limit, offset },
@@ -104,7 +104,7 @@ export const getConfirmationOperationVotes = async ({
 }
 
 export const getConfirmationOperationVoteCount = async (operations: string[]): Promise<number> => {
-  const { data } = await apolloClient.query<GetConfirmationOperationVoteCountQuery>({
+  const { data } = await getApollo().query<GetConfirmationOperationVoteCountQuery>({
     query: GetConfirmationOperationVoteCount,
     fetchPolicy: 'network-only',
     variables: { where: buildVoteWhere(operations) },

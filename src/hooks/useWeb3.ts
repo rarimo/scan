@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { getClient } from '@/client'
-import { apolloClient, GetAccountValidatorInfos, GetAccountValidatorInfosQuery } from '@/graphql'
+import { GetAccountValidatorInfos, GetAccountValidatorInfosQuery, getApollo } from '@/graphql'
 import { ErrorHandler, isWindow } from '@/helpers'
 import { useAppState } from '@/hooks'
 
@@ -26,7 +26,7 @@ export const useWeb3 = () => {
   }
 
   const getIsValidator = async (address: string) => {
-    const { data } = await apolloClient.query<GetAccountValidatorInfosQuery>({
+    const { data } = await getApollo().query<GetAccountValidatorInfosQuery>({
       query: GetAccountValidatorInfos,
       fetchPolicy: 'network-only',
       variables: { address },

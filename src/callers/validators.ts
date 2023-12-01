@@ -11,7 +11,7 @@ import { isUndefined } from 'lodash-es'
 import { getClient } from '@/client'
 import { CONFIG } from '@/config'
 import {
-  apolloClient,
+  getApollo,
   GetValidatorBase,
   GetValidatorBaseQuery,
   GetValidatorByAddress,
@@ -84,7 +84,7 @@ export const getValidatorList = async ({
   order?: SortOrder
   orderBy?: ValidatorListSortBy
 }): Promise<GetValidatorBaseQuery> => {
-  const { data } = await apolloClient.query<GetValidatorBaseQuery>({
+  const { data } = await getApollo().query<GetValidatorBaseQuery>({
     query: GetValidatorBase,
     fetchPolicy: 'network-only',
     variables: {
@@ -105,7 +105,7 @@ export const getValidatorCount = async ({
   status?: number
   jailed?: boolean
 }): Promise<number> => {
-  const { data } = await apolloClient.query<GetValidatorCountQuery>({
+  const { data } = await getApollo().query<GetValidatorCountQuery>({
     query: GetValidatorCount,
     fetchPolicy: 'network-only',
     variables: {
@@ -119,7 +119,7 @@ export const getValidatorCount = async ({
 export const getValidatorByAddress = async (
   address: string,
 ): Promise<GetValidatorByAddressQuery> => {
-  const { data } = await apolloClient.query<GetValidatorByAddressQuery>({
+  const { data } = await getApollo().query<GetValidatorByAddressQuery>({
     query: GetValidatorByAddress,
     fetchPolicy: 'network-only',
     variables: { address },
@@ -131,7 +131,7 @@ export const getValidatorByAddress = async (
 export const getValidatorByConsensusAddress = async (
   address: string,
 ): Promise<GetValidatorByConsensusAddressQuery> => {
-  const { data } = await apolloClient.query<GetValidatorByConsensusAddressQuery>({
+  const { data } = await getApollo().query<GetValidatorByConsensusAddressQuery>({
     query: GetValidatorByConsensusAddress,
     fetchPolicy: 'network-only',
     variables: { address },
@@ -149,7 +149,7 @@ export const getValidatorDelegationsList = async ({
   limit?: number
   offset?: number
 }): Promise<GetValidatorDelegationListQuery> => {
-  const { data } = await apolloClient.query<GetValidatorDelegationListQuery>({
+  const { data } = await getApollo().query<GetValidatorDelegationListQuery>({
     query: GetValidatorDelegationList,
     fetchPolicy: 'network-only',
     variables: {
@@ -171,7 +171,7 @@ export const getValidatorRedelegationsList = async ({
   limit?: number
   offset?: number
 }): Promise<GetValidatorRedelegationListQuery> => {
-  const { data } = await apolloClient.query<GetValidatorRedelegationListQuery>({
+  const { data } = await getApollo().query<GetValidatorRedelegationListQuery>({
     query: GetValidatorRedelegationList,
     fetchPolicy: 'network-only',
     variables: {
@@ -193,7 +193,7 @@ export const getValidatorUnbondingDelegationsList = async ({
   limit?: number
   offset?: number
 }): Promise<GetValidatorUnbondingDelegationListQuery> => {
-  const { data } = await apolloClient.query<GetValidatorUnbondingDelegationListQuery>({
+  const { data } = await getApollo().query<GetValidatorUnbondingDelegationListQuery>({
     query: GetValidatorUnbondingDelegationList,
     fetchPolicy: 'network-only',
     variables: {
@@ -211,7 +211,7 @@ export const getValidatorCommissionAmount = async ({
 }: {
   address: string
 }): Promise<GetValidatorCommissionAmountQuery> => {
-  const { data } = await apolloClient.query<GetValidatorCommissionAmountQuery>({
+  const { data } = await getApollo().query<GetValidatorCommissionAmountQuery>({
     query: GetValidatorCommissionAmount,
     fetchPolicy: 'network-only',
     variables: {

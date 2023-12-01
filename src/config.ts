@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 const env = (value?: string): string => value ?? ''
+const boolFromStr = (value?: string): boolean => value === 'true'
 
 // prettier-ignore
 export const CONFIG = {
@@ -24,7 +25,11 @@ export const CONFIG = {
   DEVNET_URL: env(process.env.NEXT_PUBLIC_DEVNET_URL),
   TESTNET_URL: env(process.env.NEXT_PUBLIC_TESTNET_URL),
   MAINNET_URL: env(process.env.NEXT_PUBLIC_MAINNET_URL),
+  IS_DEV_EDITION: boolFromStr(process.env.NEXT_PUBLIC_IS_DEV_EDITION) || false,
+
   // Internal
+  GRAPHQL_DOCKER_URL: 'http://hasura:8080/v1/graphql',
+  CHAIN_API_DOCKER_URL: 'http://validator:1317',
   DECIMALS: 6,
   PERCENT_DECIMALS: 2,
   AMOUNT_DECIMALS: 2,

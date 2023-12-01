@@ -1,6 +1,6 @@
 import { CONFIG } from '@/config'
 import {
-  apolloClient,
+  getApollo,
   GetOperationByIndex,
   GetOperationByIndexQuery,
   GetOperationCount,
@@ -19,7 +19,7 @@ export const getOperationList = async (
   limit: number = CONFIG.PAGE_LIMIT,
   offset = 0,
 ): Promise<OperationFragment[]> => {
-  const { data } = await apolloClient.query<GetOperationListQuery>({
+  const { data } = await getApollo().query<GetOperationListQuery>({
     query: GetOperationList,
     fetchPolicy: 'network-only',
     variables: { limit, offset },
@@ -29,7 +29,7 @@ export const getOperationList = async (
 }
 
 export const getOperationCount = async (): Promise<number> => {
-  const { data } = await apolloClient.query<GetOperationCountQuery>({
+  const { data } = await getApollo().query<GetOperationCountQuery>({
     query: GetOperationCount,
     fetchPolicy: 'network-only',
   })
@@ -38,7 +38,7 @@ export const getOperationCount = async (): Promise<number> => {
 }
 
 export const getOperationByIndex = async (index: string): Promise<GetOperationByIndexQuery> => {
-  const { data } = await apolloClient.query<GetOperationByIndexQuery>({
+  const { data } = await getApollo().query<GetOperationByIndexQuery>({
     query: GetOperationByIndex,
     fetchPolicy: 'network-only',
     variables: { index },
@@ -56,7 +56,7 @@ export const getOperationVotes = async ({
   limit: number
   offset: number
 }): Promise<OperationVoteFragment[]> => {
-  const { data } = await apolloClient.query<GetOperationVoteListQuery>({
+  const { data } = await getApollo().query<GetOperationVoteListQuery>({
     query: GetOperationVoteList,
     fetchPolicy: 'network-only',
     variables: { operation, limit, offset },
@@ -66,7 +66,7 @@ export const getOperationVotes = async ({
 }
 
 export const getOperationVoteCount = async (operation: string): Promise<number> => {
-  const { data } = await apolloClient.query<GetOperationVoteCountQuery>({
+  const { data } = await getApollo().query<GetOperationVoteCountQuery>({
     query: GetOperationVoteCount,
     fetchPolicy: 'network-only',
     variables: { operation },

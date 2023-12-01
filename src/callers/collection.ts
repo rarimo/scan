@@ -2,10 +2,10 @@ import { TokenType } from '@rarimo/client'
 
 import { CONFIG } from '@/config'
 import {
-  apolloClient,
   Collection_Bool_Exp,
   CollectionBaseFragment,
   CollectionFragment,
+  getApollo,
   GetCollectionByIndex,
   GetCollectionByIndexQuery,
   GetCollectionCount,
@@ -27,7 +27,7 @@ export const getCollectionList = async (
   offset = 0,
   filters: TokenType[] = [],
 ): Promise<CollectionBaseFragment[]> => {
-  const { data } = await apolloClient.query<GetCollectionListQuery>({
+  const { data } = await getApollo().query<GetCollectionListQuery>({
     query: GetCollectionList,
     fetchPolicy: 'network-only',
     variables: { limit, offset, where: createCollectionWhere(filters) },
@@ -37,7 +37,7 @@ export const getCollectionList = async (
 }
 
 export const getCollectionCount = async (filters: TokenType[] = []): Promise<number> => {
-  const { data } = await apolloClient.query<GetCollectionCountQuery>({
+  const { data } = await getApollo().query<GetCollectionCountQuery>({
     query: GetCollectionCount,
     fetchPolicy: 'network-only',
     variables: { where: createCollectionWhere(filters) },
@@ -47,7 +47,7 @@ export const getCollectionCount = async (filters: TokenType[] = []): Promise<num
 }
 
 export const getCollectionByIndex = async (index: string): Promise<CollectionFragment> => {
-  const { data } = await apolloClient.query<GetCollectionByIndexQuery>({
+  const { data } = await getApollo().query<GetCollectionByIndexQuery>({
     query: GetCollectionByIndex,
     fetchPolicy: 'network-only',
     variables: { index },

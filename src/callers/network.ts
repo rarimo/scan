@@ -1,6 +1,6 @@
 import { CONFIG } from '@/config'
 import {
-  apolloClient,
+  getApollo,
   GetNetworkByName,
   GetNetworkByNameQuery,
   GetNetworkCount,
@@ -14,7 +14,7 @@ export const getNetworkList = async (
   limit: number = CONFIG.PAGE_LIMIT,
   offset = 0,
 ): Promise<NetworkFragment[]> => {
-  const { data } = await apolloClient.query<GetNetworkListQuery>({
+  const { data } = await getApollo().query<GetNetworkListQuery>({
     query: GetNetworkList,
     fetchPolicy: 'network-only',
     variables: { limit, offset },
@@ -24,7 +24,7 @@ export const getNetworkList = async (
 }
 
 export const getNetworkCount = async (): Promise<number> => {
-  const { data } = await apolloClient.query<GetNetworkCountQuery>({
+  const { data } = await getApollo().query<GetNetworkCountQuery>({
     query: GetNetworkCount,
     fetchPolicy: 'network-only',
   })
@@ -33,7 +33,7 @@ export const getNetworkCount = async (): Promise<number> => {
 }
 
 export const getNetworkByName = async (name: string): Promise<NetworkFragment> => {
-  const { data } = await apolloClient.query<GetNetworkByNameQuery>({
+  const { data } = await getApollo().query<GetNetworkByNameQuery>({
     query: GetNetworkByName,
     fetchPolicy: 'network-only',
     variables: { name },

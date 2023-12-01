@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { KeyboardEvent, useState } from 'react'
 
 import {
-  apolloClient,
+  getApollo,
   Search as SearchQuery,
   SearchQuery as TSearchQuery,
   SearchQueryVariables,
@@ -19,7 +19,7 @@ import { RoutePaths } from '@/types'
 const getSearchResults = async (value: string) => {
   const valueInt = Number(value)
 
-  const { data } = await apolloClient.query<TSearchQuery, SearchQueryVariables>({
+  const { data } = await getApollo().query<TSearchQuery, SearchQueryVariables>({
     query: SearchQuery,
     fetchPolicy: 'network-only',
     variables: {

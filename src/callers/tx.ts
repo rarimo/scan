@@ -2,7 +2,7 @@ import { PublicKey } from '@rarimo/client'
 
 import { CONFIG } from '@/config'
 import {
-  apolloClient,
+  getApollo,
   GetLatestTxAndBlocks,
   GetLatestTxAndBlocksQuery,
   GetTransactionByHash,
@@ -43,7 +43,7 @@ export const getLatestTxAndBlocks = async (
   limit = 5,
   offset = 0,
 ): Promise<GetLatestTxAndBlocksQuery> => {
-  const { data } = await apolloClient.query<GetLatestTxAndBlocksQuery>({
+  const { data } = await getApollo().query<GetLatestTxAndBlocksQuery>({
     query: GetLatestTxAndBlocks,
     fetchPolicy: 'network-only',
     variables: { limit, offset },
@@ -62,7 +62,7 @@ export const getTransactionsList = async ({
   sender?: PublicKey | null
   operator?: string
 }): Promise<TransactionListFragment[]> => {
-  const { data } = await apolloClient.query<GetTransactionListQuery>({
+  const { data } = await getApollo().query<GetTransactionListQuery>({
     query: GetTransactionList,
     fetchPolicy: 'network-only',
     variables: {
@@ -79,7 +79,7 @@ export const getTransactionsListByBlock = async (
   offset = 0,
   blockHeight?: number | bigint,
 ): Promise<TransactionListFragment[]> => {
-  const { data } = await apolloClient.query<GetTransactionListByBlockQuery>({
+  const { data } = await getApollo().query<GetTransactionListByBlockQuery>({
     query: GetTransactionListByBlock,
     fetchPolicy: 'network-only',
     variables: {
@@ -96,7 +96,7 @@ export const getTransactionCount = async (args?: {
   operator?: string
 }): Promise<number> => {
   const { sender, operator } = args ?? {}
-  const { data } = await apolloClient.query<GetTransactionCountQuery>({
+  const { data } = await getApollo().query<GetTransactionCountQuery>({
     query: GetTransactionCount,
     fetchPolicy: 'network-only',
     variables: { where: createWhereFilter(sender || null, operator) },
@@ -106,7 +106,7 @@ export const getTransactionCount = async (args?: {
 }
 
 export const getTransactionByHash = async (hash: string): Promise<TransactionFragment> => {
-  const { data } = await apolloClient.query<GetTransactionByHashQuery>({
+  const { data } = await getApollo().query<GetTransactionByHashQuery>({
     query: GetTransactionByHash,
     fetchPolicy: 'network-only',
     variables: { hash: hash },

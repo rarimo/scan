@@ -1,5 +1,5 @@
 import { CONFIG } from '@/config'
-import { apolloClient } from '@/graphql'
+import { getApollo } from '@/graphql'
 import {
   GetProposalBase,
   GetProposalBaseQuery,
@@ -25,7 +25,7 @@ export const getProposalList = async (
   limit: number = CONFIG.PAGE_LIMIT,
   offset = 0,
 ): Promise<ProposalBaseFragment[]> => {
-  const { data } = await apolloClient.query<GetProposalBaseQuery>({
+  const { data } = await getApollo().query<GetProposalBaseQuery>({
     query: GetProposalBase,
     fetchPolicy: 'network-only',
     variables: { limit, offset },
@@ -35,7 +35,7 @@ export const getProposalList = async (
 }
 
 export const getProposalCount = async (): Promise<number> => {
-  const { data } = await apolloClient.query<GetProposalCountQuery>({
+  const { data } = await getApollo().query<GetProposalCountQuery>({
     query: GetProposalCount,
     fetchPolicy: 'network-only',
   })
@@ -44,7 +44,7 @@ export const getProposalCount = async (): Promise<number> => {
 }
 
 export const getProposalByID = async (id: string): Promise<ProposalFragment> => {
-  const { data } = await apolloClient.query<GetProposalByIdQuery>({
+  const { data } = await getApollo().query<GetProposalByIdQuery>({
     query: GetProposalById,
     fetchPolicy: 'network-only',
     variables: { id: Number(id) },
@@ -58,7 +58,7 @@ export const getProposalDepositsListByID = async (
   limit: number = CONFIG.PAGE_LIMIT,
   offset = 0,
 ): Promise<ProposalDepositFragment[]> => {
-  const { data } = await apolloClient.query<GetProposalDepositsByIdQuery>({
+  const { data } = await getApollo().query<GetProposalDepositsByIdQuery>({
     query: GetProposalDepositsById,
     fetchPolicy: 'network-only',
     variables: { id: Number(id), limit, offset },
@@ -68,7 +68,7 @@ export const getProposalDepositsListByID = async (
 }
 
 export const getProposalDepositsCountByID = async (id: string): Promise<number> => {
-  const { data } = await apolloClient.query<GetProposalDepositsCountByIdQuery>({
+  const { data } = await getApollo().query<GetProposalDepositsCountByIdQuery>({
     query: GetProposalDepositsCountById,
     fetchPolicy: 'network-only',
     variables: { id: Number(id) },
@@ -82,7 +82,7 @@ export const getProposalVotesListByID = async (
   limit: number = CONFIG.PAGE_LIMIT,
   offset = 0,
 ): Promise<ProposalVoteFragment[]> => {
-  const { data } = await apolloClient.query<GetProposalVotesByIdQuery>({
+  const { data } = await getApollo().query<GetProposalVotesByIdQuery>({
     query: GetProposalVotesById,
     fetchPolicy: 'network-only',
     variables: { id: Number(id), limit, offset },
@@ -92,7 +92,7 @@ export const getProposalVotesListByID = async (
 }
 
 export const getProposalVotesCountByID = async (id: string): Promise<number> => {
-  const { data } = await apolloClient.query<GetProposalVotesCountByIdQuery>({
+  const { data } = await getApollo().query<GetProposalVotesCountByIdQuery>({
     query: GetProposalVotesCountById,
     fetchPolicy: 'network-only',
     variables: { id: Number(id) },

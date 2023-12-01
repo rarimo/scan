@@ -15,10 +15,8 @@ import {
   TABLE_SMALL_TEXT_SKELETON_SX,
 } from '@/const'
 import { CollectionFragment } from '@/graphql'
-import { generatePath } from '@/helpers'
 import { useLoading, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
-import { RoutePaths } from '@/types'
 
 export default function SupportedToken({ index }: { index: string }) {
   const t = useI18n()
@@ -56,12 +54,7 @@ export default function SupportedToken({ index }: { index: string }) {
             head: t('supported-token.metadata-uri-col-lbl'),
             body: withSkeleton(
               <CopyToClipboardWrapper value={collection?.meta?.metadata_uri}>
-                <MuiLink
-                  component={Link}
-                  href={generatePath(RoutePaths.Transaction, {
-                    hash: String(collection?.meta?.metadata_uri),
-                  })}
-                >
+                <MuiLink component={Link} href={collection?.meta?.metadata_uri}>
                   {collection?.meta?.metadata_uri}
                 </MuiLink>
               </CopyToClipboardWrapper>,

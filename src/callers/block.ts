@@ -1,8 +1,8 @@
 import { CONFIG } from '@/config'
 import {
-  apolloClient,
   BlockFragment,
   BlockListFragment,
+  getApollo,
   GetBlockByHeight,
   GetBlockByHeightQuery,
   GetBlockCount,
@@ -30,7 +30,7 @@ export const getBlocksList = async ({
   limit?: number
   offset?: number
 }): Promise<BlockListFragment[]> => {
-  const { data } = await apolloClient.query<GetBlockListQuery>({
+  const { data } = await getApollo().query<GetBlockListQuery>({
     query: GetBlockList,
     fetchPolicy: 'network-only',
     variables: { limit, offset, where: createWhereFilter(operator) },
@@ -39,7 +39,7 @@ export const getBlocksList = async ({
 }
 
 export const getBlockCount = async (args?: { operator?: string }): Promise<number> => {
-  const { data } = await apolloClient.query<GetBlockCountQuery>({
+  const { data } = await getApollo().query<GetBlockCountQuery>({
     query: GetBlockCount,
     fetchPolicy: 'network-only',
     variables: { where: createWhereFilter(args?.operator) },
@@ -49,7 +49,7 @@ export const getBlockCount = async (args?: { operator?: string }): Promise<numbe
 }
 
 export const getBlockByHeight = async (height: number): Promise<BlockFragment> => {
-  const { data } = await apolloClient.query<GetBlockByHeightQuery>({
+  const { data } = await getApollo().query<GetBlockByHeightQuery>({
     query: GetBlockByHeight,
     fetchPolicy: 'network-only',
     variables: { height: height },

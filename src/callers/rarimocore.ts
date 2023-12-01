@@ -1,6 +1,6 @@
 import { CONFIG } from '@/config'
 import {
-  apolloClient,
+  getApollo,
   GetOracleBase,
   GetOracleBaseQuery,
   GetOracleByAddress,
@@ -22,7 +22,7 @@ import {
 } from '@/graphql'
 
 export const getRarimocoreParams = async () => {
-  const { data } = await apolloClient.query<GetRarimocoreParamsQuery>({
+  const { data } = await getApollo().query<GetRarimocoreParamsQuery>({
     query: GetRarimocoreParams,
     fetchPolicy: 'network-only',
   })
@@ -33,7 +33,7 @@ export const getTSSList = async (
   limit: number = CONFIG.PAGE_LIMIT,
   offset = 0,
 ): Promise<TssListFragment[]> => {
-  const { data } = await apolloClient.query<GetTssListQuery>({
+  const { data } = await getApollo().query<GetTssListQuery>({
     query: GetTssList,
     fetchPolicy: 'network-only',
     variables: { limit, offset },
@@ -43,7 +43,7 @@ export const getTSSList = async (
 }
 
 export const getTSSCount = async (): Promise<number> => {
-  const { data } = await apolloClient.query<GetTssCountQuery>({
+  const { data } = await getApollo().query<GetTssCountQuery>({
     query: GetTssCount,
     fetchPolicy: 'network-only',
   })
@@ -52,7 +52,7 @@ export const getTSSCount = async (): Promise<number> => {
 }
 
 export const getTSSByAddress = async (address: string): Promise<TssFragment> => {
-  const { data } = await apolloClient.query<GetTssByAddressQuery>({
+  const { data } = await getApollo().query<GetTssByAddressQuery>({
     query: GetTssByAddress,
     fetchPolicy: 'network-only',
     variables: { address },
@@ -65,7 +65,7 @@ export const getOracleList = async (
   limit: number = CONFIG.PAGE_LIMIT,
   offset = 0,
 ): Promise<OracleBaseFragment[]> => {
-  const { data } = await apolloClient.query<GetOracleBaseQuery>({
+  const { data } = await getApollo().query<GetOracleBaseQuery>({
     query: GetOracleBase,
     fetchPolicy: 'network-only',
     variables: { limit, offset },
@@ -75,7 +75,7 @@ export const getOracleList = async (
 }
 
 export const getOracleCount = async (): Promise<number> => {
-  const { data } = await apolloClient.query<GetOracleCountQuery>({
+  const { data } = await getApollo().query<GetOracleCountQuery>({
     query: GetOracleCount,
     fetchPolicy: 'network-only',
   })
@@ -84,7 +84,7 @@ export const getOracleCount = async (): Promise<number> => {
 }
 
 export const getOracleByAddress = async (address: string): Promise<OracleFragment> => {
-  const { data } = await apolloClient.query<GetOracleByAddressQuery>({
+  const { data } = await getApollo().query<GetOracleByAddressQuery>({
     query: GetOracleByAddress,
     fetchPolicy: 'network-only',
     variables: { address },
