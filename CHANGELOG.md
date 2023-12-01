@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [1.1.2] - 2023-12-01
+### Removed
+- chrown from the Dockerfile
+
 ## [1.1.1] - 2023-12-01
 ### Fixed
 - Docker Compose compatibility
@@ -68,7 +72,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.1.1...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.1.2...HEAD
+[1.1.2]: https://gitlab.com/rarimo/scan/compare/1.1.1...1.1.2
 [1.1.1]: https://gitlab.com/rarimo/scan/compare/1.1.0...1.1.1
 [1.1.0]: https://gitlab.com/rarimo/scan/compare/1.0.9...1.1.0
 [1.0.9]: https://gitlab.com/rarimo/scan/compare/1.0.8...1.0.9
