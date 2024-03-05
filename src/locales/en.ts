@@ -198,6 +198,7 @@ export default {
     "create-identity-default-transfer-op-lbl": "Create Identity Transfer",
     "create-identity-gist-transfer-op-lbl": "Create Identity GIST Transfer",
     "create-identity-state-transfer-op-lbl": "Create Identity State Transfer",
+    "create-worldcoin-identity-transfer-op-lbl": "Create WorldID Transfer",
   },
   "proposal-status": {
     "unspecified-lbl": "Unknown",

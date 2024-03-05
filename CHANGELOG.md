@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [1.1.3] - 2024-03-05
+### Added
+- New message locale
+### Changed
+- Version of js-sdk
+
 ## [1.1.2] - 2023-12-01
 ### Removed
 - chrown from the Dockerfile

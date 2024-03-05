@@ -63,4 +63,5 @@ export const localizeMsgType = (t: TFunction, type: string) =>
     [MessageTypeUrls.CreateIdentityDefaultTransferOp]: t('message-types.create-identity-default-transfer-op-lbl'),
     [MessageTypeUrls.CreateIdentityGISTTransferOp]: t('message-types.create-identity-gist-transfer-op-lbl'),
     [MessageTypeUrls.CreateIdentityStateTransferOp]: t('message-types.create-identity-state-transfer-op-lbl'),
+    [MessageTypeUrls.CreateWorldCoinIdentityTransferOp]: t('message-types.create-worldcoin-identity-transfer-op-lbl'),
   })[type]
