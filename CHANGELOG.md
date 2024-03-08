@@ -3,9 +3,16 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [Unreleased]
+
+## [1.1.4] - 2024-03-08
+### Fixed
+- Using correct rarimo core api url for the server-side api client
+
 ## [1.1.3] - 2024-03-05
 ### Added
 - New message locale
+
 ### Changed
 - Version of js-sdk
 
@@ -78,7 +85,9 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.1.2...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.1.4...HEAD
+[1.1.4]: https://gitlab.com/rarimo/scan/compare/1.1.3...1.1.4
+[1.1.3]: https://gitlab.com/rarimo/scan/compare/1.1.2...1.1.3
 [1.1.2]: https://gitlab.com/rarimo/scan/compare/1.1.1...1.1.2
 [1.1.1]: https://gitlab.com/rarimo/scan/compare/1.1.0...1.1.1
 [1.1.0]: https://gitlab.com/rarimo/scan/compare/1.0.9...1.1.0

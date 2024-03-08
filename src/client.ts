@@ -24,7 +24,10 @@ const baseCfg = {
 }
 
 const client = makeRarimoClient(baseCfg)
-const serverClient = makeRarimoClient({ ...baseCfg, apiUrl: CONFIG.CHAIN_API_DOCKER_URL })
+const serverClient = makeRarimoClient({
+  ...baseCfg,
+  apiUrl: CONFIG.IS_DEV_EDITION ? CONFIG.CHAIN_API_DOCKER_URL : CONFIG.CHAIN_API_URL,
+})
 
 export const getClient = () => {
   return typeof window === 'undefined' ? serverClient : client
