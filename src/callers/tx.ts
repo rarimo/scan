@@ -20,11 +20,15 @@ import {
 const createWhereFilter = (sender: PublicKey | null, operator?: string) => {
   const exp = { signer_infos: {}, block: {} }
 
+  const escapedString = sender?.key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const regex = new RegExp(escapedString!)
+  const regexString = regex.toString().replace('/', '').slice(0, -1)
+
   if (sender) {
     exp.signer_infos = {
       _cast: {
         String: {
-          _regex: sender?.key,
+          _regex: regexString,
         },
       },
     }
