@@ -31,4 +31,5 @@ export const localizeProposalType = (t: TFunction, type: ProposalType) =>
     [ProposalType.ParameterChange]: t('proposal-type.parameter-change-lbl'),
     [ProposalType.CommunityPoolSpend]: t('proposal-type.community-pool-spend-lbl'),
     [ProposalType.MintTokens]: t('proposal-type.mint-tokens-lbl'),
+    [ProposalType.Text]: t('proposal-type.text-lbl'),
   }[type])

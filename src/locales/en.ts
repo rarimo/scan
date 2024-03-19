@@ -236,6 +236,7 @@ export default {
     "parameter-change-lbl": "Parameter Change",
     "community-pool-spend-lbl": "Community Pool Spend",
     "mint-tokens-lbl": "Mint Tokens",
+    "text-lbl": "Text",
     "unknown-lbl": "Unknown",
   },
   "proposal-vote": {
