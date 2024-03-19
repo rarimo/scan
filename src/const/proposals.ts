@@ -23,6 +23,7 @@ export const PROPOSAL_TYPES_MAP = {
   'bridge/ChangeParamsProposal': ProposalType.BridgeChangeParams,
   'oraclemanager/OracleUnfreezeProposal': ProposalType.OracleUnfreeze,
   'oraclemanager/ChangeParamsProposal': ProposalType.OracleChangeParams,
+  '/cosmos.gov.v1beta1.TextProposal': ProposalType.Text,
   ParameterChange: ProposalType.ParameterChange,
   SoftwareUpgrade: ProposalType.SoftwareUpgrade,
   CancelSoftwareUpgrade: ProposalType.CancelSoftwareUpgrade,

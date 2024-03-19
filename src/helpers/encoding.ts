@@ -28,8 +28,9 @@ export const parseAddress = (
 
   if (!senderEvent) return ''
 
-  const senderAddressHex = senderEvent.attributes?.find(i => i.key === 'sender' && isHex(i.value))
-    ?.value
+  const senderAddressHex = senderEvent.attributes?.find(
+    i => i.key === 'sender' && isHex(i.value),
+  )?.value
 
   if (!senderAddressHex) return ''
 

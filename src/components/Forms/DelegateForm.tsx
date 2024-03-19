@@ -73,8 +73,8 @@ export default function DelegateForm({
     [DelegateFormFieldNames.Delegator]: isDelegation
       ? address
       : availableUndelegators.includes(address)
-      ? address
-      : availableUndelegators[0],
+        ? address
+        : availableUndelegators[0],
   }
 
   const granters = useMemo(() => {

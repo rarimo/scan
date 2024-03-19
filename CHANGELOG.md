@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
+### Added
+- `Text` Proposal type
 
 ## [1.1.4] - 2024-03-08
 ### Fixed
