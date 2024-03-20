@@ -20,12 +20,11 @@ import {
 const createWhereFilter = (sender: PublicKey | null, operator?: string) => {
   const exp = { signer_infos: {}, block: {} }
 
-  const escapedString = sender?.key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-
-  const regex = new RegExp(escapedString!)
-
+ const escapedString = sender?.key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+ const regex = new RegExp(escapedString!).toString()
+  
   // Remove the first and last character of the regex string to remove the / at the start and end
-  const regexString = regex.toString().substring(1, regex.toString().length - 1)
+  const regexString = regex.substring(1, regex.length - 1)
 
   if (sender) {
     exp.signer_infos = {
