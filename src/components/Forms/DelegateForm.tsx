@@ -107,7 +107,9 @@ export default function DelegateForm({
             )
 
             return isDelegation
-              ? schema.minNumber(BN.fromBigInt(String(minDelegationAmount), CONFIG.DECIMALS).value)
+              ? schema.minNumber(
+                  BN.fromBigInt(String(minDelegationAmount || 0), CONFIG.DECIMALS).value,
+                )
               : schema.maxNumber(
                   BN.fromBigInt(
                     delegation?.delegation_response.balance.amount ?? '0',

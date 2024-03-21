@@ -1,4 +1,4 @@
-import { makeRarimoClient } from '@rarimo/client'
+import { makeRarimoClient, type RarimoClient } from '@rarimo/client'
 
 import { CONFIG } from '@/config'
 
@@ -29,6 +29,6 @@ const serverClient = makeRarimoClient({
   apiUrl: CONFIG.IS_DEV_EDITION ? CONFIG.CHAIN_API_DOCKER_URL : CONFIG.CHAIN_API_URL,
 })
 
-export const getClient = () => {
+export const getClient = (): RarimoClient => {
   return typeof window === 'undefined' ? serverClient : client
 }
