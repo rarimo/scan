@@ -24,6 +24,7 @@ enum FieldNames {
   Description = 'description',
 }
 
+const PROPOSAL_MAX_TITLE_LENGTH = 140
 const PROPOSAL_MAX_DESC_LENGTH = 10_000
 
 export default function SubmitTextProposalForm({ id, onSubmit, setIsDialogDisabled }: FormProps) {
@@ -48,7 +49,7 @@ export default function SubmitTextProposalForm({ id, onSubmit, setIsDialogDisabl
     getErrorMessage,
   } = useForm(DEFAULT_VALUES, yup =>
     yup.object({
-      [FieldNames.Title]: yup.string().required(),
+      [FieldNames.Title]: yup.string().max(PROPOSAL_MAX_TITLE_LENGTH).required(),
       [FieldNames.Description]: yup.string().max(PROPOSAL_MAX_DESC_LENGTH).required(),
     }),
   )
