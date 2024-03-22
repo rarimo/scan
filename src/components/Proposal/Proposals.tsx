@@ -1,12 +1,15 @@
 'use client'
 
 import { TableCell } from '@mui/material'
+import { useEffect } from 'react'
 
 import { getProposalCount, getProposalList } from '@/callers'
 import { ContentBox, ContentSection, ContentWrapper } from '@/components/Content'
 import ProposalsRow from '@/components/Proposal/ProposalsRow'
+import ProposalsSubmit from '@/components/Proposal/ProposalsSubmit'
 import TableWithPagination from '@/components/TableWithPagination'
 import { ProposalBaseFragment } from '@/graphql'
+import { Bus } from '@/helpers'
 import { useLoading, useTablePagination } from '@/hooks'
 import { useI18n } from '@/locales/client'
 import { TableColumn } from '@/types'
@@ -28,15 +31,26 @@ export default function Proposals() {
     data: proposalCount,
     isLoading: isLoadingProposalCount,
     isLoadingError: isLoadingProposalCountError,
+    reload: reloadProposalCount,
   } = useLoading<number>(0, getProposalCount)
 
   const {
     data: proposalList,
     isLoading,
     isLoadingError,
+    reload: reloadProposalsList,
   } = useLoading<ProposalBaseFragment[]>([], () => getProposalList(limit, offset), {
     loadArgs: [limit, offset],
   })
+
+  useEffect(() => {
+    Bus.on(Bus.eventList.reloadVotes, () => {
+      reloadProposalCount()
+      reloadProposalsList()
+    })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const columns: readonly TableColumn<ProposalsColumnIds>[] = [
     {
@@ -83,7 +97,7 @@ export default function Proposals() {
   )
 
   return (
-    <ContentSection withBackButton title={t('proposals.title-lbl')}>
+    <ContentSection withBackButton title={t('proposals.title-lbl')} action={<ProposalsSubmit />}>
       <ContentBox>
         <ContentWrapper>
           <TableWithPagination
