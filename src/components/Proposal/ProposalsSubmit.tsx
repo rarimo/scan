@@ -26,7 +26,7 @@ export default function ProposalsSubmit() {
 
   const actions = useMemo(
     () => {
-      const result = [
+      return [
         {
           label: t('proposals.submit-proposal-action'),
           handler: () => {
@@ -36,8 +36,6 @@ export default function ProposalsSubmit() {
           isDisabled: false,
         },
       ]
-
-      return result
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [t],

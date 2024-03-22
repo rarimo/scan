@@ -27,7 +27,7 @@
     "@hookform/resolvers": "^3.3.1",
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.3",
-    "@rarimo/client": "^2.2.0",
+    "@rarimo/client": "^2.3.0",
     "graphql": "^16.7.1",
     "graphql-tag": "^2.12.6",
     "lodash-es": "^4.17.21",
@@ -74,19 +74,5 @@
     "stylelint-scss": "^5.0.1",
     "yorkie": "^2.0.0"
   },
-  "packageManager": "yarn@3.6.1",
-  "resolutions": {
-    "rarimo-js-sdk-monorepo-root": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk",
-    "@rarimo/bridge": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/bridge",
-    "@rarimo/client": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/client",
-    "@rarimo/nft-checkout": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/nft-checkout",
-    "@rarimo/provider": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/provider",
-    "@rarimo/providers-evm": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/providers-evm",
-    "@rarimo/providers-near": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/providers-near",
-    "@rarimo/providers-solana": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/providers-solana",
-    "@rarimo/react-nft-checkout": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/react-nft-checkout",
-    "@rarimo/react-provider": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/react-provider",
-    "@rarimo/shared": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/shared",
-    "@rarimo/swap": "portal:/Users/lukachisama/Documents/RARIMO/js-sdk/packages/swap"
-  }
+  "packageManager": "yarn@3.6.1"
 }

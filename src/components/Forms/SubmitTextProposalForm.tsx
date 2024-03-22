@@ -1,4 +1,5 @@
 import {
+  Button,
   FormControl,
   FormHelperText,
   TextareaAutosize as BaseTextareaAutosize,
@@ -6,11 +7,13 @@ import {
   Typography,
 } from '@mui/material'
 import { styled } from '@mui/system'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Controller } from 'react-hook-form'
 
 import { getClient } from '@/client'
+import { Dialog } from '@/components/Dialog'
 import FormWrapper from '@/components/Forms/FormWrapper'
+import MarkdownViewer from '@/components/MarkdownViewer'
 import { ErrorHandler } from '@/helpers'
 import { useForm, useWeb3 } from '@/hooks'
 import { useI18n } from '@/locales/client'
@@ -21,9 +24,13 @@ enum FieldNames {
   Description = 'description',
 }
 
+const PROPOSAL_MAX_DESC_LENGTH = 10_000
+
 export default function SubmitTextProposalForm({ id, onSubmit, setIsDialogDisabled }: FormProps) {
   const t = useI18n()
   const { address } = useWeb3()
+
+  const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false)
 
   const DEFAULT_VALUES = {
     [FieldNames.Title]: '',
@@ -31,6 +38,7 @@ export default function SubmitTextProposalForm({ id, onSubmit, setIsDialogDisabl
   }
 
   const {
+    formState,
     handleSubmit,
     control,
     isFormDisabled,
@@ -41,7 +49,7 @@ export default function SubmitTextProposalForm({ id, onSubmit, setIsDialogDisabl
   } = useForm(DEFAULT_VALUES, yup =>
     yup.object({
       [FieldNames.Title]: yup.string().required(),
-      [FieldNames.Description]: yup.string().required(),
+      [FieldNames.Description]: yup.string().max(PROPOSAL_MAX_DESC_LENGTH).required(),
     }),
   )
 
@@ -64,7 +72,7 @@ export default function SubmitTextProposalForm({ id, onSubmit, setIsDialogDisabl
 
       const amount = await getMinAmount()
 
-      const receipt = await client.tx.submitTextProposal(
+      await client.tx.submitTextProposal(
         address,
         [
           {
@@ -75,8 +83,6 @@ export default function SubmitTextProposalForm({ id, onSubmit, setIsDialogDisabl
         formData[FieldNames.Title],
         formData[FieldNames.Description],
       )
-
-      console.log(receipt)
 
       onSubmit({
         message: t('submit-text-proposal-form.submitted-msg'),
@@ -120,7 +126,8 @@ export default function SubmitTextProposalForm({ id, onSubmit, setIsDialogDisabl
             <TextareaAutosize
               {...field}
               minRows={5}
-              aria-label='empty textarea'
+              maxRows={10}
+              aria-label={`${FieldNames.Description}-textarea`}
               placeholder={t('submit-text-proposal-form.description-lbl')}
             />
 
@@ -132,6 +139,21 @@ export default function SubmitTextProposalForm({ id, onSubmit, setIsDialogDisabl
           </FormControl>
         )}
       />
+
+      {formState[FieldNames.Description] && (
+        <Button onClick={() => setIsPreviewDialogOpen(true)}>
+          {t('submit-text-proposal-form.desc-preview-btn')}
+        </Button>
+      )}
+
+      <Dialog
+        action={<></>}
+        onClose={() => setIsPreviewDialogOpen(false)}
+        isOpened={isPreviewDialogOpen}
+        title={t('submit-text-proposal-form.desc-preview-title')}
+      >
+        <MarkdownViewer>{formState[FieldNames.Description]}</MarkdownViewer>
+      </Dialog>
     </FormWrapper>
   )
 }
@@ -141,5 +163,9 @@ const TextareaAutosize = styled(BaseTextareaAutosize)(
   box-sizing: border-box;
   background: none;
   padding: ${theme.spacing(2)} ${theme.spacing(1.75)};
+  
+  &:focus {
+    outline: none;
+  }
 `,
 )

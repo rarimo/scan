@@ -314,6 +314,8 @@ export default {
     "helper-text": "Please fill out the form below to create a new text proposal.",
     "title-lbl": "Title",
     "description-lbl": "Description",
+    "desc-preview-btn": "Preview",
+    "desc-preview-title": "Description preview",
   },
   "proposal-deposits": {
     "title-lbl": "Deposits",
