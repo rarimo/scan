@@ -10,6 +10,7 @@ export const BUS_EVENT_TYPES = {
   info: 'info',
   redirectToHome: 'redirectToHome',
   reloadVotes: 'reloadVotes',
+  reloadProposals: 'reloadProposals',
 }
 
 export type EventBusEventName = (typeof BUS_EVENT_TYPES)[keyof typeof BUS_EVENT_TYPES]
