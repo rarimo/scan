@@ -7,6 +7,7 @@ import { useMemo } from 'react'
 
 import { AvatarName } from '@/components/Avatar'
 import { ContentBox, ContentWrapper } from '@/components/Content'
+import MarkdownViewer from '@/components/MarkdownViewer'
 import OverviewTable from '@/components/OverviewTable'
 import ProposalDetailsContentRow from '@/components/Proposal/ProposalDetailsContentRow'
 import ProposalDetailsTallyResult from '@/components/Proposal/ProposalDetailsTallyResult'
@@ -77,7 +78,10 @@ export default function ProposalDetails({
     },
     {
       head: t('proposal-details.description-lbl'),
-      body: withSkeleton(metadata?.description, TABLE_TYPE_BOX_SKELETON_SX),
+      body: withSkeleton(
+        <MarkdownViewer>{metadata?.description ?? ''}</MarkdownViewer>,
+        TABLE_TYPE_BOX_SKELETON_SX,
+      ),
     },
     {
       head: t('proposal-details.status-lbl'),

@@ -303,6 +303,19 @@ export default {
     "no-data-subtitle": "It will appear for a while",
     "error-title": "There was an error while loading proposals",
     "error-subtitle": "Please try again later",
+    "submit-proposal-action": "Create Proposal",
+  },
+  "proposals-submit": {
+    "dialog-action-btn": "Submit",
+    "dialog-heading": "Create Text Proposal",
+  },
+  "submit-text-proposal-form": {
+    "submitted-msg": "Text proposal successfully created.",
+    "helper-text": "Please fill out the form below to create a new text proposal.",
+    "title-lbl": "Title",
+    "description-lbl": "Description",
+    "desc-preview-btn": "Preview",
+    "desc-preview-title": "Description preview",
   },
   "proposal-deposits": {
     "title-lbl": "Deposits",
