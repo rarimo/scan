@@ -40,6 +40,7 @@ yarn-error.log*
 # editor directories and files
 .vscode/*
 !.vscode/settings.json
+!.vscode/extensions.json
 .idea
 *.suo
 *.ntvs*
