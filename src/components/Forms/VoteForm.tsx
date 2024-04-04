@@ -53,16 +53,6 @@ export default function VoteForm({
     [VoteFormFieldNames.Voter]: isValidator ? address : grants?.[0]?.granter,
   }
 
-  const getOptionsValidationRule = (yup: typeof Yup): Yup.ObjectShape => {
-    if (!isStaker && grants.length) {
-      return { [VoteFormFieldNames.Option]: yup.number().required() }
-    }
-    if (isStaker && grants.length) {
-      return { [VoteFormFieldNames.Option]: yup.number() }
-    }
-    return {}
-  }
-
   const getVoterValidationRule = (yup: typeof Yup): Yup.ObjectShape => {
     if (!isStaker && grants.length) {
       return { [VoteFormFieldNames.Voter]: yup.string().required() }
@@ -83,8 +73,8 @@ export default function VoteForm({
     getErrorMessage,
   } = useForm(DEFAULT_VALUES, yup =>
     yup.object({
-      ...getOptionsValidationRule(yup),
       ...getVoterValidationRule(yup),
+      [VoteFormFieldNames.Option]: yup.number().required(),
     }),
   )
 
@@ -103,8 +93,8 @@ export default function VoteForm({
       }
 
       formData.voter === address
-        ? await client.tx.voteProposal(address, proposalId, formData[VoteFormFieldNames.Option])
-        : await client.tx.execVoteProposal(address, formData.voter, proposalId, formData.option)
+        ? await client.tx.execVoteProposal(address, formData.voter, proposalId, formData.option)
+        : await client.tx.voteProposal(address, proposalId, formData[VoteFormFieldNames.Option])
 
       onSubmit({
         message: t('vote-form.submitted-msg', {
