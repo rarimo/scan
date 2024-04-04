@@ -51,7 +51,6 @@ export const useWeb3 = () => {
       variables: { address },
     })
 
-    await getIsStaker(address)
     return Boolean(data?.account?.[0]?.validator_infos?.length)
   }
 
