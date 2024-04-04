@@ -17,6 +17,8 @@ import {
 } from '@rarimo/client'
 import { omit } from 'lodash-es'
 import { Controller } from 'react-hook-form'
+import * as Yup from 'yup'
+import { ObjectShape } from 'yup'
 
 import { getClient } from '@/client'
 import FormWrapper from '@/components/Forms/FormWrapper'
@@ -34,7 +36,6 @@ const VOTER_LABEL_ID = 'proposal-voter-label'
 enum VoteFormFieldNames {
   Option = 'option',
   Voter = 'voter',
-  Staker = 'staker',
 }
 
 export default function VoteForm({
@@ -49,9 +50,28 @@ export default function VoteForm({
   const { localizeProposalVoteOption } = useLocalize()
 
   const DEFAULT_VALUES = {
-    [VoteFormFieldNames.Staker]: isStaker,
     [VoteFormFieldNames.Option]: VoteOption.Yes,
     [VoteFormFieldNames.Voter]: isValidator ? address : grants?.[0]?.granter,
+  }
+
+  const getOptionsValidationRule = (yup: typeof Yup): ObjectShape => {
+    if (!isStaker && grants.length) {
+      return { [VoteFormFieldNames.Option]: yup.number().required() }
+    }
+    if (isStaker && grants.length) {
+      return { [VoteFormFieldNames.Option]: yup.number() }
+    }
+    return {}
+  }
+
+  const getVoterValidationRule = (yup: typeof Yup): ObjectShape => {
+    if (!isStaker && grants.length) {
+      return { [VoteFormFieldNames.Voter]: yup.string().required() }
+    }
+    if (isStaker && grants.length) {
+      return { [VoteFormFieldNames.Voter]: yup.string() }
+    }
+    return {}
   }
 
   const {
@@ -63,21 +83,10 @@ export default function VoteForm({
     enableForm,
     getErrorMessage,
   } = useForm(DEFAULT_VALUES, yup =>
-    yup
-      .object({
-        [VoteFormFieldNames.Staker]: yup.boolean(),
-        [VoteFormFieldNames.Option]: yup
-          .number()
-          .when([VoteFormFieldNames.Staker], ([isStaker], schema) =>
-            isStaker ? schema.notRequired() : schema.required(),
-          ),
-        [VoteFormFieldNames.Voter]: yup
-          .string()
-          .when([VoteFormFieldNames.Staker], ([isStaker], schema) =>
-            isStaker ? schema.notRequired() : schema.required(),
-          ),
-      })
-      .omit([VoteFormFieldNames.Staker]),
+    yup.object({
+      ...getOptionsValidationRule(yup),
+      ...getVoterValidationRule(yup),
+    }),
   )
 
   const submit = async (formData: typeof DEFAULT_VALUES) => {
@@ -94,9 +103,9 @@ export default function VoteForm({
         return
       }
 
-      formData.voter && formData.voter !== address
-        ? await client.tx.execVoteProposal(address, formData.voter, proposalId, formData.option)
-        : await client.tx.voteProposal(address, proposalId, formData[VoteFormFieldNames.Option])
+      formData.voter === address
+        ? await client.tx.voteProposal(address, proposalId, formData[VoteFormFieldNames.Option])
+        : await client.tx.execVoteProposal(address, formData.voter, proposalId, formData.option)
 
       onSubmit({
         message: t('vote-form.submitted-msg', {
