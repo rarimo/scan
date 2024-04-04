@@ -18,7 +18,6 @@ import {
 import { omit } from 'lodash-es'
 import { Controller } from 'react-hook-form'
 import * as Yup from 'yup'
-import { ObjectShape } from 'yup'
 
 import { getClient } from '@/client'
 import FormWrapper from '@/components/Forms/FormWrapper'
@@ -54,7 +53,7 @@ export default function VoteForm({
     [VoteFormFieldNames.Voter]: isValidator ? address : grants?.[0]?.granter,
   }
 
-  const getOptionsValidationRule = (yup: typeof Yup): ObjectShape => {
+  const getOptionsValidationRule = (yup: typeof Yup): Yup.ObjectShape => {
     if (!isStaker && grants.length) {
       return { [VoteFormFieldNames.Option]: yup.number().required() }
     }
@@ -64,7 +63,7 @@ export default function VoteForm({
     return {}
   }
 
-  const getVoterValidationRule = (yup: typeof Yup): ObjectShape => {
+  const getVoterValidationRule = (yup: typeof Yup): Yup.ObjectShape => {
     if (!isStaker && grants.length) {
       return { [VoteFormFieldNames.Voter]: yup.string().required() }
     }
