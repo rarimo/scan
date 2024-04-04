@@ -21,7 +21,7 @@ docker build -t scan .
 Run the Docker image
 
 ```bash
-docker run -p 8095:8095 --env-file .env -it scan
+docker run -p 8095:8095 --env-file .env.local -it scan
 ```
 
 ## License

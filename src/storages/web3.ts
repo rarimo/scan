@@ -18,7 +18,12 @@ export class Web3Storage extends BaseStorage<LocalStorageKeys.Web3> {
     this.set(LocalStorageKeys.Web3, JSON.stringify(storage))
   }
 
-  public getStorage(initialState: Web3StorageState): Web3StorageState {
+  public getStorage(initialState: {
+    address: string
+    isConnected: boolean
+    isStaker: boolean
+    isValidator: boolean
+  }): Web3StorageState {
     const restored = this.get(LocalStorageKeys.Web3)
     return restored ? JSON.parse(restored) : initialState
   }

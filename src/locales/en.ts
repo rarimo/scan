@@ -348,6 +348,7 @@ export default {
     "title": "Proposal #{id} Details",
     "proposal-vote-submitted-msg": "Vote for proposal #{id} successfully submitted.",
     "connect-wallet-msg": "Please connect your wallet to be able to vote.",
+    "not-staker-msg": "Only users participating in staking can vote for proposals.",
     "not-validator-msg": "Only validators allowed to vote for proposals.",
     "vote-not-allowed-msg": "Not allowed proposal's status for voting.",
     "vote-btn": "Vote",

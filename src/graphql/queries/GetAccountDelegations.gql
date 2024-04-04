@@ -1,0 +1,5 @@
+query GetAccountDelegations($address: String!) {
+    action_delegation(address: $address) {
+        pagination
+    }
+}

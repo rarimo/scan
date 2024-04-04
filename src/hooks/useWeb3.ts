@@ -3,7 +3,13 @@
 import { useEffect, useState } from 'react'
 
 import { getClient } from '@/client'
-import { GetAccountValidatorInfos, GetAccountValidatorInfosQuery, getApollo } from '@/graphql'
+import {
+  GetAccountDelegations,
+  GetAccountDelegationsQuery,
+  GetAccountValidatorInfos,
+  GetAccountValidatorInfosQuery,
+  getApollo,
+} from '@/graphql'
 import { ErrorHandler, isWindow } from '@/helpers'
 import { useAppState } from '@/hooks'
 
@@ -11,10 +17,12 @@ export const useWeb3 = () => {
   const {
     isConnected,
     isValidator,
+    isStaker,
     address,
     setIsConnected,
     setAddress,
     setIsValidator,
+    setIsStaker,
     isInitialised,
   } = useAppState()
   const [isConnecting, setIsConnecting] = useState(false)
@@ -23,6 +31,17 @@ export const useWeb3 = () => {
     isConnected,
     isValidator,
     address,
+    isStaker,
+  }
+
+  const getIsStaker = async (address: string) => {
+    const { data } = await getApollo().query<GetAccountDelegationsQuery>({
+      query: GetAccountDelegations,
+      fetchPolicy: 'network-only',
+      variables: { address },
+    })
+
+    return Boolean(data.action_delegation?.pagination.total)
   }
 
   const getIsValidator = async (address: string) => {
@@ -32,6 +51,7 @@ export const useWeb3 = () => {
       variables: { address },
     })
 
+    await getIsStaker(address)
     return Boolean(data?.account?.[0]?.validator_infos?.length)
   }
 
@@ -44,6 +64,7 @@ export const useWeb3 = () => {
       setIsConnected(true)
       setAddress(client.wallet.address)
       setIsValidator(await getIsValidator(client.wallet.address))
+      setIsStaker(await getIsStaker(client.wallet.address))
 
       await new Promise(resolve => {
         if (state.address && state.isConnected) resolve(true)
@@ -57,6 +78,7 @@ export const useWeb3 = () => {
 
   const disconnect = () => {
     getClient().disconnect()
+    setIsStaker(false)
     setIsValidator(false)
     setAddress('')
     setIsConnected(false)

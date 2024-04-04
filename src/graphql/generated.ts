@@ -19069,6 +19069,13 @@ export type ValidatorFragment = { __typename?: 'validator', consensus_address: s
 
 export type ValidatorBaseFragment = { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_commissions: Array<{ __typename?: 'validator_commission', commission: any }>, validator_signing_infos: Array<{ __typename?: 'validator_signing_info', missed_blocks_counter: any }>, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }>, validator_statuses: Array<{ __typename?: 'validator_status', status: number, jailed: boolean }>, validator_voting_powers: Array<{ __typename?: 'validator_voting_power', voting_power: any }> };
 
+export type GetAccountDelegationsQueryVariables = Exact<{
+  address: Scalars['String']['input'];
+}>;
+
+
+export type GetAccountDelegationsQuery = { __typename?: 'query_root', action_delegation?: { __typename?: 'ActionDelegationResponse', pagination?: any | null, delegations?: Array<any | null> | null } | null };
+
 export type GetAccountValidatorInfosQueryVariables = Exact<{
   address: Scalars['String']['input'];
 }>;
@@ -19796,6 +19803,14 @@ export const ValidatorBase = gql`
   }
   validator_voting_powers {
     voting_power
+  }
+}
+    `;
+export const GetAccountDelegations = gql`
+    query GetAccountDelegations($address: String!) {
+  action_delegation(address: $address) {
+    pagination
+    delegations
   }
 }
     `;

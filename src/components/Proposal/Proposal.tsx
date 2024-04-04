@@ -26,7 +26,7 @@ const VOTE_FORM_ID = 'vote-form'
 
 export default function Proposal({ id }: { id: string }) {
   const t = useI18n()
-  const { isConnected, isValidator, address } = useWeb3()
+  const { isConnected, isValidator, isStaker, address } = useWeb3()
 
   const { data, isLoading, isLoadingError, reload } = useLoading<ProposalFragment>(
     {} as ProposalFragment,
@@ -65,14 +65,24 @@ export default function Proposal({ id }: { id: string }) {
   const tooltipText = useMemo(() => {
     if (!isVotingAllowed) return t('proposal.vote-not-allowed-msg')
     if (!isConnected) return t('proposal.connect-wallet-msg')
-    if (!isValidator && isGrantsEmpty) return t('proposal.not-validator-msg')
+    if (!isValidator && !isGrantsEmpty && !isStaker) return t('proposal.not-staker-msg')
+    if (!isValidator && isGrantsEmpty && !isStaker) return t('proposal.not-validator-msg')
 
     return ''
-  }, [isValidator, isVotingAllowed, isGrantsEmpty, isConnected, t])
+  }, [isValidator, isVotingAllowed, isGrantsEmpty, isConnected, t, isStaker])
 
   const isTooltipListenersDisable = useMemo(
-    () => (isValidator || !isGrantsEmpty) && isVotingAllowed && isConnected,
-    [isValidator, isGrantsEmpty, isVotingAllowed, isConnected],
+    () => (isValidator || !isGrantsEmpty || isStaker) && isVotingAllowed && isConnected,
+    [isValidator, isGrantsEmpty, isVotingAllowed, isConnected, isStaker],
+  )
+
+  const isVoteButtonDisabled = useMemo(
+    () =>
+      isDisabled ||
+      !isVotingAllowed ||
+      (!isValidator && isGrantsEmpty && !isStaker) ||
+      !isConnected,
+    [isDisabled, isVotingAllowed, isValidator, isGrantsEmpty, isConnected, isStaker],
   )
 
   const sectionAction = (
@@ -86,12 +96,7 @@ export default function Proposal({ id }: { id: string }) {
       disableTouchListener={isTooltipListenersDisable}
     >
       <span>
-        <Button
-          onClick={openDialog}
-          disabled={
-            isDisabled || !isVotingAllowed || (!isValidator && isGrantsEmpty) || !isConnected
-          }
-        >
+        <Button onClick={openDialog} disabled={isVoteButtonDisabled}>
           {t('proposal.vote-btn')}
         </Button>
       </span>

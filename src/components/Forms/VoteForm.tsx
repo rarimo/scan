@@ -34,6 +34,7 @@ const VOTER_LABEL_ID = 'proposal-voter-label'
 enum VoteFormFieldNames {
   Option = 'option',
   Voter = 'voter',
+  Staker = 'staker',
 }
 
 export default function VoteForm({
@@ -44,10 +45,11 @@ export default function VoteForm({
   proposalId,
 }: FormProps & { proposalId: number; grants: GrantAuthorization[] }) {
   const t = useI18n()
-  const { address, isValidator } = useWeb3()
+  const { address, isValidator, isStaker } = useWeb3()
   const { localizeProposalVoteOption } = useLocalize()
 
   const DEFAULT_VALUES = {
+    [VoteFormFieldNames.Staker]: isStaker,
     [VoteFormFieldNames.Option]: VoteOption.Yes,
     [VoteFormFieldNames.Voter]: isValidator ? address : grants?.[0]?.granter,
   }
@@ -61,10 +63,21 @@ export default function VoteForm({
     enableForm,
     getErrorMessage,
   } = useForm(DEFAULT_VALUES, yup =>
-    yup.object({
-      [VoteFormFieldNames.Option]: yup.number().required(),
-      [VoteFormFieldNames.Voter]: yup.string().required(),
-    }),
+    yup
+      .object({
+        [VoteFormFieldNames.Staker]: yup.boolean(),
+        [VoteFormFieldNames.Option]: yup
+          .number()
+          .when([VoteFormFieldNames.Staker], ([isStaker], schema) =>
+            isStaker ? schema.notRequired() : schema.required(),
+          ),
+        [VoteFormFieldNames.Voter]: yup
+          .string()
+          .when([VoteFormFieldNames.Staker], ([isStaker], schema) =>
+            isStaker ? schema.notRequired() : schema.required(),
+          ),
+      })
+      .omit([VoteFormFieldNames.Staker]),
   )
 
   const submit = async (formData: typeof DEFAULT_VALUES) => {
@@ -81,11 +94,9 @@ export default function VoteForm({
         return
       }
 
-      if (formData.voter !== address) {
-        await client.tx.execVoteProposal(address, formData.voter, proposalId, formData.option)
-      } else {
-        await client.tx.voteProposal(address, proposalId, formData[VoteFormFieldNames.Option])
-      }
+      formData.voter && formData.voter !== address
+        ? await client.tx.execVoteProposal(address, formData.voter, proposalId, formData.option)
+        : await client.tx.voteProposal(address, proposalId, formData[VoteFormFieldNames.Option])
 
       onSubmit({
         message: t('vote-form.submitted-msg', {
