@@ -130,7 +130,7 @@ export default function VoteForm({
       }
       enableForm()
     },
-    [disableForm, enableForm, proposalId, setNewDefaultVoteOption, formState.voter, address],
+    [disableForm, enableForm, proposalId, setNewDefaultVoteOption],
   )
 
   const submit = async (formData: typeof DEFAULT_VALUES) => {
