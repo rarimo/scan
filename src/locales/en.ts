@@ -491,6 +491,7 @@ export default {
     "voting-time-expired-error": "Voting time has expired",
     "submitted-msg": "Vote for proposal #{id} successfully submitted.",
     "helper-text": "Please select your preferred vote option by marking the appropriate radio button.",
+    "already-voted-option": "You have already voted for this option",
   },
   "delegate-form": {
     "amount-lbl": "Amount",

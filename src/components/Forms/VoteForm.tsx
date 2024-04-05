@@ -7,6 +7,7 @@ import {
   Radio,
   RadioGroup,
   Select,
+  Tooltip,
   Typography,
 } from '@mui/material'
 import {
@@ -188,7 +189,7 @@ export default function VoteForm({
                 error={Boolean(formErrors[VoteFormFieldNames.Voter])}
               >
                 {selectOptions.map((item, idx) => (
-                  <MenuItem value={item.granter} key={idx}>
+                  <MenuItem key={idx} value={item.granter}>
                     {item.granter}
                   </MenuItem>
                 ))}
@@ -212,13 +213,26 @@ export default function VoteForm({
           <FormControl>
             <RadioGroup {...field}>
               {VOTE_OPTIONS.map((option, idx) => (
-                <FormControlLabel
-                  value={option}
-                  control={<Radio />}
-                  disabled={VOTE_TYPES[option] === alreadySelectedVote}
-                  label={localizeProposalVoteOption(option as VoteOption)}
+                <Tooltip
+                  placement='bottom-start'
+                  followCursor
                   key={idx}
-                />
+                  title={t('vote-form.already-voted-option')}
+                  sx={{
+                    minWidth: 'auto',
+                    textAlign: 'left',
+                  }}
+                  disableHoverListener={VOTE_TYPES[option] !== alreadySelectedVote}
+                  disableTouchListener={VOTE_TYPES[option] !== alreadySelectedVote}
+                >
+                  <FormControlLabel
+                    value={option}
+                    control={<Radio />}
+                    disabled={VOTE_TYPES[option] === alreadySelectedVote}
+                    label={localizeProposalVoteOption(option as VoteOption)}
+                    key={idx}
+                  />
+                </Tooltip>
               ))}
             </RadioGroup>
           </FormControl>
