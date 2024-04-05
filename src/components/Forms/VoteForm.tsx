@@ -16,7 +16,7 @@ import {
   VoteOption,
 } from '@rarimo/client'
 import { omit } from 'lodash-es'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Controller } from 'react-hook-form'
 import * as Yup from 'yup'
 
@@ -98,29 +98,40 @@ export default function VoteForm({
     }),
   )
 
-  const setNewDefaultVoteOption = (voteType: string) => {
-    const newDefaultStatus = Object.values(VoteStates).find(item => item !== voteType)
-    const newDefaultOption = Object.keys(VOTE_TYPES).find(
-      key => VOTE_TYPES[key] === newDefaultStatus,
-    ) as unknown as VoteOption
-    setValue(VoteFormFieldNames.Option, newDefaultOption)
-  }
+  const selectOptions = useMemo(
+    () => (grants.length ? [...grants, { granter: address }] : []),
+    [address, grants],
+  )
 
-  const getIsChosenAddressAlreadyVotedForProposal = async (addressForChecking: string) => {
-    disableForm()
-    try {
-      const voteType = await getUserVoteTypeFromProposal(proposalId, addressForChecking)
+  const setNewDefaultVoteOption = useCallback(
+    (voteType: string) => {
+      const newDefaultStatus = Object.values(VoteStates).find(item => item !== voteType)
+      const newDefaultOption = Object.keys(VOTE_TYPES).find(
+        key => VOTE_TYPES[key] === newDefaultStatus,
+      ) as unknown as VoteOption
+      setValue(VoteFormFieldNames.Option, newDefaultOption)
+    },
+    [setValue],
+  )
 
-      if (voteType) {
-        setNewDefaultVoteOption(voteType)
+  const getIsChosenAddressAlreadyVotedForProposal = useCallback(
+    async (addressForChecking: string) => {
+      disableForm()
+      try {
+        setAlreadySelectedVote('')
+        const voteType = await getUserVoteTypeFromProposal(proposalId, addressForChecking)
+        if (voteType) {
+          setNewDefaultVoteOption(voteType)
 
-        setAlreadySelectedVote(voteType as VoteStates)
+          setAlreadySelectedVote(voteType as VoteStates)
+        }
+      } catch (e) {
+        ErrorHandler.process(e)
       }
-    } catch (e) {
-      ErrorHandler.process(e)
-    }
-    enableForm()
-  }
+      enableForm()
+    },
+    [disableForm, enableForm, proposalId, setNewDefaultVoteOption, formState.voter, address],
+  )
 
   const submit = async (formData: typeof DEFAULT_VALUES) => {
     disableForm()
@@ -154,7 +165,7 @@ export default function VoteForm({
 
   useEffect(() => {
     getIsChosenAddressAlreadyVotedForProposal(formState.voter || address)
-  }, [formState.voter, address, getIsChosenAddressAlreadyVotedForProposal])
+  }, [formState.voter, address])
 
   return (
     <FormWrapper id={id} onSubmit={handleSubmit(submit)} isFormDisabled={isFormDisabled}>
@@ -162,7 +173,7 @@ export default function VoteForm({
         {t('vote-form.helper-text')}
       </Typography>
 
-      {grants.length ? (
+      {selectOptions.length ? (
         <Controller
           name={VoteFormFieldNames.Voter}
           control={control}
@@ -178,7 +189,7 @@ export default function VoteForm({
                 disabled={isFormDisabled}
                 error={Boolean(formErrors[VoteFormFieldNames.Voter])}
               >
-                {grants.map((item, idx) => (
+                {selectOptions.map((item, idx) => (
                   <MenuItem value={item.granter} key={idx}>
                     {item.granter}
                   </MenuItem>
