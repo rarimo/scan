@@ -19074,7 +19074,7 @@ export type GetAccountDelegationsQueryVariables = Exact<{
 }>;
 
 
-export type GetAccountDelegationsQuery = { __typename?: 'query_root', action_delegation?: { __typename?: 'ActionDelegationResponse', pagination?: any | null, delegations?: Array<any | null> | null } | null };
+export type GetAccountDelegationsQuery = { __typename?: 'query_root', action_delegation?: { __typename?: 'ActionDelegationResponse', pagination?: any | null } | null };
 
 export type GetAccountValidatorInfosQueryVariables = Exact<{
   address: Scalars['String']['input'];
@@ -19082,6 +19082,14 @@ export type GetAccountValidatorInfosQueryVariables = Exact<{
 
 
 export type GetAccountValidatorInfosQuery = { __typename?: 'query_root', account: Array<{ __typename?: 'account', validator_infos: Array<{ __typename?: 'validator_info', consensus_address: string }> }> };
+
+export type GetAccountVoteForProposalQueryVariables = Exact<{
+  proposalId: Scalars['Int']['input'];
+  address: Scalars['String']['input'];
+}>;
+
+
+export type GetAccountVoteForProposalQuery = { __typename?: 'query_root', proposal_vote: Array<{ __typename?: 'proposal_vote', option: string }> };
 
 export type GetBlockByHeightQueryVariables = Exact<{
   height: Scalars['bigint']['input'];
@@ -19810,7 +19818,6 @@ export const GetAccountDelegations = gql`
     query GetAccountDelegations($address: String!) {
   action_delegation(address: $address) {
     pagination
-    delegations
   }
 }
     `;
@@ -19820,6 +19827,15 @@ export const GetAccountValidatorInfos = gql`
     validator_infos {
       consensus_address
     }
+  }
+}
+    `;
+export const GetAccountVoteForProposal = gql`
+    query GetAccountVoteForProposal($proposalId: Int!, $address: String!) {
+  proposal_vote(
+    where: {account: {address: {_eq: $address}}, proposal_id: {_eq: $proposalId}}
+  ) {
+    option
   }
 }
     `;

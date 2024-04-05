@@ -16,9 +16,11 @@ import {
   VoteOption,
 } from '@rarimo/client'
 import { omit } from 'lodash-es'
+import { useEffect, useState } from 'react'
 import { Controller } from 'react-hook-form'
 import * as Yup from 'yup'
 
+import { getUserVoteTypeFromProposal } from '@/callers'
 import { getClient } from '@/client'
 import FormWrapper from '@/components/Forms/FormWrapper'
 import { Bus, ErrorHandler } from '@/helpers'
@@ -37,6 +39,20 @@ enum VoteFormFieldNames {
   Voter = 'voter',
 }
 
+enum VoteStates {
+  Yes = 'VOTE_OPTION_YES',
+  Abstain = 'VOTE_OPTION_ABSTAIN',
+  No = 'VOTE_OPTION_NO',
+  Veto = 'VOTE_OPTION_NO_WITH_VETO',
+}
+
+const VOTE_TYPES: Record<string, VoteStates> = {
+  [VoteOption.Yes]: VoteStates.Yes,
+  [VoteOption.No]: VoteStates.No,
+  [VoteOption.Abstain]: VoteStates.Abstain,
+  [VoteOption.NoWithVeto]: VoteStates.Veto,
+}
+
 export default function VoteForm({
   id,
   onSubmit,
@@ -47,6 +63,8 @@ export default function VoteForm({
   const t = useI18n()
   const { address, isValidator, isStaker } = useWeb3()
   const { localizeProposalVoteOption } = useLocalize()
+
+  const [alreadySelectedVote, setAlreadySelectedVote] = useState<VoteStates | ''>('')
 
   const DEFAULT_VALUES = {
     [VoteFormFieldNames.Option]: VoteOption.Yes,
@@ -68,6 +86,8 @@ export default function VoteForm({
     control,
     isFormDisabled,
     formErrors,
+    formState,
+    setValue,
     disableForm,
     enableForm,
     getErrorMessage,
@@ -77,6 +97,30 @@ export default function VoteForm({
       [VoteFormFieldNames.Option]: yup.number().required(),
     }),
   )
+
+  const setNewDefaultVoteOption = (voteType: string) => {
+    const newDefaultStatus = Object.values(VoteStates).find(item => item !== voteType)
+    const newDefaultOption = Object.keys(VOTE_TYPES).find(
+      key => VOTE_TYPES[key] === newDefaultStatus,
+    ) as unknown as VoteOption
+    setValue(VoteFormFieldNames.Option, newDefaultOption)
+  }
+
+  const getIsChosenAddressAlreadyVotedForProposal = async (addressForChecking: string) => {
+    disableForm()
+    try {
+      const voteType = await getUserVoteTypeFromProposal(proposalId, addressForChecking)
+
+      if (voteType) {
+        setNewDefaultVoteOption(voteType)
+
+        setAlreadySelectedVote(voteType as VoteStates)
+      }
+    } catch (e) {
+      ErrorHandler.process(e)
+    }
+    enableForm()
+  }
 
   const submit = async (formData: typeof DEFAULT_VALUES) => {
     disableForm()
@@ -107,6 +151,10 @@ export default function VoteForm({
     enableForm()
     setIsDialogDisabled(false)
   }
+
+  useEffect(() => {
+    getIsChosenAddressAlreadyVotedForProposal(formState.voter || address)
+  }, [formState.voter, address, getIsChosenAddressAlreadyVotedForProposal])
 
   return (
     <FormWrapper id={id} onSubmit={handleSubmit(submit)} isFormDisabled={isFormDisabled}>
@@ -158,6 +206,7 @@ export default function VoteForm({
                 <FormControlLabel
                   value={option}
                   control={<Radio />}
+                  disabled={VOTE_TYPES[option] === alreadySelectedVote}
                   label={localizeProposalVoteOption(option as VoteOption)}
                   key={idx}
                 />

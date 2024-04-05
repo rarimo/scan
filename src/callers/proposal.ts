@@ -1,6 +1,8 @@
 import { CONFIG } from '@/config'
-import { getApollo } from '@/graphql'
 import {
+  GetAccountVoteForProposal,
+  GetAccountVoteForProposalQuery,
+  getApollo,
   GetProposalBase,
   GetProposalBaseQuery,
   GetProposalById,
@@ -99,4 +101,14 @@ export const getProposalVotesCountByID = async (id: string): Promise<number> => 
   })
 
   return data?.proposal?.[0]?.proposal_votes_aggregate.aggregate?.count ?? 0
+}
+
+export const getUserVoteTypeFromProposal = async (proposalId: string | number, address: string) => {
+  const { data } = await getApollo().query<GetAccountVoteForProposalQuery>({
+    query: GetAccountVoteForProposal,
+    fetchPolicy: 'network-only',
+    variables: { proposalId: Number(proposalId), address },
+  })
+
+  return data.proposal_vote?.[0]?.option
 }
