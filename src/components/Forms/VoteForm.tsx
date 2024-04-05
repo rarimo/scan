@@ -116,7 +116,6 @@ export default function VoteForm({
 
   const getIsChosenAddressAlreadyVotedForProposal = useCallback(
     async (addressForChecking: string) => {
-      disableForm()
       try {
         setAlreadySelectedVote('')
         const voteType = await getUserVoteTypeFromProposal(proposalId, addressForChecking)
@@ -128,9 +127,8 @@ export default function VoteForm({
       } catch (e) {
         ErrorHandler.process(e)
       }
-      enableForm()
     },
-    [disableForm, enableForm, proposalId, setNewDefaultVoteOption],
+    [proposalId, setNewDefaultVoteOption],
   )
 
   const submit = async (formData: typeof DEFAULT_VALUES) => {
@@ -165,7 +163,7 @@ export default function VoteForm({
 
   useEffect(() => {
     getIsChosenAddressAlreadyVotedForProposal(formState.voter || address)
-  }, [formState.voter, address])
+  }, [formState.voter, address, getIsChosenAddressAlreadyVotedForProposal])
 
   return (
     <FormWrapper id={id} onSubmit={handleSubmit(submit)} isFormDisabled={isFormDisabled}>
