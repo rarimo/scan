@@ -4,8 +4,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
 ## [1.4.0-rc.0] - 2024-04-04
-### Added
-- Stakers also can vote for proposal
+### Changed
+- Allow `delegators` to vote for proposal
 
 ## [1.3.0] - 2024-03-27
 ### Changed
