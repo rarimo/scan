@@ -218,10 +218,6 @@ export default function VoteForm({
                   followCursor
                   key={idx}
                   title={t('vote-form.already-voted-option')}
-                  sx={{
-                    minWidth: 'auto',
-                    textAlign: 'left',
-                  }}
                   disableHoverListener={VOTE_TYPES[option] !== alreadySelectedVote}
                   disableTouchListener={VOTE_TYPES[option] !== alreadySelectedVote}
                 >
