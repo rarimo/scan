@@ -1,5 +1,0 @@
-query GetAccountVoteForProposal($proposalId:Int!, $address: String!)  {
-    proposal_vote(where: {account: {address: {_eq: $address}}, proposal_id: {_eq: $proposalId}}) {
-        option
-    }
-}

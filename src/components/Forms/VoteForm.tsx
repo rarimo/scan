@@ -24,6 +24,7 @@ import * as Yup from 'yup'
 import { getUserVoteTypeFromProposal } from '@/callers'
 import { getClient } from '@/client'
 import FormWrapper from '@/components/Forms/FormWrapper'
+import { VoteStates } from '@/enums'
 import { Bus, ErrorHandler } from '@/helpers'
 import { useForm, useLocalize, useWeb3 } from '@/hooks'
 import { useI18n } from '@/locales/client'
@@ -38,13 +39,6 @@ const VOTER_LABEL_ID = 'proposal-voter-label'
 enum VoteFormFieldNames {
   Option = 'option',
   Voter = 'voter',
-}
-
-enum VoteStates {
-  Yes = 'VOTE_OPTION_YES',
-  Abstain = 'VOTE_OPTION_ABSTAIN',
-  No = 'VOTE_OPTION_NO',
-  Veto = 'VOTE_OPTION_NO_WITH_VETO',
 }
 
 const VOTE_TYPES: Record<string, VoteStates> = {
@@ -126,7 +120,7 @@ export default function VoteForm({
           setAlreadySelectedVote(voteType as VoteStates)
         }
       } catch (e) {
-        ErrorHandler.process(e)
+        ErrorHandler.processWithoutFeedback(e as Error)
       }
     },
     [proposalId, setNewDefaultVoteOption],
@@ -147,8 +141,8 @@ export default function VoteForm({
       }
 
       formData.voter === address
-        ? await client.tx.execVoteProposal(address, formData.voter, proposalId, formData.option)
-        : await client.tx.voteProposal(address, proposalId, formData[VoteFormFieldNames.Option])
+        ? await client.tx.voteProposal(address, proposalId, formData[VoteFormFieldNames.Option])
+        : await client.tx.execVoteProposal(address, formData.voter, proposalId, formData.option)
 
       onSubmit({
         message: t('vote-form.submitted-msg', {
