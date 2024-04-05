@@ -24,8 +24,8 @@ import {
 
 type UserVoteType = {
   vote: {
-    options?: {
-      option?: VoteStates
+    options: {
+      option: VoteStates
     }[]
   }
 }
@@ -110,12 +110,15 @@ export const getProposalVotesCountByID = async (id: string): Promise<number> => 
   return data?.proposal?.[0]?.proposal_votes_aggregate.aggregate?.count ?? 0
 }
 
-export const getUserVoteTypeFromProposal = async (proposalId: string | number, address: string) => {
+export const getUserVoteTypeFromProposal = async (
+  proposalId: string | number,
+  address: string,
+): Promise<VoteStates> => {
   const response = await fetch(
     `${CONFIG.CHAIN_API_URL}/cosmos/gov/v1beta1/proposals/${proposalId}/votes/${address}`,
   )
 
   const { vote }: UserVoteType = await response.json()
 
-  return vote.options?.[0]?.option
+  return vote.options[0].option
 }

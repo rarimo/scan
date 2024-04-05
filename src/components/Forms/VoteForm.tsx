@@ -117,7 +117,7 @@ export default function VoteForm({
         if (voteType) {
           setNewDefaultVoteOption(voteType)
 
-          setAlreadySelectedVote(voteType as VoteStates)
+          setAlreadySelectedVote(voteType)
         }
       } catch (e) {
         ErrorHandler.processWithoutFeedback(e as Error)
