@@ -7,6 +7,7 @@ import {
   Radio,
   RadioGroup,
   Select,
+  Tooltip,
   Typography,
 } from '@mui/material'
 import {
@@ -16,10 +17,14 @@ import {
   VoteOption,
 } from '@rarimo/client'
 import { omit } from 'lodash-es'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Controller } from 'react-hook-form'
+import * as Yup from 'yup'
 
+import { getUserVoteTypeFromProposal } from '@/callers'
 import { getClient } from '@/client'
 import FormWrapper from '@/components/Forms/FormWrapper'
+import { VoteStates } from '@/enums'
 import { Bus, ErrorHandler } from '@/helpers'
 import { useForm, useLocalize, useWeb3 } from '@/hooks'
 import { useI18n } from '@/locales/client'
@@ -36,6 +41,13 @@ enum VoteFormFieldNames {
   Voter = 'voter',
 }
 
+const VOTE_TYPES: Record<string, VoteStates> = {
+  [VoteOption.Yes]: VoteStates.Yes,
+  [VoteOption.No]: VoteStates.No,
+  [VoteOption.Abstain]: VoteStates.Abstain,
+  [VoteOption.NoWithVeto]: VoteStates.Veto,
+}
+
 export default function VoteForm({
   id,
   onSubmit,
@@ -44,12 +56,24 @@ export default function VoteForm({
   proposalId,
 }: FormProps & { proposalId: number; grants: GrantAuthorization[] }) {
   const t = useI18n()
-  const { address, isValidator } = useWeb3()
+  const { address, isValidator, isStaker } = useWeb3()
   const { localizeProposalVoteOption } = useLocalize()
+
+  const [alreadySelectedVote, setAlreadySelectedVote] = useState<VoteStates | ''>('')
 
   const DEFAULT_VALUES = {
     [VoteFormFieldNames.Option]: VoteOption.Yes,
     [VoteFormFieldNames.Voter]: isValidator ? address : grants?.[0]?.granter,
+  }
+
+  const getVoterValidationRule = (yup: typeof Yup): Yup.ObjectShape => {
+    if (!isStaker && grants.length) {
+      return { [VoteFormFieldNames.Voter]: yup.string().required() }
+    }
+    if (isStaker && grants.length) {
+      return { [VoteFormFieldNames.Voter]: yup.string() }
+    }
+    return {}
   }
 
   const {
@@ -57,14 +81,49 @@ export default function VoteForm({
     control,
     isFormDisabled,
     formErrors,
+    formState,
+    setValue,
     disableForm,
     enableForm,
     getErrorMessage,
   } = useForm(DEFAULT_VALUES, yup =>
     yup.object({
+      ...getVoterValidationRule(yup),
       [VoteFormFieldNames.Option]: yup.number().required(),
-      [VoteFormFieldNames.Voter]: yup.string().required(),
     }),
+  )
+
+  const selectOptions = useMemo(
+    () => (grants.length ? [...grants, { granter: address }] : []),
+    [address, grants],
+  )
+
+  const setNewDefaultVoteOption = useCallback(
+    (voteType: string) => {
+      const newDefaultStatus = Object.values(VoteStates).find(item => item !== voteType)
+      const newDefaultOption = Object.keys(VOTE_TYPES).find(
+        key => VOTE_TYPES[key] === newDefaultStatus,
+      ) as unknown as VoteOption
+      setValue(VoteFormFieldNames.Option, newDefaultOption)
+    },
+    [setValue],
+  )
+
+  const getIsChosenAddressAlreadyVotedForProposal = useCallback(
+    async (addressForChecking: string) => {
+      try {
+        setAlreadySelectedVote('')
+        const voteType = await getUserVoteTypeFromProposal(proposalId, addressForChecking)
+        if (voteType) {
+          setNewDefaultVoteOption(voteType)
+
+          setAlreadySelectedVote(voteType)
+        }
+      } catch (e) {
+        ErrorHandler.processWithoutFeedback(e as Error)
+      }
+    },
+    [proposalId, setNewDefaultVoteOption],
   )
 
   const submit = async (formData: typeof DEFAULT_VALUES) => {
@@ -81,11 +140,9 @@ export default function VoteForm({
         return
       }
 
-      if (formData.voter !== address) {
-        await client.tx.execVoteProposal(address, formData.voter, proposalId, formData.option)
-      } else {
-        await client.tx.voteProposal(address, proposalId, formData[VoteFormFieldNames.Option])
-      }
+      formData.voter === address
+        ? await client.tx.voteProposal(address, proposalId, formData[VoteFormFieldNames.Option])
+        : await client.tx.execVoteProposal(address, formData.voter, proposalId, formData.option)
 
       onSubmit({
         message: t('vote-form.submitted-msg', {
@@ -99,13 +156,17 @@ export default function VoteForm({
     setIsDialogDisabled(false)
   }
 
+  useEffect(() => {
+    getIsChosenAddressAlreadyVotedForProposal(formState.voter || address)
+  }, [formState.voter, address, getIsChosenAddressAlreadyVotedForProposal])
+
   return (
     <FormWrapper id={id} onSubmit={handleSubmit(submit)} isFormDisabled={isFormDisabled}>
       <Typography variant={'body2'} color={'var(--col-txt-secondary)'}>
         {t('vote-form.helper-text')}
       </Typography>
 
-      {grants.length ? (
+      {selectOptions.length ? (
         <Controller
           name={VoteFormFieldNames.Voter}
           control={control}
@@ -121,8 +182,8 @@ export default function VoteForm({
                 disabled={isFormDisabled}
                 error={Boolean(formErrors[VoteFormFieldNames.Voter])}
               >
-                {grants.map((item, idx) => (
-                  <MenuItem value={item.granter} key={idx}>
+                {selectOptions.map((item, idx) => (
+                  <MenuItem key={idx} value={item.granter}>
                     {item.granter}
                   </MenuItem>
                 ))}
@@ -146,12 +207,22 @@ export default function VoteForm({
           <FormControl>
             <RadioGroup {...field}>
               {VOTE_OPTIONS.map((option, idx) => (
-                <FormControlLabel
-                  value={option}
-                  control={<Radio />}
-                  label={localizeProposalVoteOption(option as VoteOption)}
+                <Tooltip
+                  placement='bottom-start'
+                  followCursor
                   key={idx}
-                />
+                  title={t('vote-form.already-voted-option')}
+                  disableHoverListener={VOTE_TYPES[option] !== alreadySelectedVote}
+                  disableTouchListener={VOTE_TYPES[option] !== alreadySelectedVote}
+                >
+                  <FormControlLabel
+                    value={option}
+                    control={<Radio />}
+                    disabled={VOTE_TYPES[option] === alreadySelectedVote}
+                    label={localizeProposalVoteOption(option as VoteOption)}
+                    key={idx}
+                  />
+                </Tooltip>
               ))}
             </RadioGroup>
           </FormControl>

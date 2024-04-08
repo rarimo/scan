@@ -111,6 +111,7 @@ function getVersion() {
 
   const refsReport = exec('git log -1 --format="%D"').toString()
   const versionMatch = refsReport.match(/tag: ([\w\d\-_.]+)/i)
+
   return versionMatch ? versionMatch[1] : ''
 }
 

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [Unreleased]
+### Changed
+- Allow `delegators` to vote for proposal
+
 ## [1.3.0] - 2024-03-27
 ### Changed
 - `@rarimo/client` to support amino signer

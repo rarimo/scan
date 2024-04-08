@@ -19069,12 +19069,27 @@ export type ValidatorFragment = { __typename?: 'validator', consensus_address: s
 
 export type ValidatorBaseFragment = { __typename?: 'validator', validator_info?: { __typename?: 'validator_info', operator_address: string } | null, validator_commissions: Array<{ __typename?: 'validator_commission', commission: any }>, validator_signing_infos: Array<{ __typename?: 'validator_signing_info', missed_blocks_counter: any }>, validator_descriptions: Array<{ __typename?: 'validator_description', moniker?: string | null, avatar_url?: string | null }>, validator_statuses: Array<{ __typename?: 'validator_status', status: number, jailed: boolean }>, validator_voting_powers: Array<{ __typename?: 'validator_voting_power', voting_power: any }> };
 
+export type GetAccountDelegationsQueryVariables = Exact<{
+  address: Scalars['String']['input'];
+}>;
+
+
+export type GetAccountDelegationsQuery = { __typename?: 'query_root', action_delegation?: { __typename?: 'ActionDelegationResponse', pagination?: any | null } | null };
+
 export type GetAccountValidatorInfosQueryVariables = Exact<{
   address: Scalars['String']['input'];
 }>;
 
 
 export type GetAccountValidatorInfosQuery = { __typename?: 'query_root', account: Array<{ __typename?: 'account', validator_infos: Array<{ __typename?: 'validator_info', consensus_address: string }> }> };
+
+export type GetAccountVoteForProposalQueryVariables = Exact<{
+  proposalId: Scalars['Int']['input'];
+  address: Scalars['String']['input'];
+}>;
+
+
+export type GetAccountVoteForProposalQuery = { __typename?: 'query_root', proposal_vote: Array<{ __typename?: 'proposal_vote', option: string }> };
 
 export type GetBlockByHeightQueryVariables = Exact<{
   height: Scalars['bigint']['input'];
@@ -19799,12 +19814,28 @@ export const ValidatorBase = gql`
   }
 }
     `;
+export const GetAccountDelegations = gql`
+    query GetAccountDelegations($address: String!) {
+  action_delegation(address: $address) {
+    pagination
+  }
+}
+    `;
 export const GetAccountValidatorInfos = gql`
     query GetAccountValidatorInfos($address: String!) {
   account(where: {address: {_eq: $address}}) {
     validator_infos {
       consensus_address
     }
+  }
+}
+    `;
+export const GetAccountVoteForProposal = gql`
+    query GetAccountVoteForProposal($proposalId: Int!, $address: String!) {
+  proposal_vote(
+    where: {account: {address: {_eq: $address}}, proposal_id: {_eq: $proposalId}}
+  ) {
+    option
   }
 }
     `;

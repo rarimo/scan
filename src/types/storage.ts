@@ -11,6 +11,7 @@ export type UiStorageState = {
 }
 
 export type Web3StorageState = {
+  isStaker: boolean
   isConnected: boolean
   isValidator: boolean
   address: string

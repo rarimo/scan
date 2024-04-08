@@ -1,6 +1,7 @@
 import { CONFIG } from '@/config'
-import { getApollo } from '@/graphql'
+import { VoteStates } from '@/enums'
 import {
+  getApollo,
   GetProposalBase,
   GetProposalBaseQuery,
   GetProposalById,
@@ -20,6 +21,14 @@ import {
   ProposalFragment,
   ProposalVoteFragment,
 } from '@/graphql'
+
+type UserVoteType = {
+  vote: {
+    options: {
+      option: VoteStates
+    }[]
+  }
+}
 
 export const getProposalList = async (
   limit: number = CONFIG.PAGE_LIMIT,
@@ -99,4 +108,17 @@ export const getProposalVotesCountByID = async (id: string): Promise<number> => 
   })
 
   return data?.proposal?.[0]?.proposal_votes_aggregate.aggregate?.count ?? 0
+}
+
+export const getUserVoteTypeFromProposal = async (
+  proposalId: string | number,
+  address: string,
+): Promise<VoteStates> => {
+  const response = await fetch(
+    `${CONFIG.CHAIN_API_URL}/cosmos/gov/v1beta1/proposals/${proposalId}/votes/${address}`,
+  )
+
+  const { vote }: UserVoteType = await response.json()
+
+  return vote.options[0].option
 }
