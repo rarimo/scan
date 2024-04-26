@@ -56,14 +56,14 @@ export default function VoteForm({
   proposalId,
 }: FormProps & { proposalId: number; grants: GrantAuthorization[] }) {
   const t = useI18n()
-  const { address, isValidator, isStaker } = useWeb3()
+  const { address, isStaker } = useWeb3()
   const { localizeProposalVoteOption } = useLocalize()
 
   const [alreadySelectedVote, setAlreadySelectedVote] = useState<VoteStates | ''>('')
 
   const DEFAULT_VALUES = {
     [VoteFormFieldNames.Option]: VoteOption.Yes,
-    [VoteFormFieldNames.Voter]: isValidator ? address : grants?.[0]?.granter,
+    [VoteFormFieldNames.Voter]: grants?.[0]?.granter ?? address,
   }
 
   const getVoterValidationRule = (yup: typeof Yup): Yup.ObjectShape => {
