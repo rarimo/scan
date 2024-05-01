@@ -237,6 +237,8 @@ export default {
     "community-pool-spend-lbl": "Community Pool Spend",
     "mint-tokens-lbl": "Mint Tokens",
     "text-lbl": "Text",
+    "edit-csca-list-lbl": "Edit CSCA List",
+    "replace-csca-list-lbl": "Replace CSCA List",
     "unknown-lbl": "Unknown",
   },
   "proposal-vote": {

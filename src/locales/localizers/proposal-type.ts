@@ -32,4 +32,6 @@ export const localizeProposalType = (t: TFunction, type: ProposalType) =>
     [ProposalType.CommunityPoolSpend]: t('proposal-type.community-pool-spend-lbl'),
     [ProposalType.MintTokens]: t('proposal-type.mint-tokens-lbl'),
     [ProposalType.Text]: t('proposal-type.text-lbl'),
+    [ProposalType.EditCSCAListProposal]: t('proposal-type.edit-csca-list-lbl'),
+    [ProposalType.ReplaceCSCAListProposal]: t('proposal-type.replace-csca-list-lbl'),
   }[type])
