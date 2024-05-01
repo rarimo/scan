@@ -27,7 +27,7 @@
     "@hookform/resolvers": "^3.3.1",
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.3",
-    "@rarimo/client": "^2.4.0",
+    "@rarimo/client": "^2.5.0",
     "graphql": "^16.7.1",
     "graphql-tag": "^2.12.6",
     "lodash-es": "^4.17.21",

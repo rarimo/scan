@@ -24,6 +24,9 @@ export const PROPOSAL_TYPES_MAP = {
   'oraclemanager/OracleUnfreezeProposal': ProposalType.OracleUnfreeze,
   'oraclemanager/ChangeParamsProposal': ProposalType.OracleChangeParams,
   '/cosmos.gov.v1beta1.TextProposal': ProposalType.Text,
+  '/rarimo.rarimocore.cscalist.ReplaceCSCAListProposal': ProposalType.ReplaceCSCAListProposal,
+  '/rarimo.rarimocore.cscalist.EditCSCAListProposal': ProposalType.EditCSCAListProposal,
+
   ParameterChange: ProposalType.ParameterChange,
   SoftwareUpgrade: ProposalType.SoftwareUpgrade,
   CancelSoftwareUpgrade: ProposalType.CancelSoftwareUpgrade,
