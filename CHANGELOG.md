@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [1.4.1] - 2024-05-02
+### Fixed
+- `UnfreezeSignerPartyProposal` Proposals type
+
 ## [1.4.0] - 2024-05-01
 ### Added
 - `CSCA` Proposals types
@@ -104,7 +108,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.4.0...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.4.1...HEAD
+[1.4.1]: https://gitlab.com/rarimo/scan/compare/1.4.0...1.4.1
 [1.4.0]: https://gitlab.com/rarimo/scan/compare/1.3.1...1.4.0
 [1.3.1]: https://gitlab.com/rarimo/scan/compare/1.3.0...1.3.1
 [1.3.0]: https://gitlab.com/rarimo/scan/compare/1.2.1...1.3.0

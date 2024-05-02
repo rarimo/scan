@@ -61,7 +61,7 @@ export const useProposalMetadata = (proposal?: ProposalBaseFragment | ProposalFr
 
     if (isContentArray) {
       metadata.title = content?.[0]?.content?.title ?? ''
-      metadata.description = content?.content.description ?? ''
+      metadata.description = content?.content?.description ?? ''
     } else {
       metadata.title = content?.title ?? ''
       metadata.description = content?.description ?? ''

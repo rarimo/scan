@@ -3,6 +3,7 @@ import { ProposalType } from '@rarimo/client'
 /* prettier-ignore */
 export const PROPOSAL_TYPES_MAP = {
   'rarimocore/UnfreezeSignerPartyProposal': ProposalType.UnfreezeSignerParty,
+  "/rarimo.rarimocore.rarimocore.UnfreezeSignerPartyProposal": ProposalType.UnfreezeSignerParty,
   'rarimocore/ReshareKeysProposal': ProposalType.ReshareKeys,
   'rarimocore/SlashProposal': ProposalType.Slash,
   'rarimocore/DropPartiesProposal': ProposalType.DropParties,
