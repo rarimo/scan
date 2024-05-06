@@ -103,7 +103,13 @@ export const useValidatorDetails = (operator: string, reload: () => Promise<void
         result[idx].coins = item
       })
 
-      return result.filter(i => i.coins.length)
+      return result
+        .map(el => ({
+          ...el,
+          // convert u[Denom] to Denom, e.g. uRMO to RMO
+          coins: el.coins?.map(i => ({ ...i, amount: `${i.amount}`.split('.')[0] })),
+        }))
+        .filter(el => el.coins.length && Number(el.coins[0].amount))
     },
     {
       loadOnMount: isConnected && !isEmpty,

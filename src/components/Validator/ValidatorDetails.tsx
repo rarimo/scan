@@ -1,3 +1,4 @@
+import { BN } from '@distributedlab/tools'
 import { Link } from '@mui/material'
 import { BondStatus, DelegateTypes } from '@rarimo/client'
 import { useMemo } from 'react'
@@ -208,9 +209,15 @@ export default function ValidatorDetails({
       validator?.validator_info?.operator_address ?? '',
       `${accountReward.find(i => i.delegator === address)?.coins?.[0]?.amount} ${CONFIG.DENOM}`,
       async args => {
+        const address = args.address
+        const amount = BN.fromBigInt(args.amount, CONFIG.DECIMALS).toString()
+
         await reloadReward()
         await onSubmit({
-          message: t('validator-details.reward-submitted-msg', args),
+          message: t('validator-details.reward-submitted-msg', {
+            amount,
+            address,
+          }),
         })
       },
     )
