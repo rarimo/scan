@@ -1,7 +1,7 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { Box, Button, MenuItem, Select, SelectChangeEvent, Stack, useTheme } from '@mui/material'
 import { uniqueId } from 'lodash-es'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 const BUTTON_ID = `multiple-actions-button-${uniqueId()}`
 
@@ -46,6 +46,11 @@ export default function MultipleActionsButton({
     setValue(String(event.target.value))
     handleClose()
   }
+
+  useEffect(() => {
+    setValue(actions?.[Number(value)] ? value : '0')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [actions])
 
   return (
     <Stack ref={anchorEl} direction={'row'}>

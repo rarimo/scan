@@ -73,54 +73,52 @@ export default function ValidatorDetailsActions({
     )
   }, [isGrantsLoading, isGrantsLoadingError, isDelegationLoading, isDelegationLoadingError])
 
-  const actions = useMemo(
-    () => {
-      const result = [
-        {
-          label: t('validator-details.delegate-btn'),
-          handler: () => delegate(DelegateTypes.Delegate),
-          isDisabled: isDelegationLoadingComp,
-        },
-      ]
+  const actions = useMemo(() => {
+    const result = [
+      {
+        label: t('validator-details.delegate-btn'),
+        handler: () => delegate(DelegateTypes.Delegate),
+        isDisabled: isDelegationLoadingComp,
+      },
+    ]
 
-      if (!isDelegationEmpty) {
-        result.push({
-          label: t('validator-details.undelegate-btn'),
-          handler: () => delegate(DelegateTypes.Undelegate),
-          isDisabled: isDelegationLoadingComp,
-        })
-      }
+    if (!isDelegationEmpty) {
+      result.push({
+        label: t('validator-details.undelegate-btn'),
+        handler: () => delegate(DelegateTypes.Undelegate),
+        isDisabled: isDelegationLoadingComp,
+      })
+    }
 
-      if (!isRewardEmpty) {
-        result.push({
-          label: t('validator-details.get-reward-btn'),
-          handler: getRewards,
-          isDisabled: isRewardLoading || isRewardLoadingError,
-        })
-      }
+    if (!isRewardEmpty) {
+      result.push({
+        label: t('validator-details.get-reward-btn'),
+        handler: getRewards,
+        isDisabled: isRewardLoading || isRewardLoadingError,
+      })
+    }
 
-      if (isValidator) {
-        result.push({
-          label: t('validator-details.get-commission-btn'),
-          handler: getValidatorCommission,
-          isDisabled: isRewardLoading || isRewardLoadingError,
-        })
-      }
+    if (isValidator) {
+      result.push({
+        label: t('validator-details.get-commission-btn'),
+        handler: getValidatorCommission,
+        isDisabled: isRewardLoading || isRewardLoadingError,
+      })
+    }
 
-      return result
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      isDelegationEmpty,
-      isDelegationLoading,
-      isDelegationLoadingError,
-      isRewardEmpty,
-      isRewardLoading,
-      isRewardLoadingError,
-      isValidator,
-      t,
-    ],
-  )
+    return result
+  }, [
+    delegate,
+    getRewards,
+    getValidatorCommission,
+    isDelegationEmpty,
+    isDelegationLoadingComp,
+    isRewardEmpty,
+    isRewardLoading,
+    isRewardLoadingError,
+    isValidator,
+    t,
+  ])
 
   return (
     <Tooltip
@@ -133,7 +131,11 @@ export default function ValidatorDetailsActions({
       disableTouchListener={isConnected}
     >
       <span>
-        <MultipleActionsButton actions={actions} isDisabled={!isConnected || isDisabled} />
+        <MultipleActionsButton
+          key={actions?.length}
+          actions={actions}
+          isDisabled={!isConnected || isDisabled}
+        />
       </span>
     </Tooltip>
   )
