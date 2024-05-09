@@ -31,6 +31,8 @@ export default function ProposalDepositsRow({
     decimals: 2,
   })} ${CONFIG.DENOM.toUpperCase()}`
 
+  console.log(deposit)
+
   return (
     <TableRow hover role='checkbox' tabIndex={-1}>
       <TableCell
@@ -54,10 +56,10 @@ export default function ProposalDepositsRow({
           <MuiLink
             component={Link}
             href={generatePath(RoutePaths.Transaction, {
-              hash: `${deposit?.block?.transactions[0].hash}`,
+              hash: `${deposit?.block?.transactions?.[0]?.hash}`,
             })}
           >
-            {deposit?.block?.transactions[0].hash}
+            {deposit?.block?.transactions?.[0]?.hash}
           </MuiLink>,
           {
             width: '100%',
