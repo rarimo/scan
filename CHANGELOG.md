@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [1.4.6] - 2024-05-17
+### Fixed
+- `useTablePagination` hook
+
 ## [1.4.5] - 2024-05-09
 ### Fixed
 - `ProposalDepositsRow` deposit tx parsing
@@ -124,7 +128,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.4.5...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.4.6...HEAD
+[1.4.6]: https://gitlab.com/rarimo/scan/compare/1.4.5...1.4.6
 [1.4.5]: https://gitlab.com/rarimo/scan/compare/1.4.4...1.4.5
 [1.4.4]: https://gitlab.com/rarimo/scan/compare/1.4.3...1.4.4
 [1.4.3]: https://gitlab.com/rarimo/scan/compare/1.4.2...1.4.3
