@@ -101,7 +101,9 @@ export const useTablePagination = <T = unknown>(tableKey?: string) => {
 
   useEffect(() => {
     replaceUrl()
-  }, [limit, offset, order, orderBy, replaceUrl, table])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [limit, offset, order, orderBy, table])
 
   useEffect(() => {
     replaceUrl()
