@@ -25,7 +25,7 @@ import { ValidatorDelegationsFilters, ValidatorDelegationsFiltersMapStringKey } 
 
 export default function Validator({ operator }: { operator: string }) {
   const { limit, offset, handleChangePage, handleChangeRowsPerPage, setOffset, setTableKey } =
-    useTablePagination()
+    useTablePagination('validator_delegations')
 
   const { filter, handleFilterChange } = useTabsFilter({
     queryKey: 'delegation_type',
@@ -82,7 +82,8 @@ export default function Validator({ operator }: { operator: string }) {
 
   useEffect(() => {
     setKey()
-  }, [filter, setKey, setTableKey])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filter])
 
   useEffect(() => {
     setKey()

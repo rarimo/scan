@@ -1,5 +1,7 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import {
+  Skeleton,
+  Stack,
   Table,
   TableBody,
   TableContainer,
@@ -53,7 +55,29 @@ export default function TableWithPagination({
 }) {
   const theme = useTheme()
 
-  const table = (
+  if (isLoading) {
+    return (
+      <Stack spacing={2}>
+        {Array.from({ length: limit }).map((_, idx) => {
+          return <Skeleton key={idx} variant='rectangular' height={TABLE_LIST_HEAD_ROW_HEIGHT} />
+        })}
+      </Stack>
+    )
+  }
+
+  if (!rows?.length || isLoadingError) {
+    return (
+      <NoData
+        isError={isLoadingError}
+        title={noDataTitle}
+        subtitle={noDataSubtitle}
+        errorTitle={errorTitle}
+        errorSubtitle={errorSubtitle}
+      />
+    )
+  }
+
+  return (
     <>
       <TableContainer
         sx={{
@@ -126,17 +150,5 @@ export default function TableWithPagination({
         count={count}
       />
     </>
-  )
-
-  return !isLoading && (!rows?.length || isLoadingError) ? (
-    <NoData
-      isError={isLoadingError}
-      title={noDataTitle}
-      subtitle={noDataSubtitle}
-      errorTitle={errorTitle}
-      errorSubtitle={errorSubtitle}
-    />
-  ) : (
-    table
   )
 }
