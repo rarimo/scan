@@ -19,6 +19,8 @@ export const useProposalMetadata = (proposal?: ProposalBaseFragment | ProposalFr
         return PROPOSAL_TYPES_MAP[key as keyof typeof PROPOSAL_TYPES_MAP]
       }
     }
+
+    return undefined
   }
 
   const proposalType = useMemo(() => {
@@ -26,11 +28,9 @@ export const useProposalMetadata = (proposal?: ProposalBaseFragment | ProposalFr
 
     const content = proposal?.content
 
-    if (isContentArray) {
-      return getProposalType(content[0]?.content?.['@type'] ?? '')
-    }
+    const proposalType = isContentArray ? content[0]?.content?.['@type'] : content?.['@type']
 
-    return getProposalType(content?.['@type'] ?? '')
+    return getProposalType(proposalType ?? '')
   }, [proposal, isContentArray])
 
   const proposalTypesLocalized = useMemo(() => {
@@ -69,8 +69,6 @@ export const useProposalMetadata = (proposal?: ProposalBaseFragment | ProposalFr
 
     if (metadata.title && metadata.description) return metadata
 
-    let parseErr = false
-
     if (proposal?.metadata) {
       try {
         const parsedMetadata = JSON.parse(proposal.metadata)
@@ -81,11 +79,11 @@ export const useProposalMetadata = (proposal?: ProposalBaseFragment | ProposalFr
           metadata.description = parsedMetadata.description
         }
       } catch (e) {
-        parseErr = true
+        /* empty */
       }
     }
 
-    if (proposal?.metadata && !parseErr) return metadata
+    return metadata
   }, [proposal, localizeProposalType, proposalType, t, isContentArray])
 
   return { metadata, proposalTypesLocalized }
