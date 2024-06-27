@@ -10,6 +10,7 @@ export const localizeProposalStatus = (t: TFunction, status: unknown): string =>
     [ProposalStatus.Passed]: t('proposal-status.passed-lbl'),
     [ProposalStatus.Rejected]: t('proposal-status.rejected-lbl'),
     [ProposalStatus.Failed]: t('proposal-status.failed-lbl'),
+    [ProposalStatus.Invalid]: t('proposal-status.invalid-lbl'),
     [ProposalStatus.Unrecognized]: t('proposal-status.unrecognized-lbl'),
   }[proposalStatusFromJSON(String(status))]
 }

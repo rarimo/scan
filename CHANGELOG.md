@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [1.5.0] - 2024-06-27
+### Added
+- `PROPOSAL_STATUS_INVALID` proposal status
+- `ArbitrarySigningProposal` proposal type
+
 ## [1.4.8] - 2024-05-24
 ### Fixed
 - `useProposalMetadata` metadata parsing
@@ -136,7 +141,8 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.4.8...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.5.0...HEAD
+[1.5.0]: https://gitlab.com/rarimo/scan/compare/1.4.8...1.5.0
 [1.4.8]: https://gitlab.com/rarimo/scan/compare/1.4.7...1.4.8
 [1.4.7]: https://gitlab.com/rarimo/scan/compare/1.4.6...1.4.7
 [1.4.6]: https://gitlab.com/rarimo/scan/compare/1.4.5...1.4.6

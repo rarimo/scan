@@ -34,4 +34,5 @@ export const localizeProposalType = (t: TFunction, type: ProposalType) =>
     [ProposalType.Text]: t('proposal-type.text-lbl'),
     [ProposalType.EditCSCAListProposal]: t('proposal-type.edit-csca-list-lbl'),
     [ProposalType.ReplaceCSCAListProposal]: t('proposal-type.replace-csca-list-lbl'),
+    [ProposalType.ArbitrarySigningProposal]: t('proposal-type.arbitrary-signing-lbl'),
   }[type])

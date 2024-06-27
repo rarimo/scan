@@ -207,6 +207,7 @@ export default {
     "passed-lbl": "Passed",
     "rejected-lbl": "Rejected",
     "failed-lbl": "Failed",
+    "invalid-lbl": "Invalid",
     "unrecognized-lbl": "Unknown",
   },
   "proposal-type": {
@@ -239,6 +240,7 @@ export default {
     "text-lbl": "Text",
     "edit-csca-list-lbl": "Edit CSCA List",
     "replace-csca-list-lbl": "Replace CSCA List",
+    "arbitrary-signing-lbl": "Arbitrary Signing",
     "unknown-lbl": "Unknown",
   },
   "proposal-vote": {

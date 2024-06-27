@@ -22,6 +22,7 @@ export default function ProposalStatus({ status }: { status?: string | number })
       case ProposalStatusEnum.Rejected:
         return 'default'
       case ProposalStatusEnum.Failed:
+      case ProposalStatusEnum.Invalid:
         return 'error'
       default:
         return 'default'

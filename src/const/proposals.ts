@@ -27,6 +27,7 @@ export const PROPOSAL_TYPES_MAP = {
   '/cosmos.gov.v1beta1.TextProposal': ProposalType.Text,
   '/rarimo.rarimocore.cscalist.ReplaceCSCAListProposal': ProposalType.ReplaceCSCAListProposal,
   '/rarimo.rarimocore.cscalist.EditCSCAListProposal': ProposalType.EditCSCAListProposal,
+  '/rarimo.rarimocore.rarimocore.ArbitrarySigningProposal': ProposalType.ArbitrarySigningProposal,
 
   ParameterChange: ProposalType.ParameterChange,
   SoftwareUpgrade: ProposalType.SoftwareUpgrade,
