@@ -3,12 +3,16 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [1.5.1] - 2024-11-20
+### Changed
+- Opengraph image
+
 ## [1.5.0] - 2024-06-27
 ### Added
 - `PROPOSAL_STATUS_INVALID` proposal status
 - `ArbitrarySigningProposal` proposal type
 
-## [1.4.8] - 2024-05-24
+## [1.4.8] - 2024-05-24q
 ### Fixed
 - `useProposalMetadata` metadata parsing
 
