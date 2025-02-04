@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to [Semantic Versioning].
 
+## [1.5.2] - 2025-02-04
+### Fixed
+- Displaying full timestamp
+
 ## [1.5.1] - 2024-11-20
 ### Changed
 - Opengraph image
@@ -145,7 +149,9 @@ The format is based on [Keep a Changelog], and this project adheres to [Semantic
 
 - Initiated project
 
-[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.5.0...HEAD
+[Unreleased]: https://gitlab.com/rarimo/scan/compare/1.5.2...HEAD
+[1.5.2]: https://gitlab.com/rarimo/scan/compare/1.5.1...1.5.2
+[1.5.1]: https://gitlab.com/rarimo/scan/compare/1.5.0...1.5.1
 [1.5.0]: https://gitlab.com/rarimo/scan/compare/1.4.8...1.5.0
 [1.4.8]: https://gitlab.com/rarimo/scan/compare/1.4.7...1.4.8
 [1.4.7]: https://gitlab.com/rarimo/scan/compare/1.4.6...1.4.7
