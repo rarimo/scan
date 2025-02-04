@@ -1,6 +1,5 @@
 'use client'
 
-import { time } from '@distributedlab/tools'
 import { Link as MuiLink } from '@mui/material'
 import Link from 'next/link'
 
@@ -16,7 +15,7 @@ import {
   TABLE_SMALL_TEXT_SKELETON_SX,
 } from '@/const'
 import { ConfirmationFragment } from '@/graphql'
-import { generatePath } from '@/helpers'
+import { formatTimestamp, generatePath } from '@/helpers'
 import { useLoading, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
 import { RoutePaths } from '@/types'
@@ -86,7 +85,7 @@ export default function Confirmation({ root }: { root: string }) {
     {
       head: t('confirmation.age-col-lbl'),
       body: withSkeleton(
-        time(confirmation?.block?.timestamp, { utc: true }).fromNow,
+        formatTimestamp(confirmation?.block?.timestamp),
         TABLE_MEDIUM_TEXT_SKELETON_SX,
       ),
     },

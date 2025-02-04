@@ -1,6 +1,5 @@
 'use client'
 
-import { time } from '@distributedlab/tools'
 import { Chip, Link as MuiLink } from '@mui/material'
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -18,7 +17,7 @@ import {
   TABLE_TYPE_BOX_SKELETON_SX,
 } from '@/const'
 import { GetOperationByIndexQuery } from '@/graphql'
-import { generatePath } from '@/helpers'
+import { formatTimestamp, generatePath } from '@/helpers'
 import { useLoading, useLocalize, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
 import { RoutePaths } from '@/types'
@@ -127,10 +126,7 @@ export default function Operation({ index }: { index: string }) {
     },
     {
       head: t('operation.age-col-lbl'),
-      body: withSkeleton(
-        time(operation?.timestamp, { utc: true }).fromNow,
-        TABLE_MEDIUM_TEXT_SKELETON_SX,
-      ),
+      body: withSkeleton(formatTimestamp(operation?.timestamp), TABLE_MEDIUM_TEXT_SKELETON_SX),
     },
   ]
 

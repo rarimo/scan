@@ -1,4 +1,4 @@
-import { BN, BnFormatConfig, BnLike } from '@distributedlab/tools'
+import { BN, BnFormatConfig, BnLike, time } from '@distributedlab/tools'
 
 import { CONFIG } from '@/config'
 
@@ -55,4 +55,9 @@ export const formatCurrencyWithDenom = (
 export function abbr(text = '', firstPart = 9, secondPart = 6): string {
   if (text.length <= firstPart + secondPart) return text
   return `${text.slice(0, firstPart)}...${text.slice(-secondPart)}`
+}
+
+export function formatTimestamp(timestamp?: number | string) {
+  const timeObject = time(timestamp, { utc: true })
+  return `${timeObject.fromNow} (${timeObject.format('YYYY-MM-DD HH:mm:ss [UTC]')})`
 }

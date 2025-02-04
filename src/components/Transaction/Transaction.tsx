@@ -1,6 +1,5 @@
 'use client'
 
-import { time } from '@distributedlab/tools'
 import { Chip, Link as MuiLink } from '@mui/material'
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -21,7 +20,7 @@ import {
   TABLE_TYPE_BOX_SKELETON_SX,
 } from '@/const'
 import { TransactionFragment } from '@/graphql'
-import { formatCurrencyWithDenom, generatePath, parseAddress } from '@/helpers'
+import { formatCurrencyWithDenom, formatTimestamp, generatePath, parseAddress } from '@/helpers'
 import { useLoading, useLocalize, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
 import { RoutePaths } from '@/types'
@@ -79,7 +78,7 @@ export default function Transaction({ hash }: { hash: string }) {
     {
       head: t('transaction-details.age-lbl'),
       body: withSkeleton(
-        time(transaction?.block?.timestamp, { utc: true }).fromNow,
+        formatTimestamp(transaction?.block?.timestamp),
         TABLE_MEDIUM_TEXT_SKELETON_SX,
       ),
     },

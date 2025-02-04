@@ -1,7 +1,5 @@
 'use client'
 
-import { time } from '@distributedlab/tools'
-
 import { getBlockByHeight } from '@/callers'
 import { AvatarName } from '@/components/Avatar'
 import BlockTransactions from '@/components/Block/BlockTransactions'
@@ -14,6 +12,7 @@ import {
   TABLE_SMALL_TEXT_SKELETON_SX,
 } from '@/const'
 import { BlockFragment } from '@/graphql'
+import { formatTimestamp } from '@/helpers'
 import { useLoading, useSkeleton } from '@/hooks'
 import { useI18n } from '@/locales/client'
 
@@ -39,10 +38,7 @@ export default function BlockDetails({ height }: { height: string }) {
     },
     {
       head: t('block-details.age-lbl'),
-      body: withSkeleton(
-        time(block?.timestamp, { utc: true }).fromNow,
-        TABLE_SMALL_TEXT_SKELETON_SX,
-      ),
+      body: withSkeleton(formatTimestamp(block?.timestamp), TABLE_SMALL_TEXT_SKELETON_SX),
     },
     {
       head: t('block-details.hash-lbl'),
